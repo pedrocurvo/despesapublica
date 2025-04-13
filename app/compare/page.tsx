@@ -1,8 +1,5 @@
 import type { Metadata } from "next"
-import Link from "next/link"
-import { ArrowLeft, Euro } from "lucide-react"
 
-import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { DateRangePicker } from "@/components/date-range-picker"
 import { SectorComparison } from "@/components/sector-comparison"
@@ -17,14 +14,6 @@ export const metadata: Metadata = {
 export default function ComparePage() {
   return (
     <div className="flex min-h-screen w-full flex-col">
-      <div className="flex items-center gap-2 border-b px-4 py-2 md:px-6">
-        <Button asChild variant="ghost" size="sm">
-          <Link href="/">
-            <ArrowLeft className="mr-2 h-4 w-4" />
-            Back to Dashboard
-          </Link>
-        </Button>
-      </div>
       <main className="flex-1 p-4 md:p-6">
         <div className="mb-6 flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
           <div>

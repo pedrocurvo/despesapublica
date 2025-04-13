@@ -1,10 +1,6 @@
 "use client"
 
-import Link from "next/link"
 import { useState } from "react"
-import { Euro } from "lucide-react"
-
-import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Overview } from "@/components/overview"
 import { RecentNews } from "@/components/recent-news"
