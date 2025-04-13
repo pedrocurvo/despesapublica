@@ -19,29 +19,6 @@ export default function ClientPage() {
 
   return (
     <div className="flex min-h-screen w-full flex-col">
-      <header className="sticky top-0 z-10 flex h-16 items-center gap-4 border-b bg-background px-4 md:px-6">
-        <div className="flex items-center gap-2">
-          <Euro className="h-6 w-6" />
-          <h1 className="text-lg font-semibold">Despesa Publica</h1>
-        </div>
-        <nav className="ml-auto flex gap-2">
-          <Button asChild variant="ghost" size="sm">
-            <Link href="/">Dashboard</Link>
-          </Button>
-          <Button asChild variant="ghost" size="sm">
-            <Link href="/compare">Compare</Link>
-          </Button>
-          <Button asChild variant="ghost" size="sm">
-            <Link href="/map">Map</Link>
-          </Button>
-          <Button asChild variant="ghost" size="sm">
-            <Link href="/news">News</Link>
-          </Button>
-          <Button asChild variant="ghost" size="sm">
-            <Link href="/about">About</Link>
-          </Button>
-        </nav>
-      </header>
       <main className="flex-1 p-4 md:p-6">
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
           <Card className="lg:col-span-4">

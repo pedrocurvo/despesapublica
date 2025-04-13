@@ -14,31 +14,6 @@ export const metadata: Metadata = {
 export default function MapPage() {
   return (
     <div className="flex min-h-screen w-full flex-col">
-      <header className="sticky top-0 z-10 flex h-16 items-center gap-4 border-b bg-background px-4 md:px-6">
-        <div className="flex items-center gap-2">
-          <Euro className="h-6 w-6" />
-          <h1 className="text-lg font-semibold">Portuguese Budget Portal</h1>
-        </div>
-        <nav className="ml-auto flex gap-2">
-          <Button asChild variant="ghost" size="sm">
-            <Link href="/">Dashboard</Link>
-          </Button>
-          <Button asChild variant="ghost" size="sm">
-            <Link href="/compare">Compare</Link>
-          </Button>
-          <Button asChild variant="ghost" size="sm">
-            <Link href="/map" className="font-medium">
-              Map
-            </Link>
-          </Button>
-          <Button asChild variant="ghost" size="sm">
-            <Link href="/news">News</Link>
-          </Button>
-          <Button asChild variant="ghost" size="sm">
-            <Link href="/about">About</Link>
-          </Button>
-        </nav>
-      </header>
       <div className="flex items-center gap-2 border-b px-4 py-2 md:px-6">
         <Button asChild variant="ghost" size="sm">
           <Link href="/">

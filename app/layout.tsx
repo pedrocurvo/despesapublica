@@ -1,6 +1,8 @@
 import type { Metadata } from 'next'
 import './globals.css'
 import Link from "next/link"
+import { Euro } from "lucide-react"
+import { Button } from "@/components/ui/button"
 
 export const metadata: Metadata = {
   title: 'v0 App',
@@ -15,6 +17,29 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <header className="sticky top-0 z-10 flex h-16 items-center gap-4 border-b bg-background px-4 md:px-6">
+        <div className="flex items-center gap-2">
+          <Euro className="h-6 w-6" />
+          <h1 className="text-lg font-semibold">Despesa Publica</h1>
+        </div>
+        <nav className="ml-auto flex gap-2">
+          <Button asChild variant="ghost" size="sm">
+            <Link href="/">Dashboard</Link>
+          </Button>
+          <Button asChild variant="ghost" size="sm">
+            <Link href="/compare">Compare</Link>
+          </Button>
+          <Button asChild variant="ghost" size="sm">
+            <Link href="/map">Map</Link>
+          </Button>
+          <Button asChild variant="ghost" size="sm">
+            <Link href="/news">News</Link>
+          </Button>
+          <Button asChild variant="ghost" size="sm">
+            <Link href="/about">About</Link>
+          </Button>
+        </nav>
+      </header>
       <body>{children}</body>
       <footer className="border-t py-4 px-6">
         <div className="container mx-auto flex flex-col items-center justify-between gap-4 md:flex-row">
