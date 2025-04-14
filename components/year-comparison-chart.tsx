@@ -3,34 +3,6 @@
 import { useEffect, useState } from "react"
 import { Bar, BarChart, CartesianGrid, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts"
 
-// Full budget data
-const budgetData = {
-  "2023": {
-    proposed: 93.4,
-    expended: 91.7,
-  },
-  "2022": {
-    proposed: 91.3,
-    expended: 90.5,
-  },
-  "2021": {
-    proposed: 89.8,
-    expended: 90.1,
-  },
-  "2020": {
-    proposed: 87.5,
-    expended: 89.2,
-  },
-  "2019": {
-    proposed: 86.2,
-    expended: 85.4,
-  },
-  "2018": {
-    proposed: 84.6,
-    expended: 83.1,
-  },
-}
-
 interface YearComparisonChartProps {
   selectedYears: string[]
 }
@@ -38,6 +10,49 @@ interface YearComparisonChartProps {
 export function YearComparisonChart({ selectedYears }: YearComparisonChartProps) {
   // Use state to control when we render the chart
   const [isMounted, setIsMounted] = useState(false)
+  const [budgetData, setBudgetData] = useState<{[key: string]: {proposed: number, expended: number}}>({})
+  const [isLoading, setIsLoading] = useState<boolean>(true)
+  const [error, setError] = useState<string | null>(null)
+  
+  // Fetch the budget data
+  useEffect(() => {
+    const fetchBudgetData = async () => {
+      if (selectedYears.length === 0) return
+      
+      setIsLoading(true)
+      setError(null)
+      
+      try {
+        // Fetch all needed years at once
+        const response = await fetch(`/api/budget?startYear=${Math.min(...selectedYears.map(Number))}&endYear=${Math.max(...selectedYears.map(Number))}`)
+        
+        if (!response.ok) {
+          throw new Error('Failed to fetch budget data')
+        }
+        
+        const jsonData = await response.json()
+        
+        // Transform the data structure to match our needs
+        const transformedData: {[key: string]: {proposed: number, expended: number}} = {}
+        
+        Object.entries(jsonData).forEach(([year, yearData]: [string, any]) => {
+          transformedData[year] = {
+            proposed: yearData.total.proposed,
+            expended: yearData.total.expended
+          }
+        })
+        
+        setBudgetData(transformedData)
+      } catch (err) {
+        console.error("Error fetching budget data:", err)
+        setError("Failed to load budget data")
+      } finally {
+        setIsLoading(false)
+      }
+    }
+    
+    fetchBudgetData()
+  }, [selectedYears])
   
   // Filter data based on selected years
   const data = selectedYears.map((year) => ({
@@ -62,10 +77,18 @@ export function YearComparisonChart({ selectedYears }: YearComparisonChartProps)
   }
 
   // Show a simple loading state during server rendering or first client render
-  if (!isMounted) {
+  if (!isMounted || isLoading) {
     return (
       <div className="h-[300px] w-full flex items-center justify-center">
         <div className="text-sm text-muted-foreground">Loading chart...</div>
+      </div>
+    )
+  }
+
+  if (error) {
+    return (
+      <div className="h-[300px] w-full flex items-center justify-center">
+        <div className="text-sm text-muted-foreground">{error}</div>
       </div>
     )
   }
