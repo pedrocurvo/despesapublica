@@ -13,11 +13,38 @@ type DistrictInfo = {
   expended: number
 }
 
+// Geographic centers for different regions
+const projectionConfig = {
+  mainland: {
+    center: [-8.5, 39.5],
+    scale: 5500,
+  },
+  madeira: {
+    center: [-16.9, 32.7],
+    scale: 8000,
+  },
+  azores: {
+    center: [-28, 38.5],
+    scale: 4000,
+  }
+}
+
+// Helper function to determine if a district belongs to mainland, Madeira, or Azores
+const getRegionType = (districtName: string): "mainland" | "madeira" | "azores" => {
+  if (districtName.toLowerCase().includes("madeira")) {
+    return "madeira"
+  } else if (districtName.toLowerCase().includes("açores") || districtName.toLowerCase().includes("azores")) {
+    return "azores"
+  }
+  return "mainland"
+}
+
 export function PortugalMap() {
   const [hoveredDistrict, setHoveredDistrict] = useState<DistrictInfo | null>(null)
   const [tooltipPosition, setTooltipPosition] = useState({ x: 0, y: 0 })
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
+  const [geoData, setGeoData] = useState<any>(null)
 
   // Use direct import for GeoJSON to ensure it's available
   const geoUrl = "gadm41_PRT_1.json"
@@ -65,7 +92,9 @@ export function PortugalMap() {
       "Setúbal": "setubal",
       "Évora": "evora",
       "Beja": "beja",
-      "Faro": "faro"
+      "Faro": "faro",
+      "Região Autónoma dos Açores": "azores",
+      "Região Autónoma da Madeira": "madeira"
     }
     
     return districtMap[geoName] || geoName.toLowerCase().replace(/\s+/g, "-")
@@ -92,7 +121,8 @@ export function PortugalMap() {
         }
         return response.json();
       })
-      .then(() => {
+      .then((data) => {
+        setGeoData(data);
         setLoading(false);
       })
       .catch(err => {
@@ -101,6 +131,52 @@ export function PortugalMap() {
         setLoading(false);
       });
   }, [geoUrl]);
+
+  // Create geography components with appropriate filtering
+  const renderGeographies = (regionType: "mainland" | "madeira" | "azores") => {
+    if (!geoData) return null;
+    
+    return (
+      <Geographies geography={geoData}>
+        {({ geographies }) => {
+          // Filter geographies based on region type
+          const filteredGeos = geographies.filter(geo => {
+            const districtName = geo.properties.NAME_1 || "";
+            return getRegionType(districtName) === regionType;
+          });
+          
+          return filteredGeos.map((geo) => {
+            const { NAME_1 } = geo.properties;
+            const districtId = mapDistrictId(NAME_1);
+            
+            return (
+              <Geography
+                key={geo.rsmKey}
+                geography={geo}
+                fill={getDistrictFill(districtId)}
+                stroke="#94a3b8"
+                strokeWidth={0.5}
+                style={{
+                  default: { outline: "none" },
+                  hover: { outline: "none", fill: "#38bdf8" },
+                  pressed: { outline: "none", fill: "#38bdf8" },
+                }}
+                onMouseEnter={(e) => {
+                  const district = districtData["2023"].find((d) => d.id === districtId);
+                  if (district) {
+                    handleMouseEnter(districtId, e);
+                  }
+                }}
+                onMouseMove={handleMouseMove}
+                onMouseLeave={handleMouseLeave}
+                className="cursor-pointer transition-colors"
+              />
+            );
+          });
+        }}
+      </Geographies>
+    );
+  };
 
   return (
     <div className="relative">
@@ -126,7 +202,7 @@ export function PortugalMap() {
         </div>
       </div>
 
-      <div className="relative mx-auto w-full max-w-3xl">
+      <div className="relative w-full">
         {error && (
           <div className="rounded-md bg-red-50 p-4 text-red-800">
             <p>{error}</p>
@@ -143,52 +219,61 @@ export function PortugalMap() {
               <p className="mt-2">Loading map data...</p>
             </div>
           </div>
-        ) : !error && (
-          <ComposableMap
-            projection="geoMercator"
-            projectionConfig={{
-              center: [-8.5, 39.5],
-              scale: 5500,
-            }}
-            width={600}
-            height={800}
-            style={{ width: "100%", height: "auto" }}
-          >
-            <ZoomableGroup>
-              <Geographies geography={geoUrl}>
-                {({ geographies }) =>
-                  geographies.map((geo) => {
-                    const { NAME_1 } = geo.properties;
-                    const districtId = mapDistrictId(NAME_1);
-                    
-                    return (
-                      <Geography
-                        key={geo.rsmKey}
-                        geography={geo}
-                        fill={getDistrictFill(districtId)}
-                        stroke="#94a3b8"
-                        strokeWidth={0.5}
-                        style={{
-                          default: { outline: "none" },
-                          hover: { outline: "none", fill: "#38bdf8" },
-                          pressed: { outline: "none", fill: "#38bdf8" },
-                        }}
-                        onMouseEnter={(e) => {
-                          const district = districtData["2023"].find((d) => d.id === districtId);
-                          if (district) {
-                            handleMouseEnter(districtId, e);
-                          }
-                        }}
-                        onMouseMove={handleMouseMove}
-                        onMouseLeave={handleMouseLeave}
-                        className="cursor-pointer transition-colors"
-                      />
-                    );
-                  })
-                }
-              </Geographies>
-            </ZoomableGroup>
-          </ComposableMap>
+        ) : !error && geoData && (
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {/* Main Portugal Map */}
+            <div className="md:col-span-2">
+              <div className="border rounded-lg p-2 shadow-sm">
+                <h3 className="text-sm font-medium mb-2">Mainland Portugal</h3>
+                <ComposableMap
+                  projection="geoMercator"
+                  projectionConfig={projectionConfig.mainland}
+                  width={600}
+                  height={800}
+                  style={{ width: "100%", height: "auto" }}
+                >
+                  <ZoomableGroup>
+                    {renderGeographies("mainland")}
+                  </ZoomableGroup>
+                </ComposableMap>
+              </div>
+            </div>
+            
+            {/* Islands Maps */}
+            <div className="md:col-span-1 space-y-4">
+              {/* Madeira Map */}
+              <div className="border rounded-lg p-2 shadow-sm">
+                <h3 className="text-sm font-medium mb-2">Madeira</h3>
+                <ComposableMap
+                  projection="geoMercator"
+                  projectionConfig={projectionConfig.madeira}
+                  width={300}
+                  height={300}
+                  style={{ width: "100%", height: "auto" }}
+                >
+                  <ZoomableGroup>
+                    {renderGeographies("madeira")}
+                  </ZoomableGroup>
+                </ComposableMap>
+              </div>
+              
+              {/* Azores Map */}
+              <div className="border rounded-lg p-2 shadow-sm">
+                <h3 className="text-sm font-medium mb-2">Açores</h3>
+                <ComposableMap
+                  projection="geoMercator"
+                  projectionConfig={projectionConfig.azores}
+                  width={300}
+                  height={300}
+                  style={{ width: "100%", height: "auto" }}
+                >
+                  <ZoomableGroup>
+                    {renderGeographies("azores")}
+                  </ZoomableGroup>
+                </ComposableMap>
+              </div>
+            </div>
+          </div>
         )}
 
         {hoveredDistrict && (
