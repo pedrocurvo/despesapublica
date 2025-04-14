@@ -175,11 +175,21 @@ export async function GET(request: Request) {
     return NextResponse.json({ error: "Year not found" }, { status: 404 })
   }
 
-  // Return all news data if no year specified
+  // Return all news data if no year specified, but ensure unique IDs
+  // by adding the year as a prefix to the id property
+  const allNews = Object.entries(newsData).flatMap(([year, articles]) => 
+    articles.map(article => ({
+      ...article,
+      uniqueId: `${year}-${article.id}` // Add a uniqueId property that combines year and id
+    }))
+  );
+  
+  // Sort by date (descending) to get the most recent news first
+  allNews.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  
   if (limit && limit > 0) {
-    const allNews = Object.values(newsData).flat()
     return NextResponse.json(allNews.slice(0, limit))
   }
 
-  return NextResponse.json(newsData)
+  return NextResponse.json(allNews)
 }

@@ -1,41 +1,75 @@
 "use client"
 
+import { useState, useEffect } from "react"
 import { Bar, BarChart, CartesianGrid, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts"
 
-const data = [
-  {
-    year: "2018",
-    proposed: 84.6,
-    expended: 83.1,
-  },
-  {
-    year: "2019",
-    proposed: 86.2,
-    expended: 85.4,
-  },
-  {
-    year: "2020",
-    proposed: 87.5,
-    expended: 89.2,
-  },
-  {
-    year: "2021",
-    proposed: 89.8,
-    expended: 90.1,
-  },
-  {
-    year: "2022",
-    proposed: 91.3,
-    expended: 90.5,
-  },
-  {
-    year: "2023",
-    proposed: 93.4,
-    expended: 91.7,
-  },
-]
+interface YearlyBudget {
+  year: string
+  proposed: number
+  expended: number
+}
 
 export function Overview() {
+  const [data, setData] = useState<YearlyBudget[]>([])
+  const [isLoading, setIsLoading] = useState<boolean>(true)
+  const [error, setError] = useState<string | null>(null)
+
+  useEffect(() => {
+    const fetchBudgetOverview = async () => {
+      setIsLoading(true)
+      setError(null)
+      
+      try {
+        // Fetch budget data for the years 2018-2023
+        const response = await fetch('/api/budget?startYear=2018&endYear=2023')
+        
+        if (!response.ok) {
+          throw new Error('Failed to fetch budget overview data')
+        }
+        
+        const jsonData = await response.json()
+        
+        // Transform the data for the chart
+        const chartData = Object.entries(jsonData).map(([year, yearData]: [string, any]) => ({
+          year,
+          proposed: yearData.total.proposed,
+          expended: yearData.total.expended
+        }))
+        
+        // Sort by year
+        chartData.sort((a, b) => parseInt(a.year) - parseInt(b.year))
+        
+        setData(chartData)
+      } catch (err) {
+        console.error("Error fetching budget overview:", err)
+        setError("Failed to load budget overview")
+        setData([])
+      } finally {
+        setIsLoading(false)
+      }
+    }
+    
+    fetchBudgetOverview()
+  }, [])
+
+  if (isLoading) {
+    return (
+      <div className="flex h-[300px] w-full items-center justify-center">
+        <div className="text-muted-foreground">Loading budget overview...</div>
+      </div>
+    )
+  }
+
+  if (error || data.length === 0) {
+    return (
+      <div className="flex h-[300px] w-full items-center justify-center">
+        <div className="text-muted-foreground">
+          {error || "No budget data available"}
+        </div>
+      </div>
+    )
+  }
+
   return (
     <div className="h-[300px] w-full">
       <ResponsiveContainer width="100%" height="100%">

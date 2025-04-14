@@ -5,6 +5,7 @@ import { DateRangePicker } from "@/components/date-range-picker"
 import { SectorComparison } from "@/components/sector-comparison"
 import { YearlyComparison } from "@/components/yearly-comparison"
 import { SectorSelector } from "@/components/sector-selector"
+import { SectorsProvider } from "@/lib/sectors-context"
 
 export const metadata: Metadata = {
   title: "Compare Budget Data | Portuguese Government Budget",
@@ -22,33 +23,35 @@ export default function ComparePage() {
           </div>
           <DateRangePicker />
         </div>
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
-          <Card className="lg:col-span-7">
-            <CardHeader className="flex flex-row items-center justify-between">
-              <div>
-                <CardTitle>Yearly Budget Comparison</CardTitle>
-                <CardDescription>Compare total budget allocation and expenditure over time</CardDescription>
-              </div>
-            </CardHeader>
-            <CardContent>
-              <YearlyComparison />
-            </CardContent>
-          </Card>
-        </div>
-        <div className="mt-4 grid gap-4 md:grid-cols-2 lg:grid-cols-7">
-          <Card className="lg:col-span-7">
-            <CardHeader className="flex flex-row items-center justify-between">
-              <div>
-                <CardTitle>Sector Comparison</CardTitle>
-                <CardDescription>Compare budget allocation by sector</CardDescription>
-              </div>
-              <SectorSelector />
-            </CardHeader>
-            <CardContent>
-              <SectorComparison />
-            </CardContent>
-          </Card>
-        </div>
+        <SectorsProvider>
+          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
+            <Card className="lg:col-span-7">
+              <CardHeader className="flex flex-row items-center justify-between">
+                <div>
+                  <CardTitle>Yearly Budget Comparison</CardTitle>
+                  <CardDescription>Compare total budget allocation and expenditure over time</CardDescription>
+                </div>
+              </CardHeader>
+              <CardContent>
+                <YearlyComparison />
+              </CardContent>
+            </Card>
+          </div>
+          <div className="mt-4 grid gap-4 md:grid-cols-2 lg:grid-cols-7">
+            <Card className="lg:col-span-7">
+              <CardHeader className="flex flex-row items-center justify-between">
+                <div>
+                  <CardTitle>Sector Comparison</CardTitle>
+                  <CardDescription>Compare budget allocation by sector</CardDescription>
+                </div>
+                <SectorSelector />
+              </CardHeader>
+              <CardContent>
+                <SectorComparison />
+              </CardContent>
+            </Card>
+          </div>
+        </SectorsProvider>
       </main>
     </div>
   )

@@ -7,6 +7,7 @@ import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, Command
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 import { useState } from "react"
 import { cn } from "@/lib/utils"
+import { useSectors } from "@/lib/sectors-context"
 
 const sectors = [
   { value: "education", label: "Education" },
@@ -21,7 +22,7 @@ const sectors = [
 
 export function SectorSelector() {
   const [open, setOpen] = useState(false)
-  const [selectedSectors, setSelectedSectors] = useState<string[]>(["education", "healthcare", "defense"])
+  const { selectedSectors, setSelectedSectors } = useSectors()
 
   const toggleSector = (sector: string) => {
     if (selectedSectors.includes(sector)) {

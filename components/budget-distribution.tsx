@@ -2,63 +2,47 @@
 
 import { Cell, Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts"
 
-const budgetData = {
-  "2023": [
-    { name: "Education", value: 8.2, color: "#3b82f6" },
-    { name: "Healthcare", value: 7.4, color: "#ef4444" },
-    { name: "Social Security", value: 6.8, color: "#f59e0b" },
-    { name: "Infrastructure", value: 5.2, color: "#10b981" },
-    { name: "Defense", value: 2.5, color: "#6366f1" },
-    { name: "Other", value: 63.3, color: "#94a3b8" },
-  ],
-  "2022": [
-    { name: "Education", value: 7.9, color: "#3b82f6" },
-    { name: "Healthcare", value: 7.2, color: "#ef4444" },
-    { name: "Social Security", value: 6.5, color: "#f59e0b" },
-    { name: "Infrastructure", value: 5.0, color: "#10b981" },
-    { name: "Defense", value: 2.4, color: "#6366f1" },
-    { name: "Other", value: 62.3, color: "#94a3b8" },
-  ],
-  "2021": [
-    { name: "Education", value: 7.5, color: "#3b82f6" },
-    { name: "Healthcare", value: 7.1, color: "#ef4444" },
-    { name: "Social Security", value: 6.2, color: "#f59e0b" },
-    { name: "Infrastructure", value: 4.7, color: "#10b981" },
-    { name: "Defense", value: 2.3, color: "#6366f1" },
-    { name: "Other", value: 62.0, color: "#94a3b8" },
-  ],
-  "2020": [
-    { name: "Education", value: 7.2, color: "#3b82f6" },
-    { name: "Healthcare", value: 6.9, color: "#ef4444" },
-    { name: "Social Security", value: 6.0, color: "#f59e0b" },
-    { name: "Infrastructure", value: 4.5, color: "#10b981" },
-    { name: "Defense", value: 2.2, color: "#6366f1" },
-    { name: "Other", value: 60.7, color: "#94a3b8" },
-  ],
-  "2019": [
-    { name: "Education", value: 7.0, color: "#3b82f6" },
-    { name: "Healthcare", value: 6.3, color: "#ef4444" },
-    { name: "Social Security", value: 5.7, color: "#f59e0b" },
-    { name: "Infrastructure", value: 4.4, color: "#10b981" },
-    { name: "Defense", value: 2.1, color: "#6366f1" },
-    { name: "Other", value: 60.7, color: "#94a3b8" },
-  ],
-  "2018": [
-    { name: "Education", value: 6.8, color: "#3b82f6" },
-    { name: "Healthcare", value: 6.1, color: "#ef4444" },
-    { name: "Social Security", value: 5.5, color: "#f59e0b" },
-    { name: "Infrastructure", value: 4.2, color: "#10b981" },
-    { name: "Defense", value: 2.0, color: "#6366f1" },
-    { name: "Other", value: 60.0, color: "#94a3b8" },
-  ],
+interface BudgetSectorData {
+  name: string
+  value: number
+  color: string
 }
 
 interface BudgetDistributionProps {
   year: string
+  data?: BudgetSectorData[]
+  isLoading?: boolean
 }
 
-export function BudgetDistribution({ year = "2023" }: BudgetDistributionProps) {
-  const data = budgetData[year] || budgetData["2023"]
+// Color mapping for sectors
+const sectorColors = {
+  education: "#3b82f6",
+  healthcare: "#ef4444",
+  "social-security": "#f59e0b",
+  infrastructure: "#10b981",
+  defense: "#6366f1",
+  justice: "#8b5cf6",
+  environment: "#06b6d4",
+  culture: "#ec4899",
+  other: "#94a3b8",
+}
+
+export function BudgetDistribution({ year = "2023", data, isLoading = false }: BudgetDistributionProps) {
+  if (isLoading) {
+    return (
+      <div className="flex h-[300px] w-full items-center justify-center">
+        <div className="text-muted-foreground">Loading budget data...</div>
+      </div>
+    )
+  }
+
+  if (!data || data.length === 0) {
+    return (
+      <div className="flex h-[300px] w-full items-center justify-center">
+        <div className="text-muted-foreground">No budget data available for {year}</div>
+      </div>
+    )
+  }
 
   return (
     <div className="h-[300px] w-full">
