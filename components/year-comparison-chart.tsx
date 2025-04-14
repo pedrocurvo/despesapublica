@@ -1,5 +1,6 @@
 "use client"
 
+import { useEffect, useState } from "react"
 import { Bar, BarChart, CartesianGrid, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts"
 
 // Full budget data
@@ -35,6 +36,9 @@ interface YearComparisonChartProps {
 }
 
 export function YearComparisonChart({ selectedYears }: YearComparisonChartProps) {
+  // Use state to control when we render the chart
+  const [isMounted, setIsMounted] = useState(false)
+  
   // Filter data based on selected years
   const data = selectedYears.map((year) => ({
     year,
@@ -42,11 +46,26 @@ export function YearComparisonChart({ selectedYears }: YearComparisonChartProps)
     expended: budgetData[year]?.expended || 0,
   }))
 
+  // Only render the chart component after the first client-side render
+  // This helps avoid hydration mismatches
+  useEffect(() => {
+    setIsMounted(true)
+  }, [])
+
   // If no years are selected, show a message
   if (selectedYears.length === 0) {
     return (
       <div className="flex h-[300px] w-full items-center justify-center text-sm text-muted-foreground">
         Select years to compare budget data
+      </div>
+    )
+  }
+
+  // Show a simple loading state during server rendering or first client render
+  if (!isMounted) {
+    return (
+      <div className="h-[300px] w-full flex items-center justify-center">
+        <div className="text-sm text-muted-foreground">Loading chart...</div>
       </div>
     )
   }
