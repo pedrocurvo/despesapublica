@@ -1,44 +1,73 @@
 "use client"
 
+import { useState, useEffect } from "react"
 import { CalendarIcon, ExternalLink } from "lucide-react"
 import Link from "next/link"
 
-const newsData = [
-  {
-    id: 1,
-    title: "Government Approves 2023 Budget with Focus on Education",
-    date: "2022-12-15",
-    source: "Diário de Notícias",
-    url: "#",
-  },
-  {
-    id: 2,
-    title: "Healthcare Spending Exceeds Budget Allocation for Third Year",
-    date: "2023-03-22",
-    source: "Público",
-    url: "#",
-  },
-  {
-    id: 3,
-    title: "Defense Budget Increases Amid European Security Concerns",
-    date: "2023-05-10",
-    source: "Expresso",
-    url: "#",
-  },
-  {
-    id: 4,
-    title: "Budget Execution Report Shows 98% Utilization Rate",
-    date: "2023-07-05",
-    source: "Jornal de Negócios",
-    url: "#",
-  },
-]
+interface NewsItem {
+  id: number
+  uniqueId?: string  // Add this new optional property
+  title: string
+  date: string
+  source: string
+  summary: string
+  url: string
+}
 
 export function RecentNews() {
+  const [newsData, setNewsData] = useState<NewsItem[]>([])
+  const [isLoading, setIsLoading] = useState<boolean>(true)
+  const [error, setError] = useState<string | null>(null)
+
+  useEffect(() => {
+    const fetchNews = async () => {
+      setIsLoading(true)
+      setError(null)
+      
+      try {
+        // Fetch the latest 4 news items
+        const response = await fetch(`/api/news?limit=4`)
+        
+        if (!response.ok) {
+          throw new Error("Failed to fetch news data")
+        }
+        
+        const data = await response.json()
+        setNewsData(data)
+      } catch (err) {
+        console.error("Error fetching news:", err)
+        setError("Failed to load news")
+        setNewsData([])
+      } finally {
+        setIsLoading(false)
+      }
+    }
+    
+    fetchNews()
+  }, [])
+
+  if (isLoading) {
+    return (
+      <div className="flex h-[300px] w-full items-center justify-center">
+        <div className="text-muted-foreground">Loading news...</div>
+      </div>
+    )
+  }
+
+  if (error || newsData.length === 0) {
+    return (
+      <div className="flex h-[300px] w-full items-center justify-center">
+        <div className="text-muted-foreground">
+          {error || "No news available at the moment"}
+        </div>
+      </div>
+    )
+  }
+
   return (
     <div className="space-y-4">
       {newsData.map((news) => (
-        <div key={news.id} className="border-b pb-3 last:border-0">
+        <div key={news.uniqueId || `news-${news.id}`} className="border-b pb-3 last:border-0">
           <h3 className="font-medium">{news.title}</h3>
           <div className="mt-1 flex items-center text-sm text-muted-foreground">
             <CalendarIcon className="mr-1 h-3 w-3" />

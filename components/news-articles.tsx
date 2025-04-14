@@ -170,7 +170,7 @@ export function NewsArticles({ year }: NewsArticlesProps) {
   return (
     <div className="space-y-6">
       {articles.map((article) => (
-        <div key={article.id} className="border-b pb-5 last:border-0">
+        <div key={`${year}-${article.id}`} className="border-b pb-5 last:border-0">
           <h3 className="text-lg font-medium">{article.title}</h3>
           <div className="mt-1 flex items-center text-sm text-muted-foreground">
             <CalendarIcon className="mr-1 h-3 w-3" />
