@@ -9,30 +9,42 @@ import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { Calendar } from "@/components/ui/calendar"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
+import { useDateRange } from "@/lib/date-range-context"
 
-export function DateRangePicker({ className }: React.HTMLAttributes<HTMLDivElement>) {
-  const [date, setDate] = React.useState<DateRange | undefined>({
-    from: new Date(2018, 0, 1),
-    to: new Date(),
-  })
+interface DateRangePickerProps extends React.HTMLAttributes<HTMLDivElement> {
+  onChange?: (date: DateRange | undefined) => void;
+}
+
+export function DateRangePicker({ className, onChange }: DateRangePickerProps) {
+  const { dateRange, setDateRange } = useDateRange()
+  const [open, setOpen] = React.useState(false)
+
+  // Handle date change with callback
+  const handleDateChange = (newDate: DateRange | undefined) => {
+    setDateRange(newDate)
+    if (onChange) {
+      onChange(newDate)
+    }
+  }
 
   return (
     <div className={cn("grid gap-2", className)}>
-      <Popover>
+      <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger asChild>
           <Button
             id="date"
             variant={"outline"}
-            className={cn("w-[300px] justify-start text-left font-normal", !date && "text-muted-foreground")}
+            className={cn("w-[300px] justify-start text-left font-normal", !dateRange && "text-muted-foreground")}
+            onClick={() => setOpen(true)}
           >
             <CalendarIcon className="mr-2 h-4 w-4" />
-            {date?.from ? (
-              date.to ? (
+            {dateRange?.from ? (
+              dateRange.to ? (
                 <>
-                  {format(date.from, "LLL dd, y")} - {format(date.to, "LLL dd, y")}
+                  {format(dateRange.from, "LLL dd, y")} - {format(dateRange.to, "LLL dd, y")}
                 </>
               ) : (
-                format(date.from, "LLL dd, y")
+                format(dateRange.from, "LLL dd, y")
               )
             ) : (
               <span>Pick a date</span>
@@ -43,10 +55,13 @@ export function DateRangePicker({ className }: React.HTMLAttributes<HTMLDivEleme
           <Calendar
             initialFocus
             mode="range"
-            defaultMonth={date?.from}
-            selected={date}
-            onSelect={setDate}
+            defaultMonth={dateRange?.from}
+            selected={dateRange}
+            onSelect={handleDateChange}
             numberOfMonths={2}
+            disabled={{ after: new Date() }}
+            fromYear={2018}
+            toYear={new Date().getFullYear()}
           />
         </PopoverContent>
       </Popover>
