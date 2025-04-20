@@ -3,28 +3,38 @@
 import { useEffect, useState } from "react"
 import { ComposableMap, Geographies, Geography, ZoomableGroup } from "react-simple-maps"
 import { Card, CardContent } from "@/components/ui/card"
-import { districtData } from "@/lib/district-data"
+import { Button } from "@/components/ui/button"
+import { ArrowLeft } from "lucide-react"
 
 type DistrictInfo = {
   id: string
   name: string
   received: number
-  contributed: number
-  expended: number
+  nationalPercentage: number
+}
+
+type TransferData = {
+  Total: number
+  Districts: Array<{
+    District: string
+    Total: number
+    NationalPercentage: string
+    Municipalities: Record<string, number>
+  }>
 }
 
 // Geographic centers for different regions
 const projectionConfig = {
   mainland: {
-    center: [-8.5, 39.5],
+    center: [-8.5, 39.5] as [number, number],
     scale: 5500,
   },
   madeira: {
-    center: [-16.9, 32.7],
+    center: [-16.9, 32.7] as [number, number],
     scale: 8000,
   },
   azores: {
-    center: [-28, 38.5],
+    center: [-28, 38.5] as [number, number],
     scale: 4000,
   }
 }
@@ -39,24 +49,43 @@ const getRegionType = (districtName: string): "mainland" | "madeira" | "azores" 
   return "mainland"
 }
 
-export function PortugalMap() {
+interface PortugalMapProps {
+  selectedYear: string;
+}
+
+export function PortugalMap({ selectedYear }: PortugalMapProps) {
   const [hoveredDistrict, setHoveredDistrict] = useState<DistrictInfo | null>(null)
+  const [selectedDistrict, setSelectedDistrict] = useState<string | null>(null)
   const [tooltipPosition, setTooltipPosition] = useState({ x: 0, y: 0 })
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const [geoData, setGeoData] = useState<any>(null)
+  const [municipalitiesData, setMunicipalitiesData] = useState<any>(null)
+  const [transferData, setTransferData] = useState<TransferData | null>(null)
 
-  // Use direct import for GeoJSON to ensure it's available
-  const geoUrl = "gadm41_PRT_1.json"
+  // URLs for GeoJSON files
+  const districtGeoUrl = "gadm41_PRT_1.json"
+  const municipalitiesGeoUrl = "gadm41_PRT_2.json"
 
-  const handleMouseEnter = (districtId: string, e: React.MouseEvent) => {
-    const district = districtData["2023"].find((d) => d.id === districtId)
-    if (district) {
-      setHoveredDistrict(district)
-      setTooltipPosition({
-        x: e.clientX,
-        y: e.clientY,
-      })
+  const handleMouseEnter = (districtId: string, districtName: string, e: React.MouseEvent) => {
+    if (transferData) {
+      const districtData = transferData.Districts.find(
+        d => d.District.toUpperCase() === districtName.toUpperCase()
+      );
+
+      if (districtData) {
+        setHoveredDistrict({
+          id: districtId,
+          name: districtName,
+          received: Number(districtData.Total) / 1000000000, // Convert to billions
+          nationalPercentage: Number(districtData.NationalPercentage)
+        });
+        
+        setTooltipPosition({
+          x: e.clientX,
+          y: e.clientY,
+        });
+      }
     }
   }
 
@@ -69,6 +98,10 @@ export function PortugalMap() {
 
   const handleMouseLeave = () => {
     setHoveredDistrict(null)
+  }
+
+  const handleDistrictClick = (districtName: string) => {
+    setSelectedDistrict(districtName)
   }
 
   // Map district IDs from GeoJSON properties to our data format
@@ -100,39 +133,110 @@ export function PortugalMap() {
     return districtMap[geoName] || geoName.toLowerCase().replace(/\s+/g, "-")
   }
 
-  // Get the fill color based on the received amount
-  const getDistrictFill = (districtId: string) => {
-    const district = districtData["2023"].find((d) => d.id === districtId)
-    if (!district) return "#e5e7eb" // Default gray
+  // Get the fill color based on the percentage of national budget
+  const getDistrictFill = (districtName: string) => {
+    if (!transferData) return "#e5e7eb" // Default gray
+    
+    const districtData = transferData.Districts.find(
+      d => d.District.toUpperCase() === districtName.toUpperCase()
+    );
+    
+    if (!districtData) return "#e5e7eb" // Default gray
 
-    // Color scale based on received amount
-    if (district.received > 2.0) return "#0ea5e9" // High - blue
-    if (district.received > 1.0) return "#60a5fa" // Medium-high - lighter blue
-    if (district.received > 0.5) return "#93c5fd" // Medium - even lighter blue
-    return "#bfdbfe" // Low - lightest blue
+    const percentage = Number(districtData.NationalPercentage);
+    
+    // Color scale based on percentage
+    if (percentage > 10) return "#0ea5e9" // High - blue
+    if (percentage > 7) return "#60a5fa"  // Medium-high - lighter blue
+    if (percentage > 4) return "#93c5fd"  // Medium - even lighter blue
+    return "#bfdbfe"                       // Low - lightest blue
+  }
+
+  // Get projection config for specific district
+  const getDistrictProjectionConfig = (districtName: string) => {
+    // These are approximate centers for districts
+    const districtCenters: Record<string, { center: [number, number], scale: number }> = {
+      "Aveiro": { center: [-8.6, 40.7], scale: 15000 },
+      "Beja": { center: [-7.9, 38.0], scale: 12000 },
+      "Braga": { center: [-8.4, 41.5], scale: 15000 },
+      "Bragança": { center: [-6.8, 41.8], scale: 12000 },
+      "Castelo Branco": { center: [-7.5, 40.0], scale: 12000 },
+      "Coimbra": { center: [-8.3, 40.2], scale: 15000 },
+      "Évora": { center: [-7.9, 38.6], scale: 12000 },
+      "Faro": { center: [-7.9, 37.0], scale: 12000 },
+      "Guarda": { center: [-7.2, 40.6], scale: 12000 },
+      "Leiria": { center: [-8.8, 39.7], scale: 12000 },
+      "Lisboa": { center: [-9.1, 38.7], scale: 20000 },
+      "Portalegre": { center: [-7.4, 39.3], scale: 12000 },
+      "Porto": { center: [-8.3, 41.1], scale: 20000 },
+      "Santarém": { center: [-8.5, 39.2], scale: 12000 },
+      "Setúbal": { center: [-8.9, 38.5], scale: 12000 },
+      "Viana do Castelo": { center: [-8.6, 41.7], scale: 15000 },
+      "Vila Real": { center: [-7.7, 41.3], scale: 12000 },
+      "Viseu": { center: [-7.9, 40.7], scale: 12000 },
+      // Include centers for islands if needed
+      "Região Autónoma da Madeira": projectionConfig.madeira,
+      "Região Autónoma dos Açores": projectionConfig.azores
+    }
+    
+    return districtCenters[districtName] || projectionConfig.mainland
   }
 
   useEffect(() => {
-    // Check if the file exists
-    fetch(geoUrl)
+    setLoading(true);
+    setError(null);
+    
+    // Load district-level GeoJSON data
+    fetch(districtGeoUrl)
       .then(response => {
         if (!response.ok) {
-          throw new Error(`Failed to load GeoJSON: ${response.status} ${response.statusText}`);
+          throw new Error(`Failed to load district GeoJSON: ${response.status} ${response.statusText}`);
         }
         return response.json();
       })
       .then((data) => {
         setGeoData(data);
+      })
+      .catch(err => {
+        console.error("Error loading district GeoJSON:", err);
+        setError(`Failed to load map data: ${err.message}`);
+      });
+    
+    // Load municipality-level GeoJSON data
+    fetch(municipalitiesGeoUrl)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`Failed to load municipalities GeoJSON: ${response.status} ${response.statusText}`);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        setMunicipalitiesData(data);
+      })
+      .catch(err => {
+        console.error("Error loading municipalities GeoJSON:", err);
+      });
+
+    // Fetch transfer data
+    fetch(`/api/transfers?year=${selectedYear}`)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`Failed to load transfer data: ${response.status} ${response.statusText}`);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        setTransferData(data);
         setLoading(false);
       })
       .catch(err => {
-        console.error("Error loading GeoJSON:", err);
-        setError(`Failed to load map data: ${err.message}`);
+        console.error("Error loading transfer data:", err);
+        setError(`Failed to load transfer data: ${err.message}`);
         setLoading(false);
       });
-  }, [geoUrl]);
+  }, [districtGeoUrl, municipalitiesGeoUrl, selectedYear]);
 
-  // Create geography components with appropriate filtering
+  // Create geography components with appropriate filtering for district level
   const renderGeographies = (regionType: "mainland" | "madeira" | "azores") => {
     if (!geoData) return null;
     
@@ -153,7 +257,7 @@ export function PortugalMap() {
               <Geography
                 key={geo.rsmKey}
                 geography={geo}
-                fill={getDistrictFill(districtId)}
+                fill={getDistrictFill(NAME_1)}
                 stroke="#94a3b8"
                 strokeWidth={0.5}
                 style={{
@@ -161,14 +265,46 @@ export function PortugalMap() {
                   hover: { outline: "none", fill: "#38bdf8" },
                   pressed: { outline: "none", fill: "#38bdf8" },
                 }}
-                onMouseEnter={(e) => {
-                  const district = districtData["2023"].find((d) => d.id === districtId);
-                  if (district) {
-                    handleMouseEnter(districtId, e);
-                  }
-                }}
+                onClick={() => handleDistrictClick(NAME_1)}
+                onMouseEnter={(e) => handleMouseEnter(districtId, NAME_1, e)}
                 onMouseMove={handleMouseMove}
                 onMouseLeave={handleMouseLeave}
+                className="cursor-pointer transition-colors"
+              />
+            );
+          });
+        }}
+      </Geographies>
+    );
+  };
+
+  // Render municipalities for a specific district
+  const renderMunicipalities = (districtName: string) => {
+    if (!municipalitiesData) return null;
+    
+    return (
+      <Geographies geography={municipalitiesData}>
+        {({ geographies }) => {
+          // Filter for municipalities in the selected district
+          const filteredGeos = geographies.filter(geo => {
+            return geo.properties.NAME_1 === districtName;
+          });
+          
+          return filteredGeos.map((geo) => {
+            const { NAME_2 } = geo.properties;
+            
+            return (
+              <Geography
+                key={geo.rsmKey}
+                geography={geo}
+                fill="#93c5fd"
+                stroke="#ffffff"
+                strokeWidth={0.5}
+                style={{
+                  default: { outline: "none" },
+                  hover: { outline: "none", fill: "#38bdf8" },
+                  pressed: { outline: "none", fill: "#38bdf8" },
+                }}
                 className="cursor-pointer transition-colors"
               />
             );
@@ -181,25 +317,40 @@ export function PortugalMap() {
   return (
     <div className="relative">
       <div className="mb-4 flex items-center justify-between">
-        <div className="text-sm font-medium">Budget Distribution by District (2023)</div>
-        <div className="flex items-center gap-4">
-          <div className="flex items-center gap-1">
-            <div className="h-3 w-3 rounded-full bg-[#bfdbfe]"></div>
-            <span className="text-xs">{"< €0.5B"}</span>
-          </div>
-          <div className="flex items-center gap-1">
-            <div className="h-3 w-3 rounded-full bg-[#93c5fd]"></div>
-            <span className="text-xs">€0.5B - €1.0B</span>
-          </div>
-          <div className="flex items-center gap-1">
-            <div className="h-3 w-3 rounded-full bg-[#60a5fa]"></div>
-            <span className="text-xs">€1.0B - €2.0B</span>
-          </div>
-          <div className="flex items-center gap-1">
-            <div className="h-3 w-3 rounded-full bg-[#0ea5e9]"></div>
-            <span className="text-xs">{"> €2.0B"}</span>
-          </div>
+        <div className="text-sm font-medium">
+          {selectedDistrict ? `${selectedDistrict} Municipalities` : `Budget Distribution by District (${selectedYear})`}
         </div>
+        
+        {selectedDistrict ? (
+          <Button
+            variant="outline"
+            size="sm"
+            className="flex items-center gap-1"
+            onClick={() => setSelectedDistrict(null)}
+          >
+            <ArrowLeft className="h-4 w-4" />
+            <span>Back to National View</span>
+          </Button>
+        ) : (
+          <div className="flex items-center gap-4">
+            <div className="flex items-center gap-1">
+              <div className="h-3 w-3 rounded-full bg-[#bfdbfe]"></div>
+              <span className="text-xs">{"< 4%"}</span>
+            </div>
+            <div className="flex items-center gap-1">
+              <div className="h-3 w-3 rounded-full bg-[#93c5fd]"></div>
+              <span className="text-xs">4% - 7%</span>
+            </div>
+            <div className="flex items-center gap-1">
+              <div className="h-3 w-3 rounded-full bg-[#60a5fa]"></div>
+              <span className="text-xs">7% - 10%</span>
+            </div>
+            <div className="flex items-center gap-1">
+              <div className="h-3 w-3 rounded-full bg-[#0ea5e9]"></div>
+              <span className="text-xs">{"> 10%"}</span>
+            </div>
+          </div>
+        )}
       </div>
 
       <div className="relative w-full">
@@ -207,7 +358,7 @@ export function PortugalMap() {
           <div className="rounded-md bg-red-50 p-4 text-red-800">
             <p>{error}</p>
             <p className="mt-2 text-sm">
-              Make sure the file exists at: <code>public{geoUrl}</code>
+              Make sure the file exists at: <code>public/{selectedDistrict ? municipalitiesGeoUrl : districtGeoUrl}</code>
             </p>
           </div>
         )}
@@ -219,64 +370,84 @@ export function PortugalMap() {
               <p className="mt-2">Loading map data...</p>
             </div>
           </div>
-        ) : !error && geoData && (
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {/* Main Portugal Map */}
-            <div className="md:col-span-2">
+        ) : !error && (selectedDistrict ? municipalitiesData : geoData) && (
+          <>
+            {selectedDistrict ? (
+              // Render detailed district view with municipalities
               <div className="border rounded-lg p-2 shadow-sm">
-                <h3 className="text-sm font-medium mb-2">Mainland Portugal</h3>
                 <ComposableMap
                   projection="geoMercator"
-                  projectionConfig={projectionConfig.mainland}
-                  width={600}
-                  height={800}
+                  projectionConfig={getDistrictProjectionConfig(selectedDistrict)}
+                  width={800}
+                  height={600}
                   style={{ width: "100%", height: "auto" }}
                 >
                   <ZoomableGroup>
-                    {renderGeographies("mainland")}
+                    {renderMunicipalities(selectedDistrict)}
                   </ZoomableGroup>
                 </ComposableMap>
               </div>
-            </div>
-            
-            {/* Islands Maps */}
-            <div className="md:col-span-1 space-y-4">
-              {/* Madeira Map */}
-              <div className="border rounded-lg p-2 shadow-sm">
-                <h3 className="text-sm font-medium mb-2">Madeira</h3>
-                <ComposableMap
-                  projection="geoMercator"
-                  projectionConfig={projectionConfig.madeira}
-                  width={300}
-                  height={300}
-                  style={{ width: "100%", height: "auto" }}
-                >
-                  <ZoomableGroup>
-                    {renderGeographies("madeira")}
-                  </ZoomableGroup>
-                </ComposableMap>
+            ) : (
+              // Render national map with districts
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                {/* Main Portugal Map */}
+                <div className="md:col-span-2">
+                  <div className="border rounded-lg p-2 shadow-sm">
+                    <h3 className="text-sm font-medium mb-2">Mainland Portugal</h3>
+                    <ComposableMap
+                      projection="geoMercator"
+                      projectionConfig={projectionConfig.mainland}
+                      width={600}
+                      height={800}
+                      style={{ width: "100%", height: "auto" }}
+                    >
+                      <ZoomableGroup>
+                        {renderGeographies("mainland")}
+                      </ZoomableGroup>
+                    </ComposableMap>
+                  </div>
+                </div>
+                
+                {/* Islands Maps */}
+                <div className="md:col-span-1 space-y-4">
+                  {/* Madeira Map */}
+                  <div className="border rounded-lg p-2 shadow-sm">
+                    <h3 className="text-sm font-medium mb-2">Madeira</h3>
+                    <ComposableMap
+                      projection="geoMercator"
+                      projectionConfig={projectionConfig.madeira}
+                      width={300}
+                      height={300}
+                      style={{ width: "100%", height: "auto" }}
+                    >
+                      <ZoomableGroup>
+                        {renderGeographies("madeira")}
+                      </ZoomableGroup>
+                    </ComposableMap>
+                  </div>
+                  
+                  {/* Azores Map */}
+                  <div className="border rounded-lg p-2 shadow-sm">
+                    <h3 className="text-sm font-medium mb-2">Açores</h3>
+                    <ComposableMap
+                      projection="geoMercator"
+                      projectionConfig={projectionConfig.azores}
+                      width={300}
+                      height={300}
+                      style={{ width: "100%", height: "auto" }}
+                    >
+                      <ZoomableGroup>
+                        {renderGeographies("azores")}
+                      </ZoomableGroup>
+                    </ComposableMap>
+                  </div>
+                </div>
               </div>
-              
-              {/* Azores Map */}
-              <div className="border rounded-lg p-2 shadow-sm">
-                <h3 className="text-sm font-medium mb-2">Açores</h3>
-                <ComposableMap
-                  projection="geoMercator"
-                  projectionConfig={projectionConfig.azores}
-                  width={300}
-                  height={300}
-                  style={{ width: "100%", height: "auto" }}
-                >
-                  <ZoomableGroup>
-                    {renderGeographies("azores")}
-                  </ZoomableGroup>
-                </ComposableMap>
-              </div>
-            </div>
-          </div>
+            )}
+          </>
         )}
 
-        {hoveredDistrict && (
+        {!selectedDistrict && hoveredDistrict && (
           <Card
             className="absolute z-10 w-64 shadow-lg"
             style={{
@@ -290,18 +461,8 @@ export function PortugalMap() {
               <div className="grid grid-cols-2 gap-2 text-sm">
                 <div className="text-muted-foreground">Received:</div>
                 <div className="font-medium text-right">€{hoveredDistrict.received.toFixed(2)}B</div>
-                <div className="text-muted-foreground">Contributed:</div>
-                <div className="font-medium text-right">€{hoveredDistrict.contributed.toFixed(2)}B</div>
-                <div className="text-muted-foreground">Expended:</div>
-                <div className="font-medium text-right">€{hoveredDistrict.expended.toFixed(2)}B</div>
-                <div className="text-muted-foreground">Balance:</div>
-                <div
-                  className={`font-medium text-right ${
-                    hoveredDistrict.received - hoveredDistrict.contributed > 0 ? "text-green-500" : "text-red-500"
-                  }`}
-                >
-                  €{(hoveredDistrict.received - hoveredDistrict.contributed).toFixed(2)}B
-                </div>
+                <div className="text-muted-foreground">National %:</div>
+                <div className="font-medium text-right">{hoveredDistrict.nationalPercentage.toFixed(2)}%</div>
               </div>
             </CardContent>
           </Card>
