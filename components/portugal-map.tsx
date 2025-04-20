@@ -100,8 +100,8 @@ export function PortugalMap({ selectedYear }: PortugalMapProps) {
         });
         
         setTooltipPosition({
-          x: e.clientX,
-          y: e.clientY,
+          x: e.pageX,
+          y: e.pageY,
         });
       }
     }
@@ -141,8 +141,8 @@ export function PortugalMap({ selectedYear }: PortugalMapProps) {
           setHoveredMunicipality(municipalityName);
           
           setTooltipPosition({
-            x: e.clientX,
-            y: e.clientY,
+            x: e.pageX,
+            y: e.pageY,
           });
         }
       }
@@ -151,8 +151,8 @@ export function PortugalMap({ selectedYear }: PortugalMapProps) {
 
   const handleMouseMove = (e: React.MouseEvent) => {
     setTooltipPosition({
-      x: e.clientX,
-      y: e.clientY,
+      x: e.pageX,
+      y: e.pageY,
     })
   }
 
