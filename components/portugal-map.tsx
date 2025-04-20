@@ -41,12 +41,23 @@ const projectionConfig = {
 
 // Helper function to determine if a district belongs to mainland, Madeira, or Azores
 const getRegionType = (districtName: string): "mainland" | "madeira" | "azores" => {
-  if (districtName.toLowerCase().includes("madeira")) {
+  if (districtName.toLowerCase().includes("madeira") || districtName === "MADEIRA") {
     return "madeira"
-  } else if (districtName.toLowerCase().includes("açores") || districtName.toLowerCase().includes("azores")) {
+  } else if (districtName.toLowerCase().includes("açores") || districtName.toLowerCase().includes("azores") || districtName === "AÇORES") {
     return "azores"
   }
   return "mainland"
+}
+
+// Normalize district names for comparison to ensure consistent matching
+const normalizeDistrictName = (name: string): string => {
+  // Handle special cases for autonomous regions
+  if (name.toLowerCase().includes("madeira") || name === "MADEIRA") {
+    return "MADEIRA";
+  } else if (name.toLowerCase().includes("açores") || name.toLowerCase().includes("azores") || name === "AÇORES") {
+    return "AÇORES";
+  }
+  return name;
 }
 
 interface PortugalMapProps {
@@ -98,9 +109,17 @@ export function PortugalMap({ selectedYear }: PortugalMapProps) {
 
   const handleMunicipalityMouseEnter = (municipalityName: string, districtName: string, e: React.MouseEvent) => {
     if (transferData) {
-      // Find the district data
+      // Normalize district name for API data comparison
+      const apiDistrictName = normalizeDistrictName(districtName);
+      
+      // Find the district data - for autonomous regions, we use the normalized name
       const districtData = transferData.Districts.find(
-        d => d.District.toUpperCase() === districtName.toUpperCase()
+        d => {
+          const dName = d.District.toUpperCase();
+          return dName === apiDistrictName.toUpperCase() || 
+                (apiDistrictName === "MADEIRA" && dName === "MADEIRA") || 
+                (apiDistrictName === "AÇORES" && dName === "AÇORES");
+        }
       );
 
       if (districtData && districtData.Municipalities) {
@@ -144,7 +163,9 @@ export function PortugalMap({ selectedYear }: PortugalMapProps) {
   }
 
   const handleDistrictClick = (districtName: string) => {
-    setSelectedDistrict(districtName)
+    // Normalize the district name for autonomous regions
+    const normalizedName = normalizeDistrictName(districtName);
+    setSelectedDistrict(normalizedName);
   }
 
   // Map district IDs from GeoJSON properties to our data format
@@ -180,8 +201,16 @@ export function PortugalMap({ selectedYear }: PortugalMapProps) {
   const getDistrictFill = (districtName: string) => {
     if (!transferData) return "#e5e7eb" // Default gray
     
+    // Normalize the district name for autonomous regions
+    const normalizedName = normalizeDistrictName(districtName);
+    
+    // Find the district data
     const districtData = transferData.Districts.find(
-      d => d.District.toUpperCase() === districtName.toUpperCase()
+      d => {
+        return d.District.toUpperCase() === normalizedName.toUpperCase() || 
+              (normalizedName === "MADEIRA" && d.District === "MADEIRA") || 
+              (normalizedName === "AÇORES" && d.District === "AÇORES");
+      }
     );
     
     if (!districtData) return "#e5e7eb" // Default gray
@@ -219,7 +248,9 @@ export function PortugalMap({ selectedYear }: PortugalMapProps) {
       "Viseu": { center: [-7.9, 40.7], scale: 12000 },
       // Include centers for islands if needed
       "Região Autónoma da Madeira": projectionConfig.madeira,
-      "Região Autónoma dos Açores": projectionConfig.azores
+      "MADEIRA": projectionConfig.madeira,
+      "Região Autónoma dos Açores": projectionConfig.azores,
+      "AÇORES": projectionConfig.azores,
     }
     
     return districtCenters[districtName] || projectionConfig.mainland
@@ -324,12 +355,32 @@ export function PortugalMap({ selectedYear }: PortugalMapProps) {
   // Render municipalities for a specific district
   const renderMunicipalities = (districtName: string) => {
     if (!municipalitiesData) return null;
+    console.log("Selected District:", districtName);
+    
+    // Normalize district name for comparison with GeoJSON properties
+    const normalizedDistrictName = normalizeDistrictName(districtName);
+    console.log("Normalized District Name:", normalizedDistrictName);
     
     return (
       <Geographies geography={municipalitiesData}>
         {({ geographies }) => {
           // Filter for municipalities in the selected district
           const filteredGeos = geographies.filter(geo => {
+            // For Madeira and Açores, we need special handling
+            if (normalizedDistrictName === "MADEIRA" && (
+              geo.properties.NAME_1.toLowerCase().includes("madeira") ||
+              geo.properties.NAME_1 === "Região Autónoma da Madeira"
+            )) {
+              return true;
+            }
+            if (normalizedDistrictName === "AÇORES" && (
+              geo.properties.NAME_1.toLowerCase().includes("açores") || 
+              geo.properties.NAME_1.toLowerCase().includes("azores") ||
+              geo.properties.NAME_1 === "Região Autónoma dos Açores"
+            )) {
+              return true;
+            }
+            // For mainland districts, use exact match
             return geo.properties.NAME_1 === districtName;
           });
           
@@ -364,7 +415,7 @@ export function PortugalMap({ selectedYear }: PortugalMapProps) {
     <div className="relative">
       <div className="mb-4 flex items-center justify-between">
         <div className="text-sm font-medium">
-          {selectedDistrict ? `${selectedDistrict} Municipalities` : `Budget Distribution by District (${selectedYear})`}
+          {selectedDistrict ? `${selectedDistrict === "AÇORES" ? "Açores" : selectedDistrict === "MADEIRA" ? "Madeira" : selectedDistrict} Municipalities` : `Budget Distribution by District (${selectedYear})`}
         </div>
         
         {selectedDistrict ? (
