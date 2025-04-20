@@ -57,6 +57,13 @@ export function PortugalMap({ selectedYear }: PortugalMapProps) {
   const [hoveredDistrict, setHoveredDistrict] = useState<DistrictInfo | null>(null)
   const [selectedDistrict, setSelectedDistrict] = useState<string | null>(null)
   const [tooltipPosition, setTooltipPosition] = useState({ x: 0, y: 0 })
+  const [hoveredMunicipality, setHoveredMunicipality] = useState<string | null>(null)
+  const [municipalityData, setMunicipalityData] = useState<{
+    name: string;
+    received: number;
+    districtPercentage: number;
+    nationalPercentage: number;
+  } | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const [geoData, setGeoData] = useState<any>(null)
@@ -89,6 +96,40 @@ export function PortugalMap({ selectedYear }: PortugalMapProps) {
     }
   }
 
+  const handleMunicipalityMouseEnter = (municipalityName: string, districtName: string, e: React.MouseEvent) => {
+    if (transferData) {
+      // Find the district data
+      const districtData = transferData.Districts.find(
+        d => d.District.toUpperCase() === districtName.toUpperCase()
+      );
+
+      if (districtData && districtData.Municipalities) {
+        // Find the municipality data
+        const municipalityValue = districtData.Municipalities[municipalityName.toUpperCase()] || 0;
+        
+        if (municipalityValue) {
+          // Calculate percentages
+          const nationalPercentage = (municipalityValue / transferData.Total) * 100;
+          const districtPercentage = (municipalityValue / districtData.Total) * 100;
+          
+          setMunicipalityData({
+            name: municipalityName,
+            received: municipalityValue / 1000000, // Convert to millions
+            nationalPercentage,
+            districtPercentage
+          });
+          
+          setHoveredMunicipality(municipalityName);
+          
+          setTooltipPosition({
+            x: e.clientX,
+            y: e.clientY,
+          });
+        }
+      }
+    }
+  }
+
   const handleMouseMove = (e: React.MouseEvent) => {
     setTooltipPosition({
       x: e.clientX,
@@ -98,6 +139,8 @@ export function PortugalMap({ selectedYear }: PortugalMapProps) {
 
   const handleMouseLeave = () => {
     setHoveredDistrict(null)
+    setHoveredMunicipality(null)
+    setMunicipalityData(null)
   }
 
   const handleDistrictClick = (districtName: string) => {
@@ -217,8 +260,8 @@ export function PortugalMap({ selectedYear }: PortugalMapProps) {
         console.error("Error loading municipalities GeoJSON:", err);
       });
 
-    // Fetch transfer data
-    fetch(`/api/transfers?year=${selectedYear}`)
+    // Fetch transfer data with municipality level information
+    fetch(`/api/transfers?year=${selectedYear}&level=municipality`)
       .then(response => {
         if (!response.ok) {
           throw new Error(`Failed to load transfer data: ${response.status} ${response.statusText}`);
@@ -291,7 +334,7 @@ export function PortugalMap({ selectedYear }: PortugalMapProps) {
           });
           
           return filteredGeos.map((geo) => {
-            const { NAME_2 } = geo.properties;
+            const { NAME_1, NAME_2 } = geo.properties;
             
             return (
               <Geography
@@ -305,6 +348,9 @@ export function PortugalMap({ selectedYear }: PortugalMapProps) {
                   hover: { outline: "none", fill: "#38bdf8" },
                   pressed: { outline: "none", fill: "#38bdf8" },
                 }}
+                onMouseEnter={(e) => handleMunicipalityMouseEnter(NAME_2, NAME_1, e)}
+                onMouseMove={handleMouseMove}
+                onMouseLeave={handleMouseLeave}
                 className="cursor-pointer transition-colors"
               />
             );
@@ -463,6 +509,29 @@ export function PortugalMap({ selectedYear }: PortugalMapProps) {
                 <div className="font-medium text-right">€{hoveredDistrict.received.toFixed(2)}B</div>
                 <div className="text-muted-foreground">National %:</div>
                 <div className="font-medium text-right">{hoveredDistrict.nationalPercentage.toFixed(2)}%</div>
+              </div>
+            </CardContent>
+          </Card>
+        )}
+
+        {selectedDistrict && hoveredMunicipality && municipalityData && (
+          <Card
+            className="absolute z-10 w-64 shadow-lg"
+            style={{
+              left: `${tooltipPosition.x + 10}px`,
+              top: `${tooltipPosition.y + 10}px`,
+              transform: "translate(-50%, -100%)",
+            }}
+          >
+            <CardContent className="p-4">
+              <h3 className="mb-2 font-medium">{municipalityData.name}</h3>
+              <div className="grid grid-cols-2 gap-2 text-sm">
+                <div className="text-muted-foreground">Received:</div>
+                <div className="font-medium text-right">€{municipalityData.received.toFixed(2)}M</div>
+                <div className="text-muted-foreground">District %:</div>
+                <div className="font-medium text-right">{municipalityData.districtPercentage.toFixed(2)}%</div>
+                <div className="text-muted-foreground">National %:</div>
+                <div className="font-medium text-right">{municipalityData.nationalPercentage.toFixed(2)}%</div>
               </div>
             </CardContent>
           </Card>
