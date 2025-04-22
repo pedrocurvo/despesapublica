@@ -1,13 +1,16 @@
 "use client"
 
 import { useState, useEffect } from "react"
+import { useRouter } from "next/navigation"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Overview } from "@/components/overview"
 import { RecentNews } from "@/components/recent-news"
 import { YearSelector } from "@/components/year-selector"
-import { BudgetDistribution } from "@/components/budget-distribution"
 import { DistributionYearSelector } from "@/components/distribution-year-selector"
 import { ExpenseOverview } from "@/components/expense-overview"
+import { Button } from "@/components/ui/button"
+import BudgetPieChart from "@/components/budget-pie-chart"
+import Link from "next/link"
 
 // Type definitions for budget data
 interface SectorBudget {
@@ -44,44 +47,9 @@ const sectorColors = {
 export default function ClientPage() {
   const [comparisonYears, setComparisonYears] = useState<string[]>(["2023", "2022"])
   const [distributionYear, setDistributionYear] = useState("2023")
-  const [budgetData, setBudgetData] = useState<BudgetSectorData[]>([])
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [error, setError] = useState<string | null>(null)
-
-  // Fetch budget data for the selected year
-  useEffect(() => {
-    const fetchBudgetData = async () => {
-      setIsLoading(true)
-      setError(null)
-      
-      try {
-        const response = await fetch(`/api/budget?year=${distributionYear}`)
-        
-        if (!response.ok) {
-          throw new Error(`Failed to fetch budget data for ${distributionYear}`)
-        }
-        
-        const data: YearBudgetData = await response.json()
-        
-        // Transform data into a format suitable for the pie chart
-        const chartData: BudgetSectorData[] = Object.entries(data.sectors).map(([sectorName, sectorData]) => ({
-          name: sectorName.charAt(0).toUpperCase() + sectorName.slice(1).replace('-', ' '),
-          value: sectorData.expended,
-          color: sectorColors[sectorName] || "#94a3b8"
-        }))
-        
-        setBudgetData(chartData)
-      } catch (err) {
-        console.error("Error fetching budget data:", err)
-        setError("Failed to load budget data")
-        setBudgetData([])
-      } finally {
-        setIsLoading(false)
-      }
-    }
-    
-    fetchBudgetData()
-  }, [distributionYear])
+  const router = useRouter()
 
   return (
     <div className="flex min-h-screen w-full flex-col">
@@ -97,24 +65,12 @@ export default function ClientPage() {
             </CardContent>
           </Card>
           <Card className="lg:col-span-3">
-            <CardHeader className="flex flex-row items-center justify-between">
-              <div>
-                <CardTitle>Budget Distribution</CardTitle>
-                <CardDescription>Breakdown by sector for {distributionYear}</CardDescription>
-              </div>
-              <DistributionYearSelector selectedYear={distributionYear} onYearChange={setDistributionYear} />
+            <CardHeader>
+              <CardTitle>Recent Budget News</CardTitle>
+              <CardDescription>Latest news related to government budget</CardDescription>
             </CardHeader>
             <CardContent>
-              <BudgetDistribution 
-                year={distributionYear} 
-                data={budgetData} 
-                isLoading={isLoading} 
-              />
-              {error && (
-                <div className="mt-2 text-center text-sm text-red-500">
-                  {error}
-                </div>
-              )}
+              <RecentNews />
             </CardContent>
           </Card>
         </div>
@@ -129,12 +85,37 @@ export default function ClientPage() {
             </CardContent>
           </Card>
           <Card className="lg:col-span-3">
-            <CardHeader>
-              <CardTitle>Recent Budget News</CardTitle>
-              <CardDescription>Latest news related to government budget</CardDescription>
+            <CardHeader className="flex flex-row items-center justify-between">
+              <div>
+                <CardTitle>Budget Distribution</CardTitle>
+                <CardDescription>Breakdown by sector for {distributionYear}</CardDescription>
+              </div>
+              <DistributionYearSelector selectedYear={distributionYear} onYearChange={setDistributionYear} />
             </CardHeader>
             <CardContent>
-              <RecentNews />
+              <div className="h-[300px]">
+                <BudgetPieChart 
+                  year={distributionYear} 
+                  showTooltip={false}
+                  enableSectorClick={false}
+                  showTitle={false}
+                  showLegend={false}
+                />
+              </div>
+              <div className="flex justify-end mt-4">
+                <Button 
+                  variant="outline" 
+                  className="w-full sm:w-auto" 
+                  onClick={() => router.push('/despesa')}
+                >
+                  See per sector
+                </Button>
+              </div>
+              {error && (
+                <div className="mt-2 text-center text-sm text-red-500">
+                  {error}
+                </div>
+              )}
             </CardContent>
           </Card>
         </div>

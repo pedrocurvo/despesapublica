@@ -63,20 +63,20 @@ const renderActiveShape = (props: any) => {
 
   return (
     <g>
-      <text x={cx} y={cy} dy={-20} textAnchor="middle" fill="#888">
+      <text x={cx} y={cy} dy={-20} textAnchor="middle" fill="#888" fontSize="12">
         {payload.name}
       </text>
-      <text x={cx} y={cy} textAnchor="middle" fill="#333" className="text-lg font-semibold">
+      <text x={cx} y={cy} textAnchor="middle" fill="#333" fontSize="14" fontWeight="500">
         {formatCurrency(payload.value)}
       </text>
-      <text x={cx} y={cy + 20} textAnchor="middle" fill="#888">
+      <text x={cx} y={cy + 20} textAnchor="middle" fill="#888" fontSize="12">
         {`${(percent * 100).toFixed(2)}%`}
       </text>
       <Sector
         cx={cx}
         cy={cy}
         innerRadius={innerRadius}
-        outerRadius={outerRadius + 6}
+        outerRadius={outerRadius + Math.min(6, outerRadius * 0.05)}
         startAngle={startAngle}
         endAngle={endAngle}
         fill={fill}
@@ -86,8 +86,8 @@ const renderActiveShape = (props: any) => {
         cy={cy}
         startAngle={startAngle}
         endAngle={endAngle}
-        innerRadius={innerRadius - 6}
-        outerRadius={innerRadius - 2}
+        innerRadius={innerRadius - Math.min(6, innerRadius * 0.1)}
+        outerRadius={innerRadius - Math.min(2, innerRadius * 0.03)}
         fill={fill}
       />
     </g>
@@ -129,7 +129,21 @@ const CustomTooltip = ({ active, payload }: any) => {
   return null;
 };
 
-export default function BudgetPieChart({ year = "2023" }: { year?: string }) {
+interface BudgetPieChartProps {
+  year?: string;
+  showTooltip?: boolean;
+  enableSectorClick?: boolean;
+  showTitle?: boolean;
+  showLegend?: boolean;
+}
+
+export default function BudgetPieChart({ 
+  year = "2023", 
+  showTooltip = true, 
+  enableSectorClick = true,
+  showTitle = true,
+  showLegend = true
+}: BudgetPieChartProps) {
   const [budgetData, setBudgetData] = React.useState<BudgetData | null>(null);
   const [loading, setLoading] = React.useState<boolean>(true);
   const [error, setError] = React.useState<string | null>(null);
@@ -209,7 +223,7 @@ export default function BudgetPieChart({ year = "2023" }: { year?: string }) {
   const chartData = formatChartData(budgetData, selectedSector);
   
   const handlePieClick = (_: any, index: number) => {
-    if (selectedSector) return; // Don't handle clicks when already showing subsectors
+    if (!enableSectorClick || selectedSector) return; // Don't handle clicks when disabled or already showing subsectors
     
     const sectorName = chartData[index].name;
     setSelectedSector(sectorName);
@@ -238,26 +252,28 @@ export default function BudgetPieChart({ year = "2023" }: { year?: string }) {
   
   return (
     <div className="w-full flex flex-col items-center">
-      <div className="w-full max-w-4xl">
-        <div className="text-center mb-6">
-          <h2 className="text-xl font-bold">
-            {selectedSector 
-              ? `Despesa por Subsector: ${selectedSector}` 
-              : "Despesa por Sector"}
-          </h2>
-          
-          {selectedSector && (
-            <Button 
-              variant="outline" 
-              onClick={handleBackClick}
-              className="mt-2"
-            >
-              ← Voltar para todos os sectores
-            </Button>
-          )}
-        </div>
+      <div className="w-full">
+        {showTitle && (
+          <div className="text-center mb-6">
+            <h2 className="text-xl font-bold">
+              {selectedSector 
+                ? `Despesa por Subsector: ${selectedSector}` 
+                : "Despesa por Sector"}
+            </h2>
+            
+            {selectedSector && enableSectorClick && (
+              <Button 
+                variant="outline" 
+                onClick={handleBackClick}
+                className="mt-2"
+              >
+                ← Voltar para todos os sectores
+              </Button>
+            )}
+          </div>
+        )}
         
-        <div className="w-full h-[400px] mb-10">
+        <div className="w-full min-h-[400px] mb-4">
           <ChartContainer 
             config={{
               expenses: { label: "Despesas" },
@@ -271,14 +287,15 @@ export default function BudgetPieChart({ year = "2023" }: { year?: string }) {
                   data={chartData}
                   cx="50%"
                   cy="50%"
-                  innerRadius={80}
-                  outerRadius={120}
+                  innerRadius="30%"
+                  outerRadius="60%"
                   dataKey="value"
                   onMouseEnter={handleMouseEnter}
                   onMouseLeave={handleMouseLeave}
-                  onClick={handlePieClick}
+                  onClick={enableSectorClick ? handlePieClick : undefined}
                   animationBegin={0}
                   animationDuration={800}
+                  style={enableSectorClick ? { cursor: 'pointer' } : {}}
                 >
                   {chartData.map((_, index) => (
                     <Cell 
@@ -286,31 +303,34 @@ export default function BudgetPieChart({ year = "2023" }: { year?: string }) {
                       fill={COLORS[index % COLORS.length]} 
                       stroke="#fff"
                       strokeWidth={2}
+                      style={enableSectorClick ? { cursor: 'pointer' } : {}}
                     />
                   ))}
                 </Pie>
-                <Tooltip content={<CustomTooltip />} />
+                {showTooltip && <Tooltip content={<CustomTooltip />} />}
               </PieChart>
             </ResponsiveContainer>
           </ChartContainer>
         </div>
         
         {/* Legend */}
-        <div className="w-full mt-4 px-4">
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-x-4 gap-y-2">
-            {chartData.map((entry, index) => (
-              <div key={`legend-${index}`} className="flex items-center">
-                <div 
-                  className="w-3 h-3 rounded-sm mr-2 flex-shrink-0" 
-                  style={{ backgroundColor: COLORS[index % COLORS.length] }} 
-                />
-                <span className="text-sm truncate" title={entry.name}>
-                  {entry.name}
-                </span>
-              </div>
-            ))}
+        {showLegend && (
+          <div className="w-full mt-1 sm:mt-1.5 md:mt-2 px-2 md:px-4">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-x-2 gap-y-2">
+              {chartData.map((entry, index) => (
+                <div key={`legend-${index}`} className="flex items-center">
+                  <div 
+                    className="w-3 h-3 rounded-sm mr-2 flex-shrink-0" 
+                    style={{ backgroundColor: COLORS[index % COLORS.length] }} 
+                  />
+                  <span className="text-sm truncate" title={entry.name}>
+                    {entry.name}
+                  </span>
+                </div>
+              ))}
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </div>
   );
