@@ -4,6 +4,7 @@ import Link from "next/link"
 import { Euro } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { ThemeProvider } from "@/components/theme-provider"
+import { ThemeToggle } from "@/components/theme-toggle"
 
 export const metadata: Metadata = {
   title: 'v0 App',
@@ -25,7 +26,7 @@ export default function RootLayout({
               <Euro className="h-6 w-6" />
               <h1 className="text-lg font-semibold">Despesa Publica</h1>
             </div>
-            <nav className="ml-auto flex gap-2">
+            <nav className="ml-auto flex items-center gap-2">
               <Button asChild variant="ghost" size="sm">
                 <Link href="/">Dashboard</Link>
               </Button>
@@ -44,6 +45,9 @@ export default function RootLayout({
               <Button asChild variant="ghost" size="sm">
                 <Link href="/about">About</Link>
               </Button>
+              <div className="flex items-center ml-2">
+                <ThemeToggle />
+              </div>
             </nav>
           </header>
           {children}
