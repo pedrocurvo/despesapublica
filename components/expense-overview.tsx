@@ -12,9 +12,10 @@ interface ExpenseData {
 interface ExpenseOverviewProps {
   startYear?: number;
   endYear?: number;
+  onYearClick?: (year: string) => void;
 }
 
-export function ExpenseOverview({ startYear = 2018, endYear = 2023 }: ExpenseOverviewProps) {
+export function ExpenseOverview({ startYear = 2018, endYear = 2023, onYearClick }: ExpenseOverviewProps) {
   const [data, setData] = useState<ExpenseData[]>([])
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [error, setError] = useState<string | null>(null)
@@ -121,17 +122,27 @@ export function ExpenseOverview({ startYear = 2018, endYear = 2023 }: ExpenseOve
     return null;
   };
 
+  const handleBarClick = (data: any) => {
+    if (onYearClick && data?.activePayload?.[0]?.payload?.year) {
+      onYearClick(data.activePayload[0].payload.year);
+    }
+  };
+
   return (
     <div className="h-[300px] w-full">
       <ResponsiveContainer width="100%" height="100%">
-        <BarChart data={data} margin={{ top: 20, right: 20, left: 20, bottom: 20 }}>
+        <BarChart 
+          data={data} 
+          margin={{ top: 20, right: 20, left: 20, bottom: 20 }}
+          onClick={handleBarClick}
+        >
           <CartesianGrid strokeDasharray="3 3" vertical={false} />
           <XAxis dataKey="year" />
           <YAxis domain={[80000, 120000]} tickFormatter={(value) => `€${value}M`} />
           <Tooltip content={<CustomTooltip />} />
           <Legend wrapperStyle={{ paddingTop: 10 }} />
-          <Bar name="Budgeted Expenses" dataKey="budgeted" fill="#3b82f6" radius={[4, 4, 0, 0]} />
-          <Bar name="Executed Expenses" dataKey="executed" fill="#ef4444" radius={[4, 4, 0, 0]} />
+          <Bar name="Budgeted Expenses" dataKey="budgeted" fill="#3b82f6" radius={[4, 4, 0, 0]} cursor="pointer" />
+          <Bar name="Executed Expenses" dataKey="executed" fill="#ef4444" radius={[4, 4, 0, 0]} cursor="pointer" />
         </BarChart>
       </ResponsiveContainer>
     </div>

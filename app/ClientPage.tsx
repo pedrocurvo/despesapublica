@@ -51,6 +51,10 @@ export default function ClientPage() {
   const [error, setError] = useState<string | null>(null)
   const router = useRouter()
 
+  const handleYearClick = (year: string) => {
+    setDistributionYear(year);
+  };
+
   return (
     <div className="flex min-h-screen w-full flex-col">
       <main className="flex-1 p-4 md:p-6">
@@ -81,7 +85,11 @@ export default function ClientPage() {
               <CardDescription>Detailed analysis of government expenses (2021-2023)</CardDescription>
             </CardHeader>
             <CardContent>
-              <ExpenseOverview startYear={2021} endYear={2023} />
+              <ExpenseOverview 
+                startYear={2021} 
+                endYear={2023}
+                onYearClick={handleYearClick}
+              />
             </CardContent>
           </Card>
           <Card className="lg:col-span-3">
