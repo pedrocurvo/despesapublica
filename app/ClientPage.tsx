@@ -7,7 +7,7 @@ import { RecentNews } from "@/components/recent-news"
 import { YearSelector } from "@/components/year-selector"
 import { BudgetDistribution } from "@/components/budget-distribution"
 import { DistributionYearSelector } from "@/components/distribution-year-selector"
-import { YearComparisonChart } from "@/components/year-comparison-chart"
+import { ExpenseOverview } from "@/components/expense-overview"
 
 // Type definitions for budget data
 interface SectorBudget {
@@ -120,15 +120,12 @@ export default function ClientPage() {
         </div>
         <div className="mt-4 grid gap-4 md:grid-cols-2 lg:grid-cols-7">
           <Card className="lg:col-span-4">
-            <CardHeader className="flex flex-row items-center justify-between">
-              <div>
-                <CardTitle>Year Comparison</CardTitle>
-                <CardDescription>Select years to compare budget allocations</CardDescription>
-              </div>
-              <YearSelector onYearsChange={setComparisonYears} />
+            <CardHeader>
+              <CardTitle>Expense Overview</CardTitle>
+              <CardDescription>Detailed analysis of government expenses (2021-2023)</CardDescription>
             </CardHeader>
             <CardContent>
-              <YearComparisonChart selectedYears={comparisonYears} />
+              <ExpenseOverview startYear={2021} endYear={2023} />
             </CardContent>
           </Card>
           <Card className="lg:col-span-3">

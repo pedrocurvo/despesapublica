@@ -2,15 +2,15 @@
     "Values": {
         "Despesa Total Nao Consolidada": {
             "Orcamento Corrigido": 295603.82247089996,
-            "Execucao": 1747.44079155
+            "Execucao": 214019.53698228998
         },
         "Despesa Total Consolidada": {
             "Orcamento Corrigido": 254342.19302590002,
-            "Execucao": 1391.63131222
+            "Execucao": 174713.17598960001
         },
         "Despesa Efetiva Consolidada": {
             "Orcamento Corrigido": 92590.78673390002,
-            "Execucao": 1255.42041589
+            "Execucao": 82200.99441841998
         }
     },
     "sectors": {
