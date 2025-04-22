@@ -5,8 +5,7 @@ import { CalendarIcon, ExternalLink } from "lucide-react"
 import Link from "next/link"
 
 interface NewsItem {
-  id: number
-  uniqueId?: string  // Add this new optional property
+  id: string
   title: string
   date: string
   source: string
@@ -25,15 +24,92 @@ export function RecentNews() {
       setError(null)
       
       try {
-        // Fetch the latest 4 news items
-        const response = await fetch(`/api/news?limit=4`)
+        // Get the current year
+        const currentYear = new Date().getFullYear()
         
-        if (!response.ok) {
-          throw new Error("Failed to fetch news data")
-        }
+        // Calculate date range (last 6 years)
+        const today = new Date()
+        const sixYearsAgo = new Date()
+        sixYearsAgo.setFullYear(today.getFullYear() - 6)
         
-        const data = await response.json()
-        setNewsData(data)
+        const fromDate = sixYearsAgo.toISOString().split('T')[0]
+        const toDate = today.toISOString().split('T')[0]
+        
+        // Domains to search
+        const domains = [
+          "http://publico.pt/",
+          "http://www.rtp.pt/",
+          "http://expresso.pt/",
+          "http://observador.pt/",
+          "http://jornaldenegocios.pt/",
+          "http://dn.pt/",
+          "http://www.dn.pt/",
+          "http://news.google.pt/",
+        ]
+
+        // Search queries to use
+        const queries = [
+          `orçamento estado ${currentYear}`,
+          `execução orçamental ${currentYear}`,
+          `despesa pública ${currentYear}`
+        ]
+        
+        // Collect all articles from different queries
+        const allArticles: any[] = []
+        
+        // Execute all queries in parallel
+        await Promise.all(queries.map(async (query) => {
+          // Build URL with query parameters
+          const params = new URLSearchParams()
+          params.append("query", query)
+          params.append("from", fromDate)
+          params.append("to", toDate)
+          domains.forEach(domain => params.append("domain", domain))
+          
+          try {
+            const response = await fetch(`/api/arquivo?${params.toString()}`)
+            
+            if (!response.ok) {
+              console.error(`Failed to fetch news for query "${query}"`)
+              return
+            }
+            
+            const data = await response.json()
+            
+            // Add results to allArticles
+            if (data.results && Array.isArray(data.results)) {
+              allArticles.push(...data.results)
+            }
+          } catch (err) {
+            console.error(`Error fetching news for query "${query}":`, err)
+          }
+        }))
+        
+        // Remove duplicates by title
+        const seenTitles = new Set<string>()
+        const uniqueArticles = allArticles.filter((item) => {
+          const normalizedTitle = item.headline?.trim().toLowerCase()
+          const isNew = normalizedTitle && !seenTitles.has(normalizedTitle)
+          if (isNew) seenTitles.add(normalizedTitle)
+          return isNew
+        })
+        
+        // Format and limit to 3 most recent articles
+        const processedArticles = uniqueArticles
+          .filter((item: any) => item.headline && item.headline.trim() !== "")
+          .sort((a: any, b: any) => new Date(b.datetime).getTime() - new Date(a.datetime).getTime())
+          .slice(0, 3)
+          .map((item: any, index: number) => ({
+            id: index,
+            uniqueId: `recent-${index}-${item.headline.substring(0, 20).replace(/\s+/g, '-')}`,
+            title: item.headline,
+            date: new Date(item.datetime).toISOString().split("T")[0],
+            source: item.domain.replace("www.", ""),
+            summary: "",
+            url: item.url
+          }))
+        
+        setNewsData(processedArticles)
       } catch (err) {
         console.error("Error fetching news:", err)
         setError("Failed to load news")
