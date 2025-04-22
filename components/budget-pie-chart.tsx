@@ -34,9 +34,18 @@ interface BudgetData {
 interface ChartData {
   name: string;
   value: number;
-  despesaTotalNaoConsolidada: number;
-  despesaTotalConsolidada: number;
-  despesaEfetivaConsolidada: number;
+  despesaTotalNaoConsolidada: {
+    orcamento: number;
+    execucao: number;
+  };
+  despesaTotalConsolidada: {
+    orcamento: number;
+    execucao: number;
+  };
+  despesaEfetivaConsolidada: {
+    orcamento: number;
+    execucao: number;
+  };
 }
 
 const COLORS = [
@@ -91,12 +100,28 @@ const CustomTooltip = ({ active, payload }: any) => {
     
     return (
       <div className="bg-white p-4 border border-gray-300 rounded-md shadow-md">
-        <p className="font-bold">{data.name}</p>
+        <p className="text-sm font-bold">{data.name}</p>
         <p className="text-sm text-muted-foreground mb-2">(Valores em milhões de euros)</p>
-        <p>Despesa Efetiva Consolidada (Execução): {formatCurrency(data.value)}</p>
-        <p>Despesa Total Não Consolidada: {formatCurrency(data.despesaTotalNaoConsolidada)}</p>
-        <p>Despesa Total Consolidada: {formatCurrency(data.despesaTotalConsolidada)}</p>
-        <p>Despesa Efetiva Consolidada: {formatCurrency(data.despesaEfetivaConsolidada)}</p>
+        
+        <div className="space-y-2">
+          <div>
+            <p className="font-semibold">Despesa Total Não Consolidada:</p>
+            <p>• Orçamento Corrigido: {formatCurrency(data.despesaTotalNaoConsolidada.orcamento)}</p>
+            <p>• Execução: {formatCurrency(data.despesaTotalNaoConsolidada.execucao)}</p>
+          </div>
+          
+          <div>
+            <p className="font-semibold">Despesa Total Consolidada:</p>
+            <p>• Orçamento Corrigido: {formatCurrency(data.despesaTotalConsolidada.orcamento)}</p>
+            <p>• Execução: {formatCurrency(data.despesaTotalConsolidada.execucao)}</p>
+          </div>
+          
+          <div>
+            <p className="font-semibold">Despesa Efetiva Consolidada:</p>
+            <p>• Orçamento Corrigido: {formatCurrency(data.despesaEfetivaConsolidada.orcamento)}</p>
+            <p>• Execução: {formatCurrency(data.despesaEfetivaConsolidada.execucao)}</p>
+          </div>
+        </div>
       </div>
     );
   }
@@ -146,9 +171,18 @@ export default function BudgetPieChart({ year = "2023" }: { year?: string }) {
         .map(([name, values]) => ({
           name,
           value: values.Execucao,
-          despesaTotalNaoConsolidada: values.Execucao, // For subsectors, we don't have these values separately
-          despesaTotalConsolidada: values.Execucao,    // So we use the same value for all
-          despesaEfetivaConsolidada: values.Execucao
+          despesaTotalNaoConsolidada: {
+            orcamento: values["Orcamento Corrigido"],
+            execucao: values.Execucao
+          },
+          despesaTotalConsolidada: {
+            orcamento: values["Orcamento Corrigido"],
+            execucao: values.Execucao
+          },
+          despesaEfetivaConsolidada: {
+            orcamento: values["Orcamento Corrigido"],
+            execucao: values.Execucao
+          }
         }))
         .sort((a, b) => b.value - a.value);
     }
@@ -156,9 +190,18 @@ export default function BudgetPieChart({ year = "2023" }: { year?: string }) {
     return Object.entries(data.sectors).map(([name, sectorData]) => ({
       name,
       value: sectorData["Despesa Efetiva Consolidada"].Execucao,
-      despesaTotalNaoConsolidada: sectorData["Despesa Total Nao Consolidada"].Execucao,
-      despesaTotalConsolidada: sectorData["Despesa Total Consolidada"].Execucao,
-      despesaEfetivaConsolidada: sectorData["Despesa Efetiva Consolidada"].Execucao
+      despesaTotalNaoConsolidada: {
+        orcamento: sectorData["Despesa Total Nao Consolidada"]["Orcamento Corrigido"],
+        execucao: sectorData["Despesa Total Nao Consolidada"].Execucao
+      },
+      despesaTotalConsolidada: {
+        orcamento: sectorData["Despesa Total Consolidada"]["Orcamento Corrigido"],
+        execucao: sectorData["Despesa Total Consolidada"].Execucao
+      },
+      despesaEfetivaConsolidada: {
+        orcamento: sectorData["Despesa Efetiva Consolidada"]["Orcamento Corrigido"],
+        execucao: sectorData["Despesa Efetiva Consolidada"].Execucao
+      }
     }))
     .sort((a, b) => b.value - a.value);
   };

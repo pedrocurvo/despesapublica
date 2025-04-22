@@ -6,7 +6,7 @@ import BudgetYearSelector from "@/components/budget-year-selector";
 
 export default function DespesaPage() {
   const [selectedYear, setSelectedYear] = useState("2023");
-  const availableYears = ["2023"]; // You can expand this list as more data becomes available
+  const availableYears = ["2022", "2023"]; // You can expand this list as more data becomes available
 
   return (
     <div className="container mx-auto py-8">
