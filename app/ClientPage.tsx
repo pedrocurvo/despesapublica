@@ -93,7 +93,7 @@ export default function ClientPage() {
               <CardDescription>Yearly budget allocation and expenditure (2018-2023)</CardDescription>
             </CardHeader>
             <CardContent>
-              <Overview />
+              <Overview startYear={2021} endYear={2023} />
             </CardContent>
           </Card>
           <Card className="lg:col-span-3">

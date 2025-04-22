@@ -3,45 +3,71 @@
 import { useState, useEffect } from "react"
 import { Bar, BarChart, CartesianGrid, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts"
 
-interface YearlyBudget {
+interface BalanceData {
   year: string
-  proposed: number
-  expended: number
+  receitaBudget: number
+  despesaBudget: number
+  receitaActual: number
+  despesaActual: number
+  saldoBudget: number
+  saldoActual: number
+  pibPercentage: number
+  pibBudgetPercentage: number
 }
 
-export function Overview() {
-  const [data, setData] = useState<YearlyBudget[]>([])
+interface OverviewProps {
+  startYear?: number;
+  endYear?: number;
+}
+
+export function Overview({ startYear = 2018, endYear = 2023 }: OverviewProps) {
+  const [data, setData] = useState<BalanceData[]>([])
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
-    const fetchBudgetOverview = async () => {
+    const fetchBalanceData = async () => {
       setIsLoading(true)
       setError(null)
       
       try {
-        // Fetch budget data for the years 2018-2023
-        const response = await fetch('/api/budget?startYear=2018&endYear=2023')
+        // Fetch balance data using the provided year range
+        const response = await fetch(`/api/balance?startYear=${startYear}&endYear=${endYear}`)
         
         if (!response.ok) {
-          throw new Error('Failed to fetch budget overview data')
+          throw new Error('Failed to fetch budget balance data')
         }
         
         const jsonData = await response.json()
         
         // Transform the data for the chart
-        const chartData = Object.entries(jsonData).map(([year, yearData]: [string, any]) => ({
-          year,
-          proposed: yearData.total.proposed,
-          expended: yearData.total.expended
-        }))
+        const chartData = Object.entries(jsonData).map(([year, yearData]: [string, any]) => {
+          // Skip years with missing/malformed data
+          if (!yearData || !yearData.Receita || !yearData.Despesa) {
+            console.warn(`Missing or invalid data for year ${year}`);
+            return null;
+          }
+          
+          return {
+            year,
+            receitaBudget: yearData.Receita.Budget !== undefined ? Number((yearData.Receita.Budget).toFixed(2)) : null,
+            despesaBudget: yearData.Despesa.Budget !== undefined ? Number((yearData.Despesa.Budget).toFixed(2)) : null,
+            receitaActual: yearData.Receita.Year !== undefined ? Number((yearData.Receita.Year).toFixed(2)) : null,
+            despesaActual: yearData.Despesa.Year !== undefined ? Number((yearData.Despesa.Year).toFixed(2)) : null,
+            saldoBudget: yearData.Saldo?.Budget !== undefined ? Number((yearData.Saldo.Budget).toFixed(2)) : null,
+            saldoActual: yearData.Saldo?.Year !== undefined ? Number((yearData.Saldo.Year).toFixed(2)) : null,
+            pibPercentage: yearData.PIBper?.Year !== undefined ? Number((yearData.PIBper.Year * 100).toFixed(2)) : null,
+            pibBudgetPercentage: yearData.PIBper?.Budget !== undefined ? Number((yearData.PIBper.Budget * 100).toFixed(2)) : null
+          };
+        })
+        .filter(item => item !== null) // Remove any null items
         
         // Sort by year
         chartData.sort((a, b) => parseInt(a.year) - parseInt(b.year))
         
         setData(chartData)
       } catch (err) {
-        console.error("Error fetching budget overview:", err)
+        console.error("Error fetching budget balance data:", err)
         setError("Failed to load budget overview")
         setData([])
       } finally {
@@ -49,8 +75,8 @@ export function Overview() {
       }
     }
     
-    fetchBudgetOverview()
-  }, [])
+    fetchBalanceData()
+  }, [startYear, endYear])
 
   if (isLoading) {
     return (
@@ -70,21 +96,46 @@ export function Overview() {
     )
   }
 
+  // Custom tooltip component
+  const CustomTooltip = ({ active, payload, label }: any) => {
+    if (active && payload && payload.length) {
+      const yearData = payload[0].payload;
+      return (
+        <div className="rounded-md bg-background p-4 shadow-md border border-border text-sm">
+          <p className="font-medium">{`Year: ${label}`}</p>
+          <div className="mt-2 space-y-1">
+            <p className="text-blue-500">{`Revenue Budget: ${yearData.receitaBudget !== null ? `€${yearData.receitaBudget}M` : 'N/A'}`}</p>
+            <p className="text-blue-600">{`Revenue Actual: ${yearData.receitaActual !== null ? `€${yearData.receitaActual}M` : 'N/A'}`}</p>
+            <p className="text-red-500">{`Expense Budget: ${yearData.despesaBudget !== null ? `€${yearData.despesaBudget}M` : 'N/A'}`}</p>
+            <p className="text-red-600">{`Expense Actual: ${yearData.despesaActual !== null ? `€${yearData.despesaActual}M` : 'N/A'}`}</p>
+            <div className="border-t border-border my-2"></div>
+            <p className={`font-medium ${yearData.saldoActual !== null ? (yearData.saldoActual >= 0 ? "text-green-500" : "text-red-500") : "text-muted-foreground"}`}>
+              {`Actual Balance: ${yearData.saldoActual !== null ? `€${yearData.saldoActual}M` : 'N/A'}`}
+            </p>
+            <p className={`font-medium ${yearData.saldoBudget !== null ? (yearData.saldoBudget >= 0 ? "text-green-500" : "text-red-500") : "text-muted-foreground"}`}>
+              {`Budget Balance: ${yearData.saldoBudget !== null ? `€${yearData.saldoBudget}M` : 'N/A'}`}
+            </p>
+            <div className="border-t border-border my-2"></div>
+            <p className="text-muted-foreground">{`GDP % Actual: ${yearData.pibPercentage !== null ? `${yearData.pibPercentage}%` : 'N/A'}`}</p>
+            <p className="text-muted-foreground">{`GDP % Budget: ${yearData.pibBudgetPercentage !== null ? `${yearData.pibBudgetPercentage}%` : 'N/A'}`}</p>
+          </div>
+        </div>
+      );
+    }
+    return null;
+  };
+
   return (
     <div className="h-[300px] w-full">
       <ResponsiveContainer width="100%" height="100%">
         <BarChart data={data} margin={{ top: 20, right: 20, left: 20, bottom: 20 }}>
           <CartesianGrid strokeDasharray="3 3" vertical={false} />
           <XAxis dataKey="year" />
-          <YAxis domain={[80, 95]} tickFormatter={(value) => `€${value}B`} />
-          <Tooltip
-            formatter={(value) => [`€${value}B`, ""]}
-            labelFormatter={(label) => `Year: ${label}`}
-            contentStyle={{ backgroundColor: "hsl(var(--background))", borderColor: "hsl(var(--border))" }}
-          />
+          <YAxis domain={[80000, 120000]} tickFormatter={(value) => `€${value}M`} />
+          <Tooltip content={<CustomTooltip />} />
           <Legend wrapperStyle={{ paddingTop: 10 }} />
-          <Bar name="Proposed Budget" dataKey="proposed" fill="#3b82f6" radius={[4, 4, 0, 0]} />
-          <Bar name="Expended Budget" dataKey="expended" fill="#ef4444" radius={[4, 4, 0, 0]} />
+          <Bar name="Revenue Budget" dataKey="receitaBudget" fill="#3b82f6" radius={[4, 4, 0, 0]} />
+          <Bar name="Expense Budget" dataKey="despesaBudget" fill="#ef4444" radius={[4, 4, 0, 0]} />
         </BarChart>
       </ResponsiveContainer>
     </div>
