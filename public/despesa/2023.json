@@ -1,0 +1,1406 @@
+{
+    "Values": {
+        "Despesa Total Nao Consolidada": {
+            "Orcamento Corrigido": 295603.82247089996,
+            "Execucao": 1747.44079155
+        },
+        "Despesa Total Consolidada": {
+            "Orcamento Corrigido": 254342.19302590002,
+            "Execucao": 1391.63131222
+        },
+        "Despesa Efetiva Consolidada": {
+            "Orcamento Corrigido": 92590.78673390002,
+            "Execucao": 1255.42041589
+        }
+    },
+    "sectors": {
+        "\u00d3rg\u00e3os de Soberania": {
+            "Despesa Total Nao Consolidada": {
+                "Orcamento Corrigido": 6086.097691,
+                "Execucao": 5956.78560071
+            },
+            "Despesa Total Consolidada": {
+                "Orcamento Corrigido": 5734.17538,
+                "Execucao": 5610.05285529
+            },
+            "Despesa Efetiva Consolidada": {
+                "Orcamento Corrigido": 5717.839984,
+                "Execucao": 5593.7178552899995
+            },
+            "Subsectors": {
+                "001 - SERV. GERAIS DA A.P. - ADMINISTRA\u00c7\u00c3O GERAL": {
+                    "Orcamento Corrigido": 393.044753,
+                    "Execucao": 352.37177016000004
+                },
+                "012 - SEGURAN\u00c7A E ORDEM P\u00daBLICAS - SISTEMA JUDICI\u00c1RIO": {
+                    "Orcamento Corrigido": 397.41213,
+                    "Execucao": 394.57915751999997
+                },
+                "038 - SERVI\u00c7OS CULTURAIS, RECREATIVOS E RELIGIOSOS - COMUNICA\u00c7\u00c3O SOCIAL": {
+                    "Orcamento Corrigido": 6.756247,
+                    "Execucao": 5.8256999800000004
+                },
+                "067 - OUTRAS FUN\u00c7\u00d5ES - TRANSFER\u00caNCIAS ENTRE ADMINISTRA\u00c7\u00d5ES": {
+                    "Orcamento Corrigido": 5285.2679,
+                    "Execucao": 5203.33491265
+                },
+                "095 - CONTING\u00caNCIA COVID 2019 - PREVEN\u00c7\u00c3O, CONTEN\u00c7\u00c3O, MITIGA\u00c7\u00c3O E TRATAMENTO": {
+                    "Orcamento Corrigido": 0.113536,
+                    "Execucao": 0.0784375
+                },
+                "096 - CONTING\u00caNCIA COVID 2019 - GARANTIR NORMALIDADE": {
+                    "Orcamento Corrigido": 0.008175,
+                    "Execucao": 0.00743988
+                },
+                "102 - PLANO DE RECUPERA\u00c7\u00c3O E RESILI\u00caNCIA": {
+                    "Orcamento Corrigido": 3.49495,
+                    "Execucao": 0.58818302
+                },
+                "DESPESA TOTAL N\u00c3O CONSOLIDADA": {
+                    "Orcamento Corrigido": 6086.097691,
+                    "Execucao": 5956.78560071
+                },
+                "DESPESA TOTAL CONSOLIDADA": {
+                    "Orcamento Corrigido": 5734.17538,
+                    "Execucao": 5610.05285529
+                }
+            }
+        },
+        "Governa\u00e7\u00e3o": {
+            "Despesa Total Nao Consolidada": {
+                "Orcamento Corrigido": 2943.875049,
+                "Execucao": 2192.30138014
+            },
+            "Despesa Total Consolidada": {
+                "Orcamento Corrigido": 2542.155986,
+                "Execucao": 1816.04570374
+            },
+            "Despesa Efetiva Consolidada": {
+                "Orcamento Corrigido": 2043.12585,
+                "Execucao": 1620.31952555
+            },
+            "Subsectors": {
+                "001 - SERVI\u00c7OS GERAIS DA ADMINISTRA\u00c7\u00c3O P\u00daBLICA - ADMINISTRA\u00c7\u00c3O GERAL": {
+                    "Orcamento Corrigido": 292.270746,
+                    "Execucao": 260.18375923
+                },
+                "003 - SERVI\u00c7OS GERAIS DA ADMINISTRA\u00c7\u00c3O P\u00daBLICA - COOPERA\u00c7\u00c3O ECON\u00d3MICA EXTERNA": {
+                    "Orcamento Corrigido": 2.78336,
+                    "Execucao": 1.51895188
+                },
+                "011 - SEGURAN\u00c7A E ORDEM P\u00daBLICAS - FOR\u00c7AS DE SEGURAN\u00c7A": {
+                    "Orcamento Corrigido": 81.115978,
+                    "Execucao": 81.04014342
+                },
+                "016 - EDUCA\u00c7\u00c3O - INVESTIGA\u00c7\u00c3O": {
+                    "Orcamento Corrigido": 26.532788,
+                    "Execucao": 14.89895391
+                },
+                "023 - SA\u00daDE - SERVI\u00c7OS INDIVIDUAIS DE SA\u00daDE": {
+                    "Orcamento Corrigido": 711.242253,
+                    "Execucao": 644.86063361
+                },
+                "024 - SEGURAN\u00c7A E A\u00c7\u00c3O SOCIAL - ADMINISTRA\u00c7\u00c3O E REGULAMENTA\u00c7\u00c3O": {
+                    "Orcamento Corrigido": 2.194845,
+                    "Execucao": 2.08995166
+                },
+                "027 - SEGURAN\u00c7A E A\u00c7\u00c3O SOCIAL - A\u00c7\u00c3O SOCIAL": {
+                    "Orcamento Corrigido": 24.129178,
+                    "Execucao": 23.1261056
+                },
+                "028 - HABITA\u00c7\u00c3O E SERVI\u00c7OS COLETIVOS - ADMINISTRA\u00c7\u00c3O E REGULAMENTA\u00c7\u00c3O": {
+                    "Orcamento Corrigido": 96.897693,
+                    "Execucao": 85.28295515
+                },
+                "031 - HABITA\u00c7\u00c3O E SERVI\u00c7OS COLETIVOS - ORDENAMENTO DO TERRIT\u00d3RIO": {
+                    "Orcamento Corrigido": 12.427351,
+                    "Execucao": 10.33890236
+                },
+                "033 - HABITA\u00c7\u00c3O E SERVI\u00c7OS COLETIVOS - PROTE\u00c7\u00c3O DO MEIO AMBIENTE E CONSERVA\u00c7\u00c3O DA NATUREZA": {
+                    "Orcamento Corrigido": 0.932187,
+                    "Execucao": 0.44806352
+                },
+                "037 - SERVI\u00c7OS CULTURAIS, RECREATIVOS E RELIGIOSOS - DESPORTO, RECREIO E LAZER": {
+                    "Orcamento Corrigido": 110.211921,
+                    "Execucao": 101.56958638
+                },
+                "039 - SERVI\u00c7OS CULTURAIS, RECREATIVOS E RELIGIOSOS - OUTRAS ATIVIDADES C\u00cdVICAS E RELIGIOSAS": {
+                    "Orcamento Corrigido": 21.7,
+                    "Execucao": 18.24051583
+                },
+                "062 - COM\u00c9RCIO E TURISMO - TURISMO": {
+                    "Orcamento Corrigido": 0.021236,
+                    "Execucao": 0.00548991
+                },
+                "063 - OUTRAS FUN\u00c7\u00d5ES ECON\u00d3MICAS - ADMINISTRA\u00c7\u00c3O E REGULAMENTA\u00c7\u00c3O": {
+                    "Orcamento Corrigido": 1147.624913,
+                    "Execucao": 753.94145139
+                },
+                "065 - OUTRAS FUN\u00c7\u00d5ES ECON\u00d3MICAS - DIVERSAS N\u00c3O ESPECIFICADAS": {
+                    "Orcamento Corrigido": 47.235871,
+                    "Execucao": 25.07351152
+                },
+                "068 - OUTRAS FUN\u00c7\u00d5ES - DIVERSAS N\u00c3O ESPECIFICADAS": {
+                    "Orcamento Corrigido": 6.695,
+                    "Execucao": 0.93144804
+                },
+                "082 - SEGURAN\u00c7A E A\u00c7\u00c3O SOCIAL - VIOL\u00caNCIA DOM\u00c9STICA - PREVEN\u00c7\u00c3O E PROTE\u00c7\u00c3O \u00c0 V\u00cdTIMA": {
+                    "Orcamento Corrigido": 6.668502,
+                    "Execucao": 5.21821596
+                },
+                "084 - SIMPLEX+": {
+                    "Orcamento Corrigido": 7.004948,
+                    "Execucao": 6.37647254
+                },
+                "085 - FLORESTAS": {
+                    "Orcamento Corrigido": 1.000615,
+                    "Execucao": 0.93418877
+                },
+                "095 - CONTING\u00caNCIA COVID-19 - PREVEN\u00c7\u00c3O, CONTEN\u00c7\u00c3O, MITIGA\u00c7\u00c3O E TRATAMENTO DA INFE\u00c7\u00c3O EPIDEMIOL\u00d3GICA": {
+                    "Orcamento Corrigido": 1.429976,
+                    "Execucao": 1.40920417
+                },
+                "096 - CONTING\u00caNCIA COVID-19 - GARANTIR NORMALIDADE": {
+                    "Orcamento Corrigido": 0.019251,
+                    "Execucao": 0.00740003
+                },
+                "100 - INICIATIVAS DE A\u00c7\u00c3O CLIM\u00c1TICA": {
+                    "Orcamento Corrigido": 0.025,
+                    "Execucao": 0
+                },
+                "101 - PLANO NACIONAL DE GEST\u00c3O INTEGRADA DE FOGOS RURAIS": {
+                    "Orcamento Corrigido": 5.524161,
+                    "Execucao": 4.12180049
+                },
+                "102 - PLANO DE RECUPERA\u00c7\u00c3O E RESILI\u00caNCIA": {
+                    "Orcamento Corrigido": 338.187276,
+                    "Execucao": 150.68367477
+                },
+                "DESPESA TOTAL N\u00c3O CONSOLIDADA": {
+                    "Orcamento Corrigido": 2943.875049,
+                    "Execucao": 2192.30138014
+                },
+                "DESPESA TOTAL CONSOLIDADA": {
+                    "Orcamento Corrigido": 2542.155986,
+                    "Execucao": 1816.04570374
+                }
+            }
+        },
+        "Representa\u00e7\u00e3o Externa": {
+            "Despesa Total Nao Consolidada": {
+                "Orcamento Corrigido": 943.973197,
+                "Execucao": 865.29642589
+            },
+            "Despesa Total Consolidada": {
+                "Orcamento Corrigido": 775.045579,
+                "Execucao": 696.87459389
+            },
+            "Despesa Efetiva Consolidada": {
+                "Orcamento Corrigido": 630.313873,
+                "Execucao": 552.14288799
+            },
+            "Subsectors": {
+                "002 - SERVI\u00c7OS GERAIS DA ADMINISTRA\u00c7\u00c3O P\u00daBLICA - NEG\u00d3CIOS ESTRANGEIROS": {
+                    "Orcamento Corrigido": 517.836912,
+                    "Execucao": 501.89245908
+                },
+                "003 - SERVI\u00c7OS GERAIS DA ADMINISTRA\u00c7\u00c3O P\u00daBLICA - COOPERA\u00c7\u00c3O ECON\u00d3MICA EXTERNA": {
+                    "Orcamento Corrigido": 243.97206,
+                    "Execucao": 207.9987538
+                },
+                "065 - OUTRAS FUN\u00c7\u00d5ES ECON\u00d3MICAS - DIVERSAS N\u00c3O ESPECIFICADAS": {
+                    "Orcamento Corrigido": 140.835965,
+                    "Execucao": 123.05209974
+                },
+                "084 - SIMPLEX+": {
+                    "Orcamento Corrigido": 0.314819,
+                    "Execucao": 0
+                },
+                "095 - CONTING\u00caNCIA COVID-19 - PREVEN\u00c7\u00c3O, CONTEN\u00c7\u00c3O, MITIGA\u00c7\u00c3O E TRATAMENTO DA INFE\u00c7\u00c3O EPIDEMIOL\u00d3GICA": {
+                    "Orcamento Corrigido": 0.106516,
+                    "Execucao": 0.09851547
+                },
+                "096 - CONTING\u00caNCIA COVID-19 - GARANTIR NORMALIDADE": {
+                    "Orcamento Corrigido": 0.02343,
+                    "Execucao": 0.00025
+                },
+                "102 - PLANO DE RECUPERA\u00c7\u00c3O E RESILI\u00caNCIA": {
+                    "Orcamento Corrigido": 39.183495,
+                    "Execucao": 30.76116063
+                },
+                "103 - IMPACTO DO CHOQUE GEOPOL\u00cdTICO": {
+                    "Orcamento Corrigido": 1.7,
+                    "Execucao": 1.49318717
+                },
+                "DESPESA TOTAL N\u00c3O CONSOLIDADA": {
+                    "Orcamento Corrigido": 943.973197,
+                    "Execucao": 865.29642589
+                },
+                "DESPESA TOTAL CONSOLIDADA": {
+                    "Orcamento Corrigido": 775.045579,
+                    "Execucao": 696.87459389
+                }
+            }
+        },
+        "Defesa": {
+            "Despesa Total Nao Consolidada": {
+                "Orcamento Corrigido": 2962.023168,
+                "Execucao": 2431.38042559
+            },
+            "Despesa Total Consolidada": {
+                "Orcamento Corrigido": 2852.18304,
+                "Execucao": 2330.44972248
+            },
+            "Despesa Efetiva Consolidada": {
+                "Orcamento Corrigido": 2841.772307,
+                "Execucao": 2320.82899085
+            },
+            "Subsectors": {
+                "004 - SERVI\u00c7OS GERAIS DA ADMINISTRA\u00c7\u00c3O P\u00daBLICA - INVESTIGA\u00c7\u00c3O CIENT\u00cdFICA DE CAR\u00c1TER GERAL": {
+                    "Orcamento Corrigido": 0.095,
+                    "Execucao": 0.095
+                },
+                "005 - DEFESA NACIONAL - ADMINISTRA\u00c7\u00c3O E REGULAMENTA\u00c7\u00c3O": {
+                    "Orcamento Corrigido": 318.775061,
+                    "Execucao": 113.15882822
+                },
+                "006 - DEFESA NACIONAL - INVESTIGA\u00c7\u00c3O": {
+                    "Orcamento Corrigido": 14.056236,
+                    "Execucao": 10.57985398
+                },
+                "007 - DEFESA NACIONAL - FOR\u00c7AS ARMADAS": {
+                    "Orcamento Corrigido": 2215.649928,
+                    "Execucao": 1985.03373618
+                },
+                "008 - DEFESA NACIONAL - COOPERA\u00c7\u00c3O MILITAR EXTERNA": {
+                    "Orcamento Corrigido": 5.191647,
+                    "Execucao": 4.509377
+                },
+                "014 - SEGURAN\u00c7A E ORDEM P\u00daBLICAS - PROTE\u00c7\u00c3O CIVIL E LUTA CONTRA INC\u00caNDIOS": {
+                    "Orcamento Corrigido": 79.034437,
+                    "Execucao": 73.48886166
+                },
+                "017 - EDUCA\u00c7\u00c3O - ESTABELECIMENTOS DE ENSINO N\u00c3O SUPERIOR": {
+                    "Orcamento Corrigido": 0.949725,
+                    "Execucao": 0.76526326
+                },
+                "018 - EDUCA\u00c7\u00c3O - ESTABELECIMENTOS DE ENSINO SUPERIOR": {
+                    "Orcamento Corrigido": 0.074899,
+                    "Execucao": 0.07427522
+                },
+                "022 - SA\u00daDE - HOSPITAIS E CL\u00cdNICAS": {
+                    "Orcamento Corrigido": 62.785631,
+                    "Execucao": 57.96954517
+                },
+                "027 - SEGURAN\u00c7A E A\u00c7\u00c3O SOCIAL - A\u00c7\u00c3O SOCIAL": {
+                    "Orcamento Corrigido": 133.823484,
+                    "Execucao": 130.73394651
+                },
+                "049 - IND\u00daSTRIA E ENERGIA - IND\u00daSTRIAS TRANSFORMADORAS": {
+                    "Orcamento Corrigido": 44.79893,
+                    "Execucao": 26.20399982
+                },
+                "084 - SIMPLEX+": {
+                    "Orcamento Corrigido": 0.53633,
+                    "Execucao": 0.15363094
+                },
+                "095 - CONTING\u00caNCIA COVID-19 - PREVEN\u00c7\u00c3O, CONTEN\u00c7\u00c3O, MITIGA\u00c7\u00c3O E TRATAMENTO DA INFE\u00c7\u00c3O EPIDEMIOL\u00d3GICA": {
+                    "Orcamento Corrigido": 0.070884,
+                    "Execucao": 0.07068178
+                },
+                "096 - CONTING\u00caNCIA COVID-19 - GARANTIR NORMALIDADE": {
+                    "Orcamento Corrigido": 0.00015,
+                    "Execucao": 0
+                },
+                "102 - PLANO DE RECUPERA\u00c7\u00c3O E RESILI\u00caNCIA": {
+                    "Orcamento Corrigido": 85.759903,
+                    "Execucao": 28.54342585
+                },
+                "103 - IMPACTO DO CHOQUE GEOPOL\u00cdTICO": {
+                    "Orcamento Corrigido": 0.420923,
+                    "Execucao": 0
+                },
+                "DESPESA TOTAL N\u00c3O CONSOLIDADA": {
+                    "Orcamento Corrigido": 2962.023168,
+                    "Execucao": 2431.38042559
+                },
+                "DESPESA TOTAL CONSOLIDADA": {
+                    "Orcamento Corrigido": 2852.18304,
+                    "Execucao": 2330.44972248
+                }
+            }
+        },
+        "Seguran\u00e7a Interna": {
+            "Despesa Total Nao Consolidada": {
+                "Orcamento Corrigido": 2991.35564,
+                "Execucao": 2664.26880942
+            },
+            "Despesa Total Consolidada": {
+                "Orcamento Corrigido": 2763.919,
+                "Execucao": 2468.97175429
+            },
+            "Despesa Efetiva Consolidada": {
+                "Orcamento Corrigido": 2747.519,
+                "Execucao": 2454.59597485
+            },
+            "Subsectors": {
+                "003 - SERVI\u00c7OS GERAIS DA ADMINISTRA\u00c7\u00c3O P\u00daBLICA - COOPERA\u00c7\u00c3O ECON\u00d3MICA EXTERNA": {
+                    "Orcamento Corrigido": 3.70503,
+                    "Execucao": 3.69766099
+                },
+                "009 - SEGURAN\u00c7A E ORDEM P\u00daBLICAS - ADMINISTRA\u00c7\u00c3O E REGULAMENTA\u00c7\u00c3O": {
+                    "Orcamento Corrigido": 127.65647,
+                    "Execucao": 107.04967421
+                },
+                "011 - SEGURAN\u00c7A E ORDEM P\u00daBLICAS - FOR\u00c7AS DE SEGURAN\u00c7A": {
+                    "Orcamento Corrigido": 2078.479577,
+                    "Execucao": 2027.02760343
+                },
+                "014 - SEGURAN\u00c7A E ORDEM P\u00daBLICAS - PROTE\u00c7\u00c3O CIVIL E LUTA CONTRA INC\u00caNDIOS": {
+                    "Orcamento Corrigido": 122.567239,
+                    "Execucao": 115.80877463
+                },
+                "017 - EDUCA\u00c7\u00c3O - ESTABELECIMENTOS DE ENSINO N\u00c3O SUPERIOR": {
+                    "Orcamento Corrigido": 19.529912,
+                    "Execucao": 19.26572471
+                },
+                "018 - EDUCA\u00c7\u00c3O - ESTABELECIMENTOS DE ENSINO SUPERIOR": {
+                    "Orcamento Corrigido": 7.679897,
+                    "Execucao": 7.40251465
+                },
+                "023 - SA\u00daDE - SERVI\u00c7OS INDIVIDUAIS DE SA\u00daDE": {
+                    "Orcamento Corrigido": 84.460686,
+                    "Execucao": 67.54970077
+                },
+                "027 - SEGURAN\u00c7A E A\u00c7\u00c3O SOCIAL - A\u00c7\u00c3O SOCIAL": {
+                    "Orcamento Corrigido": 35.966553,
+                    "Execucao": 30.5238991
+                },
+                "068 - OUTRAS FUN\u00c7\u00d5ES - DIVERSAS N\u00c3O ESPECIFICADAS": {
+                    "Orcamento Corrigido": 0.1255,
+                    "Execucao": 0.00732625
+                },
+                "082 - SEGURAN\u00c7A E A\u00c7\u00c3O SOCIAL - VIOL\u00caNCIA DOM\u00c9STICA - PREVEN\u00c7\u00c3O E PROTE\u00c7\u00c3O \u00c0 V\u00cdTIMA": {
+                    "Orcamento Corrigido": 11.846035,
+                    "Execucao": 11.43186857
+                },
+                "083 - SEGURAN\u00c7A E A\u00c7\u00c3O SOCIAL - INTEGRA\u00c7\u00c3O DA PESSOA COM DEFICI\u00caNCIA": {
+                    "Orcamento Corrigido": 9.322327,
+                    "Execucao": 9.30363425
+                },
+                "084 - SIMPLEX+": {
+                    "Orcamento Corrigido": 0.13125,
+                    "Execucao": 0.12873786
+                },
+                "085 - FLORESTAS": {
+                    "Orcamento Corrigido": 0,
+                    "Execucao": 0
+                },
+                "087 - SEGURAN\u00c7A E ORDEM P\u00daBLICAS - LPIEFSS - SISTEMAS DE TECNOLOGIAS DE INFORMA\u00c7\u00c3O E COMUNICA\u00c7\u00c3O": {
+                    "Orcamento Corrigido": 27.532931,
+                    "Execucao": 14.93559496
+                },
+                "088 - SEGURAN\u00c7A E ORDEM P\u00daBLICAS - LPIEFSS - INFRAESTRUTURAS": {
+                    "Orcamento Corrigido": 116.545763,
+                    "Execucao": 8.38149204
+                },
+                "089 - SEGURAN\u00c7A E ORDEM P\u00daBLICAS - LPIEFSS - VE\u00cdCULOS": {
+                    "Orcamento Corrigido": 5.349875,
+                    "Execucao": 0.1377108
+                },
+                "090 - SEGURAN\u00c7A E ORDEM P\u00daBLICAS - LPIEFSS - ARMAMENTO": {
+                    "Orcamento Corrigido": 4.895041,
+                    "Execucao": 0.44048182
+                },
+                "091 - SEGURAN\u00c7A E ORDEM P\u00daBLICAS - LPIEFSS - EQUIPAMENTO DE PROTE\u00c7\u00c3O INDIVIDUAL": {
+                    "Orcamento Corrigido": 8.541149,
+                    "Execucao": 0.7393776
+                },
+                "092 - SEGURAN\u00c7A E ORDEM P\u00daBLICAS - LPIEFSS - EQUIPAMENTO DE APOIO \u00c0 ATIVIDADE OPERACIONAL": {
+                    "Orcamento Corrigido": 1.259918,
+                    "Execucao": 0.54924875
+                },
+                "093 - SEGURAN\u00c7A E ORDEM P\u00daBLICAS - LPIEFSS - EQUIPAMENTO PARA FUN\u00c7\u00d5ES ESPECIALIZADAS": {
+                    "Orcamento Corrigido": 4.761005,
+                    "Execucao": 2.33142406
+                },
+                "095 - CONTING\u00caNCIA COVID-19 - PREVEN\u00c7\u00c3O, CONTEN\u00c7\u00c3O, MITIGA\u00c7\u00c3O E TRATAMENTO DA INFE\u00c7\u00c3O EPIDEMIOL\u00d3GICA": {
+                    "Orcamento Corrigido": 1.923208,
+                    "Execucao": 1.71707832
+                },
+                "096 - CONTING\u00caNCIA COVID-19 - GARANTIR NORMALIDADE": {
+                    "Orcamento Corrigido": 0.163692,
+                    "Execucao": 0.15712359
+                },
+                "097 - PROGRAMA ATIVAR": {
+                    "Orcamento Corrigido": 0,
+                    "Execucao": 0
+                },
+                "100 - INICIATIVAS DE A\u00c7\u00c3O CLIM\u00c1TICA": {
+                    "Orcamento Corrigido": 0.170124,
+                    "Execucao": 0.158296
+                },
+                "101 - PLANO NACIONAL DE GEST\u00c3O INTEGRADA DE FOGOS RURAIS": {
+                    "Orcamento Corrigido": 205.331704,
+                    "Execucao": 204.18557684
+                },
+                "102 - PLANO DE RECUPERA\u00c7\u00c3O E RESILI\u00caNCIA": {
+                    "Orcamento Corrigido": 113.410754,
+                    "Execucao": 31.33828522
+                },
+                "DESPESA TOTAL N\u00c3O CONSOLIDADA": {
+                    "Orcamento Corrigido": 2991.35564,
+                    "Execucao": 2664.26880942
+                },
+                "DESPESA TOTAL CONSOLIDADA": {
+                    "Orcamento Corrigido": 2763.919,
+                    "Execucao": 2468.97175429
+                }
+            }
+        },
+        "Justi\u00e7a": {
+            "Despesa Total Nao Consolidada": {
+                "Orcamento Corrigido": 2367.015852,
+                "Execucao": 2071.27308152
+            },
+            "Despesa Total Consolidada": {
+                "Orcamento Corrigido": 1842.328147,
+                "Execucao": 1590.23507448
+            },
+            "Despesa Efetiva Consolidada": {
+                "Orcamento Corrigido": 1820.842407,
+                "Execucao": 1568.78126939
+            },
+            "Subsectors": {
+                "001 - SERVI\u00c7OS GERAIS DA ADMINISTRA\u00c7\u00c3O P\u00daBLICA - ADMINISTRA\u00c7\u00c3O GERAL": {
+                    "Orcamento Corrigido": 1.05914,
+                    "Execucao": 0.38064483
+                },
+                "009 - SEGURAN\u00c7A E ORDEM P\u00daBLICAS - ADMINISTRA\u00c7\u00c3O E REGULAMENTA\u00c7\u00c3O": {
+                    "Orcamento Corrigido": 1066.608749,
+                    "Execucao": 966.20001573
+                },
+                "010 - SEGURAN\u00c7A E ORDEM P\u00daBLICAS - INVESTIGA\u00c7\u00c3O": {
+                    "Orcamento Corrigido": 194.668198,
+                    "Execucao": 181.50635549
+                },
+                "012 - SEGURAN\u00c7A E ORDEM P\u00daBLICAS - SISTEMA JUDICI\u00c1RIO": {
+                    "Orcamento Corrigido": 560.962158,
+                    "Execucao": 534.15446635
+                },
+                "013 - SEGURAN\u00c7A E ORDEM P\u00daBLICAS - SISTEMA PRISIONAL, DE REINSER\u00c7\u00c3O SOCIAL E DE MENORES": {
+                    "Orcamento Corrigido": 361.10493,
+                    "Execucao": 331.9129131
+                },
+                "034 - SERVI\u00c7OS CULTURAIS, RECREATIVOS E RELIGIOSOS - ADMINISTRA\u00c7\u00c3O E REGULAMENTA\u00c7\u00c3O": {
+                    "Orcamento Corrigido": 0.010315,
+                    "Execucao": 0.0094207
+                },
+                "063 - OUTRAS FUN\u00c7\u00d5ES ECON\u00d3MICAS - ADMINISTRA\u00c7\u00c3O E REGULAMENTA\u00c7\u00c3O": {
+                    "Orcamento Corrigido": 26.089689,
+                    "Execucao": 22.91593174
+                },
+                "065 - OUTRAS FUN\u00c7\u00d5ES ECON\u00d3MICAS - DIVERSAS N\u00c3O ESPECIFICADAS": {
+                    "Orcamento Corrigido": 3.317592,
+                    "Execucao": 0.56517578
+                },
+                "082 - SEGURAN\u00c7A E A\u00c7\u00c3O SOCIAL - VIOL\u00caNCIA DOM\u00c9STICA - PREVEN\u00c7\u00c3O E PROTE\u00c7\u00c3O \u00c0 V\u00cdTIMA": {
+                    "Orcamento Corrigido": 3.961863,
+                    "Execucao": 3.9279696
+                },
+                "083 - SEGURAN\u00c7A E A\u00c7\u00c3O SOCIAL - INTEGRA\u00c7\u00c3O DA PESSOA COM DEFICI\u00caNCIA": {
+                    "Orcamento Corrigido": 0.025222,
+                    "Execucao": 0.02522178
+                },
+                "084 - SIMPLEX+": {
+                    "Orcamento Corrigido": 5.600192,
+                    "Execucao": 2.58278807
+                },
+                "095 - CONTING\u00caNCIA COVID-19 - PREVEN\u00c7\u00c3O, CONTEN\u00c7\u00c3O, MITIGA\u00c7\u00c3O E TRATAMENTO DA INFE\u00c7\u00c3O EPIDEMIOL\u00d3GICA": {
+                    "Orcamento Corrigido": 0.653037,
+                    "Execucao": 0.51571732
+                },
+                "096 - CONTING\u00caNCIA COVID-19 - GARANTIR NORMALIDADE": {
+                    "Orcamento Corrigido": 0.321654,
+                    "Execucao": 0.20051831
+                },
+                "097 - PROGRAMA ATIVAR": {
+                    "Orcamento Corrigido": 0,
+                    "Execucao": 0
+                },
+                "102 - PLANO DE RECUPERA\u00c7\u00c3O E RESILI\u00caNCIA": {
+                    "Orcamento Corrigido": 142.633113,
+                    "Execucao": 26.37594272
+                },
+                "DESPESA TOTAL N\u00c3O CONSOLIDADA": {
+                    "Orcamento Corrigido": 2367.015852,
+                    "Execucao": 2071.27308152
+                },
+                "DESPESA TOTAL CONSOLIDADA": {
+                    "Orcamento Corrigido": 1842.328147,
+                    "Execucao": 1590.23507448
+                }
+            }
+        },
+        "Finan\u00e7as": {
+            "Despesa Total Nao Consolidada": {
+                "Orcamento Corrigido": 22799.579674,
+                "Execucao": 14273.36789053
+            },
+            "Despesa Total Consolidada": {
+                "Orcamento Corrigido": 22080.574422,
+                "Execucao": 13077.81330762
+            },
+            "Despesa Efetiva Consolidada": {
+                "Orcamento Corrigido": 5993.237171,
+                "Execucao": 4610.04438084
+            },
+            "Subsectors": {
+                "001 - SERVI\u00c7OS GERAIS DA ADMINISTRA\u00c7\u00c3O P\u00daBLICA - ADMINISTRA\u00c7\u00c3O GERAL": {
+                    "Orcamento Corrigido": 4262.372407,
+                    "Execucao": 1544.58110535
+                },
+                "003 - SERVI\u00c7OS GERAIS DA ADMINISTRA\u00c7\u00c3O P\u00daBLICA - COOPERA\u00c7\u00c3O ECON\u00d3MICA EXTERNA": {
+                    "Orcamento Corrigido": 98.417699,
+                    "Execucao": 58.54886712
+                },
+                "005 - DEFESA NACIONAL - ADMINISTRA\u00c7\u00c3O E REGULAMENTA\u00c7\u00c3O": {
+                    "Orcamento Corrigido": 218.386983,
+                    "Execucao": 209.24744191
+                },
+                "007 - DEFESA NACIONAL - FOR\u00c7AS ARMADAS": {
+                    "Orcamento Corrigido": 5.515832,
+                    "Execucao": 2.926829
+                },
+                "009 - SEGURAN\u00c7A E ORDEM P\u00daBLICAS - ADMINISTRA\u00c7\u00c3O E REGULAMENTA\u00c7\u00c3O": {
+                    "Orcamento Corrigido": 30.678793,
+                    "Execucao": 30.5707933
+                },
+                "015 - EDUCA\u00c7\u00c3O - ADMINISTRA\u00c7\u00c3O E REGULAMENTA\u00c7\u00c3O": {
+                    "Orcamento Corrigido": 0,
+                    "Execucao": 0
+                },
+                "017 - EDUCA\u00c7\u00c3O - ESTABELECIMENTOS DE ENSINO N\u00c3O SUPERIOR": {
+                    "Orcamento Corrigido": 82.892917,
+                    "Execucao": 82.892917
+                },
+                "022 - SA\u00daDE - HOSPITAIS E CL\u00cdNICAS": {
+                    "Orcamento Corrigido": 1380.111082,
+                    "Execucao": 1115.5159224
+                },
+                "026 - SEGURAN\u00c7A E A\u00c7\u00c3O SOCIAL - SEGURAN\u00c7A SOCIAL": {
+                    "Orcamento Corrigido": 10.734607,
+                    "Execucao": 9.86456799
+                },
+                "030 - HABITA\u00c7\u00c3O E SERVI\u00c7OS COLETIVOS - HABITA\u00c7\u00c3O": {
+                    "Orcamento Corrigido": 131.008246,
+                    "Execucao": 86.49892106
+                },
+                "033 - HABITA\u00c7\u00c3O E SERVI\u00c7OS COLETIVOS - PROTE\u00c7\u00c3O DO MEIO AMBIENTE E CONSERVA\u00c7\u00c3O DA NATUREZA": {
+                    "Orcamento Corrigido": 1.063416,
+                    "Execucao": 1.06341588
+                },
+                "034 - SERVI\u00c7OS CULTURAIS, RECREATIVOS E RELIGIOSOS - ADMINISTRA\u00c7\u00c3O E REGULAMENTA\u00c7\u00c3O": {
+                    "Orcamento Corrigido": 0,
+                    "Execucao": 0
+                },
+                "036 - SERVI\u00c7OS CULTURAIS, RECREATIVOS E RELIGIOSOS - CULTURA": {
+                    "Orcamento Corrigido": 1.5,
+                    "Execucao": 1.5
+                },
+                "037 - SERVI\u00c7OS CULTURAIS, RECREATIVOS E RELIGIOSOS - DESPORTO, RECREIO E LAZER": {
+                    "Orcamento Corrigido": 0.230554,
+                    "Execucao": 0.230553
+                },
+                "038 - SERVI\u00c7OS CULTURAIS, RECREATIVOS E RELIGIOSOS - COMUNICA\u00c7\u00c3O SOCIAL": {
+                    "Orcamento Corrigido": 17.543024,
+                    "Execucao": 16.68380733
+                },
+                "040 - AGRICULTURA, PECU\u00c1RIA, SILVICULTURA, CA\u00c7A, PESCA - ADMINISTRA\u00c7\u00c3O E REGULAMENTA\u00c7\u00c3O": {
+                    "Orcamento Corrigido": 153.854168,
+                    "Execucao": 145.85972825
+                },
+                "054 - TRANSPORTES E COMUNICA\u00c7\u00d5ES - TRANSPORTES RODOVI\u00c1RIOS": {
+                    "Orcamento Corrigido": 15.96725,
+                    "Execucao": 14.46051029
+                },
+                "055 - TRANSPORTES E COMUNICA\u00c7\u00d5ES - TRANSPORTES FERROVI\u00c1RIOS": {
+                    "Orcamento Corrigido": 4133.998985,
+                    "Execucao": 2074.92180304
+                },
+                "056 - TRANSPORTES E COMUNICA\u00c7\u00d5ES - TRANSPORTES A\u00c9REOS": {
+                    "Orcamento Corrigido": 130.938545,
+                    "Execucao": 126.89679389
+                },
+                "057 - TRANSPORTES E COMUNICA\u00c7\u00d5ES - TRANSPORTES MAR\u00cdTIMOS E FLUVIAIS": {
+                    "Orcamento Corrigido": 24.653768,
+                    "Execucao": 0
+                },
+                "063 - OUTRAS FUN\u00c7\u00d5ES ECON\u00d3MICAS - ADMINISTRA\u00c7\u00c3O E REGULAMENTA\u00c7\u00c3O": {
+                    "Orcamento Corrigido": 404.02227,
+                    "Execucao": 4.01968602
+                },
+                "065 - OUTRAS FUN\u00c7\u00d5ES ECON\u00d3MICAS - DIVERSAS N\u00c3O ESPECIFICADAS": {
+                    "Orcamento Corrigido": 7787.525462,
+                    "Execucao": 6058.6590078
+                },
+                "067 - OUTRAS FUN\u00c7\u00d5ES - TRANSFER\u00caNCIAS ENTRE ADMINISTRA\u00c7\u00d5ES": {
+                    "Orcamento Corrigido": 2729.69902,
+                    "Execucao": 2547.82933872
+                },
+                "068 - OUTRAS FUN\u00c7\u00d5ES - DIVERSAS N\u00c3O ESPECIFICADAS": {
+                    "Orcamento Corrigido": 76.894734,
+                    "Execucao": 0.4356223
+                },
+                "085 - FLORESTAS": {
+                    "Orcamento Corrigido": 0.01547,
+                    "Execucao": 0.01406102
+                },
+                "095 - CONTING\u00caNCIA COVID-19 - PREVEN\u00c7\u00c3O, CONTEN\u00c7\u00c3O, MITIGA\u00c7\u00c3O E TRATAMENTO DA INFE\u00c7\u00c3O EPIDEMIOL\u00d3GICA": {
+                    "Orcamento Corrigido": 0.185145,
+                    "Execucao": 0.12821478
+                },
+                "096 - CONTING\u00caNCIA COVID-19 - GARANTIR NORMALIDADE": {
+                    "Orcamento Corrigido": 13.581697,
+                    "Execucao": 1.67108156
+                },
+                "102 - PLANO DE RECUPERA\u00c7\u00c3O E RESILI\u00caNCIA": {
+                    "Orcamento Corrigido": 1087.7876,
+                    "Execucao": 138.34690152
+                },
+                "DESPESA TOTAL N\u00c3O CONSOLIDADA": {
+                    "Orcamento Corrigido": 22799.579674,
+                    "Execucao": 14273.36789053
+                },
+                "DESPESA TOTAL CONSOLIDADA": {
+                    "Orcamento Corrigido": 22080.574422,
+                    "Execucao": 13077.81330762
+                }
+            }
+        },
+        "Gest\u00e3o da D\u00edvida P\u00fablica": {
+            "Despesa Total Nao Consolidada": {
+                "Orcamento Corrigido": 139498.529,
+                "Execucao": 82682.72111235
+            },
+            "Despesa Total Consolidada": {
+                "Orcamento Corrigido": 138290.529,
+                "Execucao": 82198.90791326
+            },
+            "Despesa Efetiva Consolidada": {
+                "Orcamento Corrigido": 6811.52900000001,
+                "Execucao": 6378.11665742999
+            },
+            "Subsectors": {
+                "066 - OUTRAS FUN\u00c7\u00d5ES - OPERA\u00c7\u00d5ES DA D\u00cdVIDA P\u00daBLICA": {
+                    "Orcamento Corrigido": 139498.529,
+                    "Execucao": 82682.72111235
+                },
+                "DESPESA TOTAL N\u00c3O CONSOLIDADA": {
+                    "Orcamento Corrigido": 139498.529,
+                    "Execucao": 82682.72111235
+                },
+                "DESPESA TOTAL CONSOLIDADA": {
+                    "Orcamento Corrigido": 138290.529,
+                    "Execucao": 82198.90791326
+                }
+            }
+        },
+        "Economia e Mar": {
+            "Despesa Total Nao Consolidada": {
+                "Orcamento Corrigido": 4527.408799,
+                "Execucao": 2372.85517782
+            },
+            "Despesa Total Consolidada": {
+                "Orcamento Corrigido": 3618.818239,
+                "Execucao": 2191.03849177
+            },
+            "Despesa Efetiva Consolidada": {
+                "Orcamento Corrigido": 1631.835383,
+                "Execucao": 1473.43914975
+            },
+            "Subsectors": {
+                "040 - AGRICULTURA, PECU\u00c1RIA, SILVICULTURA, CA\u00c7A, PESCA - ADMINISTRA\u00c7\u00c3O E REGULAMENTA\u00c7\u00c3O": {
+                    "Orcamento Corrigido": 46.997068,
+                    "Execucao": 18.60922104
+                },
+                "061 - COM\u00c9RCIO E TURISMO - COM\u00c9RCIO": {
+                    "Orcamento Corrigido": 2.681683,
+                    "Execucao": 1.02239993
+                },
+                "062 - COM\u00c9RCIO E TURISMO - TURISMO": {
+                    "Orcamento Corrigido": 232.99787,
+                    "Execucao": 188.80747969
+                },
+                "063 - OUTRAS FUN\u00c7\u00d5ES ECON\u00d3MICAS - ADMINISTRA\u00c7\u00c3O E REGULAMENTA\u00c7\u00c3O": {
+                    "Orcamento Corrigido": 85.071931,
+                    "Execucao": 76.80399498
+                },
+                "065 - OUTRAS FUN\u00c7\u00d5ES ECON\u00d3MICAS - DIVERSAS N\u00c3O ESPECIFICADAS": {
+                    "Orcamento Corrigido": 1565.159363,
+                    "Execucao": 738.50557553
+                },
+                "084 - SIMPLEX+": {
+                    "Orcamento Corrigido": 1.07157,
+                    "Execucao": 0.07723631
+                },
+                "086 - COM\u00c9RCIO E TURISMO - IMPOSTO ESPECIAL DE JOGO": {
+                    "Orcamento Corrigido": 258.428993,
+                    "Execucao": 248.41860069
+                },
+                "095 - CONTING\u00caNCIA COVID-19 - PREVEN\u00c7\u00c3O, CONTEN\u00c7\u00c3O, MITIGA\u00c7\u00c3O E TRATAMENTO DA INFE\u00c7\u00c3O EPIDEMIOL\u00d3GICA": {
+                    "Orcamento Corrigido": 0.027928,
+                    "Execucao": 0.00630553
+                },
+                "096 - CONTING\u00caNCIA COVID-19 - GARANTIR NORMALIDADE": {
+                    "Orcamento Corrigido": 128.77518,
+                    "Execucao": 127.30217595
+                },
+                "102 - PLANO DE RECUPERA\u00c7\u00c3O E RESILI\u00caNCIA": {
+                    "Orcamento Corrigido": 2153.529029,
+                    "Execucao": 920.78104401
+                },
+                "103 - IMPACTO DO CHOQUE GEOPOL\u00cdTICO": {
+                    "Orcamento Corrigido": 52.668184,
+                    "Execucao": 52.52114416
+                },
+                "DESPESA TOTAL N\u00c3O CONSOLIDADA": {
+                    "Orcamento Corrigido": 4527.408799,
+                    "Execucao": 2372.85517782
+                },
+                "DESPESA TOTAL CONSOLIDADA": {
+                    "Orcamento Corrigido": 3618.818239,
+                    "Execucao": 2191.03849177
+                }
+            }
+        },
+        "Cultura": {
+            "Despesa Total Nao Consolidada": {
+                "Orcamento Corrigido": 1126.218555,
+                "Execucao": 893.37530686
+            },
+            "Despesa Total Consolidada": {
+                "Orcamento Corrigido": 780.418034,
+                "Execucao": 598.64746124
+            },
+            "Despesa Efetiva Consolidada": {
+                "Orcamento Corrigido": 741.806216,
+                "Execucao": 562.46440344
+            },
+            "Subsectors": {
+                "001 - SERVI\u00c7OS GERAIS DA ADMINISTRA\u00c7\u00c3O P\u00daBLICA - ADMINISTRA\u00c7\u00c3O GERAL": {
+                    "Orcamento Corrigido": 3.808658,
+                    "Execucao": 3.13050076
+                },
+                "036 - SERVI\u00c7OS CULTURAIS, RECREATIVOS E RELIGIOSOS - CULTURA": {
+                    "Orcamento Corrigido": 443.824802,
+                    "Execucao": 397.60852323
+                },
+                "038 - SERVI\u00c7OS CULTURAIS, RECREATIVOS E RELIGIOSOS - COMUNICA\u00c7\u00c3O SOCIAL": {
+                    "Orcamento Corrigido": 451.953752,
+                    "Execucao": 444.20460396
+                },
+                "084 - SIMPLEX+": {
+                    "Orcamento Corrigido": 1.354402,
+                    "Execucao": 0.67082941
+                },
+                "095 - CONTING\u00caNCIA COVID-19 - PREVEN\u00c7\u00c3O, CONTEN\u00c7\u00c3O, MITIGA\u00c7\u00c3O E TRATAMENTO DA INFE\u00c7\u00c3O EPIDEMIOL\u00d3GICA": {
+                    "Orcamento Corrigido": 0.330965,
+                    "Execucao": 0.01808566
+                },
+                "096 - CONTING\u00caNCIA COVID-19 - GARANTIR NORMALIDADE": {
+                    "Orcamento Corrigido": 6.100959,
+                    "Execucao": 2.82009103
+                },
+                "100 - INICIATIVAS DE A\u00c7\u00c3O CLIM\u00c1TICA": {
+                    "Orcamento Corrigido": 0.001563,
+                    "Execucao": 0
+                },
+                "102 - PLANO DE RECUPERA\u00c7\u00c3O E RESILI\u00caNCIA": {
+                    "Orcamento Corrigido": 217.933454,
+                    "Execucao": 44.097258
+                },
+                "103 - IMPACTO DO CHOQUE GEOPOL\u00cdTICO": {
+                    "Orcamento Corrigido": 0.91,
+                    "Execucao": 0.82541481
+                },
+                "DESPESA TOTAL N\u00c3O CONSOLIDADA": {
+                    "Orcamento Corrigido": 1126.218555,
+                    "Execucao": 893.37530686
+                },
+                "DESPESA TOTAL CONSOLIDADA": {
+                    "Orcamento Corrigido": 780.418034,
+                    "Execucao": 598.64746124
+                }
+            }
+        },
+        "Ci\u00eancia, Tecnologia e Ensino Superior": {
+            "Despesa Total Nao Consolidada": {
+                "Orcamento Corrigido": 6742.41975285,
+                "Execucao": 5507.47277
+            },
+            "Despesa Total Consolidada": {
+                "Orcamento Corrigido": 4443.06227885,
+                "Execucao": 3273.66756292
+            },
+            "Despesa Efetiva Consolidada": {
+                "Orcamento Corrigido": 4238.62976685,
+                "Execucao": 3086.42113592
+            },
+            "Subsectors": {
+                "001 - SERVI\u00c7OS GERAIS DA ADMINISTRA\u00c7\u00c3O P\u00daBLICA - ADMINISTRA\u00c7\u00c3O GERAL": {
+                    "Orcamento Corrigido": 28.538965,
+                    "Execucao": 27.6800213
+                },
+                "004 - SERVI\u00c7OS GERAIS DA ADMINISTRA\u00c7\u00c3O P\u00daBLICA - INVESTIGA\u00c7\u00c3O CIENT\u00cdFICA DE CAR\u00c1TER GERAL": {
+                    "Orcamento Corrigido": 1153.764767,
+                    "Execucao": 1046.94108518
+                },
+                "015 - EDUCA\u00c7\u00c3O - ADMINISTRA\u00c7\u00c3O E REGULAMENTA\u00c7\u00c3O": {
+                    "Orcamento Corrigido": 130.52918985,
+                    "Execucao": 83.94608794
+                },
+                "016 - EDUCA\u00c7\u00c3O - INVESTIGA\u00c7\u00c3O": {
+                    "Orcamento Corrigido": 641.836252,
+                    "Execucao": 440.37471658
+                },
+                "018 - EDUCA\u00c7\u00c3O - ESTABELECIMENTOS DE ENSINO SUPERIOR": {
+                    "Orcamento Corrigido": 3743.614653,
+                    "Execucao": 3374.15303315
+                },
+                "019 - EDUCA\u00c7\u00c3O - SERVI\u00c7OS AUXILIARES DE ENSINO": {
+                    "Orcamento Corrigido": 393.473578,
+                    "Execucao": 287.64054997
+                },
+                "084 - SIMPLEX+": {
+                    "Orcamento Corrigido": 1.111054,
+                    "Execucao": 0.57627701
+                },
+                "095 - CONTING\u00caNCIA COVID-19 - PREVEN\u00c7\u00c3O, CONTEN\u00c7\u00c3O, MITIGA\u00c7\u00c3O E TRATAMENTO DA INFE\u00c7\u00c3O EPIDEMIOL\u00d3GICA": {
+                    "Orcamento Corrigido": 2.15783,
+                    "Execucao": 0.26348919
+                },
+                "096 - CONTING\u00caNCIA COVID-19 - GARANTIR NORMALIDADE": {
+                    "Orcamento Corrigido": 0.828747,
+                    "Execucao": 0.47581137
+                },
+                "100 - INICIATIVAS DE A\u00c7\u00c3O CLIM\u00c1TICA": {
+                    "Orcamento Corrigido": 0.464906,
+                    "Execucao": 0.04638759
+                },
+                "102 - PLANO DE RECUPERA\u00c7\u00c3O E RESILI\u00caNCIA": {
+                    "Orcamento Corrigido": 645.837816,
+                    "Execucao": 245.34518616
+                },
+                "103 - IMPACTO DO CHOQUE GEOPOL\u00cdTICO": {
+                    "Orcamento Corrigido": 0.261995,
+                    "Execucao": 0.03012456
+                },
+                "DESPESA TOTAL N\u00c3O CONSOLIDADA": {
+                    "Orcamento Corrigido": 6742.41975285,
+                    "Execucao": 5507.47277
+                },
+                "DESPESA TOTAL CONSOLIDADA": {
+                    "Orcamento Corrigido": 4443.06227885,
+                    "Execucao": 3273.66756292
+                }
+            }
+        },
+        "Ensino B\u00e1sico e Secund\u00e1rio e Administra\u00e7\u00e3o Escolar": {
+            "Despesa Total Nao Consolidada": {
+                "Orcamento Corrigido": 8094.43127135,
+                "Execucao": 7141.34724728
+            },
+            "Despesa Total Consolidada": {
+                "Orcamento Corrigido": 7494.00717935,
+                "Execucao": 6803.01144122
+            },
+            "Despesa Efetiva Consolidada": {
+                "Orcamento Corrigido": 7329.04381335,
+                "Execucao": 6638.04807812
+            },
+            "Subsectors": {
+                "003 - SERVI\u00c7OS GERAIS DA ADMINISTRA\u00c7\u00c3O P\u00daBLICA - COOPERA\u00c7\u00c3O ECON\u00d3MICA EXTERNA": {
+                    "Orcamento Corrigido": 53.592018,
+                    "Execucao": 49.67374219
+                },
+                "012 - SEGURAN\u00c7A E ORDEM P\u00daBLICAS - SISTEMA JUDICI\u00c1RIO": {
+                    "Orcamento Corrigido": 0,
+                    "Execucao": 0
+                },
+                "015 - EDUCA\u00c7\u00c3O - ADMINISTRA\u00c7\u00c3O E REGULAMENTA\u00c7\u00c3O": {
+                    "Orcamento Corrigido": 158.07808835,
+                    "Execucao": 138.70123916
+                },
+                "017 - EDUCA\u00c7\u00c3O - ESTABELECIMENTOS DE ENSINO N\u00c3O SUPERIOR": {
+                    "Orcamento Corrigido": 6757.6782,
+                    "Execucao": 6665.64602853
+                },
+                "019 - EDUCA\u00c7\u00c3O - SERVI\u00c7OS AUXILIARES DE ENSINO": {
+                    "Orcamento Corrigido": 160.880146,
+                    "Execucao": 142.07343914
+                },
+                "084 - SIMPLEX+": {
+                    "Orcamento Corrigido": 0.048443,
+                    "Execucao": 0
+                },
+                "095 - CONTING\u00caNCIA COVID-19 - PREVEN\u00c7\u00c3O, CONTEN\u00c7\u00c3O, MITIGA\u00c7\u00c3O E TRATAMENTO DA INFE\u00c7\u00c3O EPIDEMIOL\u00d3GICA": {
+                    "Orcamento Corrigido": 0.33424,
+                    "Execucao": 0.11825545
+                },
+                "096 - CONTING\u00caNCIA COVID-19 - GARANTIR NORMALIDADE": {
+                    "Orcamento Corrigido": 0.031977,
+                    "Execucao": 0.00071318
+                },
+                "099 - UNIVERSALIZA\u00c7\u00c3O DA ESCOLA DIGITAL": {
+                    "Orcamento Corrigido": 116.985675,
+                    "Execucao": 66.95140014
+                },
+                "102 - PLANO DE RECUPERA\u00c7\u00c3O E RESILI\u00caNCIA": {
+                    "Orcamento Corrigido": 845.969151,
+                    "Execucao": 78.18242949
+                },
+                "103 - IMPACTO DO CHOQUE GEOPOL\u00cdTICO": {
+                    "Orcamento Corrigido": 0.833333,
+                    "Execucao": 0
+                },
+                "DESPESA TOTAL N\u00c3O CONSOLIDADA": {
+                    "Orcamento Corrigido": 8094.43127135,
+                    "Execucao": 7141.34724728
+                },
+                "DESPESA TOTAL CONSOLIDADA": {
+                    "Orcamento Corrigido": 7494.00717935,
+                    "Execucao": 6803.01144122
+                }
+            }
+        },
+        "Trabalho, Solidariedade e Seguran\u00e7a Social": {
+            "Despesa Total Nao Consolidada": {
+                "Orcamento Corrigido": 34503.437319,
+                "Execucao": 33429.936212
+            },
+            "Despesa Total Consolidada": {
+                "Orcamento Corrigido": 28165.594466,
+                "Execucao": 27107.3594675
+            },
+            "Despesa Efetiva Consolidada": {
+                "Orcamento Corrigido": 23722.316311,
+                "Execucao": 23324.15263089
+            },
+            "Subsectors": {
+                "001 - SERVI\u00c7OS GERAIS DA ADMINISTRA\u00c7\u00c3O P\u00daBLICA - ADMINISTRA\u00c7\u00c3O GERAL": {
+                    "Orcamento Corrigido": 0.286255,
+                    "Execucao": 0
+                },
+                "003 - SERVI\u00c7OS GERAIS DA ADMINISTRA\u00c7\u00c3O P\u00daBLICA - COOPERA\u00c7\u00c3O ECON\u00d3MICA EXTERNA": {
+                    "Orcamento Corrigido": 2.238442,
+                    "Execucao": 1.78410432
+                },
+                "017 - EDUCA\u00c7\u00c3O - ESTABELECIMENTOS DE ENSINO N\u00c3O SUPERIOR": {
+                    "Orcamento Corrigido": 5.213509,
+                    "Execucao": 4.11271778
+                },
+                "024 - SEGURAN\u00c7A E A\u00c7\u00c3O SOCIAL - ADMINISTRA\u00c7\u00c3O E REGULAMENTA\u00c7\u00c3O": {
+                    "Orcamento Corrigido": 28.145068,
+                    "Execucao": 21.457924329999997
+                },
+                "026 - SEGURAN\u00c7A E A\u00c7\u00c3O SOCIAL - SEGURAN\u00c7A SOCIAL": {
+                    "Orcamento Corrigido": 22780.920364,
+                    "Execucao": 21969.415672389998
+                },
+                "027 - SEGURAN\u00c7A E A\u00c7\u00c3O SOCIAL - A\u00c7\u00c3O SOCIAL": {
+                    "Orcamento Corrigido": 10035.654376,
+                    "Execucao": 9995.111548879999
+                },
+                "064 - OUTRAS FUN\u00c7\u00d5ES ECON\u00d3MICAS - RELA\u00c7\u00d5ES GERAIS DO TRABALHO": {
+                    "Orcamento Corrigido": 877.879813,
+                    "Execucao": 789.48595326
+                },
+                "065 - OUTRAS FUN\u00c7\u00d5ES ECON\u00d3MICAS - DIVERSAS N\u00c3O ESPECIFICADAS": {
+                    "Orcamento Corrigido": 4.560522,
+                    "Execucao": 3.05882697
+                },
+                "082 - SEGURAN\u00c7A E A\u00c7\u00c3O SOCIAL - VIOL\u00caNCIA DOM\u00c9STICA - PREVEN\u00c7\u00c3O E PROTE\u00c7\u00c3O \u00c0 V\u00cdTIMA": {
+                    "Orcamento Corrigido": 0.15,
+                    "Execucao": 0
+                },
+                "083 - SEGURAN\u00c7A E A\u00c7\u00c3O SOCIAL - INTEGRA\u00c7\u00c3O DA PESSOA COM DEFICI\u00caNCIA": {
+                    "Orcamento Corrigido": 68.428543,
+                    "Execucao": 66.89891811
+                },
+                "084 - SIMPLEX+": {
+                    "Orcamento Corrigido": 1.106812,
+                    "Execucao": 0.73240766
+                },
+                "095 - CONTING\u00caNCIA COVID-19 - PREVEN\u00c7\u00c3O, CONTEN\u00c7\u00c3O, MITIGA\u00c7\u00c3O E TRATAMENTO DA INFE\u00c7\u00c3O EPIDEMIOL\u00d3GICA": {
+                    "Orcamento Corrigido": 0.394401,
+                    "Execucao": 0.00011146
+                },
+                "096 - CONTING\u00caNCIA COVID-19 - GARANTIR NORMALIDADE": {
+                    "Orcamento Corrigido": 0.125968,
+                    "Execucao": 0.10320536999999999
+                },
+                "097 - PROGRAMA ATIVAR": {
+                    "Orcamento Corrigido": 478.631796,
+                    "Execucao": 415.91619319
+                },
+                "098 - INCENTIVO EXTRAORDIN\u00c1RIO \u00c0 NORMALIZA\u00c7\u00c3O": {
+                    "Orcamento Corrigido": 1.798925,
+                    "Execucao": 1.78589809
+                },
+                "100 - INICIATIVAS DE A\u00c7\u00c3O CLIM\u00c1TICA": {
+                    "Orcamento Corrigido": 0.024169,
+                    "Execucao": 0.02416809
+                },
+                "102 - PLANO DE RECUPERA\u00c7\u00c3O E RESILI\u00caNCIA": {
+                    "Orcamento Corrigido": 206.886096,
+                    "Execucao": 149.21243223
+                },
+                "103 - IMPACTO DO CHOQUE GEOPOL\u00cdTICO": {
+                    "Orcamento Corrigido": 10.99226,
+                    "Execucao": 10.836129869999999
+                },
+                "DESPESA TOTAL N\u00c3O CONSOLIDADA": {
+                    "Orcamento Corrigido": 34503.437319,
+                    "Execucao": 33429.936212
+                },
+                "DESPESA TOTAL CONSOLIDADA": {
+                    "Orcamento Corrigido": 28165.594466,
+                    "Execucao": 27107.3594675
+                }
+            }
+        },
+        "Sa\u00fade": {
+            "Despesa Total Nao Consolidada": {
+                "Orcamento Corrigido": 41587.746208,
+                "Execucao": 39591.00835069
+            },
+            "Despesa Total Consolidada": {
+                "Orcamento Corrigido": 16823.987499,
+                "Execucao": 14926.4945408
+            },
+            "Despesa Efetiva Consolidada": {
+                "Orcamento Corrigido": 16701.33956,
+                "Execucao": 14812.13305229
+            },
+            "Subsectors": {
+                "020 - SA\u00daDE - ADMINISTRA\u00c7\u00c3O E REGULAMENTA\u00c7\u00c3O": {
+                    "Orcamento Corrigido": 292.695769,
+                    "Execucao": 207.09175173
+                },
+                "021 - SA\u00daDE - INVESTIGA\u00c7\u00c3O": {
+                    "Orcamento Corrigido": 67.79612,
+                    "Execucao": 60.687742
+                },
+                "022 - SA\u00daDE - HOSPITAIS E CL\u00cdNICAS": {
+                    "Orcamento Corrigido": 33541.92185,
+                    "Execucao": 32515.91030436
+                },
+                "023 - SA\u00daDE - SERVI\u00c7OS INDIVIDUAIS DE SA\u00daDE": {
+                    "Orcamento Corrigido": 6170.396498,
+                    "Execucao": 6052.72259966
+                },
+                "033 - HABITA\u00c7\u00c3O E SERVI\u00c7OS COLETIVOS - PROTE\u00c7\u00c3O DO MEIO AMBIENTE E CONSERVA\u00c7\u00c3O DA NATUREZA": {
+                    "Orcamento Corrigido": 0,
+                    "Execucao": 0
+                },
+                "073 - SA\u00daDE - PARCERIAS P\u00daBLICO-PRIVADAS": {
+                    "Orcamento Corrigido": 408.364612,
+                    "Execucao": 392.84115076
+                },
+                "095 - CONTING\u00caNCIA COVID-19 - PREVEN\u00c7\u00c3O, CONTEN\u00c7\u00c3O, MITIGA\u00c7\u00c3O E TRATAMENTO DA INFE\u00c7\u00c3O EPIDEMIOL\u00d3GICA": {
+                    "Orcamento Corrigido": 290.77228,
+                    "Execucao": 201.97915538
+                },
+                "096 - CONTING\u00caNCIA COVID-19 - GARANTIR NORMALIDADE": {
+                    "Orcamento Corrigido": 18.26226,
+                    "Execucao": 11.87584688
+                },
+                "102 - PLANO DE RECUPERA\u00c7\u00c3O E RESILI\u00caNCIA": {
+                    "Orcamento Corrigido": 797.511819,
+                    "Execucao": 147.89979992
+                },
+                "DESPESA TOTAL N\u00c3O CONSOLIDADA": {
+                    "Orcamento Corrigido": 41587.746208,
+                    "Execucao": 39591.00835069
+                },
+                "DESPESA TOTAL CONSOLIDADA": {
+                    "Orcamento Corrigido": 16823.987499,
+                    "Execucao": 14926.4945408
+                }
+            }
+        },
+        "Ambiente e A\u00e7\u00e3o Clim\u00e1tica": {
+            "Despesa Total Nao Consolidada": {
+                "Orcamento Corrigido": 6562.0989537,
+                "Execucao": 3774.93826146
+            },
+            "Despesa Total Consolidada": {
+                "Orcamento Corrigido": 5786.3062547,
+                "Execucao": 3075.14048645
+            },
+            "Despesa Efetiva Consolidada": {
+                "Orcamento Corrigido": 3117.9971737,
+                "Execucao": 2194.80932946
+            },
+            "Subsectors": {
+                "031 - HABITA\u00c7\u00c3O E SERVI\u00c7OS COLETIVOS - ORDENAMENTO DO TERRIT\u00d3RIO": {
+                    "Orcamento Corrigido": 4.424359,
+                    "Execucao": 3.20195644
+                },
+                "033 - HABITA\u00c7\u00c3O E SERVI\u00c7OS COLETIVOS - PROTE\u00c7\u00c3O DO MEIO AMBIENTE E CONSERVA\u00c7\u00c3O DA NATUREZA": {
+                    "Orcamento Corrigido": 311.814294,
+                    "Execucao": 263.59333202
+                },
+                "046 - IND\u00daSTRIA E ENERGIA - ADMINISTRA\u00c7\u00c3O E REGULAMENTA\u00c7\u00c3O": {
+                    "Orcamento Corrigido": 273.0877947,
+                    "Execucao": 187.0225847
+                },
+                "047 - IND\u00daSTRIA E ENERGIA - INVESTIGA\u00c7\u00c3O": {
+                    "Orcamento Corrigido": 74.364837,
+                    "Execucao": 68.68608794
+                },
+                "051 - IND\u00daSTRIA E ENERGIA - COMBUST\u00cdVEIS, ELETRICIDADE E OUTRAS FONTES DE ENERGIA": {
+                    "Orcamento Corrigido": 61.093986,
+                    "Execucao": 52.89808276
+                },
+                "052 - TRANSPORTES E COMUNICA\u00c7\u00d5ES - ADMINISTRA\u00c7\u00c3O E REGULAMENTA\u00c7\u00c3O": {
+                    "Orcamento Corrigido": 277.200011,
+                    "Execucao": 277.2
+                },
+                "055 - TRANSPORTES E COMUNICA\u00c7\u00d5ES - TRANSPORTES FERROVI\u00c1RIOS": {
+                    "Orcamento Corrigido": 3212.527836,
+                    "Execucao": 1196.70947595
+                },
+                "057 - TRANSPORTES E COMUNICA\u00c7\u00d5ES - TRANSPORTES MAR\u00cdTIMOS E FLUVIAIS": {
+                    "Orcamento Corrigido": 155.97426,
+                    "Execucao": 91.65919667
+                },
+                "063 - OUTRAS FUN\u00c7\u00d5ES ECON\u00d3MICAS - ADMINISTRA\u00c7\u00c3O E REGULAMENTA\u00c7\u00c3O": {
+                    "Orcamento Corrigido": 992.727406,
+                    "Execucao": 919.61913843
+                },
+                "065 - OUTRAS FUN\u00c7\u00d5ES ECON\u00d3MICAS - DIVERSAS N\u00c3O ESPECIFICADAS": {
+                    "Orcamento Corrigido": 125.720024,
+                    "Execucao": 126.1660789
+                },
+                "084 - SIMPLEX+": {
+                    "Orcamento Corrigido": 1.76,
+                    "Execucao": 0.23175936
+                },
+                "085 - FLORESTAS": {
+                    "Orcamento Corrigido": 108.197968,
+                    "Execucao": 94.64714332
+                },
+                "095 - CONTING\u00caNCIA COVID-19 - PREVEN\u00c7\u00c3O, CONTEN\u00c7\u00c3O, MITIGA\u00c7\u00c3O E TRATAMENTO DA INFE\u00c7\u00c3O EPIDEMIOL\u00d3GICA": {
+                    "Orcamento Corrigido": 0.625519,
+                    "Execucao": 0.39120393
+                },
+                "096 - CONTING\u00caNCIA COVID-19 - GARANTIR NORMALIDADE": {
+                    "Orcamento Corrigido": 170.590625,
+                    "Execucao": 163.81178081
+                },
+                "101 - PLANO NACIONAL DE GEST\u00c3O INTEGRADA DE FOGOS RURAIS": {
+                    "Orcamento Corrigido": 149.654743,
+                    "Execucao": 124.11135332
+                },
+                "102 - PLANO DE RECUPERA\u00c7\u00c3O E RESILI\u00caNCIA": {
+                    "Orcamento Corrigido": 530.466483,
+                    "Execucao": 93.12029191
+                },
+                "103 - IMPACTO DO CHOQUE GEOPOL\u00cdTICO": {
+                    "Orcamento Corrigido": 111.868808,
+                    "Execucao": 111.868795
+                },
+                "DESPESA TOTAL N\u00c3O CONSOLIDADA": {
+                    "Orcamento Corrigido": 6562.0989537,
+                    "Execucao": 3774.93826146
+                },
+                "DESPESA TOTAL CONSOLIDADA": {
+                    "Orcamento Corrigido": 5786.3062547,
+                    "Execucao": 3075.14048645
+                }
+            }
+        },
+        "Infraestruturas e Habita\u00e7\u00e3o": {
+            "Despesa Total Nao Consolidada": {
+                "Orcamento Corrigido": 9644.576715,
+                "Execucao": 6423.76813848
+            },
+            "Despesa Total Consolidada": {
+                "Orcamento Corrigido": 8569.637536,
+                "Execucao": 5556.83430043
+            },
+            "Despesa Efetiva Consolidada": {
+                "Orcamento Corrigido": 4859.511467,
+                "Execucao": 3755.55868047
+            },
+            "Subsectors": {
+                "001 - SERVI\u00c7OS GERAIS DA ADMINISTRA\u00c7\u00c3O P\u00daBLICA - ADMINISTRA\u00c7\u00c3O GERAL": {
+                    "Orcamento Corrigido": 166.791297,
+                    "Execucao": 145.80290877
+                },
+                "004 - SERVI\u00c7OS GERAIS DA ADMINISTRA\u00c7\u00c3O P\u00daBLICA - INVESTIGA\u00c7\u00c3O CIENT\u00cdFICA DE CAR\u00c1TER GERAL": {
+                    "Orcamento Corrigido": 0.875,
+                    "Execucao": 0.81710937
+                },
+                "030 - HABITA\u00c7\u00c3O E SERVI\u00c7OS COLETIVOS - HABITA\u00c7\u00c3O": {
+                    "Orcamento Corrigido": 193.105473,
+                    "Execucao": 75.27969342
+                },
+                "036 - SERVI\u00c7OS CULTURAIS, RECREATIVOS E RELIGIOSOS - CULTURA": {
+                    "Orcamento Corrigido": 1.50657,
+                    "Execucao": 0.83546637
+                },
+                "052 - TRANSPORTES E COMUNICA\u00c7\u00d5ES - ADMINISTRA\u00c7\u00c3O E REGULAMENTA\u00c7\u00c3O": {
+                    "Orcamento Corrigido": 596.785538,
+                    "Execucao": 589.44442652
+                },
+                "053 - TRANSPORTES E COMUNICA\u00c7\u00d5ES - INVESTIGA\u00c7\u00c3O": {
+                    "Orcamento Corrigido": 57.055705,
+                    "Execucao": 48.87729973
+                },
+                "054 - TRANSPORTES E COMUNICA\u00c7\u00d5ES - TRANSPORTES RODOVI\u00c1RIOS": {
+                    "Orcamento Corrigido": 417.424213,
+                    "Execucao": 341.145332
+                },
+                "055 - TRANSPORTES E COMUNICA\u00c7\u00d5ES - TRANSPORTES FERROVI\u00c1RIOS": {
+                    "Orcamento Corrigido": 4457.17556,
+                    "Execucao": 2042.34224245
+                },
+                "056 - TRANSPORTES E COMUNICA\u00c7\u00d5ES - TRANSPORTES A\u00c9REOS": {
+                    "Orcamento Corrigido": 4.0958,
+                    "Execucao": 3.64756118
+                },
+                "057 - TRANSPORTES E COMUNICA\u00c7\u00d5ES - TRANSPORTES MAR\u00cdTIMOS E FLUVIAIS": {
+                    "Orcamento Corrigido": 6.5,
+                    "Execucao": 6.5
+                },
+                "058 - TRANSPORTES E COMUNICA\u00c7\u00d5ES - SISTEMAS DE COMUNICA\u00c7\u00d5ES": {
+                    "Orcamento Corrigido": 842.47764,
+                    "Execucao": 832.0811308
+                },
+                "063 - OUTRAS FUN\u00c7\u00d5ES ECON\u00d3MICAS - ADMINISTRA\u00c7\u00c3O E REGULAMENTA\u00c7\u00c3O": {
+                    "Orcamento Corrigido": 12.318862,
+                    "Execucao": 8.08848329
+                },
+                "079 - TRANSPORTES E COMUNICA\u00c7\u00d5ES - PARCERIAS P\u00daBLICO-PRIVADAS": {
+                    "Orcamento Corrigido": 2204.257983,
+                    "Execucao": 2070.49299444
+                },
+                "084 - SIMPLEX+": {
+                    "Orcamento Corrigido": 0.1025,
+                    "Execucao": 0
+                },
+                "095 - CONTING\u00caNCIA COVID-19 - PREVEN\u00c7\u00c3O, CONTEN\u00c7\u00c3O, MITIGA\u00c7\u00c3O E TRATAMENTO DA INFE\u00c7\u00c3O EPIDEMIOL\u00d3GICA": {
+                    "Orcamento Corrigido": 0.181632,
+                    "Execucao": 0.038941
+                },
+                "096 - CONTING\u00caNCIA COVID-19 - GARANTIR NORMALIDADE": {
+                    "Orcamento Corrigido": 0.08268,
+                    "Execucao": 0.0073591
+                },
+                "101 - PLANO NACIONAL DE GEST\u00c3O INTEGRADA DE FOGOS RURAIS": {
+                    "Orcamento Corrigido": 17.88838,
+                    "Execucao": 11.08782373
+                },
+                "102 - PLANO DE RECUPERA\u00c7\u00c3O E RESILI\u00caNCIA": {
+                    "Orcamento Corrigido": 647.433165,
+                    "Execucao": 236.97205197
+                },
+                "103 - IMPACTO DO CHOQUE GEOPOL\u00cdTICO": {
+                    "Orcamento Corrigido": 18.518717,
+                    "Execucao": 10.30731434
+                },
+                "DESPESA TOTAL N\u00c3O CONSOLIDADA": {
+                    "Orcamento Corrigido": 9644.576715,
+                    "Execucao": 6423.76813848
+                },
+                "DESPESA TOTAL CONSOLIDADA": {
+                    "Orcamento Corrigido": 8569.637536,
+                    "Execucao": 5556.83430043
+                }
+            }
+        },
+        "Agricultura e Alimenta\u00e7\u00e3o": {
+            "Despesa Total Nao Consolidada": {
+                "Orcamento Corrigido": 2223.035626,
+                "Execucao": 1747.44079155
+            },
+            "Despesa Total Consolidada": {
+                "Orcamento Corrigido": 1779.450985,
+                "Execucao": 1391.63131222
+            },
+            "Despesa Efetiva Consolidada": {
+                "Orcamento Corrigido": 1642.127451,
+                "Execucao": 1255.42041589
+            },
+            "Subsectors": {
+                "004 - SERVI\u00c7OS GERAIS DA ADMINISTRA\u00c7\u00c3O P\u00daBLICA - INVESTIGA\u00c7\u00c3O CIENT\u00cdFICA DE CAR\u00c1TER GERAL": {
+                    "Orcamento Corrigido": 80.63341,
+                    "Execucao": 57.48306812
+                },
+                "040 - AGRICULTURA, PECU\u00c1RIA, SILVICULTURA, CA\u00c7A, PESCA - ADMINISTRA\u00c7\u00c3O E REGULAMENTA\u00c7\u00c3O": {
+                    "Orcamento Corrigido": 138.892151,
+                    "Execucao": 127.70802367
+                },
+                "041 - AGRICULTURA, PECU\u00c1RIA, SILVICULTURA, CA\u00c7A, PESCA - INVESTIGA\u00c7\u00c3O": {
+                    "Orcamento Corrigido": 49.776212,
+                    "Execucao": 47.25194982
+                },
+                "042 - AGRICULTURA, PECU\u00c1RIA, SILVICULTURA, CA\u00c7A, PESCA - AGRICULTURA E PECU\u00c1RIA": {
+                    "Orcamento Corrigido": 1254.795346,
+                    "Execucao": 973.49135292
+                },
+                "045 - AGRICULTURA, PECU\u00c1RIA, SILVICULTURA, CA\u00c7A, PESCA - PESCA": {
+                    "Orcamento Corrigido": 119.069331,
+                    "Execucao": 102.13698135
+                },
+                "057 - TRANSPORTES E COMUNICA\u00c7\u00d5ES - TRANSPORTES MAR\u00cdTIMOS E FLUVIAIS": {
+                    "Orcamento Corrigido": 3.8429,
+                    "Execucao": 3.34913794
+                },
+                "064 - OUTRAS FUN\u00c7\u00d5ES ECON\u00d3MICAS - RELA\u00c7\u00d5ES GERAIS DO TRABALHO": {
+                    "Orcamento Corrigido": 0.171186,
+                    "Execucao": 0.17117981
+                },
+                "084 - SIMPLEX+": {
+                    "Orcamento Corrigido": 1.533711,
+                    "Execucao": 0.25900834
+                },
+                "095 - CONTING\u00caNCIA COVID-19 - PREVEN\u00c7\u00c3O, CONTEN\u00c7\u00c3O, MITIGA\u00c7\u00c3O E TRATAMENTO DA INFE\u00c7\u00c3O EPIDEMIOL\u00d3GICA": {
+                    "Orcamento Corrigido": 0.073225,
+                    "Execucao": 0
+                },
+                "096 - CONTING\u00caNCIA COVID-19 - GARANTIR NORMALIDADE": {
+                    "Orcamento Corrigido": 0.04788,
+                    "Execucao": 0.001755
+                },
+                "100 - INICIATIVAS DE A\u00c7\u00c3O CLIM\u00c1TICA": {
+                    "Orcamento Corrigido": 0.5585,
+                    "Execucao": 0.00491399
+                },
+                "101 - PLANO NACIONAL DE GEST\u00c3O INTEGRADA DE FOGOS RURAIS": {
+                    "Orcamento Corrigido": 0.019521,
+                    "Execucao": 0.00347
+                },
+                "102 - PLANO DE RECUPERA\u00c7\u00c3O E RESILI\u00caNCIA": {
+                    "Orcamento Corrigido": 108.527082,
+                    "Execucao": 35.65401058
+                },
+                "103 - IMPACTO DO CHOQUE GEOPOL\u00cdTICO": {
+                    "Orcamento Corrigido": 465.095171,
+                    "Execucao": 399.92594001
+                },
+                "DESPESA TOTAL N\u00c3O CONSOLIDADA": {
+                    "Orcamento Corrigido": 2223.035626,
+                    "Execucao": 1747.44079155
+                },
+                "DESPESA TOTAL CONSOLIDADA": {
+                    "Orcamento Corrigido": 1779.450985,
+                    "Execucao": 1391.63131222
+                }
+            }
+        }
+    }
+}
