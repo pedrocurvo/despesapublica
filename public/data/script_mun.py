@@ -2,10 +2,25 @@ import pandas as pd
 import json
 
 # Load the Excel file
+
+"""sheet_name = {
+    2023: ["Mapa 12"],
+    2022: ["Mapa 12"],
+    2021: ["Mapa 12"],
+    2020: ["Mapa XIX"],
+    2019: ["Mapa XIX"],
+    2018: ["Mapa XIX"],
+    2017: ["Mapa XIX"],
+    2016: ["Mapa XIX"],
+    2015: ["Mapa XIX"],
+}"""
+
 year = 2021
-excel_path = f"Mapas_{year}.xlsx"
 sheet_name = "Mapa 12"
-output_path = f"municipal_transfers_{year}.json"
+excel_path = f"Mapas_{year}.xlsx"
+
+#output_path = f"municipal_transfers_{year}.json"
+output_path = f"../municipality_transfers/{year}.json"
 
 # Read the sheet
 df = pd.read_excel(excel_path, sheet_name=sheet_name)

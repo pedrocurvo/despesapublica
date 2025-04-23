@@ -4,11 +4,26 @@ import json
 # Load the Excel file
 year = 2023
 excel_path = f"Quadros_{year}.xlsx"
-sheet_name_list = ["Quadro 2.1."]
-output_path = f"{year}.json"
+#sheet_name_list = ["Quadro 2.1."]
+
+sheet_name_list = {
+    2023: ["Quadro 2.1."],
+    2022: ["Quadro 2.1."],
+    2021: ["Quadro 21"],
+    2020: ["Quadro 20"],
+    2019: ["Quadro 20"],
+    2018: ["Quadro 19"],
+    2017: ["Quadro 20"],
+    2016: ["Quadro 20"],
+    2015: ["Quadro 69"],
+    2014: ["Quadro 21"],
+    2013: ["Quadro 17"],
+    }
+
+output_path = f"../balanco/{year}.json"
 
 # Read the sheets
-dfs = {sheet_name: pd.read_excel(excel_path, sheet_name=sheet_name) for sheet_name in sheet_name_list}
+dfs = {sheet_name: pd.read_excel(excel_path, sheet_name=sheet_name) for sheet_name in sheet_name_list[year]}
 
 # Dictionary to store the data
 all_data = {}
