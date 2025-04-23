@@ -6,6 +6,7 @@ import { SectorComparison } from "@/components/sector-comparison"
 import { YearlyComparison } from "@/components/yearly-comparison"
 import { SectorSelector } from "@/components/sector-selector"
 import { DistrictTrends } from "@/components/district-trends"
+import { SectorTrends } from "@/components/sector-trends"
 import { SectorsProvider } from "@/lib/sectors-context"
 import { DateRangeProvider } from "@/lib/date-range-context"
 
@@ -24,7 +25,6 @@ export default function ComparePage() {
               <h1 className="text-2xl font-bold tracking-tight">Budget Comparison</h1>
               <p className="text-muted-foreground">Compare budget data across different years and sectors</p>
             </div>
-            <DateRangePicker />
           </div>
           <SectorsProvider>
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
@@ -37,6 +37,19 @@ export default function ComparePage() {
                 </CardHeader>
                 <CardContent>
                   <DistrictTrends />
+                </CardContent>
+              </Card>
+            </div>
+            <div className="mt-4 grid gap-4 md:grid-cols-2 lg:grid-cols-7">
+              <Card className="lg:col-span-7">
+                <CardHeader className="flex flex-row items-center justify-between">
+                  <div>
+                    <CardTitle>Sector & Subsector Trends</CardTitle>
+                    <CardDescription>Compare budget allocation trends across sectors over time</CardDescription>
+                  </div>
+                </CardHeader>
+                <CardContent>
+                  <SectorTrends />
                 </CardContent>
               </Card>
             </div>
