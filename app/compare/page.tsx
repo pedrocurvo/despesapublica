@@ -1,10 +1,6 @@
 import type { Metadata } from "next"
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { DateRangePicker } from "@/components/date-range-picker"
-import { SectorComparison } from "@/components/sector-comparison"
-import { YearlyComparison } from "@/components/yearly-comparison"
-import { SectorSelector } from "@/components/sector-selector"
 import { DistrictTrends } from "@/components/district-trends"
 import { SectorTrends } from "@/components/sector-trends"
 import { SectorsProvider } from "@/lib/sectors-context"
@@ -75,7 +71,6 @@ export default function ComparePage() {
                 </CardContent>
               </Card>
             </div>
-            
           </SectorsProvider>
         </DateRangeProvider>
       </main>

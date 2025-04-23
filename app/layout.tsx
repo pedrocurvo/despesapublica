@@ -7,9 +7,11 @@ import { ThemeProvider } from "@/components/theme-provider"
 import { ThemeToggle } from "@/components/theme-toggle"
 
 export const metadata: Metadata = {
-  title: 'v0 App',
-  description: 'Created with v0',
-  generator: 'v0.dev',
+  title: 'Despesa Pública | Portuguese Government Budget',
+  description: 'Visualização da despesa pública por sector e subsector do orçamento governamental Português',
+  generator: 'Next.js',
+  applicationName: 'Despesa Pública',
+  keywords: "despesa pública, orçamento, portugal, setores, subsectores, finanças públicas",
 }
 
 export default function RootLayout({
