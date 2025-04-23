@@ -7,7 +7,7 @@ import { ThemeProvider } from "@/components/theme-provider"
 import { ThemeToggle } from "@/components/theme-toggle"
 
 export const metadata: Metadata = {
-  title: 'Despesa Pública | Portuguese Government Budget',
+  title: 'Despesa Pública | Orçamento do Governo Português',
   description: 'Visualização da despesa pública por sector e subsector do orçamento governamental Português',
   generator: 'Next.js',
   applicationName: 'Despesa Pública',
@@ -20,7 +20,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="pt" suppressHydrationWarning>
       <body suppressHydrationWarning>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <header className="sticky top-0 z-10 flex h-16 items-center gap-4 border-b bg-background px-4 md:px-6">
@@ -30,22 +30,22 @@ export default function RootLayout({
             </div>
             <nav className="ml-auto flex items-center gap-2">
               <Button asChild variant="ghost" size="sm">
-                <Link href="/">Dashboard</Link>
+                <Link href="/">Painel</Link>
               </Button>
               <Button asChild variant="ghost" size="sm">
                 <Link href="/despesa">Despesa</Link>
               </Button>
               <Button asChild variant="ghost" size="sm">
-                <Link href="/compare">Compare</Link>
+                <Link href="/compare">Comparar</Link>
               </Button>
               <Button asChild variant="ghost" size="sm">
-                <Link href="/map">Map</Link>
+                <Link href="/map">Mapa</Link>
               </Button>
               <Button asChild variant="ghost" size="sm">
-                <Link href="/news">News</Link>
+                <Link href="/news">Notícias</Link>
               </Button>
               <Button asChild variant="ghost" size="sm">
-                <Link href="/about">About</Link>
+                <Link href="/about">Sobre</Link>
               </Button>
               <div className="flex items-center ml-2">
                 <ThemeToggle />
@@ -55,16 +55,16 @@ export default function RootLayout({
           {children}
           <footer className="border-t py-4 px-6">
             <div className="container mx-auto flex flex-col items-center justify-between gap-4 md:flex-row">
-              <p className="text-sm text-muted-foreground">© 2023 Portuguese Budget Portal. All rights reserved.</p>
+              <p className="text-sm text-muted-foreground">© 2023 Portal do Orçamento Português. Todos os direitos reservados.</p>
               <nav className="flex gap-4 text-sm text-muted-foreground">
                 <Link href="/terms" className="hover:underline">
-                  Terms
+                  Termos
                 </Link>
                 <Link href="/privacy" className="hover:underline">
-                  Privacy
+                  Privacidade
                 </Link>
                 <Link href="/contact" className="hover:underline">
-                  Contact
+                  Contacto
                 </Link>
               </nav>
             </div>

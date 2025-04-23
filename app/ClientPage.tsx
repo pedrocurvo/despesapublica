@@ -26,8 +26,8 @@ export default function ClientPage() {
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
           <Card className="lg:col-span-4">
             <CardHeader>
-              <CardTitle>Budget Overview</CardTitle>
-              <CardDescription>Yearly budget allocation and expenditure (2018-2023)</CardDescription>
+              <CardTitle>Visão Geral do Orçamento</CardTitle>
+              <CardDescription>Alocação e despesa orçamental anual (2018-2023)</CardDescription>
             </CardHeader>
             <CardContent>
               <Overview startYear={2021} endYear={2023} />
@@ -35,8 +35,8 @@ export default function ClientPage() {
           </Card>
           <Card className="lg:col-span-3">
             <CardHeader>
-              <CardTitle>Recent Budget News</CardTitle>
-              <CardDescription>Latest news related to government budget</CardDescription>
+              <CardTitle>Notícias Recentes do Orçamento</CardTitle>
+              <CardDescription>Últimas notícias relacionadas com o orçamento do governo</CardDescription>
             </CardHeader>
             <CardContent>
               <RecentNews />
@@ -46,8 +46,8 @@ export default function ClientPage() {
         <div className="mt-4 grid gap-4 md:grid-cols-2 lg:grid-cols-7">
           <Card className="lg:col-span-4">
             <CardHeader>
-              <CardTitle>Expense Overview</CardTitle>
-              <CardDescription>Detailed analysis of government expenses (2021-2023)</CardDescription>
+              <CardTitle>Panorama de Despesas</CardTitle>
+              <CardDescription>Análise detalhada das despesas do governo (2021-2023)</CardDescription>
             </CardHeader>
             <CardContent>
               <ExpenseOverview 
@@ -60,8 +60,8 @@ export default function ClientPage() {
           <Card className="lg:col-span-3">
             <CardHeader className="flex flex-row items-center justify-between">
               <div>
-                <CardTitle>Budget Distribution</CardTitle>
-                <CardDescription>Breakdown by sector for {distributionYear}</CardDescription>
+                <CardTitle>Distribuição do Orçamento</CardTitle>
+                <CardDescription>Divisão por setor para {distributionYear}</CardDescription>
               </div>
               <DistributionYearSelector selectedYear={distributionYear} onYearChange={setDistributionYear} />
             </CardHeader>
@@ -81,7 +81,7 @@ export default function ClientPage() {
                   className="w-full sm:w-auto" 
                   onClick={() => router.push('/despesa')}
                 >
-                  See per sector
+                  Ver por setor
                 </Button>
               </div>
               {error && (

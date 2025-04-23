@@ -2,8 +2,8 @@ import ClientPage from "./ClientPage"
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "Portuguese Government Budget Dashboard",
-  description: "Visualize and analyze Portuguese government budget data",
+  title: "Painel do Orçamento do Governo Português",
+  description: "Visualize e analise dados do orçamento do governo português",
 }
 
 export default function Page() {

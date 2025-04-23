@@ -4,8 +4,8 @@ import { NewsArticles } from "@/components/news-articles"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 
 export const metadata: Metadata = {
-  title: "Budget News | Portuguese Government Budget",
-  description: "Latest news related to the Portuguese government budget",
+  title: "Notícias do Orçamento | Orçamento do Governo Português",
+  description: "Últimas notícias relacionadas com o orçamento do governo português",
 }
 
 const years = [2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023]
@@ -15,9 +15,9 @@ export default function NewsPage() {
     <div className="flex min-h-screen w-full flex-col">
       <main className="flex-1 p-4 md:p-6">
         <div className="mb-6">
-          <h1 className="text-2xl font-bold tracking-tight">Budget News</h1>
+          <h1 className="text-2xl font-bold tracking-tight">Notícias do Orçamento</h1>
           <p className="text-muted-foreground">
-            Latest news and updates related to the Portuguese government budget
+            Últimas notícias e atualizações relacionadas com o orçamento do governo português
           </p>
         </div>
 
@@ -34,9 +34,9 @@ export default function NewsPage() {
             <TabsContent key={year} value={String(year)}>
               <Card>
                 <CardHeader>
-                  <CardTitle>{year} Budget News</CardTitle>
+                  <CardTitle>Notícias do Orçamento de {year}</CardTitle>
                   <CardDescription>
-                    News articles related to the {year} Portuguese government budget
+                    Artigos de notícias relacionados com o orçamento do governo português de {year}
                   </CardDescription>
                 </CardHeader>
                 <CardContent>

@@ -4,8 +4,8 @@ import { FileText, Info } from "lucide-react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 
 export const metadata: Metadata = {
-  title: "About | Portuguese Government Budget",
-  description: "About the Portuguese Budget Portal and data sources",
+  title: "Sobre | Orçamento do Governo Português",
+  description: "Sobre o Portal do Orçamento Português e fontes de dados",
 }
 
 export default function AboutPage() {
@@ -13,30 +13,30 @@ export default function AboutPage() {
     <div className="flex min-h-screen w-full flex-col">
       <main className="flex-1 p-4 md:p-6">
         <div className="mb-6">
-          <h1 className="text-2xl font-bold tracking-tight">About the Portal</h1>
-          <p className="text-muted-foreground">Information about the Portuguese Budget Portal and data sources</p>
+          <h1 className="text-2xl font-bold tracking-tight">Sobre o Portal</h1>
+          <p className="text-muted-foreground">Informações sobre o Portal do Orçamento Português e fontes de dados</p>
         </div>
         <div className="grid gap-6 md:grid-cols-2">
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <Info className="h-5 w-5" />
-                About the Project
+                Sobre o Projeto
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               <p>
-                The Portuguese Budget Portal is a visualization tool designed to make government budget data more
-                accessible and understandable to the public. Our goal is to promote transparency and accountability in
-                public finances.
+                O Portal do Orçamento Português é uma ferramenta de visualização concebida para tornar os dados do orçamento
+                governamental mais acessíveis e compreensíveis para o público. O nosso objetivo é promover a transparência
+                e responsabilização nas finanças públicas.
               </p>
               <p>
-                This portal allows users to explore budget data across different years and sectors, compare allocations
-                and expenditures, and stay informed about budget-related news and developments.
+                Este portal permite aos utilizadores explorar dados orçamentais ao longo de diferentes anos e setores,
+                comparar dotações e despesas, e manter-se informados sobre notícias e desenvolvimentos relacionados com o orçamento.
               </p>
               <p>
-                The data presented in this portal includes both proposed and expended amounts for the overall budget and
-                specific sectors such as education, healthcare, defense, and more.
+                Os dados apresentados neste portal incluem tanto os valores propostos como os valores despendidos para o orçamento
+                global e setores específicos como educação, saúde, defesa, entre outros.
               </p>
             </CardContent>
           </Card>
@@ -44,20 +44,20 @@ export default function AboutPage() {
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <FileText className="h-5 w-5" />
-                Data Sources
+                Fontes de Dados
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
-              <p>The data presented in this portal is sourced from official government publications, including:</p>
+              <p>Os dados apresentados neste portal são obtidos de publicações oficiais do governo, incluindo:</p>
               <ul className="list-disc pl-6 space-y-2">
-                <li>Annual Budget Reports from the Ministry of Finance</li>
-                <li>Budget Execution Reports from the Portuguese Court of Auditors</li>
-                <li>Sector-specific reports from relevant ministries</li>
-                <li>Statistical data from the National Institute of Statistics (INE)</li>
+                <li>Relatórios Anuais do Orçamento do Ministério das Finanças</li>
+                <li>Relatórios de Execução Orçamental do Tribunal de Contas Português</li>
+                <li>Relatórios específicos de setores dos ministérios relevantes</li>
+                <li>Dados estatísticos do Instituto Nacional de Estatística (INE)</li>
               </ul>
               <p className="text-sm text-muted-foreground mt-4">
-                Note: The current version of the portal uses mock data for demonstration purposes. In a production
-                environment, this would be replaced with actual budget data from official sources.
+                Nota: A versão atual do portal utiliza dados simulados para fins de demonstração. Num ambiente de
+                produção, estes seriam substituídos por dados orçamentais reais de fontes oficiais.
               </p>
             </CardContent>
           </Card>
@@ -65,40 +65,41 @@ export default function AboutPage() {
         <div className="mt-6">
           <Card>
             <CardHeader>
-              <CardTitle>How to Use the Portal</CardTitle>
-              <CardDescription>A guide to navigating and using the Portuguese Budget Portal</CardDescription>
+              <CardTitle>Como Utilizar o Portal</CardTitle>
+              <CardDescription>Um guia para navegar e utilizar o Portal do Orçamento Português</CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
               <div>
-                <h3 className="text-lg font-medium mb-2">Dashboard</h3>
+                <h3 className="text-lg font-medium mb-2">Painel</h3>
                 <p>
-                  The dashboard provides an overview of the budget data, including key metrics and visualizations. You
-                  can see the total budget, major sector allocations, and trends over time.
+                  O painel fornece uma visão geral dos dados orçamentais, incluindo métricas-chave e visualizações. Pode
+                  ver o orçamento total, as principais alocações por setor e tendências ao longo do tempo.
                 </p>
               </div>
               <div>
-                <h3 className="text-lg font-medium mb-2">Compare</h3>
+                <h3 className="text-lg font-medium mb-2">Comparar</h3>
                 <p>
-                  The compare page allows you to select specific years and sectors to compare budget allocations and
-                  expenditures. Use the date range picker to specify a time period and the sector selector to choose
-                  which sectors to compare.
+                  A página de comparação permite-lhe selecionar anos e setores específicos para comparar alocações
+                  e despesas orçamentais. Utilize o seletor de intervalo de datas para especificar um período de tempo
+                  e o seletor de setor para escolher quais os setores a comparar.
                 </p>
               </div>
               <div>
-                <h3 className="text-lg font-medium mb-2">News</h3>
+                <h3 className="text-lg font-medium mb-2">Notícias</h3>
                 <p>
-                  The news page provides access to budget-related news articles organized by year. This helps you stay
-                  informed about important developments and discussions related to the Portuguese government budget.
+                  A página de notícias proporciona acesso a artigos relacionados com o orçamento organizados por ano.
+                  Isto ajuda-o a manter-se informado sobre desenvolvimentos e discussões importantes relacionadas com
+                  o orçamento do governo português.
                 </p>
               </div>
               <div>
-                <h3 className="text-lg font-medium mb-2">Data Interpretation</h3>
-                <p>When interpreting the data, note that:</p>
+                <h3 className="text-lg font-medium mb-2">Interpretação de Dados</h3>
+                <p>Ao interpretar os dados, note que:</p>
                 <ul className="list-disc pl-6 space-y-2 mt-2">
-                  <li>All monetary values are shown in billions of euros (€B)</li>
-                  <li>"Proposed" refers to the initially approved budget allocation</li>
-                  <li>"Expended" refers to the actual amount spent during the fiscal year</li>
-                  <li>Percentages may indicate year-over-year changes or proportion of the total budget</li>
+                  <li>Todos os valores monetários são apresentados em mil milhões de euros (€MM)</li>
+                  <li>"Proposto" refere-se à dotação orçamental inicialmente aprovada</li>
+                  <li>"Executado" refere-se ao montante efetivamente gasto durante o ano fiscal</li>
+                  <li>As percentagens podem indicar alterações de ano para ano ou proporção do orçamento total</li>
                 </ul>
               </div>
             </CardContent>

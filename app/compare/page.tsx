@@ -10,8 +10,8 @@ import { ExpenseOverviewTrends } from "@/components/expense-overview-trends"
 import { Button } from "@/components/ui/button"
 
 export const metadata: Metadata = {
-  title: "Compare Budget Data | Portuguese Government Budget",
-  description: "Compare budget data across different years and sectors",
+  title: "Comparar Dados Orçamentais | Orçamento do Governo Português",
+  description: "Compare dados orçamentais entre diferentes anos e setores",
 }
 
 export default function ComparePage() {
@@ -21,24 +21,24 @@ export default function ComparePage() {
         <DateRangeProvider>
           <div className="mb-6 flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
             <div>
-              <h1 className="text-2xl font-bold tracking-tight">Budget Comparison</h1>
-              <p className="text-muted-foreground">Compare budget data across different years and sectors</p>
+              <h1 className="text-2xl font-bold tracking-tight">Comparação Orçamental</h1>
+              <p className="text-muted-foreground">Compare dados orçamentais entre diferentes anos e setores</p>
             </div>
           </div>
           
           {/* Navigation Buttons */}
           <div className="mb-6 flex flex-wrap gap-2">
             <Button variant="outline" size="sm" asChild>
-              <a href="#budget-overview">Budget Overview</a>
+              <a href="#budget-overview">Visão Geral do Orçamento</a>
             </Button>
             <Button variant="outline" size="sm" asChild>
-              <a href="#expense-overview">Expense Overview</a>
+              <a href="#expense-overview">Visão Geral das Despesas</a>
             </Button>
             <Button variant="outline" size="sm" asChild>
-              <a href="#district-trends">District Trends</a>
+              <a href="#district-trends">Tendências por Distrito</a>
             </Button>
             <Button variant="outline" size="sm" asChild>
-              <a href="#sector-trends">Sector Trends</a>
+              <a href="#sector-trends">Tendências por Setor</a>
             </Button>
           </div>
           
@@ -46,8 +46,8 @@ export default function ComparePage() {
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-6">
               <Card className="lg:col-span-3" id="budget-overview">
                 <CardHeader>
-                  <CardTitle>Budget Overview Trends</CardTitle>
-                  <CardDescription>Compare revenue and expense trends over time</CardDescription>
+                  <CardTitle>Tendências Gerais do Orçamento</CardTitle>
+                  <CardDescription>Compare tendências de receitas e despesas ao longo do tempo</CardDescription>
                 </CardHeader>
                 <CardContent>
                   <BudgetOverviewTrends />
@@ -55,8 +55,8 @@ export default function ComparePage() {
               </Card>
               <Card className="lg:col-span-3" id="expense-overview">
                 <CardHeader>
-                  <CardTitle>Expense Overview Trends</CardTitle>
-                  <CardDescription>Compare budgeted vs executed expense trends</CardDescription>
+                  <CardTitle>Tendências Gerais das Despesas</CardTitle>
+                  <CardDescription>Compare tendências de despesas orçamentadas vs executadas</CardDescription>
                 </CardHeader>
                 <CardContent>
                   <ExpenseOverviewTrends />
@@ -67,8 +67,8 @@ export default function ComparePage() {
               <Card className="lg:col-span-7" id="district-trends">
                 <CardHeader className="flex flex-row items-center justify-between">
                   <div>
-                    <CardTitle>District & Municipality Trends</CardTitle>
-                    <CardDescription>Compare budget allocation trends across regions over time</CardDescription>
+                    <CardTitle>Tendências por Distrito e Município</CardTitle>
+                    <CardDescription>Compare tendências de alocação orçamental entre regiões ao longo do tempo</CardDescription>
                   </div>
                 </CardHeader>
                 <CardContent>
@@ -80,8 +80,8 @@ export default function ComparePage() {
               <Card className="lg:col-span-7" id="sector-trends">
                 <CardHeader className="flex flex-row items-center justify-between">
                   <div>
-                    <CardTitle>Sector & Subsector Trends</CardTitle>
-                    <CardDescription>Compare budget allocation trends across sectors over time</CardDescription>
+                    <CardTitle>Tendências por Setor e Subsetor</CardTitle>
+                    <CardDescription>Compare tendências de alocação orçamental entre setores ao longo do tempo</CardDescription>
                   </div>
                 </CardHeader>
                 <CardContent>
