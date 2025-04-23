@@ -15,7 +15,7 @@ import json
     2015: ["Mapa XIX"],
 }"""
 
-year = 2015
+year = 2000
 sheet_name = "Mapa XIX"
 #excel_path = f"Mapas_{year}.xlsx"
 excel_path = f"Mapas_{year}.xls"
@@ -41,10 +41,10 @@ current_district = None
 current_block = {}
 
 for i, row in df.iterrows():
-    #first_col = str(row.iloc[1]).strip()
-    first_col = str(row.iloc[0]).strip()
-    total_value = row.iloc[8]
-    #total_value = row.iloc[11]
+    first_col = str(row.iloc[1]).strip()
+    #first_col = str(row.iloc[0]).strip()
+    #total_value = row.iloc[8]
+    total_value = row.iloc[11]
 
     if pd.isna(first_col) or first_col == "nan":
         continue
