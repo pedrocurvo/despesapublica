@@ -15,9 +15,10 @@ import json
     2015: ["Mapa XIX"],
 }"""
 
-year = 2021
-sheet_name = "Mapa 12"
-excel_path = f"Mapas_{year}.xlsx"
+year = 2015
+sheet_name = "Mapa XIX"
+#excel_path = f"Mapas_{year}.xlsx"
+excel_path = f"Mapas_{year}.xls"
 
 #output_path = f"municipal_transfers_{year}.json"
 output_path = f"../municipality_transfers/{year}.json"
@@ -26,11 +27,13 @@ output_path = f"../municipality_transfers/{year}.json"
 df = pd.read_excel(excel_path, sheet_name=sheet_name)
 
 # Store the second-to-last row as the national total before removing it
-country_total_row = df.iloc[-2]
+#country_total_row = df.iloc[-2]
+country_total_row = df.iloc[-4]
 country_total = country_total_row.iloc[-1] if pd.notna(country_total_row.iloc[-1]) else None
 
 # Remove the last two rows
-df = df[:-2]
+#df = df[:-2]
+df = df[:-4]
 
 # Output structure
 districts = []
@@ -38,8 +41,10 @@ current_district = None
 current_block = {}
 
 for i, row in df.iterrows():
-    first_col = str(row.iloc[1]).strip()
-    total_value = row.iloc[11]
+    #first_col = str(row.iloc[1]).strip()
+    first_col = str(row.iloc[0]).strip()
+    total_value = row.iloc[8]
+    #total_value = row.iloc[11]
 
     if pd.isna(first_col) or first_col == "nan":
         continue
