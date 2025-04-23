@@ -42,6 +42,10 @@ export function NewsArticles({ year }: NewsArticlesProps) {
           "http://dn.pt/",
           'http://www.dn.pt/',
           'http://news.google.pt/',
+          'http://dgo.pt/',
+          'http://dgo.gov.pt/',
+          'http://www.dgo.pt/',
+          'http://www.portugal.gov.pt/',
         ]
 
         // Search queries to use
