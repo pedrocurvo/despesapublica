@@ -260,6 +260,11 @@ export default function BudgetPieChart({
                 ? `Despesa por Subsector: ${selectedSector}` 
                 : "Despesa por Sector"}
             </h2>
+            <p className="text-sm text-muted-foreground">
+              {selectedSector 
+                ? null 
+                : "Clique num sector para ver os detalhes"}
+            </p>
             
             {selectedSector && enableSectorClick && (
               <Button 
