@@ -322,8 +322,8 @@ export function DistrictTrends() {
   // Get formatted label for Y axis
   const getYAxisLabel = () => {
     return selectedType === 'absolute' 
-      ? "Budget (€ Billions)" 
-      : "Percentage of National Budget (%)"
+      ? "Orçamento (€ Mil Milhões)" 
+      : "Percentagem do Orçamento Nacional (%)"
   }
   
   // Get items to display in the legend
@@ -349,7 +349,7 @@ export function DistrictTrends() {
 
       return (
         <div className="bg-background border p-2 rounded-md shadow-md">
-          <p className="font-medium">{`Year: ${label}`}</p>
+          <p className="font-medium">{`Ano: ${label}`}</p>
           {sortedPayload.map((entry, index) => {
             const isDistrict = entry.name === selectedDistrict;
             const unit = selectedType === 'absolute' 
@@ -384,7 +384,7 @@ export function DistrictTrends() {
     return (
       <div className="flex h-64 items-center justify-center">
         <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-        <span>Loading district trend data...</span>
+        <span>A carregar dados de tendências por distrito...</span>
       </div>
     )
   }
@@ -392,7 +392,7 @@ export function DistrictTrends() {
   if (error) {
     return (
       <div className="rounded-md border border-red-300 bg-red-50 p-4">
-        <p className="text-sm text-red-800">Error loading data: {error}</p>
+        <p className="text-sm text-red-800">Erro ao carregar dados: {error}</p>
       </div>
     )
   }
@@ -412,11 +412,11 @@ export function DistrictTrends() {
             }}
           >
             <SelectTrigger className="w-[200px]">
-              <SelectValue placeholder="Select district" />
+              <SelectValue placeholder="Selecionar distrito" />
             </SelectTrigger>
             <SelectContent>
               <SelectGroup>
-                <SelectItem value="all">All Districts</SelectItem>
+                <SelectItem value="all">Todos os Distritos</SelectItem>
                 {districts.map(district => (
                   <SelectItem key={district} value={district}>
                     <div className="flex flex-col">
@@ -438,14 +438,14 @@ export function DistrictTrends() {
               size="sm"
               onClick={() => setSelectedType('absolute')}
             >
-              € Values
+              Valores €
             </Button>
             <Button 
               variant={selectedType === 'percentage' ? 'default' : 'outline'}
               size="sm"
               onClick={() => setSelectedType('percentage')}
             >
-              Percentage
+              Percentagem
             </Button>
           </div>
         </div>
@@ -466,28 +466,15 @@ export function DistrictTrends() {
                   }
                 }}
               />
-              <Label htmlFor="show-all-municipalities">Show all municipalities</Label>
+              <Label htmlFor="show-all-municipalities">Mostrar todos os municípios</Label>
             </div>
           )}
         </div>
       </div>
       
-      {/* {selectedDistrict && (
-        <div className="flex flex-col">
-          <div className="flex items-center">
-            <h3 className="text-sm font-medium">{selectedDistrict}</h3>
-            {getTrendIcon(selectedDistrict)}
-            <span className="ml-2 text-xs text-muted-foreground">
-              Trend from {baseYear} to {YEARS[YEARS.length-1]}
-            </span>
-          </div>
-          {getTrendPercentage(selectedDistrict)}
-        </div>
-      )} */}
-      
       {selectedDistrict && municipalities.length > 0 && !showAllMunicipalities && (
         <div className="space-y-1">
-          <p className="text-sm text-muted-foreground">Select municipalities to compare:</p>
+          <p className="text-sm text-muted-foreground">Selecionar municípios para comparar:</p>
           <div className="flex flex-wrap gap-1">
             {municipalities.map(municipality => (
               <Badge
@@ -519,7 +506,7 @@ export function DistrictTrends() {
             <XAxis dataKey="year" />
             <YAxis 
               label={{ 
-                value: getYAxisLabel(), 
+                value: selectedType === 'absolute' ? "Orçamento (€ Mil Milhões)" : "Percentagem do Orçamento Nacional (%)", 
                 angle: -90, 
                 position: 'insideLeft',
                 style: { textAnchor: 'middle' }
@@ -557,7 +544,7 @@ export function DistrictTrends() {
       
       <div className="mt-2 flex flex-wrap items-center gap-6 text-sm text-muted-foreground">
         <div className="flex items-center gap-2 mr-4">
-          <Label htmlFor="trend-base-year" className="text-sm whitespace-nowrap">Compare from:</Label>
+          <Label htmlFor="trend-base-year" className="text-sm whitespace-nowrap">Comparar desde:</Label>
           <Select 
             value={baseYear} 
             onValueChange={setBaseYear}
@@ -576,15 +563,15 @@ export function DistrictTrends() {
         </div>
         <div className="flex items-center gap-1">
           <ArrowUpIcon className="h-4 w-4 text-green-500" />
-          <span>Increased</span>
+          <span>Aumentou</span>
         </div>
         <div className="flex items-center gap-1">
           <ArrowDownIcon className="h-4 w-4 text-red-500" />
-          <span>Decreased</span>
+          <span>Diminuiu</span>
         </div>
         <div className="flex items-center gap-1">
           <MinusIcon className="h-4 w-4 text-gray-500" />
-          <span>No significant change</span>
+          <span>Sem alteração significativa</span>
         </div>
       </div>
     </div>

@@ -176,14 +176,14 @@ export function NewsArticles({ year }: NewsArticlesProps) {
           )}
           <div className="mt-3">
             <Link href={article.url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center text-sm text-primary hover:underline">
-              Read full article
+              Ler artigo completo
               <ExternalLink className="ml-1 h-3 w-3" />
             </Link>
           </div>
         </div>
       ))}
       {articles.length === 0 && !loading && (
-        <div className="py-10 text-center text-muted-foreground">No news articles available for {year}</div>
+        <div className="py-10 text-center text-muted-foreground">Não há artigos de notícias disponíveis para {year}</div>
       )}
     </div>
   )

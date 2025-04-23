@@ -15,7 +15,7 @@ export function MapContainer() {
   return (
     <Card>
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-        <CardTitle className="text-xl font-bold">Budget Distribution Map</CardTitle>
+        <CardTitle className="text-xl font-bold">Mapa de Distribuição Orçamental</CardTitle>
         <MapYearSelector selectedYear={selectedYear} onChange={handleYearChange} />
       </CardHeader>
       <CardContent>

@@ -33,7 +33,7 @@ export function PortugalGeoMap({ year, data }: PortugalGeoMapProps) {
       <Card>
         <CardContent className="p-6">
           <div className="h-[400px] w-full flex items-center justify-center">
-            <div className="text-sm text-muted-foreground">Loading map data...</div>
+            <div className="text-sm text-muted-foreground">A carregar dados do mapa...</div>
           </div>
         </CardContent>
       </Card>

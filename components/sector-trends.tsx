@@ -400,8 +400,8 @@ export function SectorTrends() {
   // Get formatted label for Y axis
   const getYAxisLabel = () => {
     return selectedType === 'absolute' 
-      ? "Budget (€ Billions)" 
-      : "Percentage of Total Budget (%)"
+      ? "Orçamento (€ Mil Milhões)" 
+      : "Percentagem do Orçamento Total (%)"
   }
   
   // Get items to display in the legend
@@ -427,7 +427,7 @@ export function SectorTrends() {
 
       return (
         <div className="bg-background border p-2 rounded-md shadow-md">
-          <p className="font-medium">{`Year: ${label}`}</p>
+          <p className="font-medium">{`Ano: ${label}`}</p>
           {sortedPayload.map((entry, index) => {
             const isSector = entry.name === selectedSector;
             const unit = selectedType === 'absolute' ? '€B' : '%';
@@ -460,7 +460,7 @@ export function SectorTrends() {
     return (
       <div className="flex h-64 items-center justify-center">
         <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-        <span>Loading sector trend data...</span>
+        <span>A carregar dados de tendências por setor...</span>
       </div>
     )
   }
@@ -468,7 +468,7 @@ export function SectorTrends() {
   if (error) {
     return (
       <div className="rounded-md border border-red-300 bg-red-50 p-4">
-        <p className="text-sm text-red-800">Error loading data: {error}</p>
+        <p className="text-sm text-red-800">Erro ao carregar dados: {error}</p>
       </div>
     )
   }
@@ -489,11 +489,11 @@ export function SectorTrends() {
             }}
           >
             <SelectTrigger className="w-[200px]">
-              <SelectValue placeholder="Select sector" />
+              <SelectValue placeholder="Selecionar setor" />
             </SelectTrigger>
             <SelectContent>
               <SelectGroup>
-                <SelectItem value="all">All Sectors</SelectItem>
+                <SelectItem value="all">Todos os Setores</SelectItem>
                 {sectors.map(sector => (
                   <SelectItem key={sector} value={sector}>
                     <div className="flex flex-col">
@@ -515,14 +515,14 @@ export function SectorTrends() {
               size="sm"
               onClick={() => setSelectedType('absolute')}
             >
-              € Values
+              Valores €
             </Button>
             <Button 
               variant={selectedType === 'percentage' ? 'default' : 'outline'}
               size="sm"
               onClick={() => setSelectedType('percentage')}
             >
-              Percentage
+              Percentagem
             </Button>
           </div>
           
@@ -541,7 +541,7 @@ export function SectorTrends() {
                   }
                 }}
               />
-              <Label htmlFor="show-all-subsectors">Show all subsectors</Label>
+              <Label htmlFor="show-all-subsectors">Mostrar todos os subsetores</Label>
             </div>
           )}
         </div>
@@ -599,7 +599,7 @@ export function SectorTrends() {
       
       {selectedSector && subsectors.length > 0 && !showAllSubsectors && (
         <div className="space-y-1">
-          <p className="text-sm text-muted-foreground">Select subsectors to compare:</p>
+          <p className="text-sm text-muted-foreground">Selecionar subsetores para comparar:</p>
           <div className="flex flex-wrap gap-1">
             {subsectors.map(subsector => (
               <Badge
@@ -631,7 +631,7 @@ export function SectorTrends() {
             <XAxis dataKey="year" />
             <YAxis 
               label={{ 
-                value: getYAxisLabel(), 
+                value: selectedType === 'absolute' ? "Orçamento (€ Biliões)" : "Percentagem do Orçamento Total (%)", 
                 angle: -90, 
                 position: 'insideLeft',
                 style: { textAnchor: 'middle' }
@@ -669,7 +669,7 @@ export function SectorTrends() {
       
       <div className="mt-2 flex flex-wrap items-center gap-6 text-sm text-muted-foreground">
         <div className="flex items-center gap-2 mr-4">
-          <Label htmlFor="trend-base-year" className="text-sm whitespace-nowrap">Compare from:</Label>
+          <Label htmlFor="trend-base-year" className="text-sm whitespace-nowrap">Comparar desde:</Label>
           <Select 
             value={baseYear} 
             onValueChange={setBaseYear}
@@ -688,15 +688,15 @@ export function SectorTrends() {
         </div>
         <div className="flex items-center gap-1">
           <ArrowUpIcon className="h-4 w-4 text-green-500" />
-          <span>Increased</span>
+          <span>Aumentou</span>
         </div>
         <div className="flex items-center gap-1">
           <ArrowDownIcon className="h-4 w-4 text-red-500" />
-          <span>Decreased</span>
+          <span>Diminuiu</span>
         </div>
         <div className="flex items-center gap-1">
           <MinusIcon className="h-4 w-4 text-gray-500" />
-          <span>No significant change</span>
+          <span>Sem alteração significativa</span>
         </div>
       </div>
     </div>

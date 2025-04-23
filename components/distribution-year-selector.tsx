@@ -35,9 +35,9 @@ export function DistributionYearSelector({ onYearChange, selectedYear }: Distrib
       </PopoverTrigger>
       <PopoverContent className="w-[120px] p-0">
         <Command>
-          <CommandInput placeholder="Search year..." />
+          <CommandInput placeholder="Pesquisar ano..." />
           <CommandList>
-            <CommandEmpty>No year found.</CommandEmpty>
+            <CommandEmpty>Nenhum ano encontrado.</CommandEmpty>
             <CommandGroup>
               {years.map((year) => (
                 <CommandItem

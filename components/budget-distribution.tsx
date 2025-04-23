@@ -31,7 +31,7 @@ export function BudgetDistribution({ year = "2023", data, isLoading = false }: B
   if (isLoading) {
     return (
       <div className="flex h-[300px] w-full items-center justify-center">
-        <div className="text-muted-foreground">Loading budget data...</div>
+        <div className="text-muted-foreground">A carregar dados orçamentais...</div>
       </div>
     )
   }
@@ -39,7 +39,7 @@ export function BudgetDistribution({ year = "2023", data, isLoading = false }: B
   if (!data || data.length === 0) {
     return (
       <div className="flex h-[300px] w-full items-center justify-center">
-        <div className="text-muted-foreground">No budget data available for {year}</div>
+        <div className="text-muted-foreground">Não existem dados orçamentais disponíveis para {year}</div>
       </div>
     )
   }
@@ -64,7 +64,7 @@ export function BudgetDistribution({ year = "2023", data, isLoading = false }: B
             ))}
           </Pie>
           <Tooltip
-            formatter={(value) => [`€${value}B`, ""]}
+            formatter={(value) => [`€${value}MM`, ""]}
             contentStyle={{ backgroundColor: "hsl(var(--background))", borderColor: "hsl(var(--border))" }}
           />
         </PieChart>

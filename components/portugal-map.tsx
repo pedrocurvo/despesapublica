@@ -415,7 +415,7 @@ export function PortugalMap({ selectedYear }: PortugalMapProps) {
     <div className="relative">
       <div className="mb-4 flex items-center justify-between">
         <div className="text-sm font-medium">
-          {selectedDistrict ? `${selectedDistrict === "AÇORES" ? "Açores" : selectedDistrict === "MADEIRA" ? "Madeira" : selectedDistrict} Municipalities` : `Budget Distribution by District (${selectedYear})`}
+          {selectedDistrict ? `${selectedDistrict === "AÇORES" ? "Açores" : selectedDistrict === "MADEIRA" ? "Madeira" : selectedDistrict} Municípios` : `Distribuição do Orçamento por Distrito (${selectedYear})`}
         </div>
         
         {selectedDistrict ? (
@@ -426,7 +426,7 @@ export function PortugalMap({ selectedYear }: PortugalMapProps) {
             onClick={() => setSelectedDistrict(null)}
           >
             <ArrowLeft className="h-4 w-4" />
-            <span>Back to National View</span>
+            <span>Voltar à Visão Nacional</span>
           </Button>
         ) : (
           <div className="flex items-center gap-4">
@@ -455,7 +455,7 @@ export function PortugalMap({ selectedYear }: PortugalMapProps) {
           <div className="rounded-md bg-red-50 p-4 text-red-800">
             <p>{error}</p>
             <p className="mt-2 text-sm">
-              Make sure the file exists at: <code>public/{selectedDistrict ? municipalitiesGeoUrl : districtGeoUrl}</code>
+              Certifique-se de que o ficheiro existe em: <code>public/{selectedDistrict ? municipalitiesGeoUrl : districtGeoUrl}</code>
             </p>
           </div>
         )}
@@ -464,7 +464,7 @@ export function PortugalMap({ selectedYear }: PortugalMapProps) {
           <div className="flex h-[600px] items-center justify-center">
             <div className="text-center">
               <div className="h-8 w-8 animate-spin rounded-full border-4 border-blue-500 border-t-transparent mx-auto"></div>
-              <p className="mt-2">Loading map data...</p>
+              <p className="mt-2">A carregar dados do mapa...</p>
             </div>
           </div>
         ) : !error && (selectedDistrict ? municipalitiesData : geoData) && (
@@ -490,7 +490,7 @@ export function PortugalMap({ selectedYear }: PortugalMapProps) {
                 {/* Main Portugal Map */}
                 <div className="md:col-span-2">
                   <div className="border rounded-lg p-2 shadow-sm">
-                    <h3 className="text-sm font-medium mb-2">Mainland Portugal</h3>
+                    <h3 className="text-sm font-medium mb-2">Portugal Continental</h3>
                     <ComposableMap
                       projection="geoMercator"
                       projectionConfig={projectionConfig.mainland}
@@ -556,9 +556,9 @@ export function PortugalMap({ selectedYear }: PortugalMapProps) {
             <CardContent className="p-4">
               <h3 className="mb-2 font-medium">{hoveredDistrict.name}</h3>
               <div className="grid grid-cols-2 gap-2 text-sm">
-                <div className="text-muted-foreground">Received:</div>
+                <div className="text-muted-foreground">Recebido:</div>
                 <div className="font-medium text-right">€{hoveredDistrict.received.toFixed(2)}B</div>
-                <div className="text-muted-foreground">National %:</div>
+                <div className="text-muted-foreground">% Nacional:</div>
                 <div className="font-medium text-right">{hoveredDistrict.nationalPercentage.toFixed(2)}%</div>
               </div>
             </CardContent>
@@ -577,11 +577,11 @@ export function PortugalMap({ selectedYear }: PortugalMapProps) {
             <CardContent className="p-4">
               <h3 className="mb-2 font-medium">{municipalityData.name}</h3>
               <div className="grid grid-cols-2 gap-2 text-sm">
-                <div className="text-muted-foreground">Received:</div>
+                <div className="text-muted-foreground">Recebido:</div>
                 <div className="font-medium text-right">€{municipalityData.received.toFixed(2)}M</div>
-                <div className="text-muted-foreground">District %:</div>
+                <div className="text-muted-foreground">% Distrito:</div>
                 <div className="font-medium text-right">{municipalityData.districtPercentage.toFixed(2)}%</div>
-                <div className="text-muted-foreground">National %:</div>
+                <div className="text-muted-foreground">% Nacional:</div>
                 <div className="font-medium text-right">{municipalityData.nationalPercentage.toFixed(2)}%</div>
               </div>
             </CardContent>

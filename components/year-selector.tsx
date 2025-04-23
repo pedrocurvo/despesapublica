@@ -45,15 +45,15 @@ export function YearSelector({ onYearsChange }: YearSelectorProps) {
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
         <Button variant="outline" role="combobox" aria-expanded={open} className="justify-between">
-          {selectedYears.length > 0 ? `${selectedYears.join(", ")}` : "Select years..."}
+          {selectedYears.length > 0 ? `${selectedYears.join(", ")}` : "Selecionar anos..."}
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
       <PopoverContent className="p-0">
         <Command>
-          <CommandInput placeholder="Search years..." />
+          <CommandInput placeholder="Pesquisar anos..." />
           <CommandList>
-            <CommandEmpty>No year found.</CommandEmpty>
+            <CommandEmpty>Nenhum ano encontrado.</CommandEmpty>
             <CommandGroup>
               {years.map((year) => (
                 <CommandItem key={year.value} value={year.value} onSelect={() => toggleYear(year.value)}>

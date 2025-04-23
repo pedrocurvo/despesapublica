@@ -243,7 +243,7 @@ export default function BudgetPieChart({
   };
   
   if (loading) {
-    return <div className="flex items-center justify-center h-60">Carregando dados do orçamento...</div>;
+    return <div className="flex items-center justify-center h-60">A carregar dados do orçamento...</div>;
   }
   
   if (error) {
@@ -257,13 +257,13 @@ export default function BudgetPieChart({
           <div className="text-center mb-6">
             <h2 className="text-xl font-bold">
               {selectedSector 
-                ? `Despesa por Subsector: ${selectedSector}` 
-                : "Despesa por Sector"}
+                ? `Despesa por Subsetor: ${selectedSector}` 
+                : "Despesa por Setor"}
             </h2>
             <p className="text-sm text-muted-foreground">
               {selectedSector 
                 ? null 
-                : "Clique num sector para ver os detalhes"}
+                : "Clique num setor para ver os detalhes"}
             </p>
             
             {selectedSector && enableSectorClick && (
@@ -272,7 +272,7 @@ export default function BudgetPieChart({
                 onClick={handleBackClick}
                 className="mt-2"
               >
-                ← Voltar para todos os sectores
+                ← Voltar para todos os setores
               </Button>
             )}
           </div>

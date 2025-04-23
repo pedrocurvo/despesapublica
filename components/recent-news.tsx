@@ -125,7 +125,7 @@ export function RecentNews() {
   if (isLoading) {
     return (
       <div className="flex h-[300px] w-full items-center justify-center">
-        <div className="text-muted-foreground">Loading news...</div>
+        <div className="text-muted-foreground">A carregar notícias...</div>
       </div>
     )
   }
@@ -134,7 +134,7 @@ export function RecentNews() {
     return (
       <div className="flex h-[300px] w-full items-center justify-center">
         <div className="text-muted-foreground">
-          {error || "No news available at the moment"}
+          {error || "Não há notícias disponíveis de momento"}
         </div>
       </div>
     )
@@ -153,7 +153,7 @@ export function RecentNews() {
           </div>
           <div className="mt-2">
             <Link href={news.url} className="inline-flex items-center text-sm text-primary hover:underline">
-              Read more
+              Ler mais
               <ExternalLink className="ml-1 h-3 w-3" />
             </Link>
           </div>
@@ -161,7 +161,7 @@ export function RecentNews() {
       ))}
       <div className="pt-2 text-center">
         <Link href="/news" className="text-sm text-primary hover:underline">
-          View all news
+          Ver todas as notícias
         </Link>
       </div>
     </div>

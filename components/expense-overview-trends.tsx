@@ -79,7 +79,7 @@ export function ExpenseOverviewTrends() {
   if (isLoading) {
     return (
       <div className="flex h-[300px] w-full items-center justify-center">
-        <div className="text-muted-foreground">Loading expense overview...</div>
+        <div className="text-muted-foreground">A carregar panorama de despesas...</div>
       </div>
     );
   }
@@ -88,7 +88,7 @@ export function ExpenseOverviewTrends() {
     return (
       <div className="flex h-[300px] w-full items-center justify-center">
         <div className="text-muted-foreground">
-          {error || "No expense data available"}
+          {error || "Não existem dados de despesa disponíveis"}
         </div>
       </div>
     );
@@ -100,15 +100,15 @@ export function ExpenseOverviewTrends() {
       const yearData = payload[0].payload;
       return (
         <div className="rounded-md bg-background p-4 shadow-md border border-border text-sm">
-          <p className="font-medium">{`Year: ${label}`}</p>
+          <p className="font-medium">{`Ano: ${label}`}</p>
           <div className="mt-2 space-y-1">
-            <p className="text-blue-500">{`Budgeted: €${yearData.budgeted?.toLocaleString()}M`}</p>
-            <p className="text-red-500">{`Executed: €${yearData.executed?.toLocaleString()}M`}</p>
+            <p className="text-blue-500">{`Orçamentado: €${yearData.budgeted?.toLocaleString()}M`}</p>
+            <p className="text-red-500">{`Executado: €${yearData.executed?.toLocaleString()}M`}</p>
             <div className="border-t border-border my-2"></div>
             <p className={`font-medium ${
               yearData.executed <= yearData.budgeted ? "text-green-500" : "text-red-500"
             }`}>
-              {`Execution Rate: ${((yearData.executed / yearData.budgeted) * 100).toFixed(2)}%`}
+              {`Taxa de Execução: ${((yearData.executed / yearData.budgeted) * 100).toFixed(2)}%`}
             </p>
           </div>
         </div>
@@ -121,11 +121,11 @@ export function ExpenseOverviewTrends() {
     <ChartContainer
       config={{
         budgeted: { 
-          label: "Budgeted Expenses (€M)", 
+          label: "Despesas Orçamentadas (€M)", 
           color: "hsl(221.2 83.2% 53.3%)" 
         },
         executed: { 
-          label: "Executed Expenses (€M)", 
+          label: "Despesas Executadas (€M)", 
           color: "hsl(0 84.2% 60.2%)" 
         },
       }}

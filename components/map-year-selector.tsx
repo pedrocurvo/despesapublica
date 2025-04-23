@@ -42,15 +42,15 @@ export function MapYearSelector({ selectedYear, onChange }: MapYearSelectorProps
           aria-expanded={open}
           className="w-[180px] justify-between"
         >
-          {selectedYear ? `${selectedYear}` : "Select year..."}
+          {selectedYear ? `${selectedYear}` : "Selecionar ano..."}
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-[180px] p-0">
         <Command>
-          <CommandInput placeholder="Search year..." />
+          <CommandInput placeholder="Pesquisar ano..." />
           <CommandList>
-            <CommandEmpty>No year found.</CommandEmpty>
+            <CommandEmpty>Nenhum ano encontrado.</CommandEmpty>
             <CommandGroup>
               {years.map((year) => (
                 <CommandItem

@@ -81,7 +81,7 @@ export function Overview({ startYear = 2018, endYear = 2023 }: OverviewProps) {
   if (isLoading) {
     return (
       <div className="flex h-[300px] w-full items-center justify-center">
-        <div className="text-muted-foreground">Loading budget overview...</div>
+        <div className="text-muted-foreground">A carregar visão geral do orçamento...</div>
       </div>
     )
   }
@@ -90,7 +90,7 @@ export function Overview({ startYear = 2018, endYear = 2023 }: OverviewProps) {
     return (
       <div className="flex h-[300px] w-full items-center justify-center">
         <div className="text-muted-foreground">
-          {error || "No budget data available"}
+          {error || "Não existem dados orçamentais disponíveis"}
         </div>
       </div>
     )
@@ -102,22 +102,22 @@ export function Overview({ startYear = 2018, endYear = 2023 }: OverviewProps) {
       const yearData = payload[0].payload;
       return (
         <div className="rounded-md bg-background p-4 shadow-md border border-border text-sm">
-          <p className="font-medium">{`Year: ${label}`}</p>
+          <p className="font-medium">{`Ano: ${label}`}</p>
           <div className="mt-2 space-y-1">
-            <p className="text-blue-500">{`Revenue Budget: ${yearData.receitaBudget !== null ? `€${yearData.receitaBudget}M` : 'N/A'}`}</p>
-            <p className="text-blue-600">{`Revenue Actual: ${yearData.receitaActual !== null ? `€${yearData.receitaActual}M` : 'N/A'}`}</p>
-            <p className="text-red-500">{`Expense Budget: ${yearData.despesaBudget !== null ? `€${yearData.despesaBudget}M` : 'N/A'}`}</p>
-            <p className="text-red-600">{`Expense Actual: ${yearData.despesaActual !== null ? `€${yearData.despesaActual}M` : 'N/A'}`}</p>
+            <p className="text-blue-500">{`Orçamento de Receita: ${yearData.receitaBudget !== null ? `€${yearData.receitaBudget}M` : 'N/D'}`}</p>
+            <p className="text-blue-600">{`Receita Real: ${yearData.receitaActual !== null ? `€${yearData.receitaActual}M` : 'N/D'}`}</p>
+            <p className="text-red-500">{`Orçamento de Despesa: ${yearData.despesaBudget !== null ? `€${yearData.despesaBudget}M` : 'N/D'}`}</p>
+            <p className="text-red-600">{`Despesa Real: ${yearData.despesaActual !== null ? `€${yearData.despesaActual}M` : 'N/D'}`}</p>
             <div className="border-t border-border my-2"></div>
             <p className={`font-medium ${yearData.saldoActual !== null ? (yearData.saldoActual >= 0 ? "text-green-500" : "text-red-500") : "text-muted-foreground"}`}>
-              {`Actual Balance: ${yearData.saldoActual !== null ? `€${yearData.saldoActual}M` : 'N/A'}`}
+              {`Saldo Real: ${yearData.saldoActual !== null ? `€${yearData.saldoActual}M` : 'N/D'}`}
             </p>
             <p className={`font-medium ${yearData.saldoBudget !== null ? (yearData.saldoBudget >= 0 ? "text-green-500" : "text-red-500") : "text-muted-foreground"}`}>
-              {`Budget Balance: ${yearData.saldoBudget !== null ? `€${yearData.saldoBudget}M` : 'N/A'}`}
+              {`Saldo Orçamentado: ${yearData.saldoBudget !== null ? `€${yearData.saldoBudget}M` : 'N/D'}`}
             </p>
             <div className="border-t border-border my-2"></div>
-            <p className="text-muted-foreground">{`GDP % Actual: ${yearData.pibPercentage !== null ? `${yearData.pibPercentage}%` : 'N/A'}`}</p>
-            <p className="text-muted-foreground">{`GDP % Budget: ${yearData.pibBudgetPercentage !== null ? `${yearData.pibBudgetPercentage}%` : 'N/A'}`}</p>
+            <p className="text-muted-foreground">{`% do PIB Real: ${yearData.pibPercentage !== null ? `${yearData.pibPercentage}%` : 'N/D'}`}</p>
+            <p className="text-muted-foreground">{`% do PIB Orçamentado: ${yearData.pibBudgetPercentage !== null ? `${yearData.pibBudgetPercentage}%` : 'N/D'}`}</p>
           </div>
         </div>
       );

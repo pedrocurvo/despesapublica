@@ -84,7 +84,7 @@ export function ExpenseOverview({ startYear = 2018, endYear = 2023, onYearClick 
   if (isLoading) {
     return (
       <div className="flex h-[300px] w-full items-center justify-center">
-        <div className="text-muted-foreground">Loading expense overview...</div>
+        <div className="text-muted-foreground">A carregar panorama de despesas...</div>
       </div>
     );
   }
@@ -93,7 +93,7 @@ export function ExpenseOverview({ startYear = 2018, endYear = 2023, onYearClick 
     return (
       <div className="flex h-[300px] w-full items-center justify-center">
         <div className="text-muted-foreground">
-          {error || "No expense data available"}
+          {error || "Não existem dados de despesa disponíveis"}
         </div>
       </div>
     );
@@ -105,15 +105,15 @@ export function ExpenseOverview({ startYear = 2018, endYear = 2023, onYearClick 
       const yearData = payload[0].payload;
       return (
         <div className="rounded-md bg-background p-4 shadow-md border border-border text-sm">
-          <p className="font-medium">{`Year: ${label}`}</p>
+          <p className="font-medium">{`Ano: ${label}`}</p>
           <div className="mt-2 space-y-1">
-            <p className="text-blue-500">{`Budgeted: €${yearData.budgeted?.toLocaleString()}M`}</p>
-            <p className="text-red-500">{`Executed: €${yearData.executed?.toLocaleString()}M`}</p>
+            <p className="text-blue-500">{`Orçamentado: €${yearData.budgeted?.toLocaleString()}M`}</p>
+            <p className="text-red-500">{`Executado: €${yearData.executed?.toLocaleString()}M`}</p>
             <div className="border-t border-border my-2"></div>
             <p className={`font-medium ${
               yearData.executed <= yearData.budgeted ? "text-green-500" : "text-red-500"
             }`}>
-              {`Execution Rate: ${((yearData.executed / yearData.budgeted) * 100).toFixed(2)}%`}
+              {`Taxa de Execução: ${((yearData.executed / yearData.budgeted) * 100).toFixed(2)}%`}
             </p>
           </div>
         </div>

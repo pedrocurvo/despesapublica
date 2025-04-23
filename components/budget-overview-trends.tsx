@@ -77,17 +77,15 @@ export function BudgetOverviewTrends() {
   if (isLoading) {
     return (
       <div className="flex h-[300px] w-full items-center justify-center">
-        <div className="text-muted-foreground">Loading budget overview...</div>
+        <div className="text-muted-foreground">A carregar tendências orçamentais...</div>
       </div>
     )
   }
 
-  if (error || data.length === 0) {
+  if (!data || data.length === 0) {
     return (
       <div className="flex h-[300px] w-full items-center justify-center">
-        <div className="text-muted-foreground">
-          {error || "No budget data available"}
-        </div>
+        <div className="text-muted-foreground">Não existem dados de tendências disponíveis</div>
       </div>
     )
   }
@@ -98,18 +96,18 @@ export function BudgetOverviewTrends() {
       const yearData = payload[0].payload;
       return (
         <div className="rounded-md bg-background p-4 shadow-md border border-border text-sm">
-          <p className="font-medium">{`Year: ${label}`}</p>
+          <p className="font-medium">{`Ano: ${label}`}</p>
           <div className="mt-2 space-y-1">
-            <p className="text-blue-500">{`Revenue Budget: ${yearData.receitaBudget !== null ? `€${yearData.receitaBudget}M` : 'N/A'}`}</p>
-            <p className="text-blue-600">{`Revenue Actual: ${yearData.receitaActual !== null ? `€${yearData.receitaActual}M` : 'N/A'}`}</p>
-            <p className="text-red-500">{`Expense Budget: ${yearData.despesaBudget !== null ? `€${yearData.despesaBudget}M` : 'N/A'}`}</p>
-            <p className="text-red-600">{`Expense Actual: ${yearData.despesaActual !== null ? `€${yearData.despesaActual}M` : 'N/A'}`}</p>
+            <p className="text-blue-500">{`Orçamento de Receita: ${yearData.receitaBudget !== null ? `€${yearData.receitaBudget}M` : 'N/D'}`}</p>
+            <p className="text-blue-600">{`Receita Real: ${yearData.receitaActual !== null ? `€${yearData.receitaActual}M` : 'N/D'}`}</p>
+            <p className="text-red-500">{`Orçamento de Despesa: ${yearData.despesaBudget !== null ? `€${yearData.despesaBudget}M` : 'N/D'}`}</p>
+            <p className="text-red-600">{`Despesa Real: ${yearData.despesaActual !== null ? `€${yearData.despesaActual}M` : 'N/D'}`}</p>
             <div className="border-t border-border my-2"></div>
             <p className={`font-medium ${yearData.saldoActual !== null ? (yearData.saldoActual >= 0 ? "text-green-500" : "text-red-500") : "text-muted-foreground"}`}>
-              {`Actual Balance: ${yearData.saldoActual !== null ? `€${yearData.saldoActual}M` : 'N/A'}`}
+              {`Saldo Real: ${yearData.saldoActual !== null ? `€${yearData.saldoActual}M` : 'N/D'}`}
             </p>
             <p className={`font-medium ${yearData.saldoBudget !== null ? (yearData.saldoBudget >= 0 ? "text-green-500" : "text-red-500") : "text-muted-foreground"}`}>
-              {`Budget Balance: ${yearData.saldoBudget !== null ? `€${yearData.saldoBudget}M` : 'N/A'}`}
+              {`Saldo Orçamentado: ${yearData.saldoBudget !== null ? `€${yearData.saldoBudget}M` : 'N/D'}`}
             </p>
           </div>
         </div>
@@ -122,19 +120,19 @@ export function BudgetOverviewTrends() {
     <ChartContainer
       config={{
         receitaBudget: { 
-          label: "Revenue Budget (€M)", 
+          label: "Orçamento de Receita (€M)", 
           color: "hsl(221.2 83.2% 53.3%)" 
         },
         receitaActual: { 
-          label: "Revenue Actual (€M)", 
+          label: "Receita Real (€M)", 
           color: "hsl(217.2 91.2% 59.8%)" 
         },
         despesaBudget: { 
-          label: "Expense Budget (€M)", 
+          label: "Orçamento de Despesa (€M)", 
           color: "hsl(0 84.2% 60.2%)" 
         },
         despesaActual: { 
-          label: "Expense Actual (€M)", 
+          label: "Despesa Real (€M)", 
           color: "hsl(0 72.2% 50.6%)" 
         },
       }}
