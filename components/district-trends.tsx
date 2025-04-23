@@ -20,7 +20,7 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { Button } from "@/components/ui/button"
-import { Loader2 } from "lucide-react"
+import { Loader2, ArrowUpIcon, ArrowDownIcon, MinusIcon } from "lucide-react"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Label } from "@/components/ui/label"
 import { Badge } from "@/components/ui/badge"
@@ -73,6 +73,18 @@ export function DistrictTrends() {
   const [selectedMunicipalities, setSelectedMunicipalities] = useState<string[]>([])
   const [showAllMunicipalities, setShowAllMunicipalities] = useState(false)
   const [selectedType, setSelectedType] = useState<'absolute' | 'percentage'>('absolute')
+  const [trendData, setTrendData] = useState<Record<string, { trend: 'up' | 'down' | 'neutral', percentage: number }>>({})
+  const [baseYear, setBaseYear] = useState<string>(YEARS[0])
+
+  // Get the proper case format of a name (first letter of each word capitalized)
+  const toProperCase = (name: string) => {
+    if (!name) return '';
+    return name
+      .toLowerCase()
+      .split(' ')
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(' ');
+  }
 
   // Fetch data for all years
   useEffect(() => {
@@ -101,6 +113,9 @@ export function DistrictTrends() {
         const districtNames = result[YEARS[0]]?.Districts.map(d => d.District) || []
         setDistricts(districtNames)
         
+        // Calculate trends for districts and municipalities
+        calculateTrends(result, baseYear)
+        
         setLoading(false)
       } catch (err) {
         console.error("Error fetching transfer data:", err)
@@ -111,6 +126,98 @@ export function DistrictTrends() {
     
     fetchAllYearData()
   }, [])
+  
+  // Recalculate trends when base year changes
+  useEffect(() => {
+    if (Object.keys(yearData).length > 0) {
+      calculateTrends(yearData, baseYear)
+    }
+  }, [baseYear, yearData])
+  
+  // Calculate trends for districts and municipalities
+  const calculateTrends = (data: Record<string, TransferData>, fromYear: string) => {
+    const trends: Record<string, { trend: 'up' | 'down' | 'neutral', percentage: number }> = {}
+    
+    // We need at least two years of data to calculate trends
+    if (Object.keys(data).length < 2) return
+    
+    // Use the selected base year and the last year to compare
+    const firstYear = fromYear
+    const lastYear = YEARS[YEARS.length - 1]
+    
+    // Skip calculation if base year is the last year
+    if (firstYear === lastYear) {
+      setTrendData({})
+      return
+    }
+    
+    // Calculate district trends
+    data[firstYear]?.Districts.forEach(district => {
+      const districtName = district.District
+      const firstYearValue = district.Total
+      
+      // Find the same district in the last year
+      const lastYearDistrict = data[lastYear]?.Districts.find(
+        d => d.District === districtName
+      )
+      
+      if (lastYearDistrict) {
+        const lastYearValue = lastYearDistrict.Total
+        const diff = lastYearValue - firstYearValue
+        const percentChange = (diff / firstYearValue) * 100
+        
+        trends[districtName] = {
+          trend: diff > 0 ? 'up' : diff < 0 ? 'down' : 'neutral',
+          percentage: Math.abs(percentChange)
+        }
+        
+        // Calculate trends for municipalities if they exist
+        if (district.Municipalities && lastYearDistrict.Municipalities) {
+          Object.entries(district.Municipalities).forEach(([muniName, muniValue]) => {
+            const lastYearMuniValue = lastYearDistrict.Municipalities?.[muniName]
+            
+            if (lastYearMuniValue !== undefined) {
+              const muniDiff = lastYearMuniValue - muniValue
+              const muniPercentChange = (muniDiff / muniValue) * 100
+              
+              trends[muniName] = {
+                trend: muniDiff > 0 ? 'up' : muniDiff < 0 ? 'down' : 'neutral',
+                percentage: Math.abs(muniPercentChange)
+              }
+            }
+          })
+        }
+      }
+    })
+    
+    setTrendData(trends)
+  }
+  
+  // Get the trend icon for a given entity
+  const getTrendIcon = (name: string) => {
+    const trend = trendData[name]
+    if (!trend) return null
+    
+    return (
+      <div className="flex items-center gap-1 ml-1" title={`${trend.percentage.toFixed(1)}% ${trend.trend === 'up' ? 'increase' : 'decrease'} since ${baseYear}`}>
+        {trend.trend === 'up' && <ArrowUpIcon className="h-3 w-3 text-green-500" />}
+        {trend.trend === 'down' && <ArrowDownIcon className="h-3 w-3 text-red-500" />}
+        {trend.trend === 'neutral' && <MinusIcon className="h-3 w-3 text-gray-500" />}
+      </div>
+    )
+  }
+  
+  // Get the trend percentage for a given entity
+  const getTrendPercentage = (name: string) => {
+    const trend = trendData[name]
+    if (!trend) return null
+    
+    return (
+      <div className="text-xs text-muted-foreground mt-0.5">
+        {trend.percentage.toFixed(1)}%
+      </div>
+    )
+  }
   
   // Update municipalities when district changes
   useEffect(() => {
@@ -257,7 +364,7 @@ export function DistrictTrends() {
                     style={{ backgroundColor: entry.color }}
                   />
                   <span className={`text-sm ${isDistrict ? 'font-medium' : ''}`}>
-                    {entry.name}
+                    {toProperCase(entry.name)}
                   </span>
                 </div>
                 <span className="text-sm font-mono">
@@ -290,6 +397,9 @@ export function DistrictTrends() {
     )
   }
 
+  // Calculate years available for base year selection (excluding the latest year)
+  const baseYearOptions = YEARS.slice(0, -1);
+
   return (
     <div className="space-y-4">
       <div className="flex flex-col space-y-2 md:flex-row md:items-center md:justify-between md:space-y-0 md:space-x-2">
@@ -309,7 +419,13 @@ export function DistrictTrends() {
                 <SelectItem value="all">All Districts</SelectItem>
                 {districts.map(district => (
                   <SelectItem key={district} value={district}>
-                    {district}
+                    <div className="flex flex-col">
+                      <div className="flex items-center">
+                        {toProperCase(district)}
+                        {getTrendIcon(district)}
+                      </div>
+                      {getTrendPercentage(district)}
+                    </div>
                   </SelectItem>
                 ))}
               </SelectGroup>
@@ -334,25 +450,40 @@ export function DistrictTrends() {
           </div>
         </div>
         
-        {selectedDistrict && municipalities.length > 0 && (
-          <div className="flex items-center space-x-2">
-            <Checkbox
-              id="show-all-municipalities"
-              checked={showAllMunicipalities}
-              onCheckedChange={(checked) => {
-                if (typeof checked === 'boolean') {
-                  setShowAllMunicipalities(checked)
-                  if (checked) {
-                    // Clear manual selections when showing all
-                    setSelectedMunicipalities([])
+        <div className="flex items-center space-x-2">
+          {selectedDistrict && municipalities.length > 0 && (
+            <div className="flex items-center space-x-2">
+              <Checkbox
+                id="show-all-municipalities"
+                checked={showAllMunicipalities}
+                onCheckedChange={(checked) => {
+                  if (typeof checked === 'boolean') {
+                    setShowAllMunicipalities(checked)
+                    if (checked) {
+                      // Clear manual selections when showing all
+                      setSelectedMunicipalities([])
+                    }
                   }
-                }
-              }}
-            />
-            <Label htmlFor="show-all-municipalities">Show all municipalities</Label>
-          </div>
-        )}
+                }}
+              />
+              <Label htmlFor="show-all-municipalities">Show all municipalities</Label>
+            </div>
+          )}
+        </div>
       </div>
+      
+      {/* {selectedDistrict && (
+        <div className="flex flex-col">
+          <div className="flex items-center">
+            <h3 className="text-sm font-medium">{selectedDistrict}</h3>
+            {getTrendIcon(selectedDistrict)}
+            <span className="ml-2 text-xs text-muted-foreground">
+              Trend from {baseYear} to {YEARS[YEARS.length-1]}
+            </span>
+          </div>
+          {getTrendPercentage(selectedDistrict)}
+        </div>
+      )} */}
       
       {selectedDistrict && municipalities.length > 0 && !showAllMunicipalities && (
         <div className="space-y-1">
@@ -365,7 +496,13 @@ export function DistrictTrends() {
                 className="cursor-pointer"
                 onClick={() => toggleMunicipality(municipality)}
               >
-                {municipality}
+                <div className="flex flex-col items-center">
+                  <div className="flex items-center">
+                    {toProperCase(municipality)}
+                    {getTrendIcon(municipality)}
+                  </div>
+                  {getTrendPercentage(municipality)}
+                </div>
               </Badge>
             ))}
           </div>
@@ -389,7 +526,17 @@ export function DistrictTrends() {
               }}
             />
             <Tooltip content={<CustomTooltip />} />
-            <Legend />
+            <Legend 
+              formatter={(value, entry) => (
+                <div className="flex flex-col items-center">
+                  <div className="flex items-center">
+                    <span>{toProperCase(value)}</span>
+                    {getTrendIcon(value)}
+                  </div>
+                  {getTrendPercentage(value)}
+                </div>
+              )}
+            />
             
             {/* Render lines for each selected item */}
             {getLineItems().map((item, index) => (
@@ -406,6 +553,39 @@ export function DistrictTrends() {
             ))}
           </LineChart>
         </ResponsiveContainer>
+      </div>
+      
+      <div className="mt-2 flex flex-wrap items-center gap-6 text-sm text-muted-foreground">
+        <div className="flex items-center gap-2 mr-4">
+          <Label htmlFor="trend-base-year" className="text-sm whitespace-nowrap">Compare from:</Label>
+          <Select 
+            value={baseYear} 
+            onValueChange={setBaseYear}
+          >
+            <SelectTrigger id="trend-base-year" className="w-[80px] h-8">
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectGroup>
+                {baseYearOptions.map(year => (
+                  <SelectItem key={year} value={year}>{year}</SelectItem>
+                ))}
+              </SelectGroup>
+            </SelectContent>
+          </Select>
+        </div>
+        <div className="flex items-center gap-1">
+          <ArrowUpIcon className="h-4 w-4 text-green-500" />
+          <span>Increased</span>
+        </div>
+        <div className="flex items-center gap-1">
+          <ArrowDownIcon className="h-4 w-4 text-red-500" />
+          <span>Decreased</span>
+        </div>
+        <div className="flex items-center gap-1">
+          <MinusIcon className="h-4 w-4 text-gray-500" />
+          <span>No significant change</span>
+        </div>
       </div>
     </div>
   )
