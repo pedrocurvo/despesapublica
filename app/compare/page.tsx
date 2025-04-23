@@ -5,6 +5,7 @@ import { DateRangePicker } from "@/components/date-range-picker"
 import { SectorComparison } from "@/components/sector-comparison"
 import { YearlyComparison } from "@/components/yearly-comparison"
 import { SectorSelector } from "@/components/sector-selector"
+import { DistrictTrends } from "@/components/district-trends"
 import { SectorsProvider } from "@/lib/sectors-context"
 import { DateRangeProvider } from "@/lib/date-range-context"
 
@@ -27,6 +28,19 @@ export default function ComparePage() {
           </div>
           <SectorsProvider>
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
+              <Card className="lg:col-span-7">
+                <CardHeader className="flex flex-row items-center justify-between">
+                  <div>
+                    <CardTitle>District & Municipality Trends</CardTitle>
+                    <CardDescription>Compare budget allocation trends across regions over time</CardDescription>
+                  </div>
+                </CardHeader>
+                <CardContent>
+                  <DistrictTrends />
+                </CardContent>
+              </Card>
+            </div>
+            <div className="mt-4 grid gap-4 md:grid-cols-2 lg:grid-cols-7">
               <Card className="lg:col-span-7">
                 <CardHeader className="flex flex-row items-center justify-between">
                   <div>
