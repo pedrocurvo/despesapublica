@@ -21,7 +21,7 @@ import pandas as pd
 import json
 
 # Load the Excel file
-year = 2023
+year = 2022
 excel_path = f"Quadros_{year}.xlsx"
 
 #sheet_name_list = ["Quadro 4.7.", "Quadro 4.9.", "Quadro 4.16.", "Quadro 4.18.", "Quadro 4.20.", "Quadro 4.22.", "Quadro 4.24.", "Quadro 4.26.", "Quadro 4.29.", "Quadro 4.32.", "Quadro 4.36.", "Quadro 4.46.", "Quadro 4.48.", "Quadro 4.54.", "Quadro 4.59.", "Quadro 4.62.", "Quadro 4.66."]
@@ -80,7 +80,7 @@ for sheet_name, df in dfs.items():
     # subsectors: {subsector: name, orçamento corrigido: value, execucao: value}
 
     # Get the DESPESA TOTAL NAO CONSOLIDADA
-    # Trasnform the first column into a list
+    # Transform the first column into a list
     subsectors = df.iloc[:, 0].tolist()
     orcamento_corrigido = df.iloc[:, 1].tolist()
     execucao = df.iloc[:, 2].tolist()
