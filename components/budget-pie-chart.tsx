@@ -155,7 +155,7 @@ export default function BudgetPieChart({
     const fetchBudgetData = async () => {
       try {
         setLoading(true);
-        const response = await fetch(`/api/public/despesa?year=${year}`);
+        const response = await fetch(`/api/despesa?year=${year}`);
         if (!response.ok) {
           throw new Error(`Error: ${response.statusText}`);
         }

@@ -138,7 +138,7 @@ export function SectorTrends() {
         
         // Fetch data for each year
         for (const year of YEARS) {
-          const response = await fetch(`/api/public/despesa?year=${year}`)
+          const response = await fetch(`/api/despesa?year=${year}`)
           
           if (!response.ok) {
             throw new Error(`Failed to load data for ${year}`)

@@ -5,47 +5,12 @@ import { useRouter } from "next/navigation"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Overview } from "@/components/overview"
 import { RecentNews } from "@/components/recent-news"
-import { YearSelector } from "@/components/year-selector"
 import { DistributionYearSelector } from "@/components/distribution-year-selector"
 import { ExpenseOverview } from "@/components/expense-overview"
 import { Button } from "@/components/ui/button"
 import BudgetPieChart from "@/components/budget-pie-chart"
-import Link from "next/link"
-
-// Type definitions for budget data
-interface SectorBudget {
-  proposed: number
-  expended: number
-}
-
-interface YearBudgetData {
-  total: SectorBudget
-  sectors: {
-    [key: string]: SectorBudget
-  }
-}
-
-interface BudgetSectorData {
-  name: string
-  value: number
-  color: string
-}
-
-// Color mapping for sectors
-const sectorColors = {
-  education: "#3b82f6",
-  healthcare: "#ef4444",
-  "social-security": "#f59e0b",
-  infrastructure: "#10b981",
-  defense: "#6366f1",
-  justice: "#8b5cf6",
-  environment: "#06b6d4",
-  culture: "#ec4899",
-  other: "#94a3b8",
-}
 
 export default function ClientPage() {
-  const [comparisonYears, setComparisonYears] = useState<string[]>(["2023", "2022"])
   const [distributionYear, setDistributionYear] = useState("2023")
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [error, setError] = useState<string | null>(null)

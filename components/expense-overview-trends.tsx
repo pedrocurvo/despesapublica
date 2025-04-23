@@ -29,7 +29,7 @@ export function ExpenseOverviewTrends() {
         
         // Fetch data for each year
         const yearDataPromises = years.map(async (year) => {
-          const response = await fetch(`/api/public/despesa?year=${year}`);
+          const response = await fetch(`/api/despesa?year=${year}`);
           if (!response.ok) {
             return null;
           }
