@@ -28,7 +28,7 @@ export function BudgetOverviewTrends() {
       
       try {
         // Fetch balance data for years 2018-2023
-        const response = await fetch('/api/balance?startYear=2018&endYear=2023')
+        const response = await fetch('/api/balance?startYear=2013&endYear=2023')
         
         if (!response.ok) {
           throw new Error('Failed to fetch budget balance data')

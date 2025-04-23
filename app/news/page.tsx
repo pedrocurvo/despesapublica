@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   description: "Últimas notícias relacionadas com o orçamento do governo português",
 }
 
-const years = [2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023]
+const years = [2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023]
 
 export default function NewsPage() {
   return (

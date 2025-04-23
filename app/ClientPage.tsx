@@ -27,10 +27,10 @@ export default function ClientPage() {
           <Card className="lg:col-span-4">
             <CardHeader>
               <CardTitle>Visão Geral do Orçamento</CardTitle>
-              <CardDescription>Alocação e despesa orçamental anual (2018-2023)</CardDescription>
+              <CardDescription>Alocação e despesa orçamental anual (2013-2023)</CardDescription>
             </CardHeader>
             <CardContent>
-              <Overview startYear={2021} endYear={2023} />
+              <Overview startYear={2013} endYear={2023} />
             </CardContent>
           </Card>
           <Card className="lg:col-span-3">
