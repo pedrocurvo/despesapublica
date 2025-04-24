@@ -1,0 +1,110 @@
+{
+  "2023": {
+    "despesa_orcamentada": 9075270563290000.0,
+    "despesa_executada": 8094853933522008.0,
+    "setores": {
+      "001 - Órgãos de Soberania": {
+        "despesa_orcamentada": 5717.839984,
+        "despesa_executada": 5593.717855290001,
+        "grau_execução": 97.82921297102884,
+        "medidas": {}
+      },
+      "002 - Governação": {
+        "despesa_orcamentada": 2043.12585,
+        "despesa_executada": 1620.3195255499993,
+        "grau_execução": 79.30590891158268,
+        "medidas": {}
+      },
+      "003 - Representação Externa": {
+        "despesa_orcamentada": 630.313873,
+        "despesa_executada": 552.14288799,
+        "grau_execução": 87.5980859126672,
+        "medidas": {}
+      },
+      "004 - Defesa": {
+        "despesa_orcamentada": 2834.033115,
+        "despesa_executada": 2320.8289908499974,
+        "grau_execução": 81.8913857627947,
+        "medidas": {}
+      },
+      "005 - Segurança Interna": {
+        "despesa_orcamentada": 2747.519,
+        "despesa_executada": 2454.59597485,
+        "grau_execução": 89.33863514137664,
+        "medidas": {}
+      },
+      "006 - Justiça": {
+        "despesa_orcamentada": 1820.842407,
+        "despesa_executada": 1568.7822607999983,
+        "grau_execução": 86.15694882593968,
+        "medidas": {}
+      },
+      "007 - Finanças": {
+        "despesa_orcamentada": 5993.237171,
+        "despesa_executada": 4610.044380839999,
+        "grau_execução": 76.92077335345617,
+        "medidas": {}
+      },
+      "008 - Gestão da Dívida Pública": {
+        "despesa_orcamentada": 6811.529,
+        "despesa_executada": 6378.11665743,
+        "grau_execução": 93.63707704143958,
+        "medidas": {}
+      },
+      "009 - Economia e Mar": {
+        "despesa_orcamentada": 1631.835383,
+        "despesa_executada": 1473.4391497500033,
+        "grau_execução": 90.2933693618778,
+        "medidas": {}
+      },
+      "010 - Cultura": {
+        "despesa_orcamentada": 741.806216,
+        "despesa_executada": 562.46440344,
+        "grau_execução": 75.82363039136357,
+        "medidas": {}
+      },
+      "011 - Ciência, Tecnologia e Ensino Superior": {
+        "despesa_orcamentada": 4238.62976685,
+        "despesa_executada": 3086.421135920003,
+        "grau_execução": 72.81648329039415,
+        "medidas": {}
+      },
+      "012 -Ensino Básico e Secundário e Administração Escolar": {
+        "despesa_orcamentada": 7329.04381335,
+        "despesa_executada": 6638.048078119995,
+        "grau_execução": 90.57181601273358,
+        "medidas": {}
+      },
+      "013 - Trabalho, Solidariedade e Segurança Social": {
+        "despesa_orcamentada": 23722.316311,
+        "despesa_executada": 23324.152630890003,
+        "grau_execução": 98.32156491427708,
+        "medidas": {}
+      },
+      "014 - Saúde": {
+        "despesa_orcamentada": 16701.33956,
+        "despesa_executada": 14812.133052290066,
+        "grau_execução": 88.68829352925309,
+        "medidas": {}
+      },
+      "015 - Ambiente e Acção Climática": {
+        "despesa_orcamentada": 3117.9971736999996,
+        "despesa_executada": 2194.809329460001,
+        "grau_execução": 70.39163947847685,
+        "medidas": {}
+      },
+      "016 - Insfraestruturas e Habitação": {
+        "despesa_orcamentada": 4859.511467,
+        "despesa_executada": 3755.5586804700006,
+        "grau_execução": 77.28263851157202,
+        "medidas": {}
+      },
+      "017 - Agricultura e Alimentação": {
+        "despesa_orcamentada": 1642.127451,
+        "despesa_executada": 1255.4204158900006,
+        "grau_execução": 76.4508513103226,
+        "medidas": {}
+      }
+    }
+  }
+}
