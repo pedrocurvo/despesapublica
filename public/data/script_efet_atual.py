@@ -57,18 +57,19 @@ sheet_name_list_laranjas = {
 
 
 # === Função para extrair dados dos quadros laranja ===
-def extrair_programas_orcamentais(df):
+def extrair_programas_orcamentais(df_laranja, ano):
     programas = {}
     for i in range(4, 21):  # Linhas 6 a 22 (0-indexed)
-        nome = str(df.iloc[i, 1]).strip()  # Nome do setor da coluna 
+        nome = str(df_laranja.iloc[i, 1]).strip()  # Nome do setor da coluna 
         if pd.notna(nome) and nome != "Sub-total":
             try:
                 # Quadro laranja
-                orcamentada = float(df.iloc[i, 4])  # Despesa orçamentada (coluna 5)
-                executada = float(df.iloc[i, 7])  # Despesa executada (coluna 8)
-                percentagem_execucao = float(df.iloc[i, 8]) # Percentagem de execução (coluna 9)
+                orcamentada = float(df_laranja.iloc[i, 4])  # Despesa orçamentada (coluna 5)
+                executada = float(df_laranja.iloc[i, 7])  # Despesa executada (coluna 8)
+                percentagem_execucao = float(df_laranja.iloc[i, 8]) # Percentagem de execução (coluna 9)
 
-                # Quadro Azul
+                # Quadro Azul #TODO
+                "Iterar os quadros associados a cada setor para retirar as medidas"
                 """medidas_por_setor = {}
                 for i in range(4, 21):  # Linhas 6 a 22 (0-indexed)
                     nome = str(df.iloc[i, 1]).strip()  # Nome do setor da coluna 
@@ -94,7 +95,8 @@ def processar_excel(path_excel, ano, path_output):
     # === Processar Quadro Laranja (programas orçamentais) ===
     quadro_laranja = sheet_name_list_laranjas[ano]
     df_laranja = pd.read_excel(path_excel, sheet_name=quadro_laranja[0], header=0)
-    programas_orcamentais = extrair_programas_orcamentais(df_laranja)
+
+    programas_orcamentais = extrair_programas_orcamentais(df_laranja, ano)
     
     output[ano] = {
         "despesa_orcamentada": float(df_laranja.iloc[23, 4]),  # Exemplo: valor da célula E25
