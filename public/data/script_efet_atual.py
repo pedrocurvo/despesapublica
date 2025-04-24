@@ -2,7 +2,7 @@ import pandas as pd
 import json
 
 # === Definições de entrada/saída ===
-year = 2023
+year = 2021
 excel_path = f"Quadros_{year}.xlsx"
 output_path = f"../despesa_atual/{year}.json"
 
@@ -71,7 +71,7 @@ def extrair_medidas_por_programa(sheet_names, path_excel):
 # === Função para extrair dados do quadro laranja ===
 def extrair_programas_orcamentais(df_laranja, medidas_programas):
     programas = {}
-    for i in range(4, 21):  # Linhas 6 a 22 (0-indexed)
+    for i in range(3, 22):  # Linhas 6 a 22 (0-indexed)
         nome_setor = str(df_laranja.iloc[i, 1]).strip()
         if pd.notna(nome_setor) and nome_setor.lower() != "sub-total":
             try:
@@ -107,9 +107,9 @@ def processar_excel(path_excel, ano, path_output):
     programas_orcamentais = extrair_programas_orcamentais(df_laranja, medidas_programas)
 
     output[ano] = {
-        "despesa_orcamentada": float(df_laranja.iloc[23, 4]),
-        "despesa_executada": float(df_laranja.iloc[23, 7]),
-        "grau_execução": float(df_laranja.iloc[23, 8]),
+        "despesa_orcamentada": float(df_laranja.iloc[24, 4]),
+        "despesa_executada": float(df_laranja.iloc[24, 7]),
+        "grau_execução": float(df_laranja.iloc[24, 8]),
         "setores": programas_orcamentais
     }
 
