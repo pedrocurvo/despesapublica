@@ -61,17 +61,26 @@ def extrair_programas_orcamentais(df):
     programas = {}
     for i in range(4, 21):  # Linhas 6 a 22 (0-indexed)
         nome = str(df.iloc[i, 1]).strip()  # Nome do setor da coluna 
-        if pd.notna(nome) and nome != "Sub-Total":
+        if pd.notna(nome) and nome != "Sub-total":
             try:
-                # Corrigindo a conversão de string para float
+                # Quadro laranja
                 orcamentada = float(df.iloc[i, 4])  # Despesa orçamentada (coluna 5)
                 executada = float(df.iloc[i, 7])  # Despesa executada (coluna 8)
                 percentagem_execucao = float(df.iloc[i, 8]) # Percentagem de execução (coluna 9)
+
+                # Quadro Azul
+                """medidas_por_setor = {}
+                for i in range(4, 21):  # Linhas 6 a 22 (0-indexed)
+                    nome = str(df.iloc[i, 1]).strip()  # Nome do setor da coluna 
+                    if pd.notna(nome) and nome != "Sub-total":
+                        medidas_por_setor["nomedamedida"] = "valordamedida"
+                        #Retirar nome e valor da medida"""
+
                 programas[nome] = {
                     "despesa_orcamentada": orcamentada,
                     "despesa_executada": executada,
                     "grau_execução": percentagem_execucao,
-                    "medidas": {}
+                    "medidas":  "medidas_por_setor",
                 }
             except Exception as e:
                 continue
@@ -88,8 +97,8 @@ def processar_excel(path_excel, ano, path_output):
     programas_orcamentais = extrair_programas_orcamentais(df_laranja)
     
     output[ano] = {
-        "despesa_orcamentada": float(str(df_laranja.iloc[23, 4]).replace(".", "").replace(",", ".")),  # Exemplo: valor da célula E25
-        "despesa_executada": float(str(df_laranja.iloc[23, 7]).replace(".", "").replace(",", ".")),  # Exemplo: valor da célula H25
+        "despesa_orcamentada": float(df_laranja.iloc[23, 4]),  # Exemplo: valor da célula E25
+        "despesa_executada": float(df_laranja.iloc[23, 7]),  # Exemplo: valor da célula H25
         "setores": programas_orcamentais  # Adiciona os setores extraídos
     }
 
