@@ -1,25 +1,5 @@
-# 2023
-# Quadro 4.7. PO01 — Órgãos de Soberania: despesa por medidas do Programa
-# Quadro 4.9. PO02 — Governação: despesa por medidas do Programa
-# Quadro 4.16. PO03 — Representação Externa: despesa por medidas do Programa
-# Quadro 4.18. PO04 — Defesa: despesa por medidas do Programa
-# Quadro 4.20. PO05 — Segurança Interna: despesa por medidas do Programa
-# Quadro 4.22. PO06 — Justiça: despesa por medidas do Programa
-# Quadro 4.24. PO07 — Finanças: despesa por medidas do Programa
-# Quadro 4.26. PO08 — Gestão da Dívida Pública: despesa por medidas do Programa
-# Quadro 4.29. PO09 — Economia e Mar: despesa por medidas do Programa
-# Quadro 4.32. PO10 — Cultura: despesa por medidas do Programa
-# Quadro 4.36. PO11 — Ciência, Tecnologia e Ensino Superior: despesa por medidas do Programa
-# Quadro 4.46. PO12 — Ensino Básico e Secundário e Administração Escolar: despesa por medidas do Programa
-# Quadro 4.48. PO13 — Trabalho, Solidariedade e Segurança Social: despesa por medidas do Programa
-# Quadro 4.54. PO14 — Saúde: despesa por medidas do Programa
-# Quadro 4.59. PO15 — Ambiente e Ação Climática: despesa por medidas do Programa
-# Quadro 4.62. PO16 — Infraestruturas e Habitação: despesa por medidas do Programa
-# Quadro 4.66. PO17 — Agricultura e Alimentação: despesa por medidas do Programa
-
 import pandas as pd
 import json
-
 
 # === Definições de entrada/saída ===
 year = 2023
@@ -56,34 +36,60 @@ sheet_name_list_laranjas = {
 }
 
 
-# === Função para extrair dados dos quadros laranja ===
-def extrair_programas_orcamentais(df_laranja, ano):
+
+# === Função para extrair medidas por setor (quadros azuis) ===
+def extrair_medidas_por_programa(sheet_names, path_excel):
+    medidas_por_programa = {}
+    for sheet in sheet_names:
+        try:
+            df = pd.read_excel(path_excel, sheet_name=sheet, header=0)
+            medidas = {}
+
+            inicio_leitura = False
+            for i in range(len(df)):
+                linha_atual = str(df.iloc[i, 1]).strip()
+
+                # Ativa a leitura após encontrar a linha-chave
+                if not inicio_leitura and "Estado, SFA e EPR" in linha_atual:
+                    inicio_leitura = True
+                    continue  # Ir para a próxima linha
+
+                if inicio_leitura:
+                    if "DESPESA TOTAL NÃO CONSOLIDADA" in linha_atual.upper():
+                        break  # Parar a leitura ao encontrar essa linha
+
+                    if pd.notna(linha_atual) and linha_atual.lower() != "sub-total":
+                        valor = df.iloc[i, 3] if pd.notna(df.iloc[i, 3]) else 0
+                        medidas[linha_atual] = valor
+
+            medidas_por_programa[sheet] = medidas
+        except Exception as e:
+            print(f"Erro ao processar {sheet}: {e}")
+    return medidas_por_programa
+
+
+# === Função para extrair dados do quadro laranja ===
+def extrair_programas_orcamentais(df_laranja, medidas_programas):
     programas = {}
     for i in range(4, 21):  # Linhas 6 a 22 (0-indexed)
-        nome = str(df_laranja.iloc[i, 1]).strip()  # Nome do setor da coluna 
-        if pd.notna(nome) and nome != "Sub-total":
+        nome_setor = str(df_laranja.iloc[i, 1]).strip()
+        if pd.notna(nome_setor) and nome_setor.lower() != "sub-total":
             try:
-                # Quadro laranja
-                orcamentada = float(df_laranja.iloc[i, 4])  # Despesa orçamentada (coluna 5)
-                executada = float(df_laranja.iloc[i, 7])  # Despesa executada (coluna 8)
-                percentagem_execucao = float(df_laranja.iloc[i, 8]) # Percentagem de execução (coluna 9)
+                orcamentada = float(df_laranja.iloc[i, 4])
+                executada = float(df_laranja.iloc[i, 7])
+                percentagem_execucao = float(df_laranja.iloc[i, 8])
 
-                # Quadro Azul #TODO
-                "Iterar os quadros associados a cada setor para retirar as medidas"
-                """medidas_por_setor = {}
-                for i in range(4, 21):  # Linhas 6 a 22 (0-indexed)
-                    nome = str(df.iloc[i, 1]).strip()  # Nome do setor da coluna 
-                    if pd.notna(nome) and nome != "Sub-total":
-                        medidas_por_setor["nomedamedida"] = "valordamedida"
-                        #Retirar nome e valor da medida"""
+                # Tentar mapear com os quadros azuis
+                quadro_azul = list(medidas_programas.values())[i - 4] if i - 4 < len(medidas_programas) else {}
 
-                programas[nome] = {
+                programas[nome_setor] = {
                     "despesa_orcamentada": orcamentada,
                     "despesa_executada": executada,
                     "grau_execução": percentagem_execucao,
-                    "medidas":  "medidas_por_setor",
+                    "medidas": quadro_azul,
                 }
             except Exception as e:
+                print(f"Erro no setor {nome_setor}: {e}")
                 continue
     return programas
 
@@ -92,21 +98,21 @@ def extrair_programas_orcamentais(df_laranja, ano):
 def processar_excel(path_excel, ano, path_output):
     output = {}
 
-    # === Processar Quadro Laranja (programas orçamentais) ===
-    quadro_laranja = sheet_name_list_laranjas[ano]
-    df_laranja = pd.read_excel(path_excel, sheet_name=quadro_laranja[0], header=0)
+    quadro_laranja = sheet_name_list_laranjas[ano][0]
+    quadros_azuis = sheet_name_list_azuis[ano]
 
-    programas_orcamentais = extrair_programas_orcamentais(df_laranja, ano)
-    
+    df_laranja = pd.read_excel(path_excel, sheet_name=quadro_laranja, header=0)
+    medidas_programas = extrair_medidas_por_programa(quadros_azuis, path_excel)
+
+    programas_orcamentais = extrair_programas_orcamentais(df_laranja, medidas_programas)
+
     output[ano] = {
-        "despesa_orcamentada": float(df_laranja.iloc[23, 4]),  # Exemplo: valor da célula E25
-        "despesa_executada": float(df_laranja.iloc[23, 7]),  # Exemplo: valor da célula H25
-        "setores": programas_orcamentais  # Adiciona os setores extraídos
+        "despesa_orcamentada": float(df_laranja.iloc[23, 4]),
+        "despesa_executada": float(df_laranja.iloc[23, 7]),
+        "grau_execução": float(df_laranja.iloc[23, 8]),
+        "setores": programas_orcamentais
     }
 
-   
-
-    # === Guardar JSON ===
     with open(path_output, "w", encoding="utf-8") as f:
         json.dump(output, f, ensure_ascii=False, indent=2)
 
