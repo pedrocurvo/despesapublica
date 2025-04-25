@@ -110,7 +110,7 @@ export function Overview({ startYear = 2018, endYear = 2023 }: OverviewProps) {
             <div className={`font-medium ${yearData.saldoActual !== null ? (yearData.saldoActual >= 0 ? "text-green-500" : "text-red-500") : "text-muted-foreground"}`}>
               <p>{`Saldo Efetivo:`}</p>
               <div className="pl-2 mt-1 text-sm">
-                <p>{`Em €: ${yearData.saldoActual !== null ? `€${(yearData.saldoActual/1000).toFixed(2)}MM` : 'N/D'}`}</p>
+                <p>{`Em €: ${yearData.saldoActual !== null ? `${(yearData.saldoActual/1000).toFixed(2)}MM` : 'N/D'}`}</p>
                 <p className="text-muted-foreground">{`Em % do PIB: ${yearData.pibPercentage !== null ? `${yearData.pibPercentage}%` : 'N/D'}`}</p>
               </div>
             </div>
