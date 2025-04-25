@@ -48,6 +48,8 @@ def limpar_valor(valor):
     else:
         return 0.0
 
+
+
 # === Função para extrair medidas por setor (quadros azuis) ===
 def extrair_medidas_por_programa(sheet_names, path_excel):
     medidas_por_programa = {}
@@ -68,7 +70,7 @@ def extrair_medidas_por_programa(sheet_names, path_excel):
                     continue  # Ir para a próxima linha
 
                 if inicio_leitura:
-                    if "DESPESA TOTAL NÃO CONSOLIDADA" in linha_atual.upper():
+                    if "DESPESA TOTAL CONSOLIDADA" in linha_atual.upper():
                         break  # Parar a leitura ao encontrar essa linha
 
                     if pd.notna(linha_atual) and linha_atual.lower() != "sub-total":
@@ -96,8 +98,10 @@ def extrair_programas_orcamentais(df_laranja, medidas_programas):
     programas = {}
     # Definindo setores sem medidas
     #setores_sem_medidas = ["PO10", "PO11", "PO19"]
-    for i in range(5, 24):  # Linhas 6 a 22 (0-indexed)
+    for i in range(3, 23):  # Linhas 6 a 22 (0-indexed)
+        print("primeior i a la por", i)
         nome_setor = str(df_laranja.iloc[i, 1]).strip()
+        print(nome_setor)
         if pd.notna(nome_setor) and nome_setor.lower() != "sub-total":
             try:
                 orcamentada = float(df_laranja.iloc[i, 4])
@@ -116,11 +120,14 @@ def extrair_programas_orcamentais(df_laranja, medidas_programas):
                 else:"""
                     # Se o setor tiver medidas, associa as medidas
                 quadro_azul = list(medidas_programas.values())[i - 5] if i - 5 < len(medidas_programas) else {}
+                
+                medidas_finais  = {k: v for k, v in quadro_azul.items() if k != "DESPESA TOTAL NÃO CONSOLIDADA"}
                 programas[nome_setor] = {
                     "despesa_orcamentada": orcamentada,
-                    "despesa_executada": executada,
+                    "despesa_executada_efetiva_consolidada": executada,
+                    "despesa_executada_total_nao_consolidada": quadro_azul["DESPESA TOTAL NÃO CONSOLIDADA"],
                     "grau_execução": percentagem_execucao,
-                    "medidas": quadro_azul,
+                    "medidas":  medidas_finais,
                 }
                 print(quadro_azul)
             except Exception as e:
@@ -141,9 +148,9 @@ def processar_excel(path_excel, ano, path_output):
     programas_orcamentais = extrair_programas_orcamentais(df_laranja, medidas_programas)
 
     output[ano] = {
-        "despesa_orcamentada": float(df_laranja.iloc[25, 4]),
-        "despesa_executada": float(df_laranja.iloc[25, 7]),
-        "grau_execução": float(df_laranja.iloc[25, 8]),
+        "despesa_orcamentada": float(df_laranja.iloc[23, 4]),
+        "despesa_executada_efetiva_consolidada": float(df_laranja.iloc[23, 7]),
+        "grau_execução": float(df_laranja.iloc[23, 8]),
         "setores": programas_orcamentais
     }
 

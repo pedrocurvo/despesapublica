@@ -1,24 +1,14 @@
 {
   "2019": {
-    "despesa_orcamentada": 71518.33892868001,
-    "despesa_executada": 66485.96957524003,
-    "grau_execução": 92.9635259548641,
+    "despesa_orcamentada": 72073.42529968,
+    "despesa_executada_efetiva_consolidada": 66998.75227406003,
+    "grau_execução": 92.9590233785621,
     "setores": {
       "001 - Órgãos de Soberania": {
         "despesa_orcamentada": 3727.185817,
-        "despesa_executada": 3674.87469618,
+        "despesa_executada_efetiva_consolidada": 3674.87469618,
+        "despesa_executada_total_nao_consolidada": 3963.45193903,
         "grau_execução": 98.59649817882958,
-        "medidas": {
-          "004 - SERV. GERAIS DA A.P. - INVESTIGAÇÃO CIENTÍFICA DE CARÁCTER GERAL": 48.66266073,
-          "040 - AGRICULTURA, PECUÁRIA, SILV, CAÇA, PESCA - ADMINISTRAÇÃO E REGULAMENTAÇÃO": 10.65750821,
-          "045 - AGRICULTURA, PECUÁRIA, SILV, CAÇA, PESCA - PESCA": 18.63591953,
-          "057 - TRANSPORTES E COMUNICAÇÕES - TRANSPORTES MARÍTIMOS E FLUVIAIS": 3.76504851
-        }
-      },
-      "002 - Governação": {
-        "despesa_orcamentada": 171.73920665,
-        "despesa_executada": 146.65061321000002,
-        "grau_execução": 85.39145840406152,
         "medidas": {
           "001 - SERV. GERAIS DA A.P. - ADMINISTRAÇÃO GERAL": 292.65310539,
           "012 - SEGURANÇA E ORDEM PÚBLICAS - SISTEMA JUDICIÁRIO": 317.67806937,
@@ -27,10 +17,11 @@
           "067 - OUTRAS FUNÇÕES - TRANSFERÊNCIAS ENTRE ADMINISTRAÇÕES": 3345.88057855
         }
       },
-      "003 - Representação Externa": {
-        "despesa_orcamentada": 451.535408,
-        "despesa_executada": 398.0739659900001,
-        "grau_execução": 88.1600775791209,
+      "002 - Governação": {
+        "despesa_orcamentada": 171.73920665,
+        "despesa_executada_efetiva_consolidada": 146.65061321000002,
+        "despesa_executada_total_nao_consolidada": 228.70237966,
+        "grau_execução": 85.39145840406152,
         "medidas": {
           "001 - SERV. GERAIS DA A.P. - ADMINISTRAÇÃO GERAL": 99.49906158,
           "011 - SEGURANÇA E ORDEM PÚBLICAS - FORÇAS DE SEGURANÇA": 65.70934551,
@@ -43,10 +34,11 @@
           "084 - SIMPLEX +": 11.79398821
         }
       },
-      "004 - Finanças": {
-        "despesa_orcamentada": 4429.363017,
-        "despesa_executada": 3789.2429693699996,
-        "grau_execução": 85.54825953137721,
+      "003 - Representação Externa": {
+        "despesa_orcamentada": 451.535408,
+        "despesa_executada_efetiva_consolidada": 398.0739659900001,
+        "despesa_executada_total_nao_consolidada": 567.33783214,
+        "grau_execução": 88.1600775791209,
         "medidas": {
           "002 - SERV. GERAIS DA A.P. - NEGÓCIOS ESTRANGEIROS": 435.55809816,
           "003 - SERV. GERAIS DA A.P. - COOPERAÇÃO ECONÓMICA EXTERNA": 84.89533609,
@@ -54,10 +46,11 @@
           "084 - SIMPLEX +": 1.03222164
         }
       },
-      "005 - Gestão da Dívida Pública": {
-        "despesa_orcamentada": 7418.29004,
-        "despesa_executada": 7171.47866417,
-        "grau_execução": 96.67293440268345,
+      "004 - Finanças": {
+        "despesa_orcamentada": 4429.363017,
+        "despesa_executada_efetiva_consolidada": 3789.2429693699996,
+        "despesa_executada_total_nao_consolidada": 17332.52939117,
+        "grau_execução": 85.54825953137721,
         "medidas": {
           "001 - SERV. GERAIS DA A.P. - ADMINISTRAÇÃO GERAL": 2260.53649329,
           "003 - SERV. GERAIS DA A.P. - COOPERAÇÃO ECONÓMICA EXTERNA": 95.47229104,
@@ -85,17 +78,26 @@
           "084 - SIMPLEX +": 0.0
         }
       },
-      "006 - Defesa": {
-        "despesa_orcamentada": 2327.030681,
-        "despesa_executada": 2080.37557722,
-        "grau_execução": 89.40043610967757,
+      "005 - Gestão da Dívida Pública": {
+        "despesa_orcamentada": 7418.29004,
+        "despesa_executada_efetiva_consolidada": 7171.47866417,
+        "despesa_executada_total_nao_consolidada": 54139.6057955,
+        "grau_execução": 96.67293440268345,
         "medidas": {
           "066 - OUTRAS FUNÇÕES - OPERAÇÕES DA DÍVIDA PÚBLICA": 54139.6057955
         }
       },
+      "006 - Defesa": {
+        "despesa_orcamentada": 2327.030681,
+        "despesa_executada_efetiva_consolidada": 2080.37557722,
+        "despesa_executada_total_nao_consolidada": null,
+        "grau_execução": 89.40043610967757,
+        "medidas": null
+      },
       "007 - Segurança Interna": {
         "despesa_orcamentada": 2159.40107385,
-        "despesa_executada": 2008.2876784899988,
+        "despesa_executada_efetiva_consolidada": 2008.2876784899988,
+        "despesa_executada_total_nao_consolidada": 2175.86675078,
         "grau_execução": 93.00206908341576,
         "medidas": {
           "001 - SERV. GERAIS DA A.P. - ADMINISTRAÇÃO GERAL": 0.0884803,
@@ -125,7 +127,8 @@
       },
       "008 - Justiça": {
         "despesa_orcamentada": 1496.43019494,
-        "despesa_executada": 1408.3127543399996,
+        "despesa_executada_efetiva_consolidada": 1408.3127543399996,
+        "despesa_executada_total_nao_consolidada": 1756.08162348,
         "grau_execução": 94.11149007164123,
         "medidas": {
           "001 - SERV. GERAIS DA A.P. - ADMINISTRAÇÃO GERAL": 11.91613665,
@@ -143,7 +146,8 @@
       },
       "009 - Cultura": {
         "despesa_orcamentada": 483.439439,
-        "despesa_executada": 439.92020619999994,
+        "despesa_executada_efetiva_consolidada": 439.92020619999994,
+        "despesa_executada_total_nao_consolidada": 690.49549759,
         "grau_execução": 90.99799700040607,
         "medidas": {
           "001 - SERV. GERAIS DA A.P. - ADMINISTRAÇÃO GERAL": 2.44522636,
@@ -154,7 +158,8 @@
       },
       "010 - Ciência, Tecnologia e Ensino Superior": {
         "despesa_orcamentada": 3287.998044,
-        "despesa_executada": 2511.9196993899996,
+        "despesa_executada_efetiva_consolidada": 2511.9196993899996,
+        "despesa_executada_total_nao_consolidada": 4166.790547,
         "grau_execução": 76.39662997895627,
         "medidas": {
           "001 - SERV. GERAIS DA A.P. - ADMINISTRAÇÃO GERAL": 22.77954289,
@@ -169,7 +174,8 @@
       },
       "011 - Ensino Básico e Secundário e Administração Escolar": {
         "despesa_orcamentada": 6730.2691113,
-        "despesa_executada": 6393.844654120014,
+        "despesa_executada_efetiva_consolidada": 6393.844654120014,
+        "despesa_executada_total_nao_consolidada": 6746.4002555,
         "grau_execução": 95.00132235997613,
         "medidas": {
           "001 - SERV. GERAIS DA A.P. - ADMINISTRAÇÃO GERAL": 3.20660258,
@@ -186,7 +192,8 @@
       },
       "012 -Trabalho, Solidariedade e Segurança Social": {
         "despesa_orcamentada": 20156.40243094,
-        "despesa_executada": 19730.152737529992,
+        "despesa_executada_efetiva_consolidada": 19730.152737529992,
+        "despesa_executada_total_nao_consolidada": 25660.60613746,
         "grau_execução": 97.8852888313258,
         "medidas": {
           "001 - SERV. GERAIS DA A.P. - ADMINISTRAÇÃO GERAL": 0.03959862,
@@ -202,7 +209,8 @@
       },
       "013 - Saúde": {
         "despesa_orcamentada": 12212.878378,
-        "despesa_executada": 11506.088535040017,
+        "despesa_executada_efetiva_consolidada": 11506.088535040017,
+        "despesa_executada_total_nao_consolidada": 29574.58215209,
         "grau_execução": 94.21274968042606,
         "medidas": {
           "020 - SAÚDE - ADMINISTRAÇÃO E REGULAMENTAÇÃO": 154.87424777,
@@ -215,7 +223,8 @@
       },
       "014 - Planeamento e Infraestruturas": {
         "despesa_orcamentada": 3643.014548,
-        "despesa_executada": 2959.85450682,
+        "despesa_executada_efetiva_consolidada": 2959.85450682,
+        "despesa_executada_total_nao_consolidada": 5308.29348802,
         "grau_execução": 81.24739739084896,
         "medidas": {
           "001 - SERV. GERAIS DA A.P. - ADMINISTRAÇÃO GERAL": 75.8358232600001,
@@ -241,7 +250,8 @@
       },
       "015 - Economia": {
         "despesa_orcamentada": 553.069071,
-        "despesa_executada": 449.80222585000007,
+        "despesa_executada_efetiva_consolidada": 449.80222585000007,
+        "despesa_executada_total_nao_consolidada": 1281.54169085,
         "grau_execução": 81.32839991155464,
         "medidas": {
           "001 - SERV. GERAIS DA A.P. - ADMINISTRAÇÃO GERAL": 0.8675024,
@@ -258,7 +268,8 @@
       },
       "016 - Ambiente": {
         "despesa_orcamentada": 1397.907842,
-        "despesa_executada": 1154.1206954500003,
+        "despesa_executada_efetiva_consolidada": 1154.1206954500003,
+        "despesa_executada_total_nao_consolidada": 2637.19374459,
         "grau_execução": 82.56057093139908,
         "medidas": {
           "001 - SERV. GERAIS DA A.P. - ADMINISTRAÇÃO GERAL": 0.0,
@@ -279,7 +290,8 @@
       },
       "017 - Agricultura, Florestas e Desenvolvimento Rural e Mar": {
         "despesa_orcamentada": 1312.085813,
-        "despesa_executada": 1111.5293941299997,
+        "despesa_executada_efetiva_consolidada": 1111.5293941299997,
+        "despesa_executada_total_nao_consolidada": 1399.61577664,
         "grau_execução": 84.71468734110913,
         "medidas": {
           "001 - SERV. GERAIS DA A.P. - ADMINISTRAÇÃO GERAL": 0.0,
@@ -296,7 +308,8 @@
       },
       "018 - Mar": {
         "despesa_orcamentada": 115.385184,
-        "despesa_executada": 64.22270055999999,
+        "despesa_executada_efetiva_consolidada": 64.22270055999999,
+        "despesa_executada_total_nao_consolidada": 81.7211369800001,
         "grau_execução": 55.65939952914578,
         "medidas": {
           "004 - SERV. GERAIS DA A.P. - INVESTIGAÇÃO CIENTÍFICA DE CARÁCTER GERAL": 48.66266073,

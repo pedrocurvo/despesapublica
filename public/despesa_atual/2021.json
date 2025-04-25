@@ -1,12 +1,13 @@
 {
   "2021": {
-    "despesa_orcamentada": 81682.0,
-    "despesa_executada": 74281.0,
-    "grau_execução": 90.9,
+    "despesa_orcamentada": 82617.0,
+    "despesa_executada_efetiva_consolidada": 75011.0,
+    "grau_execução": 90.8,
     "setores": {
       "001 - Órgãos de Soberania": {
         "despesa_orcamentada": 4267.0,
-        "despesa_executada": 4203.0,
+        "despesa_executada_efetiva_consolidada": 4203.0,
+        "despesa_executada_total_nao_consolidada": 4547.5,
         "grau_execução": 98.5,
         "medidas": {
           "001 - SERV. GERAIS DA A.P. - ADMINISTRAÇÃO GERAL": 350.1,
@@ -19,7 +20,8 @@
       },
       "002 - Governação": {
         "despesa_orcamentada": 1160.0,
-        "despesa_executada": 993.0,
+        "despesa_executada_efetiva_consolidada": 993.0,
+        "despesa_executada_total_nao_consolidada": 1378.0,
         "grau_execução": 85.5,
         "medidas": {
           "001 - SERV. GERAIS DA A.P. - ADMINISTRAÇÃO GERAL": 168.3,
@@ -44,7 +46,8 @@
       },
       "003 - Economia": {
         "despesa_orcamentada": 716.0,
-        "despesa_executada": 522.0,
+        "despesa_executada_efetiva_consolidada": 522.0,
+        "despesa_executada_total_nao_consolidada": 1599.67993663,
         "grau_execução": 72.9,
         "medidas": {
           "061 - COMÉRCIO E TURISMO - COMÉRCIO": 44.67125037,
@@ -62,7 +65,8 @@
       },
       "004 - Representação Externa": {
         "despesa_orcamentada": 496.0,
-        "despesa_executada": 431.0,
+        "despesa_executada_efetiva_consolidada": 431.0,
+        "despesa_executada_total_nao_consolidada": 631.7,
         "grau_execução": 86.8,
         "medidas": {
           "002 - SERV. GERAIS DA A.P. - NEGÓCIOS ESTRANGEIROS": 460.0,
@@ -76,7 +80,8 @@
       },
       "005 - Finanças": {
         "despesa_orcamentada": 5915.0,
-        "despesa_executada": 5025.0,
+        "despesa_executada_efetiva_consolidada": 5025.0,
+        "despesa_executada_total_nao_consolidada": 14123.5,
         "grau_execução": 84.9,
         "medidas": {
           "001 - SERV. GERAIS DA A.P. - ADMINISTRAÇÃO GERAL": 1267.4,
@@ -108,7 +113,8 @@
       },
       "006 - Gestão da Dívida Pública": {
         "despesa_orcamentada": 6605.0,
-        "despesa_executada": 6383.0,
+        "despesa_executada_efetiva_consolidada": 6383.0,
+        "despesa_executada_total_nao_consolidada": 56755.27678654001,
         "grau_execução": 96.6,
         "medidas": {
           "066 - OUTRAS FUNÇÕES - OPERAÇÕES DA DÍVIDA PÚBLICA": 56755.27678654001
@@ -116,7 +122,8 @@
       },
       "007 - Defesa": {
         "despesa_orcamentada": 2668.0,
-        "despesa_executada": 2392.0,
+        "despesa_executada_efetiva_consolidada": 2392.0,
+        "despesa_executada_total_nao_consolidada": 2492.4,
         "grau_execução": 89.6,
         "medidas": {
           "004 - SERV. GERAIS DA A.P. - INVESTIGAÇÃO CIENTÍFICA DE CARÁCTER GERAL": 0.1,
@@ -139,7 +146,8 @@
       },
       "008 - Segurança Interna": {
         "despesa_orcamentada": 2370.0,
-        "despesa_executada": 2125.0,
+        "despesa_executada_efetiva_consolidada": 2125.0,
+        "despesa_executada_total_nao_consolidada": 2324.2,
         "grau_execução": 89.7,
         "medidas": {
           "003 - SERV. GERAIS DA A.P. - COOPERAÇÃO ECONÓMICA EXTERNA": 3.1,
@@ -169,7 +177,8 @@
       },
       "009 - Justiça": {
         "despesa_orcamentada": 1577.0,
-        "despesa_executada": 1430.0,
+        "despesa_executada_efetiva_consolidada": 1430.0,
+        "despesa_executada_total_nao_consolidada": 1864.31549093,
         "grau_execução": 90.7,
         "medidas": {
           "001 - SERV. GERAIS DA A.P. - ADMINISTRAÇÃO GERAL": 0.99611216,
@@ -190,7 +199,8 @@
       },
       "012 - Cultura": {
         "despesa_orcamentada": 610.0,
-        "despesa_executada": 509.0,
+        "despesa_executada_efetiva_consolidada": 509.0,
+        "despesa_executada_total_nao_consolidada": 787.65498785,
         "grau_execução": 83.6,
         "medidas": {
           "036 - SERVIÇOS CULTURAIS, RECREATIVOS E RELIGIOSOS - CULTURA": 326.77417638,
@@ -202,7 +212,8 @@
       },
       "013 - Ciência, Tecnologia e Ensino Superior": {
         "despesa_orcamentada": 3461.0,
-        "despesa_executada": 2602.0,
+        "despesa_executada_efetiva_consolidada": 2602.0,
+        "despesa_executada_total_nao_consolidada": 4433.0,
         "grau_execução": 75.2,
         "medidas": {
           "001 - SERV. GERAIS DA A.P. - ADMINISTRAÇÃO GERAL": 25.1,
@@ -220,7 +231,8 @@
       },
       "014 -Ensino Básico e Secundário e Administração Escolar": {
         "despesa_orcamentada": 7624.0,
-        "despesa_executada": 7091.0,
+        "despesa_executada_efetiva_consolidada": 7091.0,
+        "despesa_executada_total_nao_consolidada": 7798.07731344,
         "grau_execução": 93.0,
         "medidas": {
           "003 - SERV. GERAIS DA A.P. - COOPERAÇÃO ECONÓMICA EXTERNA": 35.68818422,
@@ -240,7 +252,8 @@
       },
       "015 - Trabalho, Solidariedade e Segurança Social": {
         "despesa_orcamentada": 22910.0,
-        "despesa_executada": 22439.0,
+        "despesa_executada_efetiva_consolidada": 22439.0,
+        "despesa_executada_total_nao_consolidada": 28973.8,
         "grau_execução": 97.9,
         "medidas": {
           "001 - SERV. GERAIS DA A.P. - ADMINISTRAÇÃO GERAL": 0.0,
@@ -263,7 +276,8 @@
       },
       "016 - Saúde": {
         "despesa_orcamentada": 14321.0,
-        "despesa_executada": 12859.0,
+        "despesa_executada_efetiva_consolidada": 12859.0,
+        "despesa_executada_total_nao_consolidada": 33296.3,
         "grau_execução": 89.8,
         "medidas": {
           "002 - SERV. GERAIS DA A.P. - NEGÓCIOS ESTRANGEIROS": 0.0,
@@ -281,7 +295,8 @@
       },
       "017 - Ambiente e Acção Climática": {
         "despesa_orcamentada": 2561.0,
-        "despesa_executada": 1984.0,
+        "despesa_executada_efetiva_consolidada": 1984.0,
+        "despesa_executada_total_nao_consolidada": 3279.482,
         "grau_execução": 77.4,
         "medidas": {
           "031 - HABITAÇÃO E SERV. COLECTIVOS - ORDENAMENTO DO TERRITÓRIO": 12.63076,
@@ -305,7 +320,8 @@
       },
       "018 - Insfraestruturas e Habitação": {
         "despesa_orcamentada": 3960.0,
-        "despesa_executada": 2926.0,
+        "despesa_executada_efetiva_consolidada": 2926.0,
+        "despesa_executada_total_nao_consolidada": 5802.4,
         "grau_execução": 73.9,
         "medidas": {
           "001 - SERV. GERAIS DA A.P. - ADMINISTRAÇÃO GERAL": 84.6,
@@ -329,7 +345,8 @@
       },
       "020 - Agricultura": {
         "despesa_orcamentada": 1268.0,
-        "despesa_executada": 1030.0,
+        "despesa_executada_efetiva_consolidada": 1030.0,
+        "despesa_executada_total_nao_consolidada": 1272.3,
         "grau_execução": 81.2,
         "medidas": {
           "040 - AGRICULTURA, PECUÁRIA, SILV, CAÇA, PESCA - ADMINISTRAÇÃO E REGULAMENTAÇÃO": 83.0,
@@ -337,7 +354,6 @@
           "042 - AGRICULTURA, PECUÁRIA, SILV, CAÇA, PESCA - AGRICULTURA E PECUÁRIA": 1056.8,
           "045 - AGRICULTURA, PECUÁRIA, SILV, CAÇA, PESCA - PESCA": 60.9,
           "084 - SIMPLEX +": 0.6,
-          "085 - FLORESTAS": 0.0,
           "095 - CONTINGÊNCIA COVID 2019 - PREVENÇÃO, CONTENÇÃO, MITIGAÇÃO E TRATAMENTO": 0.3,
           "096 - CONTINGÊNCIA COVID 2019 - GARANTIR NORMALIDADE": 24.4,
           "101 - PLANO NACIONAL DE GESTÃO INTEGRADA DE FOGOS RURAIS": 0.2,
@@ -346,7 +362,8 @@
       },
       "021 - Mar": {
         "despesa_orcamentada": 126.0,
-        "despesa_executada": 69.0,
+        "despesa_executada_efetiva_consolidada": 69.0,
+        "despesa_executada_total_nao_consolidada": 103.6,
         "grau_execução": 54.4,
         "medidas": {
           "004 - SERV. GERAIS DA A.P. - INVESTIGAÇÃO CIENTÍFICA DE CARÁCTER GERAL": 55.7,

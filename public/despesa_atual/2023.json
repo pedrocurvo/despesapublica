@@ -1,12 +1,13 @@
 {
   "2023": {
-    "despesa_orcamentada": 90752.70563289999,
-    "despesa_executada": 80948.53933522008,
-    "grau_execução": 89.19683305383937,
+    "despesa_orcamentada": 92583.04754189998,
+    "despesa_executada_efetiva_consolidada": 82200.99540983007,
+    "grau_execução": 88.7862277082947,
     "setores": {
       "001 - Órgãos de Soberania": {
         "despesa_orcamentada": 5717.839984,
-        "despesa_executada": 5593.717855290001,
+        "despesa_executada_efetiva_consolidada": 5593.717855290001,
+        "despesa_executada_total_nao_consolidada": 5956.78560071,
         "grau_execução": 97.82921297102884,
         "medidas": {
           "001 - SERV. GERAIS DA A.P. - ADMINISTRAÇÃO GERAL": 352.37177016000004,
@@ -20,7 +21,8 @@
       },
       "002 - Governação": {
         "despesa_orcamentada": 2043.12585,
-        "despesa_executada": 1620.3195255499993,
+        "despesa_executada_efetiva_consolidada": 1620.3195255499993,
+        "despesa_executada_total_nao_consolidada": 2192.30138014,
         "grau_execução": 79.30590891158268,
         "medidas": {
           "001 - SERVIÇOS GERAIS DA ADMINISTRAÇÃO PÚBLICA - ADMINISTRAÇÃO GERAL": 260.18375923,
@@ -44,20 +46,21 @@
           "085 - FLORESTAS": 0.93418877,
           "095 - CONTINGÊNCIA COVID-19 - PREVENÇÃO, CONTENÇÃO, MITIGAÇÃO E TRATAMENTO DA INFEÇÃO EPIDEMIOLÓGICA": 1.40920417,
           "096 - CONTINGÊNCIA COVID-19 - GARANTIR NORMALIDADE": 0.00740003,
-          "100 - INICIATIVAS DE AÇÃO CLIMÁTICA": 0,
+          "100 - INICIATIVAS DE AÇÃO CLIMÁTICA": 0.0,
           "101 - PLANO NACIONAL DE GESTÃO INTEGRADA DE FOGOS RURAIS": 4.12180049,
           "102 - PLANO DE RECUPERAÇÃO E RESILIÊNCIA": 150.68367477
         }
       },
       "003 - Representação Externa": {
         "despesa_orcamentada": 630.313873,
-        "despesa_executada": 552.14288799,
+        "despesa_executada_efetiva_consolidada": 552.14288799,
+        "despesa_executada_total_nao_consolidada": 865.29642589,
         "grau_execução": 87.5980859126672,
         "medidas": {
           "002 - SERVIÇOS GERAIS DA ADMINISTRAÇÃO PÚBLICA - NEGÓCIOS ESTRANGEIROS": 501.89245908,
           "003 - SERVIÇOS GERAIS DA ADMINISTRAÇÃO PÚBLICA - COOPERAÇÃO ECONÓMICA EXTERNA": 207.9987538,
           "065 - OUTRAS FUNÇÕES ECONÓMICAS - DIVERSAS NÃO ESPECIFICADAS": 123.05209974,
-          "084 - SIMPLEX+": 0,
+          "084 - SIMPLEX+": 0.0,
           "095 - CONTINGÊNCIA COVID-19 - PREVENÇÃO, CONTENÇÃO, MITIGAÇÃO E TRATAMENTO DA INFEÇÃO EPIDEMIOLÓGICA": 0.09851547,
           "096 - CONTINGÊNCIA COVID-19 - GARANTIR NORMALIDADE": 0.00025,
           "102 - PLANO DE RECUPERAÇÃO E RESILIÊNCIA": 30.76116063,
@@ -66,7 +69,8 @@
       },
       "004 - Defesa": {
         "despesa_orcamentada": 2834.033115,
-        "despesa_executada": 2320.8289908499974,
+        "despesa_executada_efetiva_consolidada": 2320.8289908499974,
+        "despesa_executada_total_nao_consolidada": 2431.38042559,
         "grau_execução": 81.8913857627947,
         "medidas": {
           "004 - SERVIÇOS GERAIS DA ADMINISTRAÇÃO PÚBLICA - INVESTIGAÇÃO CIENTÍFICA DE CARÁTER GERAL": 0.095,
@@ -82,14 +86,15 @@
           "049 - INDÚSTRIA E ENERGIA - INDÚSTRIAS TRANSFORMADORAS": 26.20399982,
           "084 - SIMPLEX+": 0.15363094,
           "095 - CONTINGÊNCIA COVID-19 - PREVENÇÃO, CONTENÇÃO, MITIGAÇÃO E TRATAMENTO DA INFEÇÃO EPIDEMIOLÓGICA": 0.07068178,
-          "096 - CONTINGÊNCIA COVID-19 - GARANTIR NORMALIDADE": 0,
+          "096 - CONTINGÊNCIA COVID-19 - GARANTIR NORMALIDADE": 0.0,
           "102 - PLANO DE RECUPERAÇÃO E RESILIÊNCIA": 28.54342585,
-          "103 - IMPACTO DO CHOQUE GEOPOLÍTICO": 0
+          "103 - IMPACTO DO CHOQUE GEOPOLÍTICO": 0.0
         }
       },
       "005 - Segurança Interna": {
         "despesa_orcamentada": 2747.519,
-        "despesa_executada": 2454.59597485,
+        "despesa_executada_efetiva_consolidada": 2454.59597485,
+        "despesa_executada_total_nao_consolidada": 2664.26880942,
         "grau_execução": 89.33863514137664,
         "medidas": {
           "003 - SERVIÇOS GERAIS DA ADMINISTRAÇÃO PÚBLICA - COOPERAÇÃO ECONÓMICA EXTERNA": 3.69766099,
@@ -104,7 +109,7 @@
           "082 - SEGURANÇA E AÇÃO SOCIAL - VIOLÊNCIA DOMÉSTICA - PREVENÇÃO E PROTEÇÃO À VÍTIMA": 11.43186857,
           "083 - SEGURANÇA E AÇÃO SOCIAL - INTEGRAÇÃO DA PESSOA COM DEFICIÊNCIA": 9.30363425,
           "084 - SIMPLEX+": 0.12873786,
-          "085 - FLORESTAS": 0,
+          "085 - FLORESTAS": 0.0,
           "087 - SEGURANÇA E ORDEM PÚBLICAS - LPIEFSS - SISTEMAS DE TECNOLOGIAS DE INFORMAÇÃO E COMUNICAÇÃO": 14.93559496,
           "088 - SEGURANÇA E ORDEM PÚBLICAS - LPIEFSS - INFRAESTRUTURAS": 8.38149204,
           "089 - SEGURANÇA E ORDEM PÚBLICAS - LPIEFSS - VEÍCULOS": 0.1377108,
@@ -114,7 +119,7 @@
           "093 - SEGURANÇA E ORDEM PÚBLICAS - LPIEFSS - EQUIPAMENTO PARA FUNÇÕES ESPECIALIZADAS": 2.33142406,
           "095 - CONTINGÊNCIA COVID-19 - PREVENÇÃO, CONTENÇÃO, MITIGAÇÃO E TRATAMENTO DA INFEÇÃO EPIDEMIOLÓGICA": 1.71707832,
           "096 - CONTINGÊNCIA COVID-19 - GARANTIR NORMALIDADE": 0.15712359,
-          "097 - PROGRAMA ATIVAR": 0,
+          "097 - PROGRAMA ATIVAR": 0.0,
           "100 - INICIATIVAS DE AÇÃO CLIMÁTICA": 0.158296,
           "101 - PLANO NACIONAL DE GESTÃO INTEGRADA DE FOGOS RURAIS": 204.18557684,
           "102 - PLANO DE RECUPERAÇÃO E RESILIÊNCIA": 31.33828522
@@ -122,7 +127,8 @@
       },
       "006 - Justiça": {
         "despesa_orcamentada": 1820.842407,
-        "despesa_executada": 1568.7822607999983,
+        "despesa_executada_efetiva_consolidada": 1568.7822607999983,
+        "despesa_executada_total_nao_consolidada": 2071.27308152,
         "grau_execução": 86.15694882593968,
         "medidas": {
           "001 - SERVIÇOS GERAIS DA ADMINISTRAÇÃO PÚBLICA - ADMINISTRAÇÃO GERAL": 0.38064483,
@@ -138,13 +144,14 @@
           "084 - SIMPLEX+": 2.58278807,
           "095 - CONTINGÊNCIA COVID-19 - PREVENÇÃO, CONTENÇÃO, MITIGAÇÃO E TRATAMENTO DA INFEÇÃO EPIDEMIOLÓGICA": 0.51571732,
           "096 - CONTINGÊNCIA COVID-19 - GARANTIR NORMALIDADE": 0.20051831,
-          "097 - PROGRAMA ATIVAR": 0,
+          "097 - PROGRAMA ATIVAR": 0.0,
           "102 - PLANO DE RECUPERAÇÃO E RESILIÊNCIA": 26.37594272
         }
       },
       "007 - Finanças": {
         "despesa_orcamentada": 5993.237171,
-        "despesa_executada": 4610.044380839999,
+        "despesa_executada_efetiva_consolidada": 4610.044380839999,
+        "despesa_executada_total_nao_consolidada": 14273.36789053,
         "grau_execução": 76.92077335345617,
         "medidas": {
           "001 - SERVIÇOS GERAIS DA ADMINISTRAÇÃO PÚBLICA - ADMINISTRAÇÃO GERAL": 1544.58110535,
@@ -152,13 +159,13 @@
           "005 - DEFESA NACIONAL - ADMINISTRAÇÃO E REGULAMENTAÇÃO": 209.24744191,
           "007 - DEFESA NACIONAL - FORÇAS ARMADAS": 2.926829,
           "009 - SEGURANÇA E ORDEM PÚBLICAS - ADMINISTRAÇÃO E REGULAMENTAÇÃO": 30.5707933,
-          "015 - EDUCAÇÃO - ADMINISTRAÇÃO E REGULAMENTAÇÃO": 0,
+          "015 - EDUCAÇÃO - ADMINISTRAÇÃO E REGULAMENTAÇÃO": 0.0,
           "017 - EDUCAÇÃO - ESTABELECIMENTOS DE ENSINO NÃO SUPERIOR": 82.892917,
           "022 - SAÚDE - HOSPITAIS E CLÍNICAS": 1115.5159224,
           "026 - SEGURANÇA E AÇÃO SOCIAL - SEGURANÇA SOCIAL": 9.86456799,
           "030 - HABITAÇÃO E SERVIÇOS COLETIVOS - HABITAÇÃO": 86.49892106,
           "033 - HABITAÇÃO E SERVIÇOS COLETIVOS - PROTEÇÃO DO MEIO AMBIENTE E CONSERVAÇÃO DA NATUREZA": 1.06341588,
-          "034 - SERVIÇOS CULTURAIS, RECREATIVOS E RELIGIOSOS - ADMINISTRAÇÃO E REGULAMENTAÇÃO": 0,
+          "034 - SERVIÇOS CULTURAIS, RECREATIVOS E RELIGIOSOS - ADMINISTRAÇÃO E REGULAMENTAÇÃO": 0.0,
           "036 - SERVIÇOS CULTURAIS, RECREATIVOS E RELIGIOSOS - CULTURA": 1.5,
           "037 - SERVIÇOS CULTURAIS, RECREATIVOS E RELIGIOSOS - DESPORTO, RECREIO E LAZER": 0.230553,
           "038 - SERVIÇOS CULTURAIS, RECREATIVOS E RELIGIOSOS - COMUNICAÇÃO SOCIAL": 16.68380733,
@@ -166,7 +173,7 @@
           "054 - TRANSPORTES E COMUNICAÇÕES - TRANSPORTES RODOVIÁRIOS": 14.46051029,
           "055 - TRANSPORTES E COMUNICAÇÕES - TRANSPORTES FERROVIÁRIOS": 2074.92180304,
           "056 - TRANSPORTES E COMUNICAÇÕES - TRANSPORTES AÉREOS": 126.89679389,
-          "057 - TRANSPORTES E COMUNICAÇÕES - TRANSPORTES MARÍTIMOS E FLUVIAIS": 0,
+          "057 - TRANSPORTES E COMUNICAÇÕES - TRANSPORTES MARÍTIMOS E FLUVIAIS": 0.0,
           "063 - OUTRAS FUNÇÕES ECONÓMICAS - ADMINISTRAÇÃO E REGULAMENTAÇÃO": 4.01968602,
           "065 - OUTRAS FUNÇÕES ECONÓMICAS - DIVERSAS NÃO ESPECIFICADAS": 6058.6590078,
           "067 - OUTRAS FUNÇÕES - TRANSFERÊNCIAS ENTRE ADMINISTRAÇÕES": 2547.82933872,
@@ -179,7 +186,8 @@
       },
       "008 - Gestão da Dívida Pública": {
         "despesa_orcamentada": 6811.529,
-        "despesa_executada": 6378.11665743,
+        "despesa_executada_efetiva_consolidada": 6378.11665743,
+        "despesa_executada_total_nao_consolidada": 82682.72111235,
         "grau_execução": 93.63707704143958,
         "medidas": {
           "066 - OUTRAS FUNÇÕES - OPERAÇÕES DA DÍVIDA PÚBLICA": 82682.72111235
@@ -187,7 +195,8 @@
       },
       "009 - Economia e Mar": {
         "despesa_orcamentada": 1631.835383,
-        "despesa_executada": 1473.4391497500033,
+        "despesa_executada_efetiva_consolidada": 1473.4391497500033,
+        "despesa_executada_total_nao_consolidada": 2372.85517782,
         "grau_execução": 90.2933693618778,
         "medidas": {
           "040 - AGRICULTURA, PECUÁRIA, SILVICULTURA, CAÇA, PESCA - ADMINISTRAÇÃO E REGULAMENTAÇÃO": 18.60922104,
@@ -205,7 +214,8 @@
       },
       "010 - Cultura": {
         "despesa_orcamentada": 741.806216,
-        "despesa_executada": 562.46440344,
+        "despesa_executada_efetiva_consolidada": 562.46440344,
+        "despesa_executada_total_nao_consolidada": 893.37530686,
         "grau_execução": 75.82363039136357,
         "medidas": {
           "001 - SERVIÇOS GERAIS DA ADMINISTRAÇÃO PÚBLICA - ADMINISTRAÇÃO GERAL": 3.13050076,
@@ -214,14 +224,15 @@
           "084 - SIMPLEX+": 0.67082941,
           "095 - CONTINGÊNCIA COVID-19 - PREVENÇÃO, CONTENÇÃO, MITIGAÇÃO E TRATAMENTO DA INFEÇÃO EPIDEMIOLÓGICA": 0.01808566,
           "096 - CONTINGÊNCIA COVID-19 - GARANTIR NORMALIDADE": 2.82009103,
-          "100 - INICIATIVAS DE AÇÃO CLIMÁTICA": 0,
+          "100 - INICIATIVAS DE AÇÃO CLIMÁTICA": 0.0,
           "102 - PLANO DE RECUPERAÇÃO E RESILIÊNCIA": 44.097258,
           "103 - IMPACTO DO CHOQUE GEOPOLÍTICO": 0.82541481
         }
       },
       "011 - Ciência, Tecnologia e Ensino Superior": {
         "despesa_orcamentada": 4238.62976685,
-        "despesa_executada": 3086.421135920003,
+        "despesa_executada_efetiva_consolidada": 3086.421135920003,
+        "despesa_executada_total_nao_consolidada": 5507.47277,
         "grau_execução": 72.81648329039415,
         "medidas": {
           "001 - SERVIÇOS GERAIS DA ADMINISTRAÇÃO PÚBLICA - ADMINISTRAÇÃO GERAL": 27.6800213,
@@ -240,28 +251,30 @@
       },
       "012 -Ensino Básico e Secundário e Administração Escolar": {
         "despesa_orcamentada": 7329.04381335,
-        "despesa_executada": 6638.048078119995,
+        "despesa_executada_efetiva_consolidada": 6638.048078119995,
+        "despesa_executada_total_nao_consolidada": 7141.34724728,
         "grau_execução": 90.57181601273358,
         "medidas": {
           "003 - SERVIÇOS GERAIS DA ADMINISTRAÇÃO PÚBLICA - COOPERAÇÃO ECONÓMICA EXTERNA": 49.67374219,
-          "012 - SEGURANÇA E ORDEM PÚBLICAS - SISTEMA JUDICIÁRIO": 0,
+          "012 - SEGURANÇA E ORDEM PÚBLICAS - SISTEMA JUDICIÁRIO": 0.0,
           "015 - EDUCAÇÃO - ADMINISTRAÇÃO E REGULAMENTAÇÃO": 138.70123916,
           "017 - EDUCAÇÃO - ESTABELECIMENTOS DE ENSINO NÃO SUPERIOR": 6665.64602853,
           "019 - EDUCAÇÃO - SERVIÇOS AUXILIARES DE ENSINO": 142.07343914,
-          "084 - SIMPLEX+": 0,
+          "084 - SIMPLEX+": 0.0,
           "095 - CONTINGÊNCIA COVID-19 - PREVENÇÃO, CONTENÇÃO, MITIGAÇÃO E TRATAMENTO DA INFEÇÃO EPIDEMIOLÓGICA": 0.11825545,
           "096 - CONTINGÊNCIA COVID-19 - GARANTIR NORMALIDADE": 0.00071318,
           "099 - UNIVERSALIZAÇÃO DA ESCOLA DIGITAL": 66.95140014,
           "102 - PLANO DE RECUPERAÇÃO E RESILIÊNCIA": 78.18242949,
-          "103 - IMPACTO DO CHOQUE GEOPOLÍTICO": 0
+          "103 - IMPACTO DO CHOQUE GEOPOLÍTICO": 0.0
         }
       },
       "013 - Trabalho, Solidariedade e Segurança Social": {
         "despesa_orcamentada": 23722.316311,
-        "despesa_executada": 23324.152630890003,
+        "despesa_executada_efetiva_consolidada": 23324.152630890003,
+        "despesa_executada_total_nao_consolidada": 33429.936212,
         "grau_execução": 98.32156491427708,
         "medidas": {
-          "001 - SERVIÇOS GERAIS DA ADMINISTRAÇÃO PÚBLICA - ADMINISTRAÇÃO GERAL": 0,
+          "001 - SERVIÇOS GERAIS DA ADMINISTRAÇÃO PÚBLICA - ADMINISTRAÇÃO GERAL": 0.0,
           "003 - SERVIÇOS GERAIS DA ADMINISTRAÇÃO PÚBLICA - COOPERAÇÃO ECONÓMICA EXTERNA": 1.78410432,
           "017 - EDUCAÇÃO - ESTABELECIMENTOS DE ENSINO NÃO SUPERIOR": 4.11271778,
           "024 - SEGURANÇA E AÇÃO SOCIAL - ADMINISTRAÇÃO E REGULAMENTAÇÃO": 21.457924329999997,
@@ -269,7 +282,7 @@
           "027 - SEGURANÇA E AÇÃO SOCIAL - AÇÃO SOCIAL": 9995.111548879999,
           "064 - OUTRAS FUNÇÕES ECONÓMICAS - RELAÇÕES GERAIS DO TRABALHO": 789.48595326,
           "065 - OUTRAS FUNÇÕES ECONÓMICAS - DIVERSAS NÃO ESPECIFICADAS": 3.05882697,
-          "082 - SEGURANÇA E AÇÃO SOCIAL - VIOLÊNCIA DOMÉSTICA - PREVENÇÃO E PROTEÇÃO À VÍTIMA": 0,
+          "082 - SEGURANÇA E AÇÃO SOCIAL - VIOLÊNCIA DOMÉSTICA - PREVENÇÃO E PROTEÇÃO À VÍTIMA": 0.0,
           "083 - SEGURANÇA E AÇÃO SOCIAL - INTEGRAÇÃO DA PESSOA COM DEFICIÊNCIA": 66.89891811,
           "084 - SIMPLEX+": 0.73240766,
           "095 - CONTINGÊNCIA COVID-19 - PREVENÇÃO, CONTENÇÃO, MITIGAÇÃO E TRATAMENTO DA INFEÇÃO EPIDEMIOLÓGICA": 0.00011146,
@@ -283,14 +296,15 @@
       },
       "014 - Saúde": {
         "despesa_orcamentada": 16701.33956,
-        "despesa_executada": 14812.133052290066,
+        "despesa_executada_efetiva_consolidada": 14812.133052290066,
+        "despesa_executada_total_nao_consolidada": 39591.00835069,
         "grau_execução": 88.68829352925309,
         "medidas": {
           "020 - SAÚDE - ADMINISTRAÇÃO E REGULAMENTAÇÃO": 207.09175173,
           "021 - SAÚDE - INVESTIGAÇÃO": 60.687742,
           "022 - SAÚDE - HOSPITAIS E CLÍNICAS": 32515.91030436,
           "023 - SAÚDE - SERVIÇOS INDIVIDUAIS DE SAÚDE": 6052.72259966,
-          "033 - HABITAÇÃO E SERVIÇOS COLETIVOS - PROTEÇÃO DO MEIO AMBIENTE E CONSERVAÇÃO DA NATUREZA": 0,
+          "033 - HABITAÇÃO E SERVIÇOS COLETIVOS - PROTEÇÃO DO MEIO AMBIENTE E CONSERVAÇÃO DA NATUREZA": 0.0,
           "073 - SAÚDE - PARCERIAS PÚBLICO-PRIVADAS": 392.84115076,
           "095 - CONTINGÊNCIA COVID-19 - PREVENÇÃO, CONTENÇÃO, MITIGAÇÃO E TRATAMENTO DA INFEÇÃO EPIDEMIOLÓGICA": 201.97915538,
           "096 - CONTINGÊNCIA COVID-19 - GARANTIR NORMALIDADE": 11.87584688,
@@ -299,7 +313,8 @@
       },
       "015 - Ambiente e Acção Climática": {
         "despesa_orcamentada": 3117.9971736999996,
-        "despesa_executada": 2194.809329460001,
+        "despesa_executada_efetiva_consolidada": 2194.809329460001,
+        "despesa_executada_total_nao_consolidada": 3774.93826146,
         "grau_execução": 70.39163947847685,
         "medidas": {
           "031 - HABITAÇÃO E SERVIÇOS COLETIVOS - ORDENAMENTO DO TERRITÓRIO": 3.20195644,
@@ -323,7 +338,8 @@
       },
       "016 - Insfraestruturas e Habitação": {
         "despesa_orcamentada": 4859.511467,
-        "despesa_executada": 3755.5586804700006,
+        "despesa_executada_efetiva_consolidada": 3755.5586804700006,
+        "despesa_executada_total_nao_consolidada": 6423.76813848,
         "grau_execução": 77.28263851157202,
         "medidas": {
           "001 - SERVIÇOS GERAIS DA ADMINISTRAÇÃO PÚBLICA - ADMINISTRAÇÃO GERAL": 145.80290877,
@@ -339,7 +355,7 @@
           "058 - TRANSPORTES E COMUNICAÇÕES - SISTEMAS DE COMUNICAÇÕES": 832.0811308,
           "063 - OUTRAS FUNÇÕES ECONÓMICAS - ADMINISTRAÇÃO E REGULAMENTAÇÃO": 8.08848329,
           "079 - TRANSPORTES E COMUNICAÇÕES - PARCERIAS PÚBLICO-PRIVADAS": 2070.49299444,
-          "084 - SIMPLEX+": 0,
+          "084 - SIMPLEX+": 0.0,
           "095 - CONTINGÊNCIA COVID-19 - PREVENÇÃO, CONTENÇÃO, MITIGAÇÃO E TRATAMENTO DA INFEÇÃO EPIDEMIOLÓGICA": 0.038941,
           "096 - CONTINGÊNCIA COVID-19 - GARANTIR NORMALIDADE": 0.0073591,
           "101 - PLANO NACIONAL DE GESTÃO INTEGRADA DE FOGOS RURAIS": 11.08782373,
@@ -349,7 +365,8 @@
       },
       "017 - Agricultura e Alimentação": {
         "despesa_orcamentada": 1642.127451,
-        "despesa_executada": 1255.4204158900006,
+        "despesa_executada_efetiva_consolidada": 1255.4204158900006,
+        "despesa_executada_total_nao_consolidada": 1747.44079155,
         "grau_execução": 76.4508513103226,
         "medidas": {
           "004 - SERVIÇOS GERAIS DA ADMINISTRAÇÃO PÚBLICA - INVESTIGAÇÃO CIENTÍFICA DE CARÁTER GERAL": 57.48306812,
@@ -360,7 +377,7 @@
           "057 - TRANSPORTES E COMUNICAÇÕES - TRANSPORTES MARÍTIMOS E FLUVIAIS": 3.34913794,
           "064 - OUTRAS FUNÇÕES ECONÓMICAS - RELAÇÕES GERAIS DO TRABALHO": 0.17117981,
           "084 - SIMPLEX+": 0.25900834,
-          "095 - CONTINGÊNCIA COVID-19 - PREVENÇÃO, CONTENÇÃO, MITIGAÇÃO E TRATAMENTO DA INFEÇÃO EPIDEMIOLÓGICA": 0,
+          "095 - CONTINGÊNCIA COVID-19 - PREVENÇÃO, CONTENÇÃO, MITIGAÇÃO E TRATAMENTO DA INFEÇÃO EPIDEMIOLÓGICA": 0.0,
           "096 - CONTINGÊNCIA COVID-19 - GARANTIR NORMALIDADE": 0.001755,
           "100 - INICIATIVAS DE AÇÃO CLIMÁTICA": 0.00491399,
           "101 - PLANO NACIONAL DE GESTÃO INTEGRADA DE FOGOS RURAIS": 0.00347,
