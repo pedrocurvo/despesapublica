@@ -6,6 +6,7 @@ import { useEffect, useState } from "react"
 
 interface NewsArticlesProps {
   year: number
+  sector?: string | null
 }
 
 interface NewsArticle {
@@ -17,7 +18,30 @@ interface NewsArticle {
   url: string
 }
 
-export function NewsArticles({ year }: NewsArticlesProps) {
+// Object mapping sectors to related keywords for more targeted searches
+const sectorKeywords = {
+  education: ["educação", "ensino", "escola", "universidade", "estudantes"],
+  healthcare: ["saúde", "hospitais", "médicos", "enfermeiros", "sns"],
+  "social-security": ["segurança social", "pensões", "reformas", "apoios sociais"],
+  infrastructure: ["infraestrutura", "transportes", "estradas", "ferrovia", "obras públicas"],
+  defense: ["defesa", "forças armadas", "militares", "exército", "marinha"],
+  justice: ["justiça", "tribunais", "magistrados", "sistema judicial"],
+  environment: ["ambiente", "clima", "sustentabilidade", "poluição", "energias renováveis"],
+  culture: ["cultura", "artes", "património", "museus", "espetáculos"],
+  finance: ["finanças", "impostos", "receitas", "despesas", "orçamento"],
+  economy: ["economia", "empresas", "indústria", "turismo", "competitividade"],
+  agriculture: ["agricultura", "desenvolvimento rural", "pescas", "produção agrícola"],
+  science: ["ciência", "tecnologia", "investigação", "inovação", "ensino superior"],
+  external: ["negócios estrangeiros", "diplomacia", "embaixadas", "cooperação externa"],
+  governance: ["governação", "administração pública", "modernização", "simplificação"],
+  housing: ["habitação", "arrendamento", "construção", "reabilitação urbana"],
+  sea: ["mar", "recursos marítimos", "portos", "pesca", "economia do mar"],
+  tourism: ["turismo", "hotelaria", "restauração", "património", "promoção turística"],
+  public_debt: ["dívida pública", "juros", "amortização", "gestão da dívida"],
+  security: ["segurança interna", "polícia", "proteção civil", "bombeiros"]
+}
+
+export function NewsArticles({ year, sector }: NewsArticlesProps) {
   const [articles, setArticles] = useState<NewsArticle[]>([])
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
@@ -48,13 +72,69 @@ export function NewsArticles({ year }: NewsArticlesProps) {
           'http://www.portugal.gov.pt/',
         ]
 
-        // Search queries to use
-        const queries = [
+        // Base search queries
+        let queries = [
           `orçamento estado ${year}`,
           `execução orçamental ${year}`,
           `despesa pública ${year}`,
-          `orçamento geral ${year}`
+          `orçamento geral ${year}`,
+          `OE ${year}`,
+          `lei orçamento ${year}`,
+          `relatório orçamento ${year}`,
+          `debate orçamento ${year}`,
+          `aprovação orçamento ${year}`,
+          `ministro finanças orçamento ${year}`,
+          `programa orçamental ${year}`,
+          `medidas orçamentais ${year}`,
+          `receitas estado ${year}`,
+          `défice orçamental ${year}`,
+          `discussão orçamento ${year}`
         ]
+        
+        // If a sector is selected, add sector-specific queries
+        if (sector) {
+          // Get proper sector name in Portuguese
+          const sectorNameMap = {
+            "education": "Educação",
+            "healthcare": "Saúde",
+            "social-security": "Segurança Social",
+            "infrastructure": "Infraestruturas",
+            "defense": "Defesa",
+            "justice": "Justiça",
+            "environment": "Ambiente",
+            "culture": "Cultura",
+            "finance": "Finanças",
+            "economy": "Economia",
+            "agriculture": "Agricultura",
+            "science": "Ciência e Tecnologia",
+            "external": "Representação Externa",
+            "governance": "Governação",
+            "housing": "Habitação",
+            "sea": "Mar",
+            "tourism": "Turismo",
+            "public_debt": "Gestão da Dívida Pública",
+            "security": "Segurança Interna"
+          }
+          
+          const sectorName = sectorNameMap[sector as keyof typeof sectorNameMap] || sector
+          
+          // Add sector-specific queries
+          queries = [
+            `orçamento ${sectorName} ${year}`,
+            `despesa ${sectorName} ${year}`,
+            `${sectorName} orçamento estado ${year}`
+          ]
+          
+          // Add keywords related to the sector to enrich the queries
+          const keywords = sectorKeywords[sector as keyof typeof sectorKeywords] || []
+          if (keywords.length > 0) {
+            // Add more specific queries with keywords
+            keywords.forEach(keyword => {
+              queries.push(`orçamento ${keyword} ${year}`)
+              queries.push(`despesa ${keyword} ${year}`)
+            })
+          }
+        }
         
         // Collect all articles from different queries
         const allArticles: any[] = []
@@ -71,8 +151,8 @@ export function NewsArticles({ year }: NewsArticlesProps) {
           try {
             const response = await fetch(`/api/arquivo?${params.toString()}`)
             
+            // Silently skip failed queries without logging errors
             if (!response.ok) {
-              console.error(`Failed to fetch news for query "${query}"`)
               return
             }
             
@@ -83,7 +163,7 @@ export function NewsArticles({ year }: NewsArticlesProps) {
               allArticles.push(...data.results)
             }
           } catch (err) {
-            console.error(`Error fetching news for query "${query}":`, err)
+            // Silently ignore fetch errors
           }
         }))
         
@@ -119,18 +199,36 @@ export function NewsArticles({ year }: NewsArticlesProps) {
           }
         }
 
-        // Format and limit
-        const processedArticles = interleaved
-          .filter((item: any) => item.headline && item.headline.trim() !== "")
-          .slice(0, 15)
-          .map((item: any, index: number) => ({
-            id: `${year}-${index}`,
-            title: item.headline,
-            date: new Date(item.datetime).toISOString().split("T")[0],
-            source: item.domain.replace("www.", ""),
-            summary: "",
-            url: item.url
-          }))
+        // Filter articles with valid headlines
+        const validArticles = interleaved.filter((item: any) => 
+          item.headline && item.headline.trim() !== ""
+        )
+
+        // Separate articles into two groups: those with > 4 words and those with <= 4 words
+        const longHeadlines: any[] = []
+        const shortHeadlines: any[] = []
+        
+        validArticles.forEach((item: any) => {
+          const wordCount = item.headline.trim().split(/\s+/).length
+          if (wordCount > 4) {
+            longHeadlines.push(item)
+          } else {
+            shortHeadlines.push(item)
+          }
+        })
+
+        // Prioritize articles with longer headlines, but include shorter ones if needed
+        const prioritizedArticles = [...longHeadlines, ...shortHeadlines].slice(0, 15)
+        
+        // Format and map the final list
+        const processedArticles = prioritizedArticles.map((item: any, index: number) => ({
+          id: `${year}-${sector || ""}-${index}`,
+          title: item.headline,
+          date: new Date(item.datetime).toISOString().split("T")[0],
+          source: item.domain.replace("www.", ""),
+          summary: "",
+          url: item.url
+        }))
         
         setArticles(processedArticles)
       } catch (err) {
@@ -142,7 +240,7 @@ export function NewsArticles({ year }: NewsArticlesProps) {
     }
     
     fetchNews()
-  }, [year])
+  }, [year, sector])
   
   if (loading) {
     return (
@@ -183,7 +281,11 @@ export function NewsArticles({ year }: NewsArticlesProps) {
         </div>
       ))}
       {articles.length === 0 && !loading && (
-        <div className="py-10 text-center text-muted-foreground">Não há artigos de notícias disponíveis para {year}</div>
+        <div className="py-10 text-center text-muted-foreground">
+          {sector 
+            ? `Não há artigos de notícias disponíveis para o setor ${sector} em ${year}` 
+            : `Não há artigos de notícias disponíveis para ${year}`}
+        </div>
       )}
     </div>
   )

@@ -77,8 +77,8 @@ export function SectorNewsArticles({ year, sector }: SectorNewsArticlesProps) {
           try {
             const response = await fetch(`/api/arquivo?${params.toString()}`)
             
+            // Silently skip failed queries without logging errors
             if (!response.ok) {
-              console.error(`Failed to fetch news for query "${query}"`)
               return
             }
             
@@ -89,7 +89,7 @@ export function SectorNewsArticles({ year, sector }: SectorNewsArticlesProps) {
               allArticles.push(...data.results)
             }
           } catch (err) {
-            console.error(`Error fetching news for query "${query}":`, err)
+            // Silently ignore fetch errors
           }
         }))
         
@@ -125,18 +125,36 @@ export function SectorNewsArticles({ year, sector }: SectorNewsArticlesProps) {
           }
         }
 
-        // Format and limit
-        const processedArticles = interleaved
-          .filter((item: any) => item.headline && item.headline.trim() !== "")
-          .slice(0, 10)
-          .map((item: any, index: number) => ({
-            id: `${year}-${sector}-${index}`,
-            title: item.headline,
-            date: new Date(item.datetime).toISOString().split("T")[0],
-            source: item.domain.replace("www.", ""),
-            summary: "",
-            url: item.url
-          }))
+        // Filter articles with valid headlines
+        const validArticles = interleaved.filter((item: any) => 
+          item.headline && item.headline.trim() !== ""
+        )
+
+        // Separate articles into two groups: those with > 4 words and those with <= 4 words
+        const longHeadlines: any[] = []
+        const shortHeadlines: any[] = []
+        
+        validArticles.forEach((item: any) => {
+          const wordCount = item.headline.trim().split(/\s+/).length
+          if (wordCount > 4) {
+            longHeadlines.push(item)
+          } else {
+            shortHeadlines.push(item)
+          }
+        })
+
+        // Prioritize articles with longer headlines, but include shorter ones if needed
+        const prioritizedArticles = [...longHeadlines, ...shortHeadlines].slice(0, 10)
+        
+        // Format and map the final list
+        const processedArticles = prioritizedArticles.map((item: any, index: number) => ({
+          id: `${year}-${sector}-${index}`,
+          title: item.headline,
+          date: new Date(item.datetime).toISOString().split("T")[0],
+          source: item.domain.replace("www.", ""),
+          summary: "",
+          url: item.url
+        }))
         
         setArticles(processedArticles)
       } catch (err) {
