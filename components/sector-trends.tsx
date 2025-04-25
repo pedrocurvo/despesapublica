@@ -44,36 +44,17 @@ type SubsectorData = {
 type BudgetData = {
   sectors: {
     [key: string]: {
-      "Despesa Total Nao Consolidada": {
-        "Orcamento Corrigido": number;
-        "Execucao": number;
-      };
-      "Despesa Total Consolidada": {
-        "Orcamento Corrigido": number;
-        "Execucao": number;
-      };
       "Despesa Efetiva Consolidada": {
-        "Orcamento Corrigido": number;
         "Execucao": number;
       };
       "Subsectors"?: {
         [key: string]: {
-          "Orcamento Corrigido": number;
           "Execucao": number;
         };
       };
     };
   };
 }
-
-// Expense types
-type ExpenseType = 
-  | "Despesa Total Nao Consolidada"
-  | "Despesa Total Consolidada"
-  | "Despesa Efetiva Consolidada";
-
-// Data source
-type DataSource = "Orcamento Corrigido" | "Execucao";
 
 // Color palette for the lines
 const COLORS = [
@@ -101,8 +82,6 @@ export function SectorTrends() {
   const [selectedType, setSelectedType] = useState<'absolute' | 'percentage'>('absolute')
   const [trendData, setTrendData] = useState<Record<string, { trend: 'up' | 'down' | 'neutral', percentage: number }>>({})
   const [baseYear, setBaseYear] = useState<string>(YEARS[0])
-  const [expenseType, setExpenseType] = useState<ExpenseType>("Despesa Total Consolidada")
-  const [dataSource, setDataSource] = useState<DataSource>("Execucao")
 
   // Get the proper case format of a name (first letter of each word capitalized)
   const toProperCase = (name: string) => {
@@ -114,17 +93,11 @@ export function SectorTrends() {
       .join(' ');
   }
 
-  // Get the formatted name for expense types and data sources
-  const getFormattedName = (name: string): string => {
-    const mapping: Record<string, string> = {
-      "Despesa Total Nao Consolidada": "Despesa Total Não Consolidada",
-      "Despesa Total Consolidada": "Despesa Total Consolidada",
-      "Despesa Efetiva Consolidada": "Despesa Efetiva Consolidada",
-      "Orcamento Corrigido": "Orçamento Corrigido",
-      "Execucao": "Execução"
-    };
-    
-    return mapping[name] || name;
+  // Add CSS transition classes for subsector selection container
+  const getSubsectorSelectionClasses = () => {
+    return `space-y-1 transition-all duration-300 ease-in-out ${
+      showAllSubsectors ? 'opacity-0 max-h-0 overflow-hidden' : 'opacity-100 max-h-[500px]'
+    }`;
   }
 
   // Fetch data for all years
@@ -169,12 +142,12 @@ export function SectorTrends() {
     fetchAllYearData()
   }, [])
   
-  // Recalculate trends when base year changes or expense type/data source changes
+  // Recalculate trends when base year changes
   useEffect(() => {
     if (Object.keys(yearData).length > 0) {
       calculateTrends(yearData, baseYear)
     }
-  }, [baseYear, yearData, expenseType, dataSource])
+  }, [baseYear, yearData])
   
   // Calculate trends for sectors and subsectors
   const calculateTrends = (data: Record<string, BudgetData>, fromYear: string) => {
@@ -203,8 +176,8 @@ export function SectorTrends() {
     Object.entries(firstYearData.sectors).forEach(([sectorName, sectorData]) => {
       // Check if the sector exists in the last year
       if (lastYearData.sectors[sectorName]) {
-        const firstYearValue = sectorData[expenseType][dataSource]
-        const lastYearValue = lastYearData.sectors[sectorName][expenseType][dataSource]
+        const firstYearValue = sectorData["Despesa Efetiva Consolidada"]["Execucao"]
+        const lastYearValue = lastYearData.sectors[sectorName]["Despesa Efetiva Consolidada"]["Execucao"]
         
         const diff = lastYearValue - firstYearValue
         const percentChange = (diff / firstYearValue) * 100
@@ -218,8 +191,8 @@ export function SectorTrends() {
         if (sectorData.Subsectors && lastYearData.sectors[sectorName].Subsectors) {
           Object.entries(sectorData.Subsectors).forEach(([subsectorName, subsectorData]) => {
             if (lastYearData.sectors[sectorName].Subsectors?.[subsectorName]) {
-              const firstYearSubValue = subsectorData[dataSource]
-              const lastYearSubValue = lastYearData.sectors[sectorName].Subsectors?.[subsectorName][dataSource]
+              const firstYearSubValue = subsectorData["Execucao"]
+              const lastYearSubValue = lastYearData.sectors[sectorName].Subsectors?.[subsectorName]["Execucao"]
               
               const subDiff = lastYearSubValue - firstYearSubValue
               const subPercentChange = (subDiff / firstYearSubValue) * 100
@@ -302,7 +275,7 @@ export function SectorTrends() {
       year,
       // Calculate total budget as a sum of all sector executions
       Total: (Object.values(yearDataObj.sectors).reduce((acc, sector) => 
-        acc + sector[expenseType][dataSource], 0) / 1000).toFixed(2), // Convert to billions
+        acc + sector["Despesa Efetiva Consolidada"]["Execucao"], 0) / 1000).toFixed(2), // Convert to billions
     }
     
     // If no sector is selected, show totals for all sectors
@@ -310,15 +283,15 @@ export function SectorTrends() {
       sectors.forEach(sectorName => {
         const sectorData = yearDataObj?.sectors[sectorName]
         
-        if (sectorData && sectorData[expenseType]) {
+        if (sectorData && sectorData["Despesa Efetiva Consolidada"]) {
           if (selectedType === 'absolute') {
             // Convert to billions and store as number for the graph
-            dataPoint[sectorName] = Number((sectorData[expenseType][dataSource] / 1000).toFixed(2))
+            dataPoint[sectorName] = Number((sectorData["Despesa Efetiva Consolidada"]["Execucao"] / 1000).toFixed(2))
           } else {
             // Calculate percentage of total budget
             const totalBudget = Object.values(yearDataObj.sectors).reduce((acc, sector) => 
-              acc + sector[expenseType][dataSource], 0)
-            const percentage = (sectorData[expenseType][dataSource] / totalBudget) * 100
+              acc + sector["Despesa Efetiva Consolidada"]["Execucao"], 0)
+            const percentage = (sectorData["Despesa Efetiva Consolidada"]["Execucao"] / totalBudget) * 100
             dataPoint[sectorName] = Number(percentage.toFixed(2)) // Store as number for the graph
           }
         }
@@ -328,15 +301,15 @@ export function SectorTrends() {
     else if (selectedSector && selectedSubsectors.length === 0 && !showAllSubsectors) {
       const sectorData = yearDataObj?.sectors[selectedSector]
       
-      if (sectorData && sectorData[expenseType]) {
+      if (sectorData && sectorData["Despesa Efetiva Consolidada"]) {
         if (selectedType === 'absolute') {
           // Convert to billions and store as number for the graph
-          dataPoint[selectedSector] = Number((sectorData[expenseType][dataSource] / 1000).toFixed(2))
+          dataPoint[selectedSector] = Number((sectorData["Despesa Efetiva Consolidada"]["Execucao"] / 1000).toFixed(2))
         } else {
           // Calculate percentage of total budget
           const totalBudget = Object.values(yearDataObj.sectors).reduce((acc, sector) => 
-            acc + sector[expenseType][dataSource], 0)
-          const percentage = (sectorData[expenseType][dataSource] / totalBudget) * 100
+            acc + sector["Despesa Efetiva Consolidada"]["Execucao"], 0)
+          const percentage = (sectorData["Despesa Efetiva Consolidada"]["Execucao"] / totalBudget) * 100
           dataPoint[selectedSector] = Number(percentage.toFixed(2)) // Store as number for the graph
         }
       }
@@ -345,16 +318,16 @@ export function SectorTrends() {
     else if (selectedSector) {
       const sectorData = yearDataObj?.sectors[selectedSector]
       
-      if (sectorData && sectorData[expenseType]) {
+      if (sectorData && sectorData["Despesa Efetiva Consolidada"]) {
         // Add sector total
         if (selectedType === 'absolute') {
           // Convert to billions and store as number for the graph
-          dataPoint[selectedSector] = Number((sectorData[expenseType][dataSource] / 1000).toFixed(2))
+          dataPoint[selectedSector] = Number((sectorData["Despesa Efetiva Consolidada"]["Execucao"] / 1000).toFixed(2))
         } else {
           // Calculate percentage of total budget
           const totalBudget = Object.values(yearDataObj.sectors).reduce((acc, sector) => 
-            acc + sector[expenseType][dataSource], 0)
-          const percentage = (sectorData[expenseType][dataSource] / totalBudget) * 100
+            acc + sector["Despesa Efetiva Consolidada"]["Execucao"], 0)
+          const percentage = (sectorData["Despesa Efetiva Consolidada"]["Execucao"] / totalBudget) * 100
           dataPoint[selectedSector] = Number(percentage.toFixed(2)) // Store as number for the graph
         }
         
@@ -372,11 +345,11 @@ export function SectorTrends() {
             if (subsector) {
               if (selectedType === 'absolute') {
                 // Convert to billions and store as number for the graph
-                dataPoint[subName] = Number((subsector[dataSource] / 1000).toFixed(2))
+                dataPoint[subName] = Number((subsector["Execucao"] / 1000).toFixed(2))
               } else {
                 // Calculate percentage of sector budget
-                const sectorBudget = sectorData[expenseType][dataSource]
-                const percentage = (subsector[dataSource] / sectorBudget) * 100
+                const sectorBudget = sectorData["Despesa Efetiva Consolidada"]["Execucao"]
+                const percentage = (subsector["Execucao"] / sectorBudget) * 100
                 dataPoint[subName] = Number(percentage.toFixed(2)) // Store as number for the graph
               }
             }
@@ -539,7 +512,10 @@ export function SectorTrends() {
               Percentagem
             </Button>
           </div>
-          
+        </div>
+        
+        {/* Right side: Show all subsectors checkbox */}
+        <div className="flex items-center space-x-2">
           {selectedSector && subsectors.length > 0 && (
             <div className="flex items-center space-x-2">
               <Checkbox
@@ -559,60 +535,10 @@ export function SectorTrends() {
             </div>
           )}
         </div>
-        
-        {/* Right side: Expense type and data source selection */}
-        <div className="flex flex-wrap items-center gap-2 rounded-md p-2 bg-muted/20">
-          <div className="flex items-center gap-1">
-            <span className="text-xs font-medium whitespace-nowrap">Tipo:</span>
-            <Select 
-              value={expenseType} 
-              onValueChange={(value: ExpenseType) => setExpenseType(value)}
-            >
-              <SelectTrigger className="h-8 w-[180px] text-xs">
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectGroup>
-                  <SelectItem value="Despesa Total Nao Consolidada">
-                    Despesa Total Não Consolidada
-                  </SelectItem>
-                  <SelectItem value="Despesa Total Consolidada">
-                    Despesa Total Consolidada
-                  </SelectItem>
-                  <SelectItem value="Despesa Efetiva Consolidada">
-                    Despesa Efetiva Consolidada
-                  </SelectItem>
-                </SelectGroup>
-              </SelectContent>
-            </Select>
-          </div>
-
-          <div className="flex items-center gap-1">
-            <span className="text-xs font-medium whitespace-nowrap">Fonte:</span>
-            <div className="flex space-x-1">
-              <Button
-                variant={dataSource === 'Orcamento Corrigido' ? 'default' : 'outline'}
-                size="sm"
-                className="h-8 text-xs"
-                onClick={() => setDataSource('Orcamento Corrigido')}
-              >
-                Orçamento
-              </Button>
-              <Button 
-                variant={dataSource === 'Execucao' ? 'default' : 'outline'}
-                size="sm"
-                className="h-8 text-xs"
-                onClick={() => setDataSource('Execucao')}
-              >
-                Execução
-              </Button>
-            </div>
-          </div>
-        </div>
       </div>
       
-      {selectedSector && subsectors.length > 0 && !showAllSubsectors && (
-        <div className="space-y-1">
+      {selectedSector && subsectors.length > 0 && (
+        <div className={getSubsectorSelectionClasses()}>
           <p className="text-sm text-muted-foreground">Selecionar subsetores para comparar:</p>
           <div className="flex flex-wrap gap-1">
             {subsectors.map(subsector => (
@@ -645,7 +571,7 @@ export function SectorTrends() {
             <XAxis dataKey="year" />
             <YAxis 
               label={{ 
-                value: selectedType === 'absolute' ? "Orçamento (€ Biliões)" : "Percentagem do Orçamento Total (%)", 
+                value: selectedType === 'absolute' ? "Orçamento (€ Mil Milhões)" : "Percentagem do Orçamento Total (%)", 
                 angle: -90, 
                 position: 'insideLeft',
                 style: { textAnchor: 'middle' }

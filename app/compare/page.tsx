@@ -64,19 +64,6 @@ export default function ComparePage() {
               </Card>
             </div>
             <div className="mt-4 grid gap-4 md:grid-cols-2 lg:grid-cols-7">
-              <Card className="lg:col-span-7" id="district-trends">
-                <CardHeader className="flex flex-row items-center justify-between">
-                  <div>
-                    <CardTitle>Tendências por Distrito e Município</CardTitle>
-                    <CardDescription>Compare tendências de alocação orçamental entre regiões ao longo do tempo</CardDescription>
-                  </div>
-                </CardHeader>
-                <CardContent>
-                  <DistrictTrends />
-                </CardContent>
-              </Card>
-            </div>
-            <div className="mt-4 grid gap-4 md:grid-cols-2 lg:grid-cols-7">
               <Card className="lg:col-span-7" id="sector-trends">
                 <CardHeader className="flex flex-row items-center justify-between">
                   <div>
@@ -86,6 +73,19 @@ export default function ComparePage() {
                 </CardHeader>
                 <CardContent>
                   <SectorTrends />
+                </CardContent>
+              </Card>
+            </div>
+            <div className="mt-4 grid gap-4 md:grid-cols-2 lg:grid-cols-7">
+              <Card className="lg:col-span-7" id="district-trends">
+                <CardHeader className="flex flex-row items-center justify-between">
+                  <div>
+                    <CardTitle>Tendências por Distrito e Município</CardTitle>
+                    <CardDescription>Compare tendências de alocação orçamental entre regiões ao longo do tempo</CardDescription>
+                  </div>
+                </CardHeader>
+                <CardContent>
+                  <DistrictTrends />
                 </CardContent>
               </Card>
             </div>
