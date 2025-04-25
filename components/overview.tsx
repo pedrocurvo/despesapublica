@@ -5,14 +5,10 @@ import { Bar, BarChart, CartesianGrid, Legend, ResponsiveContainer, Tooltip, XAx
 
 interface BalanceData {
   year: string
-  receitaBudget: number
-  despesaBudget: number
   receitaActual: number
   despesaActual: number
-  saldoBudget: number
   saldoActual: number
   pibPercentage: number
-  pibBudgetPercentage: number
 }
 
 interface OverviewProps {
@@ -50,14 +46,10 @@ export function Overview({ startYear = 2018, endYear = 2023 }: OverviewProps) {
           
           return {
             year,
-            receitaBudget: yearData.Receita.Budget !== undefined ? Number((yearData.Receita.Budget).toFixed(2)) : null,
-            despesaBudget: yearData.Despesa.Budget !== undefined ? Number((yearData.Despesa.Budget).toFixed(2)) : null,
             receitaActual: yearData.Receita.Year !== undefined ? Number((yearData.Receita.Year).toFixed(2)) : null,
             despesaActual: yearData.Despesa.Year !== undefined ? Number((yearData.Despesa.Year).toFixed(2)) : null,
-            saldoBudget: yearData.Saldo?.Budget !== undefined ? Number((yearData.Saldo.Budget).toFixed(2)) : null,
             saldoActual: yearData.Saldo?.Year !== undefined ? Number((yearData.Saldo.Year).toFixed(2)) : null,
             pibPercentage: yearData.PIBper?.Year !== undefined ? Number((yearData.PIBper.Year * 100).toFixed(2)) : null,
-            pibBudgetPercentage: yearData.PIBper?.Budget !== undefined ? Number((yearData.PIBper.Budget * 100).toFixed(2)) : null
           };
         })
         .filter(item => item !== null) // Remove any null items
@@ -130,8 +122,8 @@ export function Overview({ startYear = 2018, endYear = 2023 }: OverviewProps) {
           <YAxis domain={[80000, 120000]} tickFormatter={(value) => `€${(value/1000).toFixed(0)}MM`} />
           <Tooltip content={<CustomTooltip />} />
           <Legend wrapperStyle={{ paddingTop: 10 }} />
-          <Bar name="Receita" dataKey="receitaBudget" fill="#3b82f6" radius={[4, 4, 0, 0]} />
-          <Bar name="Despesa" dataKey="despesaBudget" fill="#ef4444" radius={[4, 4, 0, 0]} />
+          <Bar name="Receita" dataKey="receitaActual" fill="#3b82f6" radius={[4, 4, 0, 0]} />
+          <Bar name="Despesa" dataKey="despesaActual" fill="#ef4444" radius={[4, 4, 0, 0]} />
         </BarChart>
       </ResponsiveContainer>
     </div>
