@@ -90,13 +90,13 @@ export function BudgetOverviewTrends() {
         <div className="rounded-md bg-background p-4 shadow-md border border-border text-sm">
           <p className="font-medium">{`Ano: ${label}`}</p>
           <div className="mt-2 space-y-1">
-            <p className="text-blue-600">{`Receita Real: ${yearData.receitaActual !== null ? `€${(yearData.receitaActual/1000).toFixed(2)}MM` : 'N/D'}`}</p>
-            <p className="text-red-600">{`Despesa Real: ${yearData.despesaActual !== null ? `€${(yearData.despesaActual/1000).toFixed(2)}MM` : 'N/D'}`}</p>
+            <p className="text-blue-600">{`Receita Efetiva: ${yearData.receitaActual !== null ? `€${(yearData.receitaActual/1000).toFixed(2)}MM` : 'N/D'}`}</p>
+            <p className="text-red-600">{`Despesa Efetiva: ${yearData.despesaActual !== null ? `€${(yearData.despesaActual/1000).toFixed(2)}MM` : 'N/D'}`}</p>
             <div className="border-t border-border my-2"></div>
             <div className={`font-medium ${yearData.saldoActual !== null ? (yearData.saldoActual >= 0 ? "text-green-500" : "text-red-500") : "text-muted-foreground"}`}>
 <p>              {`Saldo Efetivo:`}</p>
               <div className="pl-2 mt-1 text-sm">
-                <p>{`Em €: ${yearData.saldoActual !== null ? `€${(yearData.saldoActual/1000).toFixed(2)}MM` : 'N/D'}`}            </p>
+                <p>{`Em €: ${yearData.saldoActual !== null ? `${(yearData.saldoActual/1000).toFixed(2)}MM` : 'N/D'}`}            </p>
             <p className="text-muted-foreground">{`Em % do PIB: ${yearData.pibPercentage !== null ? `${yearData.pibPercentage}%` : 'N/D'}`}            </p>
 </div>
             </div>
@@ -141,7 +141,7 @@ export function BudgetOverviewTrends() {
             strokeWidth={2}
             dot={{ r: 3 }}
             activeDot={{ r: 5 }}
-            name="Receita Real"
+            name="Receita Efetiva"
           />
           <Line
             type="monotone"
@@ -150,7 +150,7 @@ export function BudgetOverviewTrends() {
             strokeWidth={2}
             dot={{ r: 3 }}
             activeDot={{ r: 5 }}
-            name="Despesa Real"
+            name="Despesa Efetiva"
           />
         </LineChart>
       </ResponsiveContainer>
