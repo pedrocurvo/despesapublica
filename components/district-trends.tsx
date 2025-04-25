@@ -75,6 +75,7 @@ export function DistrictTrends() {
   const [selectedType, setSelectedType] = useState<'absolute' | 'percentage'>('absolute')
   const [trendData, setTrendData] = useState<Record<string, { trend: 'up' | 'down' | 'neutral', percentage: number, absoluteChange: number }>>({})
   const [baseYear, setBaseYear] = useState<string>(YEARS[0])
+  const [municipalitySorting, setMunicipalitySorting] = useState<'alphabetical' | 'increasing' | 'decreasing'>('alphabetical')
 
   // Get the proper case format of a name (first letter of each word capitalized)
   const toProperCase = (name: string) => {
@@ -320,7 +321,7 @@ export function DistrictTrends() {
     
     return dataPoint
   })
-  
+    
   // Toggle municipality selection
   const toggleMunicipality = (municipality: string) => {
     setSelectedMunicipalities(prev => 
@@ -409,6 +410,28 @@ export function DistrictTrends() {
     }
 
     return null;
+  };
+
+  const getSortedMunicipalities = () => {
+    if (municipalitySorting === 'alphabetical') {
+      return [...municipalities].sort();
+    }
+
+    // Sort by trend data (percentage change or absolute change)
+    return [...municipalities].sort((a, b) => {
+      const aTrend = trendData[a];
+      const bTrend = trendData[b];
+      
+      // Default to 0 if no trend data available
+      const aValue = aTrend ? (selectedType === 'absolute' ? aTrend.absoluteChange : aTrend.percentage) : 0;
+      const bValue = bTrend ? (selectedType === 'absolute' ? bTrend.absoluteChange : bTrend.percentage) : 0;
+      
+      if (municipalitySorting === 'increasing') {
+        return aValue - bValue;
+      } else { // decreasing
+        return bValue - aValue;
+      }
+    });
   };
 
   if (loading) {
@@ -505,9 +528,26 @@ export function DistrictTrends() {
       
       {selectedDistrict && municipalities.length > 0 && (
         <div className={getMunicipalitySelectionClasses()}>
-          <p className="text-sm text-muted-foreground">Selecionar municípios para comparar:</p>
+          <div className="flex justify-between items-center mb-2">
+            <p className="text-sm text-muted-foreground">Selecionar municípios para comparar:</p>
+            <Select 
+              value={municipalitySorting} 
+              onValueChange={(value: 'alphabetical' | 'increasing' | 'decreasing') => setMunicipalitySorting(value)}
+            >
+              <SelectTrigger className="w-[160px] h-8 text-xs">
+                <SelectValue placeholder="Ordenar por" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectGroup>
+                  <SelectItem value="alphabetical">Ordem alfabética</SelectItem>
+                  <SelectItem value="increasing">% Crescente</SelectItem>
+                  <SelectItem value="decreasing">% Decrescente</SelectItem>
+                </SelectGroup>
+              </SelectContent>
+            </Select>
+          </div>
           <div className="flex flex-wrap gap-1">
-            {municipalities.map(municipality => (
+            {getSortedMunicipalities().map(municipality => (
               <Badge
                 key={municipality}
                 variant={selectedMunicipalities.includes(municipality) ? "default" : "outline"}
@@ -536,13 +576,13 @@ export function DistrictTrends() {
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis dataKey="year" />
             <YAxis 
-              label={{ 
+                            label={{ 
                 value: selectedType === 'absolute' ? "Orçamento (€ Milhões)" : "Percentagem do Orçamento Nacional (%)", 
                 angle: -90, 
                 position: 'insideLeft',
                 style: { textAnchor: 'middle' }
               }}
-            />
+                          />
             <Tooltip content={<CustomTooltip />} />
             <Legend 
               formatter={(value, entry) => (
