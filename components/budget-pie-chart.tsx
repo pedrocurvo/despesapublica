@@ -64,7 +64,7 @@ const renderActiveShape = (props: any) => {
   return (
     <g>
       {/* Show name above the rings */}
-      <text x={cx} y={cy - outerRadius - 15} textAnchor="middle" fill="#333" fontSize="14" fontWeight="500">
+      <text x={cx} y={cy - outerRadius - 20} textAnchor="middle" fill="#333" fontSize="16" fontWeight="600">
         {payload.name}
       </text>
       
@@ -287,12 +287,12 @@ export default function BudgetPieChart({
         </div>
       )}
       <div className={`relative w-full ${showLegend ? 'min-h-[400px]' : 'min-h-[300px]'} mb-${showLegend ? '4' : '0'}`}>
-{/* Back Button */}
+    {/* Back Button */}
       {selectedSector && enableSectorClick && (
         <div className="absolute top-4 right-4 z-10">
           <Button 
             variant="outline" 
-  onClick={handleBackClick}
+            onClick={handleBackClick}
             className="mt-2"
           >
             ← Voltar para todos os setores
@@ -345,14 +345,22 @@ export default function BudgetPieChart({
           <div className="w-full mt-1 sm:mt-1.5 md:mt-2 px-2 md:px-4">
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-x-2 gap-y-2">
               {chartData.map((entry, index) => (
-                <div key={`legend-${index}`} className="flex items-center">
+                <div 
+                  key={`legend-${index}`} 
+                  className="flex items-center group relative"
+                  title={entry.name}
+                >
                   <div 
                     className="w-3 h-3 rounded-sm mr-2 flex-shrink-0" 
-                    style={{ backgroundColor: COLORS[index % COLORS.length] }} 
+                    style={{ backgroundColor: COLORS[index % COLORS.length] }}
+                    title={entry.name} 
                   />
-                  <span className="text-sm truncate" title={entry.name}>
+                  <span className="text-sm truncate">
                     {entry.name}
                   </span>
+                  <div className="absolute -top-8 left-0 bg-black/80 text-white px-2 py-1 rounded text-xs whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50">
+                    {entry.name}
+                  </div>
                 </div>
               ))}
             </div>

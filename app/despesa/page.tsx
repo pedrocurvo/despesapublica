@@ -33,6 +33,7 @@ export default function DespesaPage() {
           <BudgetPieChart 
             year={selectedYear} 
             onSectorClick={setSelectedSector}
+            showTooltip={false}
           />
         </div>
 
