@@ -62,9 +62,11 @@ const normalizeDistrictName = (name: string): string => {
 
 interface PortugalMapProps {
   selectedYear: string;
+  onDistrictClick?: (district: string | null) => void;
+  externalSelectedDistrict?: string | null;
 }
 
-export function PortugalMap({ selectedYear }: PortugalMapProps) {
+export function PortugalMap({ selectedYear, onDistrictClick, externalSelectedDistrict }: PortugalMapProps) {
   const [hoveredDistrict, setHoveredDistrict] = useState<DistrictInfo | null>(null)
   const [selectedDistrict, setSelectedDistrict] = useState<string | null>(null)
   const [tooltipPosition, setTooltipPosition] = useState({ x: 0, y: 0 })
@@ -85,6 +87,13 @@ export function PortugalMap({ selectedYear }: PortugalMapProps) {
   const districtGeoUrl = "gadm41_PRT_1.json"
   const municipalitiesGeoUrl = "gadm41_PRT_2.json"
 
+  // Sync internal selectedDistrict with external state if provided
+  useEffect(() => {
+    if (externalSelectedDistrict !== undefined) {
+      setSelectedDistrict(externalSelectedDistrict);
+    }
+  }, [externalSelectedDistrict]);
+
   const handleMouseEnter = (districtId: string, districtName: string, e: React.MouseEvent) => {
     if (transferData) {
       const districtData = transferData.Districts.find(
@@ -95,7 +104,7 @@ export function PortugalMap({ selectedYear }: PortugalMapProps) {
         setHoveredDistrict({
           id: districtId,
           name: districtName,
-          received: Number(districtData.Total) / 1000000000, // Convert to billions
+          received: Number(districtData.Total) / 1000000, // Convert to millions
           nationalPercentage: Number(districtData.NationalPercentage)
         });
         
@@ -166,6 +175,11 @@ export function PortugalMap({ selectedYear }: PortugalMapProps) {
     // Normalize the district name for autonomous regions
     const normalizedName = normalizeDistrictName(districtName);
     setSelectedDistrict(normalizedName);
+    
+    // Call the onDistrictClick callback if provided
+    if (onDistrictClick) {
+      onDistrictClick(normalizedName);
+    }
   }
 
   // Map district IDs from GeoJSON properties to our data format
@@ -309,6 +323,16 @@ export function PortugalMap({ selectedYear }: PortugalMapProps) {
         setLoading(false);
       });
   }, [districtGeoUrl, municipalitiesGeoUrl, selectedYear]);
+  
+  // When year changes, reset the selected district only if externalSelectedDistrict is undefined
+  useEffect(() => {
+    if (externalSelectedDistrict === undefined) {
+      setSelectedDistrict(null);
+      if (onDistrictClick) {
+        onDistrictClick(null);
+      }
+    }
+  }, [selectedYear, onDistrictClick, externalSelectedDistrict]);
 
   // Create geography components with appropriate filtering for district level
   const renderGeographies = (regionType: "mainland" | "madeira" | "azores") => {
@@ -355,11 +379,9 @@ export function PortugalMap({ selectedYear }: PortugalMapProps) {
   // Render municipalities for a specific district
   const renderMunicipalities = (districtName: string) => {
     if (!municipalitiesData) return null;
-    console.log("Selected District:", districtName);
     
     // Normalize district name for comparison with GeoJSON properties
     const normalizedDistrictName = normalizeDistrictName(districtName);
-    console.log("Normalized District Name:", normalizedDistrictName);
     
     return (
       <Geographies geography={municipalitiesData}>
@@ -411,6 +433,15 @@ export function PortugalMap({ selectedYear }: PortugalMapProps) {
     );
   };
 
+  const handleBackClick = () => {
+    setSelectedDistrict(null);
+    
+    // Call the onDistrictClick with null to notify parent component
+    if (onDistrictClick) {
+      onDistrictClick(null);
+    }
+  };
+
   return (
     <div className="relative">
       <div className="mb-4 flex items-center justify-between">
@@ -423,7 +454,7 @@ export function PortugalMap({ selectedYear }: PortugalMapProps) {
             variant="outline"
             size="sm"
             className="flex items-center gap-1"
-            onClick={() => setSelectedDistrict(null)}
+            onClick={handleBackClick}
           >
             <ArrowLeft className="h-4 w-4" />
             <span>Voltar à Visão Nacional</span>
@@ -557,7 +588,7 @@ export function PortugalMap({ selectedYear }: PortugalMapProps) {
               <h3 className="mb-2 font-medium">{hoveredDistrict.name}</h3>
               <div className="grid grid-cols-2 gap-2 text-sm">
                 <div className="text-muted-foreground">Recebido:</div>
-                <div className="font-medium text-right">€{hoveredDistrict.received.toFixed(2)}B</div>
+                <div className="font-medium text-right">€{hoveredDistrict.received.toFixed(2)}M</div>
                 <div className="text-muted-foreground">% Nacional:</div>
                 <div className="font-medium text-right">{hoveredDistrict.nationalPercentage.toFixed(2)}%</div>
               </div>

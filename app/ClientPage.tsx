@@ -26,8 +26,8 @@ export default function ClientPage() {
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
           <Card className="lg:col-span-4">
             <CardHeader>
-              <CardTitle>Visão Geral do Orçamento</CardTitle>
-              <CardDescription>Alocação e despesa orçamental anual (2013-2023)</CardDescription>
+              <CardTitle>Balanço Orçamental</CardTitle>
+              <CardDescription>Receita e despesa anual (2013-2023)</CardDescription>
             </CardHeader>
             <CardContent>
               <Overview startYear={2013} endYear={2023} />
@@ -70,7 +70,7 @@ export default function ClientPage() {
                 <BudgetPieChart 
                   year={distributionYear} 
                   showTooltip={false}
-                  enableSectorClick={false}
+                  enableSectorClick={true}
                   showTitle={false}
                   showLegend={false}
                 />

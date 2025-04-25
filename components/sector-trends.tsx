@@ -417,6 +417,20 @@ export function SectorTrends() {
     }
   }
 
+  // Calculate the chart height based on the number of legend items
+  const calculateChartHeight = () => {
+    const lineItems = getLineItems();
+    // Base height plus additional height for each item beyond a threshold
+    const baseHeight = 400;
+    const threshold = 6; // Lower threshold for sectors (was 8)
+    const additionalHeightPerItem = 30; // More height per item (was 20)
+    
+    if (lineItems.length > threshold) {
+      return baseHeight + (lineItems.length - threshold) * additionalHeightPerItem;
+    }
+    return baseHeight;
+  }
+
   // Add a custom tooltip component to sort items
   const CustomTooltip = ({ active, payload, label }: any) => {
     if (active && payload && payload.length) {
@@ -621,7 +635,7 @@ export function SectorTrends() {
         </div>
       )}
       
-      <div className="h-[400px]">
+      <div style={{ height: `${calculateChartHeight()}px` }}>
         <ResponsiveContainer width="100%" height="100%">
           <LineChart
             data={chartData}
@@ -669,7 +683,7 @@ export function SectorTrends() {
       
       <div className="mt-2 flex flex-wrap items-center gap-6 text-sm text-muted-foreground">
         <div className="flex items-center gap-2 mr-4">
-          <Label htmlFor="trend-base-year" className="text-sm whitespace-nowrap">Comparar desde:</Label>
+          <Label htmlFor="trend-base-year" className="text-sm whitespace-nowrap">Comparar com:</Label>
           <Select 
             value={baseYear} 
             onValueChange={setBaseYear}

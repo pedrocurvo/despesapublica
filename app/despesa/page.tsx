@@ -3,9 +3,12 @@
 import { useState } from "react";
 import BudgetPieChart from "@/components/budget-pie-chart";
 import BudgetYearSelector from "@/components/budget-year-selector";
+import { SectorNewsArticles } from "@/components/sector-news-articles";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 
 export default function DespesaPage() {
   const [selectedYear, setSelectedYear] = useState("2023");
+  const [selectedSector, setSelectedSector] = useState<string | null>(null);
   const availableYears = ["2021", "2022", "2023"]; // You can expand this list as more data becomes available
 
   return (
@@ -27,8 +30,27 @@ export default function DespesaPage() {
         </div>
         
         <div className="rounded-lg border bg-card p-6">
-          <BudgetPieChart year={selectedYear} />
+          <BudgetPieChart 
+            year={selectedYear} 
+            onSectorClick={setSelectedSector}
+          />
         </div>
+
+        {selectedSector && (
+          <div className="mt-8">
+            <Card>
+              <CardHeader>
+                <CardTitle>Notícias sobre {selectedSector}</CardTitle>
+                <CardDescription>
+                  Artigos de notícias relacionados com {selectedSector} em {selectedYear}
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <SectorNewsArticles year={selectedYear} sector={selectedSector} />
+              </CardContent>
+            </Card>
+          </div>
+        )}
       </div>
     </div>
   );

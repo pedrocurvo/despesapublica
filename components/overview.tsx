@@ -104,20 +104,14 @@ export function Overview({ startYear = 2018, endYear = 2023 }: OverviewProps) {
         <div className="rounded-md bg-background p-4 shadow-md border border-border text-sm">
           <p className="font-medium">{`Ano: ${label}`}</p>
           <div className="mt-2 space-y-1">
-            <p className="text-blue-500">{`Orçamento de Receita: ${yearData.receitaBudget !== null ? `€${yearData.receitaBudget}M` : 'N/D'}`}</p>
-            <p className="text-blue-600">{`Receita Real: ${yearData.receitaActual !== null ? `€${yearData.receitaActual}M` : 'N/D'}`}</p>
-            <p className="text-red-500">{`Orçamento de Despesa: ${yearData.despesaBudget !== null ? `€${yearData.despesaBudget}M` : 'N/D'}`}</p>
-            <p className="text-red-600">{`Despesa Real: ${yearData.despesaActual !== null ? `€${yearData.despesaActual}M` : 'N/D'}`}</p>
+            <p className="text-blue-600">{`Receita Efetiva: ${yearData.receitaActual !== null ? `€${yearData.receitaActual}M` : 'N/D'}`}</p>
+            <p className="text-red-600">{`Despesa Efetiva: ${yearData.despesaActual !== null ? `€${yearData.despesaActual}M` : 'N/D'}`}</p>
             <div className="border-t border-border my-2"></div>
             <p className={`font-medium ${yearData.saldoActual !== null ? (yearData.saldoActual >= 0 ? "text-green-500" : "text-red-500") : "text-muted-foreground"}`}>
-              {`Saldo Real: ${yearData.saldoActual !== null ? `€${yearData.saldoActual}M` : 'N/D'}`}
-            </p>
-            <p className={`font-medium ${yearData.saldoBudget !== null ? (yearData.saldoBudget >= 0 ? "text-green-500" : "text-red-500") : "text-muted-foreground"}`}>
-              {`Saldo Orçamentado: ${yearData.saldoBudget !== null ? `€${yearData.saldoBudget}M` : 'N/D'}`}
+              {`Saldo Efetivo: ${yearData.saldoActual !== null ? `€${yearData.saldoActual}M` : 'N/D'}`}
             </p>
             <div className="border-t border-border my-2"></div>
-            <p className="text-muted-foreground">{`% do PIB Real: ${yearData.pibPercentage !== null ? `${yearData.pibPercentage}%` : 'N/D'}`}</p>
-            <p className="text-muted-foreground">{`% do PIB Orçamentado: ${yearData.pibBudgetPercentage !== null ? `${yearData.pibBudgetPercentage}%` : 'N/D'}`}</p>
+            <p className="text-muted-foreground">{`Em % do PIB: ${yearData.pibPercentage !== null ? `${yearData.pibPercentage}%` : 'N/D'}`}</p>
           </div>
         </div>
       );
@@ -134,8 +128,8 @@ export function Overview({ startYear = 2018, endYear = 2023 }: OverviewProps) {
           <YAxis domain={[80000, 120000]} tickFormatter={(value) => `€${value}M`} />
           <Tooltip content={<CustomTooltip />} />
           <Legend wrapperStyle={{ paddingTop: 10 }} />
-          <Bar name="Revenue Budget" dataKey="receitaBudget" fill="#3b82f6" radius={[4, 4, 0, 0]} />
-          <Bar name="Expense Budget" dataKey="despesaBudget" fill="#ef4444" radius={[4, 4, 0, 0]} />
+          <Bar name="Receita" dataKey="receitaBudget" fill="#3b82f6" radius={[4, 4, 0, 0]} />
+          <Bar name="Despesa" dataKey="despesaBudget" fill="#ef4444" radius={[4, 4, 0, 0]} />
         </BarChart>
       </ResponsiveContainer>
     </div>

@@ -63,15 +63,19 @@ const renderActiveShape = (props: any) => {
 
   return (
     <g>
-      <text x={cx} y={cy} dy={-20} textAnchor="middle" fill="#888" fontSize="12">
+      {/* Show name above the rings */}
+      <text x={cx} y={cy - outerRadius - 15} textAnchor="middle" fill="#333" fontSize="14" fontWeight="500">
         {payload.name}
       </text>
-      <text x={cx} y={cy} textAnchor="middle" fill="#333" fontSize="14" fontWeight="500">
+      
+      {/* Keep values in the center */}
+      <text x={cx} y={cy - 10} textAnchor="middle" fill="#333" fontSize="14" fontWeight="500">
         {formatCurrency(payload.value)}
       </text>
-      <text x={cx} y={cy + 20} textAnchor="middle" fill="#888" fontSize="12">
+      <text x={cx} y={cy + 15} textAnchor="middle" fill="#888" fontSize="12">
         {`${(percent * 100).toFixed(2)}%`}
       </text>
+      
       <Sector
         cx={cx}
         cy={cy}
@@ -135,6 +139,7 @@ interface BudgetPieChartProps {
   enableSectorClick?: boolean;
   showTitle?: boolean;
   showLegend?: boolean;
+  onSectorClick?: (sector: string | null) => void;
 }
 
 export default function BudgetPieChart({ 
@@ -142,7 +147,8 @@ export default function BudgetPieChart({
   showTooltip = true, 
   enableSectorClick = true,
   showTitle = true,
-  showLegend = true
+  showLegend = true,
+  onSectorClick
 }: BudgetPieChartProps) {
   const [budgetData, setBudgetData] = React.useState<BudgetData | null>(null);
   const [loading, setLoading] = React.useState<boolean>(true);
@@ -172,7 +178,10 @@ export default function BudgetPieChart({
     fetchBudgetData();
     // Reset selected sector when year changes
     setSelectedSector(null);
-  }, [year]);
+    if (onSectorClick) {
+      onSectorClick(null);
+    }
+  }, [year, onSectorClick]);
   
   // Format data for the pie chart
   const formatChartData = (data: BudgetData | null, sector: string | null): ChartData[] => {
@@ -227,6 +236,11 @@ export default function BudgetPieChart({
     
     const sectorName = chartData[index].name;
     setSelectedSector(sectorName);
+    
+    // Call the onSectorClick prop if provided
+    if (onSectorClick) {
+      onSectorClick(sectorName);
+    }
   };
   
   const handleMouseEnter = (_: any, index: number) => {
@@ -240,6 +254,11 @@ export default function BudgetPieChart({
   const handleBackClick = () => {
     setSelectedSector(null);
     setActiveIndex(null);
+    
+    // Call the onSectorClick prop with null if provided
+    if (onSectorClick) {
+      onSectorClick(null);
+    }
   };
   
   if (loading) {
@@ -253,32 +272,35 @@ export default function BudgetPieChart({
   return (
     <div className="w-full flex flex-col items-center">
       <div className="w-full">
-        {showTitle && (
-          <div className="text-center mb-6">
-            <h2 className="text-xl font-bold">
-              {selectedSector 
-                ? `Despesa por Subsetor: ${selectedSector}` 
-                : "Despesa por Setor"}
-            </h2>
-            <p className="text-sm text-muted-foreground">
-              {selectedSector 
-                ? null 
-                : "Clique num setor para ver os detalhes"}
-            </p>
-            
-            {selectedSector && enableSectorClick && (
-              <Button 
-                variant="outline" 
-                onClick={handleBackClick}
-                className="mt-2"
-              >
-                ← Voltar para todos os setores
-              </Button>
-            )}
-          </div>
-        )}
+      {showTitle && (
+        <div className="text-center mb-6">
+          <h2 className="text-xl font-bold">
+            {selectedSector 
+              ? `Despesa por Subsetor: ${selectedSector}` 
+              : "Despesa por Setor"}
+          </h2>
+          <p className="text-sm text-muted-foreground">
+            {selectedSector 
+              ? null 
+              : "Clique num setor para ver os detalhes"}
+          </p>
+        </div>
+      )}
+      <div className="relative w-full min-h-[400px] mb-4">
+      {/* Back Button */}
+      {selectedSector && enableSectorClick && (
+        <div className="absolute top-4 right-4 z-10">
+          <Button 
+            variant="outline" 
+            onClick={handleBackClick}
+            className="mt-2"
+          >
+            ← Voltar para todos os setores
+          </Button>
+        </div>
+      )}
         
-        <div className="w-full min-h-[400px] mb-4">
+          {/* Chart */}
           <ChartContainer 
             config={{
               expenses: { label: "Despesas" },

@@ -63,7 +63,7 @@ export default function RootLayout({
                 <Link href="/privacy" className="hover:underline">
                   Privacidade
                 </Link>
-                <Link href="/contact" className="hover:underline">
+                <Link href="/team" className="hover:underline">
                   Contacto
                 </Link>
               </nav>
