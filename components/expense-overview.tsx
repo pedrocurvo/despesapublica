@@ -107,8 +107,8 @@ export function ExpenseOverview({ startYear = 2018, endYear = 2023, onYearClick 
         <div className="rounded-md bg-background p-4 shadow-md border border-border text-sm">
           <p className="font-medium">{`Ano: ${label}`}</p>
           <div className="mt-2 space-y-1">
-            <p className="text-blue-500">{`Orçamentado: €${yearData.budgeted?.toLocaleString()}M`}</p>
-            <p className="text-red-500">{`Executado: €${yearData.executed?.toLocaleString()}M`}</p>
+            <p className="text-blue-500">{`Orçamentado: €${(yearData.budgeted/1000).toLocaleString()}MM`}</p>
+            <p className="text-red-500">{`Executado: €${(yearData.executed/1000).toLocaleString()}MM`}</p>
             <div className="border-t border-border my-2"></div>
             <p className={`font-medium ${
               yearData.executed <= yearData.budgeted ? "text-green-500" : "text-red-500"
@@ -138,11 +138,11 @@ export function ExpenseOverview({ startYear = 2018, endYear = 2023, onYearClick 
         >
           <CartesianGrid strokeDasharray="3 3" vertical={false} />
           <XAxis dataKey="year" />
-          <YAxis domain={[80000, 120000]} tickFormatter={(value) => `€${value}M`} />
+          <YAxis domain={[80000, 120000]} tickFormatter={(value) => `€${(value/1000).toFixed(0)}MM`} />
           <Tooltip content={<CustomTooltip />} />
           <Legend wrapperStyle={{ paddingTop: 10 }} />
-          <Bar name="Budgeted Expenses" dataKey="budgeted" fill="#3b82f6" radius={[4, 4, 0, 0]} cursor="pointer" />
-          <Bar name="Executed Expenses" dataKey="executed" fill="#ef4444" radius={[4, 4, 0, 0]} cursor="pointer" />
+          <Bar name="Despesa Orçamentada" dataKey="budgeted" fill="#3b82f6" radius={[4, 4, 0, 0]} cursor="pointer" />
+          <Bar name="Despesa Real (Executada)" dataKey="executed" fill="#ef4444" radius={[4, 4, 0, 0]} cursor="pointer" />
         </BarChart>
       </ResponsiveContainer>
     </div>

@@ -47,11 +47,11 @@ export default function ClientPage() {
           <Card className="lg:col-span-4">
             <CardHeader>
               <CardTitle>Panorama de Despesas</CardTitle>
-              <CardDescription>Análise detalhada das despesas do governo (2021-2023)</CardDescription>
+              <CardDescription>Despesa orçamentada e real (2015-2023)</CardDescription>
             </CardHeader>
             <CardContent>
               <ExpenseOverview 
-                startYear={2021} 
+                startYear={2023} 
                 endYear={2023}
                 onYearClick={handleYearClick}
               />
