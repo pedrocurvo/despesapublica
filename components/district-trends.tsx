@@ -86,6 +86,13 @@ export function DistrictTrends() {
       .join(' ');
   }
 
+  // Add CSS transition classes for municipality buttons container
+  const getMunicipalitySelectionClasses = () => {
+    return `space-y-1 transition-all duration-300 ease-in-out ${
+      showAllMunicipalities ? 'opacity-0 max-h-0 overflow-hidden' : 'opacity-100 max-h-[500px]'
+    }`;
+  }
+
   // Fetch data for all years
   useEffect(() => {
     const fetchAllYearData = async () => {
@@ -252,7 +259,7 @@ export function DistrictTrends() {
     // Start with the year as the base object
     const dataPoint: Record<string, any> = {
       year,
-      Total: (yearDataObj.Total / 1000000000).toFixed(2), // Convert to billions
+      Total: (yearDataObj.Total / 1000000).toFixed(2), // Convert to millions
     }
     
     // If no district is selected, show totals for all selected districts
@@ -261,7 +268,7 @@ export function DistrictTrends() {
         const district = yearDataObj.Districts.find(d => d.District === districtName)
         if (district) {
           if (selectedType === 'absolute') {
-            dataPoint[districtName] = (district.Total / 1000000000).toFixed(2) // Convert to billions
+            dataPoint[districtName] = (district.Total / 1000000).toFixed(2) // Convert to millions
           } else {
             dataPoint[districtName] = Number(district.NationalPercentage).toFixed(2) // Percentage
           }
@@ -273,7 +280,7 @@ export function DistrictTrends() {
       const district = yearDataObj.Districts.find(d => d.District === selectedDistrict)
       if (district) {
         if (selectedType === 'absolute') {
-          dataPoint[selectedDistrict] = (district.Total / 1000000000).toFixed(2) // Convert to billions
+          dataPoint[selectedDistrict] = (district.Total / 1000000).toFixed(2) // Convert to millions
         } else {
           dataPoint[selectedDistrict] = Number(district.NationalPercentage).toFixed(2) // Percentage
         }
@@ -285,7 +292,7 @@ export function DistrictTrends() {
       if (district?.Municipalities) {
         // Add district total if requested
         if (selectedType === 'absolute') {
-          dataPoint[selectedDistrict] = (district.Total / 1000000000).toFixed(2) // Convert to billions
+          dataPoint[selectedDistrict] = (district.Total / 1000000).toFixed(2) // Convert to millions
         } else {
           dataPoint[selectedDistrict] = Number(district.NationalPercentage).toFixed(2) // Percentage
         }
@@ -322,23 +329,31 @@ export function DistrictTrends() {
   // Get formatted label for Y axis
   const getYAxisLabel = () => {
     return selectedType === 'absolute' 
-      ? "Orçamento (€ Mil Milhões)" 
+      ? "Orçamento (€ Milhões)" 
       : "Percentagem do Orçamento Nacional (%)"
   }
   
-  // Get items to display in the legend
+  // Determine which lines should be displayed in the chart
   const getLineItems = () => {
+    // If no district is selected, show all districts
     if (!selectedDistrict) {
-      return districts
-    } else if (selectedMunicipalities.length === 0 && !showAllMunicipalities) {
-      return [selectedDistrict]
-    } else {
-      const items = [selectedDistrict]
-      const municList = showAllMunicipalities ? municipalities : selectedMunicipalities
-      return [...items, ...municList]
+      return districts;
     }
+    
+    // If a district is selected but no municipalities or show all municipalities is false
+    if (selectedDistrict && selectedMunicipalities.length === 0 && !showAllMunicipalities) {
+      return [selectedDistrict];
+    }
+    
+    // If showing all municipalities
+    if (showAllMunicipalities) {
+      return [selectedDistrict, ...municipalities];
+    }
+    
+    // If showing specific municipalities
+    return [selectedDistrict, ...selectedMunicipalities];
   }
-
+  
   // Calculate the chart height based on the number of legend items
   const calculateChartHeight = () => {
     const lineItems = getLineItems();
@@ -366,9 +381,7 @@ export function DistrictTrends() {
           <p className="font-medium">{`Ano: ${label}`}</p>
           {sortedPayload.map((entry, index) => {
             const isDistrict = entry.name === selectedDistrict;
-            const unit = selectedType === 'absolute' 
-              ? (isDistrict ? '€B' : '€M') 
-              : '%';
+            const unit = selectedType === 'absolute' ? '€M' : '%';
             
             return (
               <div key={`item-${index}`} className="flex justify-between gap-4 items-center">
@@ -486,8 +499,8 @@ export function DistrictTrends() {
         </div>
       </div>
       
-      {selectedDistrict && municipalities.length > 0 && !showAllMunicipalities && (
-        <div className="space-y-1">
+      {selectedDistrict && municipalities.length > 0 && (
+        <div className={getMunicipalitySelectionClasses()}>
           <p className="text-sm text-muted-foreground">Selecionar municípios para comparar:</p>
           <div className="flex flex-wrap gap-1">
             {municipalities.map(municipality => (
@@ -520,7 +533,7 @@ export function DistrictTrends() {
             <XAxis dataKey="year" />
             <YAxis 
               label={{ 
-                value: selectedType === 'absolute' ? "Orçamento (€ Mil Milhões)" : "Percentagem do Orçamento Nacional (%)", 
+                value: selectedType === 'absolute' ? "Orçamento (€ Milhões)" : "Percentagem do Orçamento Nacional (%)", 
                 angle: -90, 
                 position: 'insideLeft',
                 style: { textAnchor: 'middle' }
