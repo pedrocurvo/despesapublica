@@ -19,36 +19,29 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { Button } from "@/components/ui/button"
-import { Loader2, ArrowUpIcon, ArrowDownIcon, MinusIcon } from "lucide-react"
+import { Loader2, ArrowUpIcon, ArrowDownIcon, MinusIcon, AlertCircle } from "lucide-react"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Label } from "@/components/ui/label"
 import { Badge } from "@/components/ui/badge"
+import { Alert, AlertDescription } from "@/components/ui/alert"
 
 // Years to fetch data for
-const YEARS = ["2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023"]
+const YEARS = ["2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023"]
 
-type SectorData = {
-  name: string
-  value: number
-  percentage: number
-  subsectors?: SubsectorData[]
-}
-
-type SubsectorData = {
-  name: string
-  value: number
-  percentage: number
-}
-
-type BudgetData = {
-  sectors: {
-    [key: string]: {
-      "Despesa Efetiva Consolidada": {
-        "Execucao": number;
-      };
-      "Subsectors"?: {
-        [key: string]: {
-          "Execucao": number;
+// Define types for the new data format
+interface BudgetData {
+  [year: string]: {
+    despesa_orcamentada: number;
+    despesa_executada_efetiva_consolidada: number;
+    grau_execução: number;
+    setores: {
+      [key: string]: {
+        despesa_orcamentada: number;
+        despesa_executada_efetiva_consolidada: number;
+        despesa_executada_total_nao_consolidada: number;
+        grau_execução: number;
+        medidas: {
+          [key: string]: number;
         };
       };
     };
@@ -74,10 +67,17 @@ export function SectorTrends() {
   const [error, setError] = useState<string | null>(null)
   const [yearData, setYearData] = useState<Record<string, BudgetData>>({})
   const [sectors, setSectors] = useState<string[]>([])
+  // Track sectors that exist in all years or just some years
+  const [sectorsInAllYears, setSectorsInAllYears] = useState<Set<string>>(new Set())
+  const [partialSectors, setPartialSectors] = useState<Set<string>>(new Set())
   const [selectedSector, setSelectedSector] = useState<string | null>(null)
   const [subsectors, setSubsectors] = useState<string[]>([])
+  // Track subsectors that exist in all years or just some years
+  const [subsectorsInAllYears, setSubsectorsInAllYears] = useState<Set<string>>(new Set())
+  const [partialSubsectors, setPartialSubsectors] = useState<Set<string>>(new Set())
   const [selectedSubsectors, setSelectedSubsectors] = useState<string[]>([])
   const [showAllSubsectors, setShowAllSubsectors] = useState(false)
+  const [showIncompleteData, setShowIncompleteData] = useState(false)
   const [selectedType, setSelectedType] = useState<'absolute' | 'percentage'>('absolute')
   const [trendData, setTrendData] = useState<Record<string, { trend: 'up' | 'down' | 'neutral', percentage: number }>>({})
   const [baseYear, setBaseYear] = useState<string>(YEARS[0])
@@ -102,12 +102,17 @@ export function SectorTrends() {
 
   // Get sorted subsectors based on the selected sorting method
   const getSortedSubsectors = () => {
+    // Filter subsectors based on showIncompleteData preference
+    const subsectorsToShow = subsectors.filter(subsector => 
+      showIncompleteData || subsectorsInAllYears.has(subsector)
+    );
+
     if (subsectorSorting === 'alphabetical') {
-      return [...subsectors].sort();
+      return [...subsectorsToShow].sort();
     }
 
     // Sort by trend data (percentage change)
-    return [...subsectors].sort((a, b) => {
+    return [...subsectorsToShow].sort((a, b) => {
       const aTrend = trendData[a];
       const bTrend = trendData[b];
       
@@ -146,10 +151,47 @@ export function SectorTrends() {
         
         setYearData(result)
         
-        // Extract all sector names from the first year's data
-        const firstYearData = result[YEARS[0]]
-        const sectorNames = firstYearData ? Object.keys(firstYearData.sectors) : []
-        setSectors(sectorNames)
+        // Extract all sector names from all years to identify sectors present in all years vs. partial years
+        const sectorsByYear = new Map<string, Set<string>>()
+        const allSectors = new Set<string>()
+        
+        // First gather all sectors by year and collect all unique sector names
+        YEARS.forEach(year => {
+          const yearSectors = new Set<string>()
+          if (result[year]?.[year]?.setores) {
+            Object.keys(result[year][year].setores).forEach(sectorName => {
+              yearSectors.add(sectorName)
+              allSectors.add(sectorName)
+            })
+          }
+          sectorsByYear.set(year, yearSectors)
+        })
+        
+        // Then determine which sectors are in all years vs. partial years
+        const inAllYears = new Set<string>()
+        const inPartialYears = new Set<string>()
+        
+        allSectors.forEach(sector => {
+          let inAll = true
+          for (const year of YEARS) {
+            if (!sectorsByYear.get(year)?.has(sector)) {
+              inAll = false
+              break
+            }
+          }
+          
+          if (inAll) {
+            inAllYears.add(sector)
+          } else {
+            inPartialYears.add(sector)
+          }
+        })
+        
+        setSectorsInAllYears(inAllYears)
+        setPartialSectors(inPartialYears)
+        
+        // Use all sectors as the initial list, sort them alphabetically
+        setSectors([...allSectors].sort())
         
         // Calculate trends for sectors and subsectors
         calculateTrends(result, baseYear)
@@ -172,7 +214,7 @@ export function SectorTrends() {
     }
   }, [baseYear, yearData])
   
-  // Calculate trends for sectors and subsectors
+  // Calculate trends for sectors and subsectors with new data structure
   const calculateTrends = (data: Record<string, BudgetData>, fromYear: string) => {
     const trends: Record<string, { trend: 'up' | 'down' | 'neutral', percentage: number }> = {}
     
@@ -189,18 +231,27 @@ export function SectorTrends() {
       return
     }
     
-    // Calculate sector trends
-    const firstYearData = data[firstYear]
-    const lastYearData = data[lastYear]
+    // Check if data is available for both years
+    if (!data[firstYear]?.[firstYear] || !data[lastYear]?.[lastYear]) {
+      console.warn("Missing data for trend calculation")
+      return
+    }
     
-    if (!firstYearData?.sectors || !lastYearData?.sectors) return
+    // Calculate sector trends
+    const firstYearData = data[firstYear][firstYear]
+    const lastYearData = data[lastYear][lastYear]
+    
+    if (!firstYearData?.setores || !lastYearData?.setores) {
+      console.warn("Missing sector data for trend calculation")
+      return
+    }
     
     // Process each sector in the first year
-    Object.entries(firstYearData.sectors).forEach(([sectorName, sectorData]) => {
+    Object.entries(firstYearData.setores).forEach(([sectorName, sectorData]) => {
       // Check if the sector exists in the last year
-      if (lastYearData.sectors[sectorName]) {
-        const firstYearValue = sectorData["Despesa Efetiva Consolidada"]["Execucao"]
-        const lastYearValue = lastYearData.sectors[sectorName]["Despesa Efetiva Consolidada"]["Execucao"]
+      if (lastYearData.setores[sectorName]) {
+        const firstYearValue = sectorData.despesa_executada_efetiva_consolidada
+        const lastYearValue = lastYearData.setores[sectorName].despesa_executada_efetiva_consolidada
         
         const diff = lastYearValue - firstYearValue
         const percentChange = (diff / firstYearValue) * 100
@@ -210,15 +261,23 @@ export function SectorTrends() {
           percentage: Math.abs(percentChange)
         }
         
-        // Calculate subsector trends if they exist
-        if (sectorData.Subsectors && lastYearData.sectors[sectorName].Subsectors) {
-          Object.entries(sectorData.Subsectors).forEach(([subsectorName, subsectorData]) => {
-            if (lastYearData.sectors[sectorName].Subsectors?.[subsectorName]) {
-              const firstYearSubValue = subsectorData["Execucao"]
-              const lastYearSubValue = lastYearData.sectors[sectorName].Subsectors?.[subsectorName]["Execucao"]
+        // Calculate subsector (medidas) trends if they exist
+        if (sectorData.medidas && lastYearData.setores[sectorName].medidas) {
+          // Get all unique subsector names across both years
+          const allSubsectorNames = new Set<string>()
+          
+          Object.keys(sectorData.medidas).forEach(name => allSubsectorNames.add(name))
+          Object.keys(lastYearData.setores[sectorName].medidas).forEach(name => allSubsectorNames.add(name))
+          
+          // Calculate trends for each subsector that exists in both years
+          allSubsectorNames.forEach(subsectorName => {
+            if (sectorData.medidas[subsectorName] !== undefined && 
+                lastYearData.setores[sectorName].medidas[subsectorName] !== undefined) {
+              const firstYearSubValue = sectorData.medidas[subsectorName]
+              const lastYearSubValue = lastYearData.setores[sectorName].medidas[subsectorName]
               
               const subDiff = lastYearSubValue - firstYearSubValue
-              const subPercentChange = (subDiff / firstYearSubValue) * 100
+              const subPercentChange = firstYearSubValue > 0 ? (subDiff / firstYearSubValue) * 100 : 0
               
               trends[subsectorName] = {
                 trend: subDiff > 0 ? 'up' : subDiff < 0 ? 'down' : 'neutral',
@@ -256,35 +315,62 @@ export function SectorTrends() {
     // If absolute mode, show change in M € (with sign and color)
     let color = ''
     trend.trend === 'up' ? color = 'text-green-600' : trend.trend === 'down' ? color = 'text-red-600' : color = 'text-gray-500'
+    
     // Calculate absolute change for sector or subsector
     const firstYear = baseYear
     const lastYear = YEARS[YEARS.length - 1]
     let absoluteChange = 0
-    if (firstYear !== lastYear && yearData[firstYear] && yearData[lastYear]) {
-      // Try sector
-      if (yearData[firstYear].sectors[name] && yearData[lastYear].sectors[name]) {
-        const first = yearData[firstYear].sectors[name]["Despesa Efetiva Consolidada"]["Execucao"]
-        const last = yearData[lastYear].sectors[name]["Despesa Efetiva Consolidada"]["Execucao"]
-        absoluteChange =  Math.abs(last - first)
+    
+    if (firstYear !== lastYear && 
+        yearData[firstYear]?.[firstYear]?.setores && 
+        yearData[lastYear]?.[lastYear]?.setores) {
+        
+      // Check if name is a sector
+      if (yearData[firstYear][firstYear].setores[name] && yearData[lastYear][lastYear].setores[name]) {
+        const first = yearData[firstYear][firstYear].setores[name].despesa_executada_efetiva_consolidada
+        const last = yearData[lastYear][lastYear].setores[name].despesa_executada_efetiva_consolidada
+        absoluteChange = Math.abs(last - first)
       } else {
-        // Try subsector
-        for (const sector of Object.keys(yearData[firstYear].sectors)) {
-          const firstSub = yearData[firstYear].sectors[sector].Subsectors?.[name]?.Execucao
-          const lastSub = yearData[lastYear].sectors[sector].Subsectors?.[name]?.Execucao
-          if (firstSub !== undefined && lastSub !== undefined) {
-            absoluteChange = Math.abs(lastSub - firstSub)
+        // Check if name is a subsector/measure
+        for (const sector of Object.keys(yearData[firstYear][firstYear].setores)) {
+          const firstYearMedidas = yearData[firstYear][firstYear].setores[sector].medidas
+          const lastYearMedidas = yearData[lastYear][lastYear].setores[sector]?.medidas
+          
+          if (firstYearMedidas?.[name] !== undefined && lastYearMedidas?.[name] !== undefined) {
+            const first = firstYearMedidas[name]
+            const last = lastYearMedidas[name]
+            absoluteChange = Math.abs(last - first)
             break
           }
         }
       }
     }
+    
     return (
       <div className={`text-xs text-muted-foreground mt-0.5 ${color}`}>
         {selectedType === 'absolute' 
-          ? `${(absoluteChange / 1000000).toFixed(1)}M €`
+          ? `${(absoluteChange / 1000).toFixed(1)}M €`
           : `${trend.percentage.toFixed(1)}%`}
       </div>
     )
+  }
+  
+  // Add indicator for partial data
+  const getPartialDataIndicator = (name: string, type: 'sector' | 'subsector') => {
+    const isPartial = type === 'sector' 
+      ? partialSectors.has(name) 
+      : partialSubsectors.has(name);
+
+    if (!isPartial) return null;
+    
+    return (
+      <div 
+        className="inline-flex ml-1 text-amber-500" 
+        title="Dados parciais: Este item não existe em todos os anos analisados"
+      >
+        <AlertCircle size={12} />
+      </div>
+    );
   }
   
   // Update subsectors when sector changes
@@ -292,119 +378,176 @@ export function SectorTrends() {
     if (!selectedSector || !yearData || Object.keys(yearData).length === 0) {
       setSubsectors([])
       setSelectedSubsectors([])
+      setSubsectorsInAllYears(new Set())
+      setPartialSubsectors(new Set())
       return
     }
     
-    // Find the selected sector in the latest year
-    const latestYear = YEARS[YEARS.length - 1]
-    const sectorData = yearData[latestYear]?.sectors[selectedSector]
+    // Find the selected sector in all years to identify subsectors
+    const subsectorsByYear = new Map<string, Set<string>>()
+    const allSubsectors = new Set<string>()
     
-    if (sectorData?.Subsectors) {
-      // Get all subsector names, excluding special entries
-      const subsectorNames = Object.keys(sectorData.Subsectors)
-        .filter(name => 
-          name !== "DESPESA TOTAL NÃO CONSOLIDADA" && 
-          name !== "DESPESA TOTAL CONSOLIDADA"
-        )
-      setSubsectors(subsectorNames)
+    // Gather subsectors by year for the selected sector
+    YEARS.forEach(year => {
+      const yearSubsectors = new Set<string>()
+      if (yearData[year]?.[year]?.setores?.[selectedSector]?.medidas) {
+        Object.keys(yearData[year][year].setores[selectedSector].medidas).forEach(subsectorName => {
+          yearSubsectors.add(subsectorName)
+          allSubsectors.add(subsectorName)
+        })
+      }
+      subsectorsByYear.set(year, yearSubsectors)
+    })
+    
+    // Determine which subsectors are in all years vs. partial years
+    const inAllYears = new Set<string>()
+    const inPartialYears = new Set<string>()
+    
+    allSubsectors.forEach(subsector => {
+      let inAll = true
+      for (const year of YEARS) {
+        if (!subsectorsByYear.get(year)?.has(subsector)) {
+          inAll = false
+          break
+        }
+      }
       
-      // Reset selected subsectors
-      setSelectedSubsectors([])
-    } else {
-      setSubsectors([])
-      setSelectedSubsectors([])
-    }
+      if (inAll) {
+        inAllYears.add(subsector)
+      } else {
+        inPartialYears.add(subsector)
+      }
+    })
+    
+    setSubsectorsInAllYears(inAllYears)
+    setPartialSubsectors(inPartialYears)
+    
+    // Use all subsectors as the initial list, sort them alphabetically
+    setSubsectors([...allSubsectors].sort())
+    
+    // Reset selected subsectors
+    setSelectedSubsectors([])
   }, [selectedSector, yearData])
   
-  // Prepare data for the chart
+  // Prepare data for the chart with the new data structure
   const chartData = YEARS.map(year => {
     const yearDataObj = yearData[year]
-    if (!yearDataObj?.sectors) return { year }
+    if (!yearDataObj?.[year]?.setores) return { year }
     
     // Start with the year as the base object
     const dataPoint: Record<string, any> = {
       year,
       // Calculate total budget as a sum of all sector executions
-      Total: (Object.values(yearDataObj.sectors).reduce((acc, sector) => 
-        acc + sector["Despesa Efetiva Consolidada"]["Execucao"], 0) / 1000).toFixed(2), // Convert to billions
+      Total: (Object.values(yearDataObj[year].setores).reduce((acc, sector) => 
+        acc + sector.despesa_executada_efetiva_consolidada, 0) / 1000).toFixed(2), // Convert to billions
     }
     
     // If no sector is selected, show totals for all sectors
     if (!selectedSector) {
-      sectors.forEach(sectorName => {
-        const sectorData = yearDataObj?.sectors[sectorName]
+      // Determine which sectors to display based on showIncompleteData setting
+      const sectorsToShow = showIncompleteData ? sectors : [...sectorsInAllYears];
+      
+      sectorsToShow.forEach(sectorName => {
+        const sectorData = yearDataObj[year]?.setores[sectorName]
         
-        if (sectorData && sectorData["Despesa Efetiva Consolidada"]) {
+        if (sectorData) {
           if (selectedType === 'absolute') {
             // Convert to billions and store as number for the graph
-            dataPoint[sectorName] = Number((sectorData["Despesa Efetiva Consolidada"]["Execucao"] / 1000).toFixed(2))
+            dataPoint[sectorName] = Number((sectorData.despesa_executada_efetiva_consolidada / 1000).toFixed(2))
           } else {
             // Calculate percentage of total budget
-            const totalBudget = Object.values(yearDataObj.sectors).reduce((acc, sector) => 
-              acc + sector["Despesa Efetiva Consolidada"]["Execucao"], 0)
-            const percentage = (sectorData["Despesa Efetiva Consolidada"]["Execucao"] / totalBudget) * 100
+            const totalBudget = Object.values(yearDataObj[year].setores).reduce((acc, sector) => 
+              acc + sector.despesa_executada_efetiva_consolidada, 0)
+            const percentage = (sectorData.despesa_executada_efetiva_consolidada / totalBudget) * 100
             dataPoint[sectorName] = Number(percentage.toFixed(2)) // Store as number for the graph
           }
+        } else {
+          // For sectors that don't exist in this year but are included due to showIncompleteData,
+          // use null to create a gap in the chart line
+          dataPoint[sectorName] = null;
         }
       })
     } 
     // If a sector is selected but no subsectors, show sector total
     else if (selectedSector && selectedSubsectors.length === 0 && !showAllSubsectors) {
-      const sectorData = yearDataObj?.sectors[selectedSector]
+      const sectorData = yearDataObj[year]?.setores[selectedSector]
       
-      if (sectorData && sectorData["Despesa Efetiva Consolidada"]) {
+      if (sectorData) {
         if (selectedType === 'absolute') {
           // Convert to billions and store as number for the graph
-          dataPoint[selectedSector] = Number((sectorData["Despesa Efetiva Consolidada"]["Execucao"] / 1000).toFixed(2))
+          dataPoint[selectedSector] = Number((sectorData.despesa_executada_efetiva_consolidada / 1000).toFixed(2))
         } else {
           // Calculate percentage of total budget
-          const totalBudget = Object.values(yearDataObj.sectors).reduce((acc, sector) => 
-            acc + sector["Despesa Efetiva Consolidada"]["Execucao"], 0)
-          const percentage = (sectorData["Despesa Efetiva Consolidada"]["Execucao"] / totalBudget) * 100
+          const totalBudget = Object.values(yearDataObj[year].setores).reduce((acc, sector) => 
+            acc + sector.despesa_executada_efetiva_consolidada, 0)
+          const percentage = (sectorData.despesa_executada_efetiva_consolidada / totalBudget) * 100
           dataPoint[selectedSector] = Number(percentage.toFixed(2)) // Store as number for the graph
         }
+      } else {
+        // If sector doesn't exist in this year, use null for gap in chart
+        dataPoint[selectedSector] = null;
       }
     }
     // If showing all subsectors or specific subsectors
     else if (selectedSector) {
-      const sectorData = yearDataObj?.sectors[selectedSector]
+      const sectorData = yearDataObj[year]?.setores[selectedSector]
       
-      if (sectorData && sectorData["Despesa Efetiva Consolidada"]) {
+      if (sectorData) {
         // Add sector total
         if (selectedType === 'absolute') {
           // Convert to billions and store as number for the graph
-          dataPoint[selectedSector] = Number((sectorData["Despesa Efetiva Consolidada"]["Execucao"] / 1000).toFixed(2))
+          dataPoint[selectedSector] = Number((sectorData.despesa_executada_efetiva_consolidada / 1000).toFixed(2))
         } else {
           // Calculate percentage of total budget
-          const totalBudget = Object.values(yearDataObj.sectors).reduce((acc, sector) => 
-            acc + sector["Despesa Efetiva Consolidada"]["Execucao"], 0)
-          const percentage = (sectorData["Despesa Efetiva Consolidada"]["Execucao"] / totalBudget) * 100
+          const totalBudget = Object.values(yearDataObj[year].setores).reduce((acc, sector) => 
+            acc + sector.despesa_executada_efetiva_consolidada, 0)
+          const percentage = (sectorData.despesa_executada_efetiva_consolidada / totalBudget) * 100
           dataPoint[selectedSector] = Number(percentage.toFixed(2)) // Store as number for the graph
         }
         
-        // Add subsector data if available
-        if (sectorData.Subsectors) {
-          const subsectorsToShow = showAllSubsectors ? 
-            Object.keys(sectorData.Subsectors).filter(name => 
-              name !== "DESPESA TOTAL NÃO CONSOLIDADA" && 
-              name !== "DESPESA TOTAL CONSOLIDADA"
-            ) : 
-            selectedSubsectors
+        // Add subsector (medidas) data if available
+        if (sectorData.medidas) {
+          // Determine which subsectors to show based on settings
+          let subsectorsToShow: string[] = [];
+          if (showAllSubsectors) {
+            subsectorsToShow = showIncompleteData 
+              ? Object.keys(sectorData.medidas) 
+              : [...subsectorsInAllYears];
+          } else {
+            subsectorsToShow = selectedSubsectors;
+          }
           
           subsectorsToShow.forEach(subName => {
-            const subsector = sectorData.Subsectors?.[subName]
-            if (subsector) {
+            const subsectorValue = sectorData.medidas?.[subName]
+            if (subsectorValue !== undefined) {
               if (selectedType === 'absolute') {
                 // Convert to billions and store as number for the graph
-                dataPoint[subName] = Number((subsector["Execucao"] / 1000).toFixed(2))
+                dataPoint[subName] = Number((subsectorValue / 1000).toFixed(2))
               } else {
                 // Calculate percentage of sector budget
-                const sectorBudget = sectorData["Despesa Efetiva Consolidada"]["Execucao"]
-                const percentage = (subsector["Execucao"] / sectorBudget) * 100
+                const sectorBudget = sectorData.despesa_executada_efetiva_consolidada
+                const percentage = (subsectorValue / sectorBudget) * 100
                 dataPoint[subName] = Number(percentage.toFixed(2)) // Store as number for the graph
               }
+            } else {
+              // For subsectors that don't exist in this year but are included due to showIncompleteData,
+              // use null to create a gap in the chart line
+              dataPoint[subName] = null;
             }
           })
+        }
+      } else {
+        // If sector doesn't exist in this year, set sector and all selected subsectors to null
+        dataPoint[selectedSector] = null;
+        
+        if (showAllSubsectors) {
+          subsectors.forEach(subName => {
+            dataPoint[subName] = null;
+          });
+        } else {
+          selectedSubsectors.forEach(subName => {
+            dataPoint[subName] = null;
+          });
         }
       }
     }
@@ -421,31 +564,29 @@ export function SectorTrends() {
     )
   }
   
-  // Get formatted label for Y axis
-  const getYAxisLabel = () => {
-    return selectedType === 'absolute' 
-      ? "Orçamento (€ Mil Milhões)" 
-      : "Percentagem do Orçamento Total (%)"
-  }
-  
   // Get items to display in the legend
   const getLineItems = () => {
     if (!selectedSector) {
-      return sectors
+      // Only show sectors based on showIncompleteData preference
+      return showIncompleteData ? sectors : [...sectorsInAllYears];
     } else if (selectedSubsectors.length === 0 && !showAllSubsectors) {
-      return [selectedSector]
+      return [selectedSector];
     } else {
-      const items = [selectedSector]
-      const subList = showAllSubsectors ? subsectors : selectedSubsectors
-      return [...items, ...subList]
+      const items = [selectedSector];
+      // Only show subsectors based on showIncompleteData preference
+      const subList = showAllSubsectors 
+        ? (showIncompleteData ? subsectors : [...subsectorsInAllYears])
+        : selectedSubsectors;
+      return [...items, ...subList];
     }
   }
 
   // Add a custom tooltip component to sort items
   const CustomTooltip = ({ active, payload, label }: any) => {
     if (active && payload && payload.length) {
-      // Sort payload by value in descending order
-      const sortedPayload = [...payload].sort((a, b) => {
+      // Filter out null values and sort by value in descending order
+      const filteredPayload = payload.filter(entry => entry.value !== null);
+      const sortedPayload = [...filteredPayload].sort((a, b) => {
         return parseFloat(b.value) - parseFloat(a.value);
       });
 
@@ -497,8 +638,8 @@ export function SectorTrends() {
     )
   }
 
-  // Calculate years available for base year selection (excluding the latest year)
-  const baseYearOptions = YEARS.slice(0, -1);
+  // Get items to show in chart
+  const lineItems = getLineItems();
 
   return (
     <div className="space-y-4">
@@ -518,17 +659,23 @@ export function SectorTrends() {
             <SelectContent>
               <SelectGroup>
                 <SelectItem value="all">Todos os Setores</SelectItem>
-                {sectors.map(sector => (
-                  <SelectItem key={sector} value={sector}>
-                    <div className="flex flex-col">
-                      <div className="flex items-center">
-                        {toProperCase(sector)}
-                        {getTrendIcon(sector)}
+                {sectors.map(sector => {
+                  const isPartialData = partialSectors.has(sector);
+                  if (!showIncompleteData && isPartialData) return null;
+                  
+                  return (
+                    <SelectItem key={sector} value={sector}>
+                      <div className="flex flex-col">
+                        <div className="flex items-center">
+                          {toProperCase(sector)}
+                          {getTrendIcon(sector)}
+                          {getPartialDataIndicator(sector, 'sector')}
+                        </div>
+                        {getTrendPercentage(sector)}
                       </div>
-                      {getTrendPercentage(sector)}
-                    </div>
-                  </SelectItem>
-                ))}
+                    </SelectItem>
+                  );
+                })}
               </SelectGroup>
             </SelectContent>
           </Select>
@@ -551,8 +698,29 @@ export function SectorTrends() {
           </div>
         </div>
         
-        {/* Right side: Show all subsectors checkbox */}
-        <div className="flex items-center space-x-2">
+        {/* Right side: Checkboxes for data display options */}
+        <div className="flex items-center space-x-3">
+          {/* Show incomplete data checkbox */}
+          <div className="flex items-center space-x-2">
+            <Checkbox
+              id="show-incomplete-data"
+              checked={showIncompleteData}
+              onCheckedChange={(checked) => {
+                if (typeof checked === 'boolean') {
+                  setShowIncompleteData(checked);
+                  // If turning off incomplete data, remove any selected subsectors that aren't in all years
+                  if (!checked) {
+                    setSelectedSubsectors(prev => 
+                      prev.filter(s => subsectorsInAllYears.has(s))
+                    );
+                  }
+                }
+              }}
+            />
+            <Label htmlFor="show-incomplete-data" className="text-sm">Mostrar dados incompletos</Label>
+          </div>
+          
+          {/* Show all subsectors checkbox (only when a sector is selected) */}
           {selectedSector && subsectors.length > 0 && (
             <div className="flex items-center space-x-2">
               <Checkbox
@@ -568,11 +736,23 @@ export function SectorTrends() {
                   }
                 }}
               />
-              <Label htmlFor="show-all-subsectors">Mostrar todos os subsetores</Label>
+              <Label htmlFor="show-all-subsectors" className="text-sm">Mostrar todos os subsetores</Label>
             </div>
           )}
         </div>
       </div>
+      
+      {/* Alert for incomplete data */}
+      {partialSectors.size > 0 && (
+        <Alert variant={showIncompleteData ? "default" : "destructive"}>
+          <AlertCircle className="h-4 w-4" />
+          <AlertDescription>
+            {showIncompleteData 
+              ? "Alguns setores ou subsetores não existem em todos os anos. Eles estão marcados com um ícone de alerta." 
+              : "Alguns setores ou subsetores foram ocultados porque não existem em todos os anos."}
+          </AlertDescription>
+        </Alert>
+      )}
       
       {selectedSector && subsectors.length > 0 && (
         <div className={getSubsectorSelectionClasses()}>
@@ -595,22 +775,27 @@ export function SectorTrends() {
             </Select>
           </div>
           <div className="flex flex-wrap gap-1">
-            {getSortedSubsectors().map(subsector => (
-              <Badge
-                key={subsector}
-                variant={selectedSubsectors.includes(subsector) ? "default" : "outline"}
-                className="cursor-pointer"
-                onClick={() => toggleSubsector(subsector)}
-              >
-                <div className="flex flex-col items-center">
-                  <div className="flex items-center">
-                    {toProperCase(subsector)}
-                    {getTrendIcon(subsector)}
+            {getSortedSubsectors().map(subsector => {
+              const isPartialData = partialSubsectors.has(subsector);
+              
+              return (
+                <Badge
+                  key={subsector}
+                  variant={selectedSubsectors.includes(subsector) ? "default" : "outline"}
+                  className="cursor-pointer"
+                  onClick={() => toggleSubsector(subsector)}
+                >
+                  <div className="flex flex-col items-center">
+                    <div className="flex items-center">
+                      {toProperCase(subsector)}
+                      {getTrendIcon(subsector)}
+                      {getPartialDataIndicator(subsector, 'subsector')}
+                    </div>
+                    {getTrendPercentage(subsector)}
                   </div>
-                  {getTrendPercentage(subsector)}
-                </div>
-              </Badge>
-            ))}
+                </Badge>
+              );
+            })}
           </div>
         </div>
       )}
@@ -634,7 +819,7 @@ export function SectorTrends() {
             />
             <Tooltip content={<CustomTooltip />} />
             {/* No Legend here */}
-            {getLineItems().map((item, index) => (
+            {lineItems.map((item, index) => (
               <Line
                 key={item}
                 type="monotone"
@@ -644,6 +829,7 @@ export function SectorTrends() {
                 strokeWidth={item === selectedSector ? 2 : 1.5}
                 dot={true}
                 activeDot={{ r: 6 }}
+                connectNulls={false} // Don't connect lines across missing data points
               />
             ))}
           </LineChart>
@@ -651,10 +837,16 @@ export function SectorTrends() {
       </div>
       {/* Custom legend below the chart */}
       <div className="mt-2 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-x-2 gap-y-2">
-        {getLineItems().map((item, index) => (
+        {lineItems.map((item, index) => (
           <div key={item} className="flex items-center group relative min-w-0" title={toProperCase(item)}>
             <div className="w-3 h-3 rounded-sm mr-2 flex-shrink-0" style={{ backgroundColor: COLORS[index % COLORS.length] }} />
-            <span className="text-sm truncate font-medium">{toProperCase(item)}</span>
+            <span className="text-sm truncate font-medium">
+              {toProperCase(item)}
+              {partialSectors.has(item) || partialSubsectors.has(item) ? 
+                <AlertCircle className="inline-flex ml-1 text-amber-500" size={12} /> : 
+                null
+              }
+            </span>
             {getTrendIcon(item)}
             {getTrendPercentage(item)}
             {/* Tooltip on hover for full name if truncated */}
@@ -677,7 +869,7 @@ export function SectorTrends() {
             </SelectTrigger>
             <SelectContent>
               <SelectGroup>
-                {baseYearOptions.map(year => (
+                {YEARS.slice(0, -1).map(year => (
                   <SelectItem key={year} value={year}>{year}</SelectItem>
                 ))}
               </SelectGroup>
@@ -695,6 +887,10 @@ export function SectorTrends() {
         <div className="flex items-center gap-1">
           <MinusIcon className="h-4 w-4 text-gray-500" />
           <span>Sem alteração significativa</span>
+        </div>
+        <div className="flex items-center gap-1">
+          <AlertCircle className="h-4 w-4 text-amber-500" />
+          <span>Dados parciais</span>
         </div>
       </div>
     </div>
