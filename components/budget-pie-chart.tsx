@@ -282,17 +282,17 @@ export default function BudgetPieChart({
           <p className="text-sm text-muted-foreground">
             {selectedSector 
               ? null 
-              : "Clique num setor para ver os detalhes"}
+              : "Clique num setor para ver os detalhes e notícias sobre esse setor."}
           </p>
         </div>
       )}
-      <div className="relative w-full min-h-[400px] mb-4">
-      {/* Back Button */}
+      <div className={`relative w-full ${showLegend ? 'min-h-[400px]' : 'min-h-[300px]'} mb-${showLegend ? '4' : '0'}`}>
+{/* Back Button */}
       {selectedSector && enableSectorClick && (
         <div className="absolute top-4 right-4 z-10">
           <Button 
             variant="outline" 
-            onClick={handleBackClick}
+  onClick={handleBackClick}
             className="mt-2"
           >
             ← Voltar para todos os setores
@@ -300,45 +300,45 @@ export default function BudgetPieChart({
         </div>
       )}
         
-          {/* Chart */}
-          <ChartContainer 
-            config={{
-              expenses: { label: "Despesas" },
-            }}
-          >
-            <ResponsiveContainer width="100%" height="100%">
-              <PieChart>
-                <Pie
-                  activeIndex={activeIndex !== null ? activeIndex : undefined}
-                  activeShape={renderActiveShape}
-                  data={chartData}
-                  cx="50%"
-                  cy="50%"
-                  innerRadius="30%"
-                  outerRadius="60%"
-                  dataKey="value"
-                  onMouseEnter={handleMouseEnter}
-                  onMouseLeave={handleMouseLeave}
-                  onClick={enableSectorClick ? handlePieClick : undefined}
-                  animationBegin={0}
-                  animationDuration={800}
-                  style={enableSectorClick ? { cursor: 'pointer' } : {}}
-                >
-                  {chartData.map((_, index) => (
-                    <Cell 
-                      key={`cell-${index}`} 
-                      fill={COLORS[index % COLORS.length]} 
-                      stroke="#fff"
-                      strokeWidth={2}
-                      style={enableSectorClick ? { cursor: 'pointer' } : {}}
-                    />
-                  ))}
-                </Pie>
-                {showTooltip && <Tooltip content={<CustomTooltip />} />}
-              </PieChart>
-            </ResponsiveContainer>
-          </ChartContainer>
-        </div>
+        {/* Chart */}
+        <ChartContainer 
+          config={{
+            expenses: { label: "Despesas" },
+          }}
+        >
+          <ResponsiveContainer width="100%" height="100%">
+            <PieChart>
+                            <Pie
+                activeIndex={activeIndex !== null ? activeIndex : undefined}
+                activeShape={renderActiveShape}
+                data={chartData}
+                cx="50%"
+                cy="50%"
+                innerRadius="30%"
+                outerRadius="60%"
+                dataKey="value"
+                onMouseEnter={handleMouseEnter}
+                onMouseLeave={handleMouseLeave}
+                onClick={enableSectorClick ? handlePieClick : undefined}
+                animationBegin={0}
+                animationDuration={800}
+                style={enableSectorClick ? { cursor: 'pointer' } : {}}
+              >
+                {chartData.map((_, index) => (
+                  <Cell 
+                    key={`cell-${index}`} 
+                    fill={COLORS[index % COLORS.length]} 
+                    stroke="#fff"
+                    strokeWidth={2}
+                    style={enableSectorClick ? { cursor: 'pointer' } : {}}
+                  />
+                ))}
+              </Pie>
+              {showTooltip && <Tooltip content={<CustomTooltip />} />}
+            </PieChart>
+          </ResponsiveContainer>
+        </ChartContainer>
+      </div>
         
         {/* Legend */}
         {showLegend && (

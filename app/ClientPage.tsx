@@ -8,13 +8,13 @@ import { RecentNews } from "@/components/recent-news"
 import { DistributionYearSelector } from "@/components/distribution-year-selector"
 import { ExpenseOverview } from "@/components/expense-overview"
 import { Button } from "@/components/ui/button"
-import BudgetPieChart from "@/components/budget-pie-chart"
+import HomeBudgetPieChart from "@/components/home-budget-pie-chart"
 
 export default function ClientPage() {
   const [distributionYear, setDistributionYear] = useState("2023")
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [error, setError] = useState<string | null>(null)
-  const router = useRouter()
+const router = useRouter()
 
   const handleYearClick = (year: string) => {
     setDistributionYear(year);
@@ -65,20 +65,16 @@ export default function ClientPage() {
               </div>
               <DistributionYearSelector selectedYear={distributionYear} onYearChange={setDistributionYear} />
             </CardHeader>
-            <CardContent>
-              <div className="h-[300px]">
-                <BudgetPieChart 
-                  year={distributionYear} 
-                  showTooltip={false}
-                  enableSectorClick={true}
-                  showTitle={false}
-                  showLegend={false}
+            <CardContent className="p-2 sm:p-4 md:p-6 pb-0">
+              <div className="h-[350px]">
+                <HomeBudgetPieChart 
+                  year={distributionYear}
                 />
               </div>
               <div className="flex justify-end mt-4">
                 <Button 
                   variant="outline" 
-                  className="w-full sm:w-auto" 
+                  className="w-full sm:w-auto"
                   onClick={() => router.push('/despesa')}
                 >
                   Ver por setor
