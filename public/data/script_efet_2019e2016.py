@@ -32,7 +32,6 @@ sheet_name_list_laranjas = {
     2016: ["Quadro 110"],
     2015: ["Quadro 114"],
     2014: ["Quadro 100"],
-    2013: ["Quadro 116"],
 }
 
 def limpar_valor(valor):

@@ -2,7 +2,7 @@ import pandas as pd
 import json
 
 # === Definições de entrada/saída ===
-year = 2
+year = 2017
 excel_path = f"Quadros_{year}.xls"
 output_path = f"../despesa_atual/{year}.json"
 
