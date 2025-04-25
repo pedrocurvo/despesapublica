@@ -417,7 +417,7 @@ export function SectorTrends() {
           <p className="font-medium">{`Ano: ${label}`}</p>
           {sortedPayload.map((entry, index) => {
             const isSector = entry.name === selectedSector;
-            const unit = selectedType === 'absolute' ? '€B' : '%';
+            const unit = selectedType === 'absolute' ? '€MM' : '%';
             
             return (
               <div key={`item-${index}`} className="flex justify-between gap-4 items-center">
