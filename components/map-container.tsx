@@ -6,6 +6,7 @@ import { MapYearSelector } from "@/components/map-year-selector";
 import { DistrictNewsArticles } from "@/components/district-news-articles";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Euro } from "lucide-react";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 type TransferData = {
   Total: number;
@@ -23,6 +24,7 @@ export function MapContainer() {
   const [transferData, setTransferData] = useState<TransferData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const isMobile = useIsMobile();
 
   const handleYearChange = (year: string) => {
     setSelectedYear(year);
@@ -92,8 +94,8 @@ export function MapContainer() {
   const nationalTotal = transferData ? transferData.Total / 1000000 : 0; // Convert to millions
 
   return (
-    <div className="space-y-6">
-      <Card>
+    <div className={`space-y-6 ${selectedDistrict && !isMobile ? "lg:grid lg:grid-cols-3 lg:gap-6 lg:space-y-0" : ""}`}>
+      <Card className={selectedDistrict && !isMobile ? "lg:col-span-2" : ""}>
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
           <div>
             <CardTitle className="text-xl font-bold">Mapa de Distribuição Orçamental</CardTitle>
@@ -123,7 +125,7 @@ export function MapContainer() {
       </Card>
 
       {selectedDistrict && (
-        <Card>
+        <Card className={!isMobile ? "lg:col-span-1" : ""}>
           <CardHeader>
             <CardTitle>Notícias sobre {formatDistrictName(selectedDistrict)}</CardTitle>
             <CardDescription>

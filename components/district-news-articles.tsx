@@ -121,6 +121,48 @@ export function DistrictNewsArticles({ year, district }: DistrictNewsArticlesPro
           groupedBySource[source].push(item)
         }
 
+        // Filter and sort articles by preference:
+        // 1. Prefer headlines with more than 4 words
+        // 2. Prefer headlines that contain the district name
+        const sortArticlesByRelevance = (articles: any[]) => {
+          const normalizedDistrictName = searchDistrict.toLowerCase();
+          
+          return articles.sort((a, b) => {
+            const headlineA = a.headline?.trim() || "";
+            const headlineB = b.headline?.trim() || "";
+            
+            const wordsA = headlineA.split(/\s+/).filter(Boolean).length;
+            const wordsB = headlineB.split(/\s+/).filter(Boolean).length;
+            
+            const containsDistrictA = headlineA.toLowerCase().includes(normalizedDistrictName);
+            const containsDistrictB = headlineB.toLowerCase().includes(normalizedDistrictName);
+            
+            // First priority: Contains district name
+            if (containsDistrictA && !containsDistrictB) return -1;
+            if (!containsDistrictA && containsDistrictB) return 1;
+            
+            // Second priority: More than 4 words
+            if (wordsA > 4 && wordsB <= 4) return -1;
+            if (wordsA <= 4 && wordsB > 4) return 1;
+
+            // Third priority: Contain oracamento/despesa related words
+            const keywordsA = headlineA.toLowerCase().match(/(orçamento|despesa|investimento|financiamento|transferências)/g) || [];
+            const keywordsB = headlineB.toLowerCase().match(/(orçamento|despesa|investimento|financiamento|transferências)/g) || [];
+            const keywordCountA = keywordsA.length;
+            const keywordCountB = keywordsB.length;
+            if (keywordCountA > keywordCountB) return -1;
+            if (keywordCountA < keywordCountB) return 1;
+            
+            // If both have same priority, prefer the one with more words
+            return wordsB - wordsA;
+          });
+        };
+        
+        // Sort the articles within each source by relevance
+        Object.keys(groupedBySource).forEach(source => {
+          groupedBySource[source] = sortArticlesByRelevance(groupedBySource[source]);
+        });
+
         // Interleave in round-robin
         const interleaved: any[] = []
         let exhausted = false
@@ -136,7 +178,14 @@ export function DistrictNewsArticles({ year, district }: DistrictNewsArticlesPro
 
         // Format and limit
         const processedArticles = interleaved
-          .filter((item: any) => item.headline && item.headline.trim() !== "")
+          .filter((item: any) => {
+            // Only include headlines that exist and are not empty
+            const hasHeadline = item.headline && item.headline.trim() !== "";
+            // Count words in headline
+            const wordCount = hasHeadline ? item.headline.trim().split(/\s+/).filter(Boolean).length : 0;
+            // Prefer headlines with more than 4 words
+            return hasHeadline && wordCount > 0;
+          })
           .slice(0, 10)
           .map((item: any, index: number) => ({
             id: `${year}-${district}-${index}`,
