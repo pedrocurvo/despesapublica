@@ -104,14 +104,16 @@ export function Overview({ startYear = 2018, endYear = 2023 }: OverviewProps) {
         <div className="rounded-md bg-background p-4 shadow-md border border-border text-sm">
           <p className="font-medium">{`Ano: ${label}`}</p>
           <div className="mt-2 space-y-1">
-            <p className="text-blue-600">{`Receita Efetiva: ${yearData.receitaActual !== null ? `€${yearData.receitaActual}M` : 'N/D'}`}</p>
-            <p className="text-red-600">{`Despesa Efetiva: ${yearData.despesaActual !== null ? `€${yearData.despesaActual}M` : 'N/D'}`}</p>
+            <p className="text-blue-600">{`Receita Efetiva: ${yearData.receitaActual !== null ? `€${(yearData.receitaActual/1000).toFixed(2)}MM` : 'N/D'}`}</p>
+            <p className="text-red-600">{`Despesa Efetiva: ${yearData.despesaActual !== null ? `€${(yearData.despesaActual/1000).toFixed(2)}MM` : 'N/D'}`}</p>
             <div className="border-t border-border my-2"></div>
-            <p className={`font-medium ${yearData.saldoActual !== null ? (yearData.saldoActual >= 0 ? "text-green-500" : "text-red-500") : "text-muted-foreground"}`}>
-              {`Saldo Efetivo: ${yearData.saldoActual !== null ? `€${yearData.saldoActual}M` : 'N/D'}`}
-            </p>
-            <div className="border-t border-border my-2"></div>
-            <p className="text-muted-foreground">{`Em % do PIB: ${yearData.pibPercentage !== null ? `${yearData.pibPercentage}%` : 'N/D'}`}</p>
+            <div className={`font-medium ${yearData.saldoActual !== null ? (yearData.saldoActual >= 0 ? "text-green-500" : "text-red-500") : "text-muted-foreground"}`}>
+              <p>{`Saldo Efetivo:`}</p>
+              <div className="pl-2 mt-1 text-sm">
+                <p>{`Em €: ${yearData.saldoActual !== null ? `€${(yearData.saldoActual/1000).toFixed(2)}MM` : 'N/D'}`}</p>
+                <p className="text-muted-foreground">{`Em % do PIB: ${yearData.pibPercentage !== null ? `${yearData.pibPercentage}%` : 'N/D'}`}</p>
+              </div>
+            </div>
           </div>
         </div>
       );
@@ -125,7 +127,7 @@ export function Overview({ startYear = 2018, endYear = 2023 }: OverviewProps) {
         <BarChart data={data} margin={{ top: 20, right: 20, left: 20, bottom: 20 }}>
           <CartesianGrid strokeDasharray="3 3" vertical={false} />
           <XAxis dataKey="year" />
-          <YAxis domain={[80000, 120000]} tickFormatter={(value) => `€${value}M`} />
+          <YAxis domain={[80000, 120000]} tickFormatter={(value) => `€${(value/1000).toFixed(0)}MM`} />
           <Tooltip content={<CustomTooltip />} />
           <Legend wrapperStyle={{ paddingTop: 10 }} />
           <Bar name="Receita" dataKey="receitaBudget" fill="#3b82f6" radius={[4, 4, 0, 0]} />
