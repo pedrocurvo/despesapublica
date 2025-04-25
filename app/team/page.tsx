@@ -3,28 +3,22 @@ import { Linkedin, Mail, Twitter, Instagram } from 'lucide-react';
 
 const members = [
     {
-        name: 'Méschac Irung',
-        role: 'Creator',
+        name: 'Pedro Curvo',
+        role: 'Creator - Developer',
         avatar: 'https://avatars.githubusercontent.com/u/47919550?v=4',
-        linkedin: 'https://www.linkedin.com/in/meschac-irung/',
+        linkedin: 'https://www.linkedin.com/in/pedro-curvo/',
     },
     {
-        name: 'Théo Balick',
-        role: 'Frontend Dev',
+        name: 'Clara Vasconcelos',
+        role: 'Creator',
         avatar: 'https://avatars.githubusercontent.com/u/68236786?v=4',
         linkedin: 'https://www.linkedin.com/in/theobalick/',
     },
     {
-        name: 'Glodie Lukose',
-        role: 'Frontend Dev',
+        name: 'Tomás LAST NAME',
+        role: 'Creator',
         avatar: 'https://avatars.githubusercontent.com/u/99137927?v=4',
         linkedin: 'https://www.linkedin.com/in/glodie-lukose/',
-    },
-    {
-        name: 'Bernard Ngandu',
-        role: 'Backend Dev',
-        avatar: 'https://avatars.githubusercontent.com/u/31113941?v=4',
-        linkedin: 'https://www.linkedin.com/in/bernard-ngandu/',
     },
 ]
 
