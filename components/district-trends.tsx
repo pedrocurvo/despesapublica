@@ -73,7 +73,7 @@ export function DistrictTrends() {
   const [selectedMunicipalities, setSelectedMunicipalities] = useState<string[]>([])
   const [showAllMunicipalities, setShowAllMunicipalities] = useState(false)
   const [selectedType, setSelectedType] = useState<'absolute' | 'percentage'>('absolute')
-  const [trendData, setTrendData] = useState<Record<string, { trend: 'up' | 'down' | 'neutral', percentage: number }>>({})
+  const [trendData, setTrendData] = useState<Record<string, { trend: 'up' | 'down' | 'neutral', percentage: number, absoluteChange: number }>>({})
   const [baseYear, setBaseYear] = useState<string>(YEARS[0])
 
   // Get the proper case format of a name (first letter of each word capitalized)
@@ -143,7 +143,7 @@ export function DistrictTrends() {
   
   // Calculate trends for districts and municipalities
   const calculateTrends = (data: Record<string, TransferData>, fromYear: string) => {
-    const trends: Record<string, { trend: 'up' | 'down' | 'neutral', percentage: number }> = {}
+    const trends: Record<string, { trend: 'up' | 'down' | 'neutral', percentage: number, absoluteChange: number }> = {}
     
     // We need at least two years of data to calculate trends
     if (Object.keys(data).length < 2) return
@@ -175,7 +175,8 @@ export function DistrictTrends() {
         
         trends[districtName] = {
           trend: diff > 0 ? 'up' : diff < 0 ? 'down' : 'neutral',
-          percentage: Math.abs(percentChange)
+          percentage: Math.abs(percentChange),
+          absoluteChange: diff
         }
         
         // Calculate trends for municipalities if they exist
@@ -189,7 +190,8 @@ export function DistrictTrends() {
               
               trends[muniName] = {
                 trend: muniDiff > 0 ? 'up' : muniDiff < 0 ? 'down' : 'neutral',
-                percentage: Math.abs(muniPercentChange)
+                percentage: Math.abs(muniPercentChange),
+                absoluteChange: muniDiff
               }
             }
           })
@@ -221,7 +223,9 @@ export function DistrictTrends() {
     
     return (
       <div className="text-xs text-muted-foreground mt-0.5">
-        {trend.percentage.toFixed(1)}%
+        {selectedType === 'absolute' 
+          ? `${(trend.absoluteChange / 1000000).toFixed(1)}M €`
+          : `${trend.percentage.toFixed(1)}%`}
       </div>
     )
   }
