@@ -35,15 +35,23 @@ sheet_name_list_laranjas = {
     2013: ["Quadro 116"],
 }
 
+import math
+
 def limpar_valor(valor):
     if isinstance(valor, str):
-        # Remove espaços normais e não separáveis, e troca vírgula por ponto
-        valor_limpo = valor.replace('\xa0', '').replace(' ', '').replace(' ', '').replace(',', '.')
+        # Remove espaços e separadores invisíveis, depois trata pontuação
+        valor_limpo = valor.replace('\xa0', '').replace(' ', '').replace(' ', '')
+        valor_limpo = valor_limpo.replace('.', '').replace(',', '.')
         try:
-            return float(valor_limpo)
+            valor_float = float(valor_limpo)
+            if math.isnan(valor_float):
+                return 0.0
+            return valor_float
         except ValueError:
             return 0.0
     elif isinstance(valor, (int, float)):
+        if math.isnan(valor):
+            return 0.0
         return float(valor)
     else:
         return 0.0
@@ -56,12 +64,12 @@ def extrair_medidas_por_programa(sheet_names, path_excel):
     for sheet in sheet_names:
         print(sheet)
         try:
-            df = pd.read_excel(path_excel, sheet_name=sheet, header=0)
+            df = pd.read_excel(path_excel, sheet_name=sheet, header=0, dtype={2: str})
             medidas = {}
 
             inicio_leitura = False
             for i in range(len(df)):
-                linha_atual = str(df.iloc[i, 1]).strip()
+                linha_atual = str(df.iloc[i, 0]).strip()
                 
 
                 # Ativa a leitura após encontrar a linha-chave
@@ -78,10 +86,10 @@ def extrair_medidas_por_programa(sheet_names, path_excel):
                         print(valor_raw)
                         valor_limpo = limpar_valor(valor_raw)
                         medidas[linha_atual] = valor_limpo"""
-                        print(f"linha {i}, valor bruto: {repr(df.iloc[i, 3])}")
-                        valor_raw = df.iloc[i, 3]
+                        print(f"linha {i}, valor bruto: {repr(df.iloc[i, 2])}")
+                        valor_raw = df.iloc[i, 2] 
                         valor = limpar_valor(valor_raw)
-                        medidas[linha_atual] = valor_raw
+                        medidas[linha_atual] = valor
 
                         """valor = df.iloc[i, 3] if pd.notna(df.iloc[i, 3]) else 0
                         print(valor)
@@ -93,43 +101,47 @@ def extrair_medidas_por_programa(sheet_names, path_excel):
     return medidas_por_programa
 
 
-# === Função para extrair dados do quadro laranja ===
 def extrair_programas_orcamentais(df_laranja, medidas_programas):
     programas = {}
-    # Definindo setores sem medidas
-    #setores_sem_medidas = ["PO10", "PO11", "PO19"]
-    for i in range(3, 23):  # Linhas 6 a 22 (0-indexed)
-        print("primeior i a la por", i)
-        nome_setor = str(df_laranja.iloc[i, 1]).strip()
+    indice_medidas = 5  # Novo índice para medidas
+
+    for i in range(3, 20):  # Linhas 6 a 22 (0-indexed)
+        nome_setor = str(df_laranja.iloc[i, 0]).strip()
         print(nome_setor)
         if pd.notna(nome_setor) and nome_setor.lower() != "sub-total":
             try:
-                orcamentada = float(df_laranja.iloc[i, 4])
-                executada = float(df_laranja.iloc[i, 7])
-                percentagem_execucao = float(df_laranja.iloc[i, 8])
+                orcamentada = float(df_laranja.iloc[i, 3])
+                executada = float(df_laranja.iloc[i, 6])
+                percentagem_execucao = float(df_laranja.iloc[i, 7])
 
-                """# Verifica se o setor tem medidas associadas
-                if any(setor in nome_setor for setor in setores_sem_medidas):
-                    # Setor não tem medidas associadas
+              
+                if nome_setor== "04 – Gestão da Dívida Pública":
+                    print("NETRA")
+                # Se o setor tiver medidas, associa as medidas
+                
                     programas[nome_setor] = {
                         "despesa_orcamentada": orcamentada,
-                        "despesa_executada": executada,
+                        "despesa_executada_efetiva_consolidada": executada,
+                        "despesa_executada_total_nao_consolidada": None,
                         "grau_execução": percentagem_execucao,
-                        "medidas": None  # Não há medidas para este setor
+                        "medidas":  None,
                     }
-                else:"""
+
+                else:
+                    print(i)
                     # Se o setor tiver medidas, associa as medidas
-                quadro_azul = list(medidas_programas.values())[i - 5] if i - 5 < len(medidas_programas) else {}
+                    quadro_azul = list(medidas_programas.values())[indice_medidas - 5] if indice_medidas - 5 < len(medidas_programas) else {}
+                    indice_medidas += 1 
+                    medidas_finais  = {k: v for k, v in quadro_azul.items() if k != "DESPESA TOTAL NÃO CONSOLIDADA"}
                 
-                medidas_finais  = {k: v for k, v in quadro_azul.items() if k != "DESPESA TOTAL NÃO CONSOLIDADA"}
-                programas[nome_setor] = {
-                    "despesa_orcamentada": orcamentada,
-                    "despesa_executada_efetiva_consolidada": executada,
-                    "despesa_executada_total_nao_consolidada": quadro_azul["DESPESA TOTAL NÃO CONSOLIDADA"],
-                    "grau_execução": percentagem_execucao,
-                    "medidas":  medidas_finais,
-                }
-                print(quadro_azul)
+                    programas[nome_setor] = {
+                        "despesa_orcamentada": orcamentada,
+                        "despesa_executada_efetiva_consolidada": executada,
+                        "despesa_executada_total_nao_consolidada": quadro_azul["DESPESA TOTAL NÃO CONSOLIDADA"],
+                        "grau_execução": percentagem_execucao,
+                        "medidas":  medidas_finais,
+                    }
+ 
             except Exception as e:
                 print(f"Erro no setor {nome_setor}: {e} {i}")
                 continue
@@ -148,9 +160,9 @@ def processar_excel(path_excel, ano, path_output):
     programas_orcamentais = extrair_programas_orcamentais(df_laranja, medidas_programas)
 
     output[ano] = {
-        "despesa_orcamentada": float(df_laranja.iloc[23, 4]),
-        "despesa_executada_efetiva_consolidada": float(df_laranja.iloc[23, 7]),
-        "grau_execução": float(df_laranja.iloc[23, 8]),
+        "despesa_orcamentada": float(df_laranja.iloc[19, 3]),
+        "despesa_executada_efetiva_consolidada": float(df_laranja.iloc[19, 6]),
+        "grau_execução": float(df_laranja.iloc[19, 7]),
         "setores": programas_orcamentais
     }
 

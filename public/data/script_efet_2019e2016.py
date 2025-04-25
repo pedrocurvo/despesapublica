@@ -2,7 +2,7 @@ import pandas as pd
 import json
 
 # === Definições de entrada/saída ===
-year = 2019
+year = 2
 excel_path = f"Quadros_{year}.xls"
 output_path = f"../despesa_atual/{year}.json"
 
@@ -79,6 +79,7 @@ def extrair_medidas_por_programa(sheet_names, path_excel):
                         valor_limpo = limpar_valor(valor_raw)
                         medidas[linha_atual] = valor_limpo"""
                         print(f"linha {i}, valor bruto: {repr(df.iloc[i, 3])}")
+                        # 4 NO CASDO DO 2016
                         valor_raw = df.iloc[i, 3]
                         valor = limpar_valor(valor_raw)
                         medidas[linha_atual] = valor
@@ -108,7 +109,7 @@ def extrair_programas_orcamentais(df_laranja, medidas_programas):
                 percentagem_execucao = float(df_laranja.iloc[i, 8])
 
               
-                if nome_setor== "006 - Defesa":
+                if nome_setor== "005 - Gestão da Dívida Pública":
                     print("NETRA")
                 # Se o setor tiver medidas, associa as medidas
                 
