@@ -8,7 +8,6 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
-  Legend,
   ResponsiveContainer,
 } from "recharts"
 import {
@@ -576,27 +575,14 @@ export function DistrictTrends() {
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis dataKey="year" />
             <YAxis 
-                            label={{ 
+              label={{ 
                 value: selectedType === 'absolute' ? "Orçamento (€ Milhões)" : "Percentagem do Orçamento Nacional (%)", 
                 angle: -90, 
                 position: 'insideLeft',
                 style: { textAnchor: 'middle' }
               }}
-                          />
-            <Tooltip content={<CustomTooltip />} />
-            <Legend 
-              formatter={(value, entry) => (
-                <div className="flex flex-col items-center">
-                  <div className="flex items-center">
-                    <span>{toProperCase(value)}</span>
-                    {getTrendIcon(value)}
-                  </div>
-                  {getTrendPercentage(value)}
-                </div>
-              )}
             />
-            
-            {/* Render lines for each selected item */}
+            <Tooltip content={<CustomTooltip />} />
             {getLineItems().map((item, index) => (
               <Line
                 key={item}
@@ -611,6 +597,19 @@ export function DistrictTrends() {
             ))}
           </LineChart>
         </ResponsiveContainer>
+      </div>
+      <div className="mt-2 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-x-2 gap-y-2">
+        {getLineItems().map((item, index) => (
+          <div key={`${item === selectedDistrict ? 'district' : 'municipality'}-${item}`} className="flex items-center group relative min-w-0" title={toProperCase(item)}>
+            <div className="w-3 h-3 rounded-sm mr-2 flex-shrink-0" style={{ backgroundColor: COLORS[index % COLORS.length] }} />
+            <span className="text-sm truncate font-medium">{toProperCase(item)}</span>
+            {getTrendIcon(item)}
+            {getTrendPercentage(item)}
+            <div className="absolute -top-8 left-0 bg-black/80 text-white px-2 py-1 rounded text-xs whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50">
+              {toProperCase(item)}
+            </div>
+          </div>
+        ))}
       </div>
       
       <div className="mt-2 flex flex-wrap items-center gap-6 text-sm text-muted-foreground">

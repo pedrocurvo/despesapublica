@@ -8,7 +8,6 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
-  Legend,
   ResponsiveContainer,
 } from "recharts"
 import {
@@ -224,14 +223,42 @@ export function SectorTrends() {
     )
   }
   
-  // Get the trend percentage for a given entity
+  // Get the trend percentage or absolute change for a given entity
   const getTrendPercentage = (name: string) => {
     const trend = trendData[name]
     if (!trend) return null
-    
+
+    // If percentage mode, show +X.X% (green) for increase, -X.X% (red) for decrease, 0.0% (gray) for neutral
+    // If absolute mode, show change in M € (with sign and color)
+    let color = ''
+    trend.trend === 'up' ? color = 'text-green-600' : trend.trend === 'down' ? color = 'text-red-600' : color = 'text-gray-500'
+    // Calculate absolute change for sector or subsector
+    const firstYear = baseYear
+    const lastYear = YEARS[YEARS.length - 1]
+    let absoluteChange = 0
+    if (firstYear !== lastYear && yearData[firstYear] && yearData[lastYear]) {
+      // Try sector
+      if (yearData[firstYear].sectors[name] && yearData[lastYear].sectors[name]) {
+        const first = yearData[firstYear].sectors[name]["Despesa Efetiva Consolidada"]["Execucao"]
+        const last = yearData[lastYear].sectors[name]["Despesa Efetiva Consolidada"]["Execucao"]
+        absoluteChange =  Math.abs(last - first)
+      } else {
+        // Try subsector
+        for (const sector of Object.keys(yearData[firstYear].sectors)) {
+          const firstSub = yearData[firstYear].sectors[sector].Subsectors?.[name]?.Execucao
+          const lastSub = yearData[lastYear].sectors[sector].Subsectors?.[name]?.Execucao
+          if (firstSub !== undefined && lastSub !== undefined) {
+            absoluteChange = Math.abs(lastSub - firstSub)
+            break
+          }
+        }
+      }
+    }
     return (
-      <div className="text-xs text-muted-foreground mt-0.5">
-        {trend.percentage.toFixed(1)}%
+      <div className={`text-xs text-muted-foreground mt-0.5 ${color}`}>
+        {selectedType === 'absolute' 
+          ? `${(absoluteChange / 1000000).toFixed(1)}M €`
+          : `${trend.percentage.toFixed(1)}%`}
       </div>
     )
   }
@@ -388,20 +415,6 @@ export function SectorTrends() {
       const subList = showAllSubsectors ? subsectors : selectedSubsectors
       return [...items, ...subList]
     }
-  }
-
-  // Calculate the chart height based on the number of legend items
-  const calculateChartHeight = () => {
-    const lineItems = getLineItems();
-    // Base height plus additional height for each item beyond a threshold
-    const baseHeight = 400;
-    const threshold = 6; // Lower threshold for sectors (was 8)
-    const additionalHeightPerItem = 30; // More height per item (was 20)
-    
-    if (lineItems.length > threshold) {
-      return baseHeight + (lineItems.length - threshold) * additionalHeightPerItem;
-    }
-    return baseHeight;
   }
 
   // Add a custom tooltip component to sort items
@@ -561,7 +574,8 @@ export function SectorTrends() {
         </div>
       )}
       
-      <div style={{ height: `${calculateChartHeight()}px` }}>
+      {/* Fixed height for chart, card will expand for legend/buttons */}
+      <div className="h-[400px] w-full">
         <ResponsiveContainer width="100%" height="100%">
           <LineChart
             data={chartData}
@@ -578,19 +592,7 @@ export function SectorTrends() {
               }}
             />
             <Tooltip content={<CustomTooltip />} />
-            <Legend 
-              formatter={(value, entry) => (
-                <div className="flex flex-col items-center">
-                  <div className="flex items-center">
-                    <span>{toProperCase(value)}</span>
-                    {getTrendIcon(value)}
-                  </div>
-                  {getTrendPercentage(value)}
-                </div>
-              )}
-            />
-            
-            {/* Render lines for each selected item */}
+            {/* No Legend here */}
             {getLineItems().map((item, index) => (
               <Line
                 key={item}
@@ -605,6 +607,21 @@ export function SectorTrends() {
             ))}
           </LineChart>
         </ResponsiveContainer>
+      </div>
+      {/* Custom legend below the chart */}
+      <div className="mt-2 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-x-2 gap-y-2">
+        {getLineItems().map((item, index) => (
+          <div key={item} className="flex items-center group relative min-w-0" title={toProperCase(item)}>
+            <div className="w-3 h-3 rounded-sm mr-2 flex-shrink-0" style={{ backgroundColor: COLORS[index % COLORS.length] }} />
+            <span className="text-sm truncate font-medium">{toProperCase(item)}</span>
+            {getTrendIcon(item)}
+            {getTrendPercentage(item)}
+            {/* Tooltip on hover for full name if truncated */}
+            <div className="absolute -top-8 left-0 bg-black/80 text-white px-2 py-1 rounded text-xs whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50">
+              {toProperCase(item)}
+            </div>
+          </div>
+        ))}
       </div>
       
       <div className="mt-2 flex flex-wrap items-center gap-6 text-sm text-muted-foreground">
