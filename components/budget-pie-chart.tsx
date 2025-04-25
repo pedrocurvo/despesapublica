@@ -289,7 +289,7 @@ export default function BudgetPieChart({
       <div className={`relative w-full ${showLegend ? 'min-h-[400px]' : 'min-h-[300px]'} mb-${showLegend ? '4' : '0'}`}>
     {/* Back Button */}
       {selectedSector && enableSectorClick && (
-        <div className="absolute top-4 right-4 z-10">
+        <div className="absolute top-4 right-4 z-[5]">
           <Button 
             variant="outline" 
             onClick={handleBackClick}

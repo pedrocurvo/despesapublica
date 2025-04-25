@@ -17,7 +17,7 @@ export default function DespesaPage() {
         <div className="flex flex-col space-y-2">
           <h1 className="text-3xl font-bold tracking-tight">Despesa Pública</h1>
           <p className="text-muted-foreground">
-            Visualização da despesa pública por sector e subsector
+          Visualização da despesa pública por setor e respetivas medidas do programa orçamental
           </p>
         </div>
         
