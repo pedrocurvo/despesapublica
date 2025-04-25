@@ -82,6 +82,8 @@ export function SectorTrends() {
   const [trendData, setTrendData] = useState<Record<string, { trend: 'up' | 'down' | 'neutral', percentage: number }>>({})
   const [baseYear, setBaseYear] = useState<string>(YEARS[0])
   const [subsectorSorting, setSubsectorSorting] = useState<'alphabetical' | 'increasing' | 'decreasing'>('alphabetical')
+  // Add state to track hovered legend item
+  const [hoveredItem, setHoveredItem] = useState<string | null>(null)
 
   // Get the proper case format of a name (first letter of each word capitalized)
   const toProperCase = (name: string) => {
@@ -825,11 +827,12 @@ export function SectorTrends() {
                 type="monotone"
                 dataKey={item}
                 name={item}
-                stroke={COLORS[index % COLORS.length]}
+                stroke={hoveredItem === null || hoveredItem === item ? COLORS[index % COLORS.length] : "#9ca3af"}
                 strokeWidth={item === selectedSector ? 2 : 1.5}
                 dot={true}
                 activeDot={{ r: 6 }}
                 connectNulls={false} // Don't connect lines across missing data points
+                opacity={hoveredItem === null || hoveredItem === item ? 1 : 0.5}
               />
             ))}
           </LineChart>
@@ -838,7 +841,13 @@ export function SectorTrends() {
       {/* Custom legend below the chart */}
       <div className="mt-2 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-x-2 gap-y-2">
         {lineItems.map((item, index) => (
-          <div key={item} className="flex items-center group relative min-w-0" title={toProperCase(item)}>
+          <div 
+            key={item} 
+            className="flex items-center group relative min-w-0" 
+            title={toProperCase(item)}
+            onMouseEnter={() => setHoveredItem(item)}
+            onMouseLeave={() => setHoveredItem(null)}
+          >
             <div className="w-3 h-3 rounded-sm mr-2 flex-shrink-0" style={{ backgroundColor: COLORS[index % COLORS.length] }} />
             <span className="text-sm truncate font-medium">
               {toProperCase(item)}
