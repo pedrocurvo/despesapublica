@@ -81,6 +81,7 @@ export function SectorTrends() {
   const [selectedType, setSelectedType] = useState<'absolute' | 'percentage'>('absolute')
   const [trendData, setTrendData] = useState<Record<string, { trend: 'up' | 'down' | 'neutral', percentage: number }>>({})
   const [baseYear, setBaseYear] = useState<string>(YEARS[0])
+  const [subsectorSorting, setSubsectorSorting] = useState<'alphabetical' | 'increasing' | 'decreasing'>('alphabetical')
 
   // Get the proper case format of a name (first letter of each word capitalized)
   const toProperCase = (name: string) => {
@@ -98,6 +99,29 @@ export function SectorTrends() {
       showAllSubsectors ? 'opacity-0 max-h-0 overflow-hidden' : 'opacity-100 max-h-[500px]'
     }`;
   }
+
+  // Get sorted subsectors based on the selected sorting method
+  const getSortedSubsectors = () => {
+    if (subsectorSorting === 'alphabetical') {
+      return [...subsectors].sort();
+    }
+
+    // Sort by trend data (percentage change)
+    return [...subsectors].sort((a, b) => {
+      const aTrend = trendData[a];
+      const bTrend = trendData[b];
+      
+      // Default to 0 if no trend data available
+      const aValue = aTrend ? aTrend.percentage : 0;
+      const bValue = bTrend ? bTrend.percentage : 0;
+      
+      if (subsectorSorting === 'increasing') {
+        return aValue - bValue;
+      } else { // decreasing
+        return bValue - aValue;
+      }
+    });
+  };
 
   // Fetch data for all years
   useEffect(() => {
@@ -552,9 +576,26 @@ export function SectorTrends() {
       
       {selectedSector && subsectors.length > 0 && (
         <div className={getSubsectorSelectionClasses()}>
-          <p className="text-sm text-muted-foreground">Selecionar subsetores para comparar:</p>
+          <div className="flex justify-between items-center mb-2">
+            <p className="text-sm text-muted-foreground">Selecionar subsetores para comparar:</p>
+            <Select 
+              value={subsectorSorting} 
+              onValueChange={(value: 'alphabetical' | 'increasing' | 'decreasing') => setSubsectorSorting(value)}
+            >
+              <SelectTrigger className="w-[160px] h-8 text-xs">
+                <SelectValue placeholder="Ordenar por" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectGroup>
+                  <SelectItem value="alphabetical">Ordem alfabética</SelectItem>
+                  <SelectItem value="increasing">% Crescente</SelectItem>
+                  <SelectItem value="decreasing">% Decrescente</SelectItem>
+                </SelectGroup>
+              </SelectContent>
+            </Select>
+          </div>
           <div className="flex flex-wrap gap-1">
-            {subsectors.map(subsector => (
+            {getSortedSubsectors().map(subsector => (
               <Badge
                 key={subsector}
                 variant={selectedSubsectors.includes(subsector) ? "default" : "outline"}
