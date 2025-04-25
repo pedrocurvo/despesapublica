@@ -21,10 +21,10 @@ export function ExpenseOverviewTrends() {
       setError(null)
       
       try {
-        // Create an array of years to fetch (2018-2023)
+        // Create an array of years to fetch (2015-2023)
         const years = Array.from(
-          { length: 6 },
-          (_, i) => 2018 + i
+          { length: 9 },
+          (_, i) => 2015 + i
         );
         
         // Fetch data for each year
@@ -39,23 +39,24 @@ export function ExpenseOverviewTrends() {
         
         const yearResults = await Promise.all(yearDataPromises);
         
-        // Transform the data for the chart
+        // Transform the data for the chart with the new JSON format
         const chartData = yearResults
           .filter(result => result !== null)
           .map(result => {
             const { year, data } = result;
-            // Get the "Despesa Efetiva Consolidada" values
-            const values = data?.totalValues?.["Despesa Efetiva Consolidada"];
             
-            if (!values) {
+            // Extract data from the new JSON structure
+            const yearData = data[year];
+            
+            if (!yearData) {
               console.warn(`Missing expense data for year ${year}`);
               return null;
             }
             
             return {
               year: year.toString(),
-              budgeted: Number(values["Orcamento Corrigido"].toFixed(2)),
-              executed: Number(values["Execucao"].toFixed(2))
+              budgeted: Number((yearData.despesa_orcamentada / 1000).toFixed(2)), // Convert to billions
+              executed: Number((yearData.despesa_executada_efetiva_consolidada / 1000).toFixed(2)) // Convert to billions
             };
           })
           .filter(item => item !== null);
@@ -102,8 +103,8 @@ export function ExpenseOverviewTrends() {
         <div className="rounded-md bg-background p-4 shadow-md border border-border text-sm">
           <p className="font-medium">{`Ano: ${label}`}</p>
           <div className="mt-2 space-y-1">
-            <p className="text-blue-500">{`Orçamentado: €${yearData.budgeted?.toLocaleString()}M`}</p>
-            <p className="text-red-500">{`Executado: €${yearData.executed?.toLocaleString()}M`}</p>
+            <p className="text-blue-500">{`Orçamentado: €${yearData.budgeted?.toLocaleString()}MM`}</p>
+            <p className="text-red-500">{`Executado: €${yearData.executed?.toLocaleString()}MM`}</p>
             <div className="border-t border-border my-2"></div>
             <p className={`font-medium ${
               yearData.executed <= yearData.budgeted ? "text-green-500" : "text-red-500"
@@ -121,11 +122,11 @@ export function ExpenseOverviewTrends() {
     <ChartContainer
       config={{
         budgeted: { 
-          label: "Despesas Orçamentadas (€M)", 
+          label: "Despesas Orçamentadas (€MM)", 
           color: "hsl(221.2 83.2% 53.3%)" 
         },
         executed: { 
-          label: "Despesas Executadas (€M)", 
+          label: "Despesas Executadas (€MM)", 
           color: "hsl(0 84.2% 60.2%)" 
         },
       }}
@@ -138,7 +139,7 @@ export function ExpenseOverviewTrends() {
         >
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="year" />
-          <YAxis tickFormatter={(value) => `€${value}M`} />
+          <YAxis tickFormatter={(value) => `€${value}MM`} />
           <Tooltip content={<CustomTooltip />} />
           <Legend wrapperStyle={{ fontSize: '0.8rem', marginTop: '5px' }} />
           <Line

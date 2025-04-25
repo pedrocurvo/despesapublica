@@ -9,7 +9,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 export default function DespesaPage() {
   const [selectedYear, setSelectedYear] = useState("2023");
   const [selectedSector, setSelectedSector] = useState<string | null>(null);
-  const availableYears = ["2021", "2022", "2023"]; // You can expand this list as more data becomes available
+  const availableYears = ["2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023"];
 
   return (
     <div className="container mx-auto py-8">

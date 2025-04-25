@@ -14,49 +14,18 @@ export async function GET(request: Request) {
     const budgetData = JSON.parse(fileData);
     
     // Return specific sector data if requested
-    if (sector) {
-      if (!budgetData.sectors[sector]) {
-        return NextResponse.json({ error: "Sector not found" }, { status: 404 });
-      }
+    if (sector && budgetData[year]?.setores[sector]) {
       return NextResponse.json({
-        sector: sector,
-        data: budgetData.sectors[sector]
+        [year]: {
+          sector: sector,
+          ...budgetData[year].setores[sector]
+        }
       });
     }
     
-    // Process data to format it for the chart
-    const formattedData = {
-      sectors: {},
-      totalValues: budgetData.Values
-    };
+    // Just return the whole data structure as it already has the correct format
+    return NextResponse.json(budgetData);
     
-    // Extract the required data for each sector
-    Object.keys(budgetData.sectors).forEach(sectorName => {
-      const sectorData = budgetData.sectors[sectorName];
-      formattedData.sectors[sectorName] = {
-        "Despesa Total Nao Consolidada": sectorData["Despesa Total Nao Consolidada"],
-        "Despesa Total Consolidada": sectorData["Despesa Total Consolidada"],
-        "Despesa Efetiva Consolidada": sectorData["Despesa Efetiva Consolidada"],
-        "Subsectors": {}
-      };
-      
-      // Format subsector data if available
-      if (sectorData.Subsectors) {
-        const subsectors = {};
-        Object.keys(sectorData.Subsectors).forEach(subsectorName => {
-          // Skip the DESPESA TOTAL entries which are totals 
-          if (
-            subsectorName !== "DESPESA TOTAL NÃO CONSOLIDADA" && 
-            subsectorName !== "DESPESA TOTAL CONSOLIDADA"
-          ) {
-            subsectors[subsectorName] = sectorData.Subsectors[subsectorName];
-          }
-        });
-        formattedData.sectors[sectorName]["Subsectors"] = subsectors;
-      }
-    });
-    
-    return NextResponse.json(formattedData);
   } catch (error) {
     console.error("Error reading budget data:", error);
     return NextResponse.json(

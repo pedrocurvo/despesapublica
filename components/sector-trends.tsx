@@ -25,7 +25,7 @@ import { Label } from "@/components/ui/label"
 import { Badge } from "@/components/ui/badge"
 
 // Years to fetch data for
-const YEARS = ["2022", "2023"]
+const YEARS = ["2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023"]
 
 type SectorData = {
   name: string

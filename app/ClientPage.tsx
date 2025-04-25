@@ -51,7 +51,7 @@ const router = useRouter()
             </CardHeader>
             <CardContent>
               <ExpenseOverview 
-                startYear={2023} 
+                startYear={2015} 
                 endYear={2023}
                 onYearClick={handleYearClick}
               />

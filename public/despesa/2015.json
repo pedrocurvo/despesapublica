@@ -1,0 +1,249 @@
+{
+  "2015": {
+    "despesa_orcamentada": 65990.62713575999,
+    "despesa_executada_efetiva_consolidada": 62052.40633225,
+    "grau_execução": 94.03215126989468,
+    "setores": {
+      "01 - Órgãos de Soberania": {
+        "despesa_orcamentada": 3210.04279454,
+        "despesa_executada_efetiva_consolidada": 3136.80271253,
+        "despesa_executada_total_nao_consolidada": 3253.70,
+        "grau_execução": 97.71840792482345,
+        "medidas": {
+          "001 -  SERV. GERAIS DA AP -  ADMINISTRAÇÃO GERAL": 259.10,
+          "012 -  SEGURANÇA E ORDEM PÚBLICAS -  SISTEMA JUDICIÁRIO": 32.60,
+          "036 -  SERVIÇOS CULTURAIS, RECREATIVOS E RELIGIOSOS -  CULTURA": 2.10,
+          "038 -  SERVIÇOS CULTURAIS, RECREATIVOS E RELIGIOSOS -  COMUNICAÇÃO SOCIAL": 3.60,
+          "067 -  OUTRAS FUNÇÕES - TRANSFERÊNCIAS ENTRE ADMINISTRAÇÕES": 2956.30
+        }
+      },
+      "02 -  Governação e Cultura": {
+        "despesa_orcamentada": 841.3507300000001,
+        "despesa_executada_efetiva_consolidada": 718.9123707399999,
+        "despesa_executada_total_nao_consolidada": null,
+        "grau_execução": 85.44740559504831,
+        "medidas": null
+      },
+      "03 -  Finanças e Administração Pública": {
+        "despesa_orcamentada": 3909.1780032499983,
+        "despesa_executada_efetiva_consolidada": 3504.9160183599997,
+        "despesa_executada_total_nao_consolidada": 15909.9,
+        "grau_execução": 89.65864474439627,
+        "medidas": {
+          "001 -  SERV. GERAIS DA A.P. - ADMINISTRAÇÃO GERAL": 3134.7,
+          "002 - SERV. GERAIS DA A.P. - NEGÓCIOS ESTRANGEIROS": 0.0,
+          "003 - SERV. GERAIS DA A.P. - COOPERAÇÃO ECONÓMICA EXTERNA": 91.8,
+          "005 - DEFESA NACIONAL - ADMINISTRAÇÃO E REGULAMENTAÇÃO": 15.5,
+          "007 - DEFESA NACIONAL - FORÇAS ARMADAS": 4.0,
+          "009 - SEGURANÇA E ORDEM PÚBLICAS - ADMINISTRAÇÃO E REGULAMENTAÇÃO": 0.1,
+          "017 - EDUCAÇÃO - ESTABELECIMENTOS DE ENSINO NÃO SUPERIOR": 22.5,
+          "020 - SAÚDE - ADMINISTRAÇÃO E REGULAMENTAÇÃO": 0.1,
+          "022 - SAÚDE - HOSPITAIS E CLÍNICAS": 49.3,
+          "026 - SEGURANÇA E AÇÃO SOCIAL - SEGURANÇA SOCIAL": 22.8,
+          "027 - SEGURANÇA E AÇÃO SOCIAL - AÇÃO SOCIAL": 14.3,
+          "030 - HABITAÇÃO E SERV. COLECTIVOS - HABITAÇÃO": 67.8,
+          "033 - HABITAÇÃO E SERV. COLECTIVOS - PROTECÇÃO DO MEIO AMBIENTE E CONSERVAÇÃO DA NATUREZA": 0.0,
+          "036 - SERVIÇOS CULTURAIS, RECREATIVOS E RELIGIOSOS - CULTURA": 3.6,
+          "037 - SERVIÇOS CULTURAIS, RECREATIVOS E RELIGIOSOS - DESPORTO, RECREIO E LAZER": 0.1,
+          "038 - SERVIÇOS CULTURAIS, RECREATIVOS E RELIGIOSOS - COMUNICAÇÃO SOCIAL": 14.2,
+          "040 - AGRICULTURA, PECUÁRIA, SILV., CAÇA, PESCA - ADMINISTRAÇÃO E REGULAMENTAÇÃO": 17.5,
+          "054 - TRANSPORTES E COMUNICAÇÕES - TRANSPORTES RODOVIÁRIOS": 512.1,
+          "055 - TRANSPORTES E COMUNICAÇÕES - TRANSPORTES FERROVIÁRIOS": 2670.3,
+          "056 - TRANSPORTES E COMUNICAÇÕES - TRANSPORTES AÉREOS": 27.1,
+          "057 - TRANSPORTES E COMUNICAÇÕES - TRANSPORTES MARÍTIMOS E FLUVIAIS": 13.1,
+          "058 - TRANSPORTES E COMUNICAÇÕES - SISTEMAS DE COMUNICAÇÕES": 53.3,
+          "064 - OUTRAS FUNÇÕES ECONÓMICAS - RELAÇÕES GERAIS DO TRABALHO": 0.0,
+          "065 - OUTRAS FUNÇÕES ECONÓMICAS - DIVERSAS NÃO ESPECIFICADAS": 6931.6,
+          "066 - OUTRAS FUNÇÕES - OPERAÇÕES DA DÍVIDA PÚBLICA": 424.4,
+          "067 - OUTRAS FUNÇÕES - TRANSFERÊNCIAS ENTRE ADMINISTRAÇÕES": 1819.9,
+          "068 - OUTRAS FUNÇÕES - DIVERSAS NÃO ESPECIFICADAS": 0.0
+        }
+      },
+      "04 - Gestão da Dívida Pública": {
+        "despesa_orcamentada": 7508.406373000005,
+        "despesa_executada_efetiva_consolidada": 7096.7839626200075,
+        "despesa_executada_total_nao_consolidada": null,
+        "grau_execução": 94.51784586593263,
+        "medidas": null
+      },
+      "05 - Representação Externa": {
+        "despesa_orcamentada": 369.72316604,
+        "despesa_executada_efetiva_consolidada": 334.06657018,
+        "despesa_executada_total_nao_consolidada": 408.23062610,
+        "grau_execução": 90.35586646032822,
+        "medidas": {
+          "002 - SERV. GERAIS DA AP - NEGÓCIOS ESTRANGEIROS": 314.07180220,
+          "003 - SERV. GERAIS DA AP -  COOPERAÇÃO ECONÓMICA EXTERNA": 88.17772420,
+          "004 - SERV. GERAIS DA AP - INVESTIGAÇÃO CIENTÍFICA DE CARÁTER GERAL": 5.9810997000000010
+        }
+      },
+      "06 - Defesa": {
+        "despesa_orcamentada": 2248.39043973,
+        "despesa_executada_efetiva_consolidada": 1996.06249116,
+        "despesa_executada_total_nao_consolidada": 2071.7,
+        "grau_execução": 88.77739630487396,
+        "medidas": {
+          "004 - SERV. GERAIS DA AP - INVESTIGAÇÃO CIENTÍFICA DE CARÁTER GERAL": 0.1,
+          "005  - DEFESA NACIONAL - ADMINISTRAÇÃO E REGULAMENTAÇÃO": 120.7,
+          "006 - DEFESA NACIONAL - INVESTIGAÇÃO": 6.6,
+          "007 - DEFESA NACIONAL - FORÇAS ARMADAS": 1795.9,
+          "008 - DEFESA NACIONAL - COOPERAÇÃO MILITAR EXTERNA": 4.7,
+          "014 - SEGURANÇA E ORDEM PÚBLICAS - PROTEÇÃO CIVIL E LUTA CONTRA INCÊNDIOS": 0.8,
+          "017 - EDUCAÇÃO - ESTABELECIMENTOS DE ENSINO NÃO SUPERIOR": 0.9,
+          "018 - EDUCAÇÃO - ESTABELECIMENTOS DE ENSINO SUPERIOR": 0.2,
+          "022 - SAÚDE - HOSPITAIS E CLÍNICAS": 49.2,
+          "026 - SEGURANÇA E AÇÃO SOCIAL - SEGURANÇA SOCIAL": 0.0,
+          "027 - SEGURANÇA E AÇÃO SOCIAL - AÇÃO SOCIAL": 72.9,
+          "028 - HABITAÇÃO E SERV. COLECTIVOS - ADMINISTRAÇÃO E REGULAMENTAÇÃO": 0.0,
+          "049 - INDÚSTRIA E ENERGIA - INDÚSTRIAS TRANSFORMADORAS": 19.7
+        }
+      },
+      "07 - Segurança Interna": {
+        "despesa_orcamentada": 2041.5629916699997,
+        "despesa_executada_efetiva_consolidada": 1961.2054331699997,
+        "despesa_executada_total_nao_consolidada": 2088.3,
+        "grau_execução": 96.06391971112939,
+        "medidas": {
+          "003 - SERV. GERAIS DA AP - COOPERAÇÃO ECONÓMICA EXTERNA": 1.0,
+          "009 - SEGURANÇA E ORDEM PÚBLICAS - ADMINISTRAÇÃO E REGULAMENTAÇÃO": 70.0,
+          "011 - SEGURANÇA E ORDEM PÚBLICAS - FORÇAS DE SEGURANÇA": 1636.4,
+          "014 - SEGURANÇA E ORDEM PÚBLICAS - PROTEÇÃO CIVIL E LUTA CONTRA INCÊNDIOS": 243.3,
+          "017 - EDUCAÇÃO - ESTABELECIMENTOS DE ENSINO NÃO SUPERIOR": 9.3,
+          "018 - EDUCAÇÃO - ESTABELECIMENTOS DE ENSINO SUPERIOR": 6.2,
+          "023 - SAÚDE - SERVIÇOS INDIVIDUAIS DE SAÚDE": 55.4,
+          "027 - SEGURANÇA E ACÇÃO SOCIAL - ACÇÃO SOCIAL": 13.2,
+          "068 - OUTRAS FUNÇÕES - DIVERSAS NÃO ESPECIFICADAS": 0.7,
+          "071 - SEGURANÇA E ORDEM PÚBLICAS - PARCERIAS PÚBLICO-PRIVADAS": 44.5
+        }
+      },
+      "08 - Justiça": {
+        "despesa_orcamentada": 1479.4519411800002,
+        "despesa_executada_efetiva_consolidada": 1386.38449441,
+        "despesa_executada_total_nao_consolidada": 1667.8,
+        "grau_execução": 93.70932950375054,
+        "medidas": {
+          "001 - SERV. GERAIS DA AP - ADMINISTRAÇÃO GERAL": 5.3,
+          "009 - SEGURANÇA E ORDEM PÚBLICAS - ADMINISTRAÇÃO E REGULAMENTAÇÃO": 684.1,
+          "010 - SEGURANÇA E ORDEM PÚBLICAS - INVESTIGAÇÃO": 112.8,
+          "012 - SEGURANÇA E ORDEM PÚBLICAS - SISTEMA JUDICIÁRIO": 600.3,
+          "013 - SEGURANÇA E ORDEM PÚBLICAS - SISTEMA PRISIONAL, DE REINSERÇÃO SOCIAL E DE MENORES": 246.7,
+          "063 - OUTRAS FUNÇÕES ECONÓMICAS - ADMINISTRAÇÃO E REGULAMENTAÇÃO": 17.6,
+          "065 - OUTRAS FUNÇÕES ECONÓMICAS - DIVERSAS NÃO ESPECIFICADAS": 1.0
+        }
+      },
+      "09 - Economia": {
+        "despesa_orcamentada": 3760.228175,
+        "despesa_executada_efetiva_consolidada": 3435.57380843,
+        "despesa_executada_total_nao_consolidada": 6587.0,
+        "grau_execução": 91.36609930406682,
+        "medidas": {
+          "001 -  SERV. GERAIS DA A.P. -  ADMINISTRAÇÃO GERAL": 0.0,
+          "004 -  SERV. GERAIS DA A.P. -  INVESTIGAÇÃO CIENTÍFICA DE CARÁCTER GERAL": 3.20328049,
+          "036 -  SERVIÇOS CULTURAIS, RECREATIVOS E RELIGIOSOS -  CULTURA": 1.913132440,
+          "052 -  TRANSPORTES E COMUNICAÇÕES -  ADMINISTRAÇÃO E REGULAMENTAÇÃO": 48.255034220,
+          "053 -  TRANSPORTES E COMUNICAÇÕES -  INVESTIGAÇÃO": 31.10653988,
+          "054 -  TRANSPORTES E COMUNICAÇÕES -  TRANSPORTES RODOVIÁRIOS": 328.04141286,
+          "055 -  TRANSPORTES E COMUNICAÇÕES -  TRANSPORTES FERROVIÁRIOS": 1242.74438393,
+          "056 -  TRANSPORTES E COMUNICAÇÕES -  TRANSPORTES AÉREOS": 72.921271480000020,
+          "057 -  TRANSPORTES E COMUNICAÇÕES -  TRANSPORTES MARÍTIMOS E FLUVIAIS": 44.98940451,
+          "058 -  TRANSPORTES E COMUNICAÇÕES -  SISTEMAS DE COMUNICAÇÕES": 106.481958840,
+          "062 -  COMÉRCIO E TURISMO -  TURISMO": 189.302720070,
+          "063 -  OUTRAS FUNÇÕES ECONÓMICAS -  ADMINISTRAÇÃO E REGULAMENTAÇÃO": 52.528685539999990,
+          "065 -  OUTRAS FUNÇÕES ECONÓMICAS -  DIVERSAS NÃO ESPECIFICADAS": 153.16847242,
+          "079 -  TRANSPORTES E COMUNICAÇÕES -  PARCERIAS PÚBLICO PRIVADAS": 1303.605884240
+        }
+      },
+      "10 - Ambiente, Ordenamento do Território e da Energia": {
+        "despesa_orcamentada": 809.52007101,
+        "despesa_executada_efetiva_consolidada": 346.39885341,
+        "despesa_executada_total_nao_consolidada": 451.706713,
+        "grau_execução": 42.79064421192355,
+        "medidas": {
+          "028 - HABITAÇÃO E SERV. COLECTIVOS - ADMINISTRAÇÃO E REGULAMENTAÇÃO": 8.8601072,
+          "030 - HABITAÇÃO E SERV. COLECTIVOS - HABITAÇÃO": 78.8447613,
+          "031 - HABITAÇÃO E SERV. COLECTIVOS - ORDENAMENTO DO TERRITÓRIO": 43.9946004,
+          "033 - HABITAÇÃO E SERV. COLECTIVOS - PROTEÇÃO DO MEIO AMBIENTE E CONSERVAÇÃO DA NATUREZA": 221.510793,
+          "043 - AGRICULTURA, PECUÁRIA, SILV., CAÇA, PESCA - SILVICULTURA": 0.3927057,
+          "046 - INDÚSTRIA E ENERGIA - ADMINISTRAÇÃO E REGULAMENTAÇÃO": 10.9217795,
+          "051 - INDÚSTRIA E ENERGIA - COMBUSTÍVEIS, ELETRICIDADE E OUTRAS FONTES DE ENERGIA": 27.8458069,
+          "063 - OUTRAS FUNÇÕES ECONÓMICAS - ADMINISTRAÇÃO E REGULAMENTAÇÃO": 26.138357,
+          "065 - OUTRAS FUNÇÕES ECONÓMICAS - DIVERSAS NÃO ESPECIFICADAS": 24.8758735,
+          "068 - OUTRAS FUNÇÕES - DIVERSAS NÃO ESPECIFICADAS": 8.3219284
+        }
+      },
+      "11 - Agricultura e Mar": {
+        "despesa_orcamentada": 1249.089303,
+        "despesa_executada_efetiva_consolidada": 1083.12891066,
+        "despesa_executada_total_nao_consolidada": 1340.255484310,
+        "grau_execução": 86.7134886239595,
+        "medidas": {
+          "003 -  SERV. GERAIS DA A.P. -  COOPERAÇÃO ECONÓMICA EXTERNA": 0.0,
+          "004 -  SERV. GERAIS DA A.P. -  INVESTIGAÇÃO CIENTÍFICA DE CARÁCTER GERAL": 37.875269810,
+          "040 -  AGRICULTURA, PECUÁRIA, SILV, CAÇA, PESCA -  ADMINISTRAÇÃO E REGULAMENTAÇÃO": 88.687404890000020,
+          "041 -  AGRICULTURA, PECUÁRIA, SILV, CAÇA, PESCA -  INVESTIGAÇÃO": 56.996790180000010,
+          "042 -  AGRICULTURA, PECUÁRIA, SILV, CAÇA, PESCA -  AGRICULTURA E PECUÁRIA": 995.08646309000000,
+          "043 -  AGRICULTURA, PECUÁRIA, SILV, CAÇA, PESCA -  SILVICULTURA": 69.905423060,
+          "045 -  AGRICULTURA, PECUÁRIA, SILV, CAÇA, PESCA -  PESCA": 82.335200990000040,
+          "057 -  TRANSPORTES E COMUNICAÇÕES -  TRANSPORTES MARÍTIMOS E FLUVIAIS": 1.179623460,
+          "064 -  OUTRAS FUNÇÕES ECONÓMICAS -  RELAÇÕES GERAIS DO TRABALHO": 0.568034890
+        }
+      },
+      "12 - Saúde": {
+        "despesa_orcamentada": 9796.129040439997,
+        "despesa_executada_efetiva_consolidada": 9395.437271879999,
+        "despesa_executada_total_nao_consolidada": 22102.90,
+        "grau_execução": 95.90969282962814,
+        "medidas": {
+          "020 - SAÚDE - ADMINISTRAÇÃO E REGULAMENTAÇÃO": 1225.70,
+          "021 - SAÚDE - INVESTIGAÇÃO": 40.20,
+          "022 - SAÚDE - HOSPITAIS E CLÍNICAS": 14640.60,
+          "023 -  SAÚDE - SERVIÇOS INDIVIDUAIS DE SAÚDE": 5348.60,
+          "073 - SAÚDE - PARCERIAS PÚBLICO PRIVADAS": 847.70
+        }
+      },
+      "13 - Ensino Básico e Secundário e Administração Escolar": {
+        "despesa_orcamentada": 6003.1871982,
+        "despesa_executada_efetiva_consolidada": 5792.923273900001,
+        "despesa_executada_total_nao_consolidada": 5921.2769976,
+        "grau_execução": 96.49746180890303,
+        "medidas": {
+          "SERV. GERAIS DA AP - COOPERAÇÃO ECONÓMICA EXTERNA": 15.1740721,
+          "EDUCAÇÃO - ADMINISTRAÇÃO E REGULAMENTAÇÃO": 94.9408335,
+          "EDUCAÇÃO - ESTABELECIMENTOS DE ENSINO NÃO SUPERIOR": 5688.4203162,
+          "EDUCAÇÃO - ESTABELECIMENTOS DE ENSINO SUPERIOR": 0.9479543,
+          "EDUCAÇÃO - SERVIÇOS AUXILIARES DE ENSINO": 121.7938215
+        }
+      },
+      "14 - Ciência e Ensino Superior": {
+        "despesa_orcamentada": 2722.6669087,
+        "despesa_executada_efetiva_consolidada": 2212.2101608,
+        "despesa_executada_total_nao_consolidada": 3652.70169290,
+        "grau_execução": 81.25159025994371,
+        "medidas": {
+          "SERV. GERAIS DA AP - ADMINISTRAÇÃO GERAL": 19.54834870,
+          "SERV. GERAIS DA AP - COOPERAÇÃO ECONÓMICA EXTERNA": 0.0,
+          "SERV. GERAIS DA AP - INVESTIGAÇÂO CIENTÍFICA DE CARÁTER GERAL": 658.70329610,
+          "EDUCAÇÃO - ADMINISTRAÇÃO E REGULAMENTAÇÃO": 48.68659240,
+          "EDUCAÇÃO - INVESTIGAÇÃO": 213.06356190,
+          "EDUCAÇÃO - ESTABELECIMENTOS DE ENSINO SUPERIOR": 2461.62925740,
+          "EDUCAÇÃO - SERVIÇOS AUXILIARES DE ENSINO": 251.07063630
+        }
+      },
+      "15 - Solidariedade, Emprego e Segurança Social": {
+        "despesa_orcamentada": 20041.699999999997,
+        "despesa_executada_efetiva_consolidada": 19651.6,
+        "despesa_executada_total_nao_consolidada": 29942.20,
+        "grau_execução": 98.05355833088012,
+        "medidas": {
+          "001 - SERV. GERAIS DA AP - ADMINISTRAÇÃO GERAL": 0.10,
+          "003 - SERV. GERAIS DA AP - COOPERAÇÃO ECONÓMICA EXTERNA": 1.20,
+          "024 - SEGURANÇA E AÇÃO SOCIAL - ADMINISTRAÇÃO E REGULAMENTAÇÃO": 13.90,
+          "026 - SEGURANÇA E AÇÃO SOCIAL - SEGURANÇA SOCIAL": 15376.10,
+          "027 - SEGURANÇA E AÇÃO SOCIAL - AÇÃO SOCIAL": 8499.80,
+          "064 - OUTRAS FUNÇÕES ECONÓMICAS - RELAÇÕES GERAIS DO TRABALHO": 1048.90,
+          "065 - OUTRAS FUNÇÕES ECONÓMICAS - DIVERSAS NÃO ESPECIFICADAS": 2.0
+        }
+      }
+    }
+  }
+}

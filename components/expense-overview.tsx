@@ -44,23 +44,24 @@ export function ExpenseOverview({ startYear = 2018, endYear = 2023, onYearClick 
         
         const yearResults = await Promise.all(yearDataPromises);
         
-        // Transform the data for the chart
+        // Transform the data for the chart with the new JSON format
         const chartData = yearResults
           .filter(result => result !== null)
           .map(result => {
             const { year, data } = result;
-            // Get the "Despesa Efetiva Consolidada" values
-            const values = data?.totalValues?.["Despesa Efetiva Consolidada"];
             
-            if (!values) {
+            // Extract data from the new JSON structure
+            const yearData = data[year];
+            
+            if (!yearData) {
               console.warn(`Missing expense data for year ${year}`);
               return null;
             }
             
             return {
               year: year.toString(),
-              budgeted: Number(values["Orcamento Corrigido"].toFixed(2)),
-              executed: Number(values["Execucao"].toFixed(2))
+              budgeted: Number(yearData.despesa_orcamentada.toFixed(2)),
+              executed: Number(yearData.despesa_executada_efetiva_consolidada.toFixed(2))
             };
           })
           .filter(item => item !== null);

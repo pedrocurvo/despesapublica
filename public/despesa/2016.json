@@ -4,7 +4,7 @@
     "despesa_executada_efetiva_consolidada": 62978.21783554001,
     "grau_execução": 94.90887014132883,
     "setores": {
-      "O01 - Órgãos de Soberania": {
+      "001 - Órgãos de Soberania": {
         "despesa_orcamentada": 3236.2999999999993,
         "despesa_executada_efetiva_consolidada": 3191.7000000000007,
         "despesa_executada_total_nao_consolidada": 3306.3,
@@ -17,7 +17,7 @@
           "067 - OUTRAS FUNÇÕES - TRANSFERÊNCIAS ENTRE ADMINISTRAÇÕES": 3014.0
         }
       },
-      "O02 - Governação": {
+      "002 - Governação": {
         "despesa_orcamentada": 144.927153,
         "despesa_executada_efetiva_consolidada": 130.80870419,
         "despesa_executada_total_nao_consolidada": 241.18324757000002,

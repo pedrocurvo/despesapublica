@@ -7,24 +7,18 @@ import { formatCurrency } from "@/lib/utils";
 
 // Interfaces
 interface BudgetData {
-  sectors: {
-    [key: string]: {
-      "Despesa Total Nao Consolidada": {
-        "Orcamento Corrigido": number;
-        "Execucao": number;
-      };
-      "Despesa Total Consolidada": {
-        "Orcamento Corrigido": number;
-        "Execucao": number;
-      };
-      "Despesa Efetiva Consolidada": {
-        "Orcamento Corrigido": number;
-        "Execucao": number;
-      };
-      "Subsectors": {
-        [key: string]: {
-          "Orcamento Corrigido": number;
-          "Execucao": number;
+  [year: string]: {
+    despesa_orcamentada: number;
+    despesa_executada_efetiva_consolidada: number;
+    grau_execução: number;
+    setores: {
+      [key: string]: {
+        despesa_orcamentada: number;
+        despesa_executada_efetiva_consolidada: number;
+        despesa_executada_total_nao_consolidada: number;
+        grau_execução: number;
+        medidas: {
+          [key: string]: number;
         };
       };
     };
@@ -127,10 +121,10 @@ export default function HomeBudgetPieChart({ year, onSectorClick }: HomeBudgetPi
   const formatChartData = (data: BudgetData | null): ChartData[] => {
     if (!data) return [];
     
-    return Object.entries(data.sectors)
+    return Object.entries(data[year]?.setores || {})
       .map(([name, sectorData]) => ({
         name,
-        value: sectorData["Despesa Efetiva Consolidada"].Execucao
+        value: sectorData.despesa_executada_efetiva_consolidada
       }))
       .sort((a, b) => b.value - a.value);
   };
