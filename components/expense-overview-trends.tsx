@@ -138,7 +138,7 @@ export function ExpenseOverviewTrends() {
         >
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="year" />
-          <YAxis tickFormatter={(value) => `${value}`} />
+          <YAxis tickFormatter={(value) => `€${value}M`} />
           <Tooltip content={<CustomTooltip />} />
           <Legend wrapperStyle={{ fontSize: '0.8rem', marginTop: '5px' }} />
           <Line
@@ -148,6 +148,7 @@ export function ExpenseOverviewTrends() {
             strokeWidth={2}
             dot={{ r: 3 }}
             activeDot={{ r: 5 }}
+            name="Orçamentado"
           />
           <Line
             type="monotone"
@@ -156,6 +157,7 @@ export function ExpenseOverviewTrends() {
             strokeWidth={2}
             dot={{ r: 3 }}
             activeDot={{ r: 5 }}
+            name="Executado"
           />
         </LineChart>
       </ResponsiveContainer>
