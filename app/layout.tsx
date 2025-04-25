@@ -36,10 +36,10 @@ export default function RootLayout({
                 <Link href="/despesa">Despesa</Link>
               </Button>
               <Button asChild variant="ghost" size="sm">
-                <Link href="/compare">Comparar</Link>
+                <Link href="/map">Mapa</Link>
               </Button>
               <Button asChild variant="ghost" size="sm">
-                <Link href="/map">Mapa</Link>
+                <Link href="/compare">Comparar</Link>
               </Button>
               <Button asChild variant="ghost" size="sm">
                 <Link href="/news">Notícias</Link>
