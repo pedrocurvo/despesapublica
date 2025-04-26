@@ -81,6 +81,7 @@ export function SectorTrends() {
   const [selectedType, setSelectedType] = useState<'absolute' | 'percentage'>('absolute')
   const [trendData, setTrendData] = useState<Record<string, { trend: 'up' | 'down' | 'neutral', percentage: number }>>({})
   const [baseYear, setBaseYear] = useState<string>(YEARS[0])
+  const [endYear, setEndYear] = useState<string>(YEARS[YEARS.length - 1])
   const [subsectorSorting, setSubsectorSorting] = useState<'alphabetical' | 'increasing' | 'decreasing'>('alphabetical')
   // Add state to track hovered legend item
   const [hoveredItem, setHoveredItem] = useState<string | null>(null)
@@ -223,9 +224,9 @@ export function SectorTrends() {
     // We need at least two years of data to calculate trends
     if (Object.keys(data).length < 2) return
     
-    // Use the selected base year and the last year to compare
+    // Use the selected base year and the selected end year to compare
     const firstYear = fromYear
-    const lastYear = YEARS[YEARS.length - 1]
+    const lastYear = endYear
     
     // Skip calculation if base year is the last year
     if (firstYear === lastYear) {
@@ -320,7 +321,7 @@ export function SectorTrends() {
     
     // Calculate absolute change for sector or subsector
     const firstYear = baseYear
-    const lastYear = YEARS[YEARS.length - 1]
+    const lastYear = endYear
     let absoluteChange = 0
     
     if (firstYear !== lastYear && 
@@ -432,7 +433,9 @@ export function SectorTrends() {
   }, [selectedSector, yearData])
   
   // Prepare data for the chart with the new data structure
-  const chartData = YEARS.map(year => {
+  const chartData = YEARS
+    .filter(year => parseInt(year) >= parseInt(baseYear) && parseInt(year) <= parseInt(endYear))
+    .map(year => {
     const yearDataObj = yearData[year]
     if (!yearDataObj?.[year]?.setores) return { year }
     
@@ -748,7 +751,7 @@ export function SectorTrends() {
           <AlertCircle className="h-4 w-4" />
           <AlertDescription>
             {showIncompleteData 
-              ? "Alguns setores ou subsetores não existem em todos os anos. Eles estão marcados com um ícone de alerta." 
+              ? "Alguns setores ou subsetores (marcados com um ícone de alerta) não existem em todos os anos." 
               : "Alguns setores ou subsetores foram ocultados porque não existem em todos os anos."}
           </AlertDescription>
         </Alert>
@@ -866,10 +869,16 @@ export function SectorTrends() {
       
       <div className="mt-2 flex flex-wrap items-center gap-6 text-sm text-muted-foreground">
         <div className="flex items-center gap-2 mr-4">
-          <Label htmlFor="trend-base-year" className="text-sm whitespace-nowrap">Comparar com:</Label>
+          <Label htmlFor="trend-base-year" className="text-sm whitespace-nowrap">Comparar desde:</Label>
           <Select 
             value={baseYear} 
-            onValueChange={setBaseYear}
+            onValueChange={(year) => {
+              setBaseYear(year);
+              // Auto-fix endYear if it is before new baseYear
+              if (Number(endYear) < Number(year)) {
+                setEndYear(year);
+              }
+            }}
           >
             <SelectTrigger id="trend-base-year" className="w-[80px] h-8">
               <SelectValue />
@@ -877,6 +886,24 @@ export function SectorTrends() {
             <SelectContent>
               <SelectGroup>
                 {YEARS.slice(0, -1).map(year => (
+                  <SelectItem key={year} value={year}>{year}</SelectItem>
+                ))}
+              </SelectGroup>
+            </SelectContent>
+          </Select>
+        </div>
+        <div className="flex items-center gap-2 mr-4">
+          <Label htmlFor="trend-end-year" className="text-sm whitespace-nowrap">Até:</Label>
+          <Select 
+            value={endYear} 
+            onValueChange={setEndYear}
+          >
+            <SelectTrigger id="trend-end-year" className="w-[80px] h-8">
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectGroup>
+                {YEARS.filter(year => Number(year) >= Number(baseYear)).map(year => (
                   <SelectItem key={year} value={year}>{year}</SelectItem>
                 ))}
               </SelectGroup>
