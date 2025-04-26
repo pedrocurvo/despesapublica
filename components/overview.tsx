@@ -119,7 +119,7 @@ export function Overview({ startYear = 2018, endYear = 2023 }: OverviewProps) {
         <BarChart data={data} margin={{ top: 20, right: 20, left: 20, bottom: 20 }}>
           <CartesianGrid strokeDasharray="3 3" vertical={false} />
           <XAxis dataKey="year" />
-          <YAxis domain={[80000, 120000]} tickFormatter={(value) => `€${(value/1000).toFixed(0)}MM`} />
+          <YAxis domain={[60000, 120000]} tickFormatter={(value) => `€${(value/1000).toFixed(0)}MM`} />
           <Tooltip content={<CustomTooltip />} />
           <Legend wrapperStyle={{ paddingTop: 10 }} />
           <Bar name="Receita" dataKey="receitaActual" fill="#3b82f6" radius={[4, 4, 0, 0]} />

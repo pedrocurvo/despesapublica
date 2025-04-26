@@ -49,7 +49,16 @@ export default function NewsPage() {
         <div className="mb-6">
           <h1 className="text-2xl font-bold tracking-tight">Notícias do Orçamento</h1>
           <p className="text-muted-foreground">
-            Últimas notícias e atualizações relacionadas com o orçamento do governo português
+            Notícias e atualizações relacionadas com o orçamento do governo português preservadas no{" "}
+            <a
+              href="https://arquivo.pt"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-blue-500 hover:underline"
+            >
+              Arquivo.pt
+            </a>
+            .
           </p>
         </div>
 

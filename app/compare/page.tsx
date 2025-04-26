@@ -22,7 +22,7 @@ export default function ComparePage() {
           <div className="mb-6 flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
             <div>
               <h1 className="text-2xl font-bold tracking-tight">Comparação Orçamental</h1>
-              <p className="text-muted-foreground">Compare dados orçamentais entre diferentes anos e setores</p>
+              <p className="text-muted-foreground">Compare dados orçamentais entre diferentes anos, setores, distritos e municípios</p>
             </div>
           </div>
           
@@ -35,10 +35,10 @@ export default function ComparePage() {
               <a href="#expense-overview">Visão Geral das Despesas</a>
             </Button>
             <Button variant="outline" size="sm" asChild>
-              <a href="#district-trends">Tendências por Distrito</a>
+              <a href="#sector-trends">Tendências por Setor</a>
             </Button>
             <Button variant="outline" size="sm" asChild>
-              <a href="#sector-trends">Tendências por Setor</a>
+              <a href="#district-trends">Tendências por Distrito</a>
             </Button>
           </div>
           

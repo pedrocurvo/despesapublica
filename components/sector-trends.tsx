@@ -351,7 +351,7 @@ export function SectorTrends() {
     return (
       <div className={`text-xs text-muted-foreground mt-0.5 ${color}`}>
         {selectedType === 'absolute' 
-          ? `${(absoluteChange / 1000).toFixed(1)}M €`
+          ? `${(absoluteChange / 1000).toFixed(1)}MM €`
           : `${trend.percentage.toFixed(1)}%`}
       </div>
     )
@@ -670,10 +670,8 @@ export function SectorTrends() {
                       <div className="flex flex-col">
                         <div className="flex items-center">
                           {toProperCase(sector)}
-                          {getTrendIcon(sector)}
                           {getPartialDataIndicator(sector, 'sector')}
                         </div>
-                        {getTrendPercentage(sector)}
                       </div>
                     </SelectItem>
                   );
@@ -719,7 +717,7 @@ export function SectorTrends() {
                 }
               }}
             />
-            <Label htmlFor="show-incomplete-data" className="text-sm">Mostrar dados incompletos</Label>
+            <Label htmlFor="show-incomplete-data" className="text-sm">Mostrar todos os setores</Label>
           </div>
           
           {/* Show all subsectors checkbox (only when a sector is selected) */}

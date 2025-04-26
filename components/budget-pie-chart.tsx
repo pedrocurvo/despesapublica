@@ -251,8 +251,8 @@ export default function BudgetPieChart({
         <div className="text-center mb-6">
           <h2 className="text-xl font-bold">
             {selectedSector 
-              ? `Despesa por Subsetor: ${selectedSector}` 
-              : "Despesa por Setor"}
+              ? `Despesa Efetiva Exectuda por Subsetor: ${selectedSector}` 
+              : "Despesa Efetiva Exectuda por Setor"}
           </h2>
           <p className="text-sm text-muted-foreground">
             {selectedSector 

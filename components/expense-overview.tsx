@@ -139,7 +139,7 @@ export function ExpenseOverview({ startYear = 2018, endYear = 2023, onYearClick 
         >
           <CartesianGrid strokeDasharray="3 3" vertical={false} />
           <XAxis dataKey="year" />
-          <YAxis domain={[80000, 120000]} tickFormatter={(value) => `€${(value/1000).toFixed(0)}MM`} />
+          <YAxis domain={[60000, 100000]} tickFormatter={(value) => `€${(value/1000).toFixed(0)}MM`} />
           <Tooltip content={<CustomTooltip />} />
           <Legend wrapperStyle={{ paddingTop: 10 }} />
           <Bar name="Despesa Orçamentada" dataKey="budgeted" fill="#3b82f6" radius={[4, 4, 0, 0]} cursor="pointer" />
