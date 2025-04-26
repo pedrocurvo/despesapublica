@@ -43,9 +43,24 @@ export function RecentNews() {
           "http://observador.pt/",
           "http://jornaldenegocios.pt/",
           "http://dn.pt/",
+          "http://dn.sapo.pt/",
           "http://www.dn.pt/",
           "http://news.google.pt/",
-        ]
+          "http://dgo.pt/",
+          "http://dgo.gov.pt/",
+          "http://www.dgo.pt/",
+          "http://www.portugal.gov.pt/",
+          "https://www.dnoticias.pt/",
+          "https://dnoticias.pt/",
+          "https://www.jn.pt/",
+          "https://jn.sapo.pt/",
+          "https://sicnoticias.pt/",
+          "https://www.rtp.pt/noticias/",
+          "https://tvi24.iol.pt/",
+          "https://www.sabado.pt/",
+          "https://www.banca-financas.com/",
+          "https://jornaleconomico.sapo.pt/"
+        ];
 
         // Search queries to use
         const queries = [
