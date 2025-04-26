@@ -2,9 +2,8 @@ import type { Metadata } from 'next'
 import './globals.css'
 import Link from "next/link"
 import { Euro } from "lucide-react"
-import { Button } from "@/components/ui/button"
 import { ThemeProvider } from "@/components/theme-provider"
-import { ThemeToggle } from "@/components/theme-toggle"
+import { NavMenu, NavItem } from "@/components/nav-menu"
 
 export const metadata: Metadata = {
   title: 'Despesa Pública | Orçamento do Governo Português',
@@ -13,6 +12,16 @@ export const metadata: Metadata = {
   applicationName: 'Despesa Pública',
   keywords: "despesa pública, orçamento, portugal, setores, subsectores, finanças públicas",
 }
+
+// Navigation links array that can be easily modified
+const navLinks: NavItem[] = [
+  { name: "Painel", href: "/" },
+  { name: "Despesa", href: "/despesa" },
+  { name: "Mapa", href: "/map" },
+  { name: "Comparar", href: "/compare" },
+  { name: "Notícias", href: "/news" },
+  { name: "Sobre", href: "/about" },
+]
 
 export default function RootLayout({
   children,
@@ -28,29 +37,7 @@ export default function RootLayout({
               <Euro className="h-6 w-6" />
               <h1 className="text-lg font-semibold">Despesa Publica</h1>
             </div>
-            <nav className="ml-auto flex items-center gap-2">
-              <Button asChild variant="ghost" size="sm">
-                <Link href="/">Painel</Link>
-              </Button>
-              <Button asChild variant="ghost" size="sm">
-                <Link href="/despesa">Despesa</Link>
-              </Button>
-              <Button asChild variant="ghost" size="sm">
-                <Link href="/map">Mapa</Link>
-              </Button>
-              <Button asChild variant="ghost" size="sm">
-                <Link href="/compare">Comparar</Link>
-              </Button>
-              <Button asChild variant="ghost" size="sm">
-                <Link href="/news">Notícias</Link>
-              </Button>
-              <Button asChild variant="ghost" size="sm">
-                <Link href="/about">Sobre</Link>
-              </Button>
-              <div className="flex items-center ml-2">
-                <ThemeToggle />
-              </div>
-            </nav>
+            <NavMenu links={navLinks} />
           </header>
           {children}
           <footer className="border-t py-4 px-6">
