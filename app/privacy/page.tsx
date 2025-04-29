@@ -5,8 +5,8 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Separator } from "@/components/ui/separator";
 
 export const metadata: Metadata = {
-  title: "Política de Privacidade | Orçamento do Governo Português",
-  description: "Este Portal apenas visualiza dados públicos e não recolhe informações pessoais dos utilizadores.",
+  title: "Política de Privacidade | DespesaPública.pt",
+  description: "Esta Plataforma apenas visualiza dados públicos e não recolhe informações pessoais dos utilizadores.",
 };
 
 export default function PrivacyPage() {
@@ -32,10 +32,10 @@ export default function PrivacyPage() {
                 <div>
                   <h2 className="text-xl font-semibold">1. Introdução</h2>
                   <p className="mt-2 text-muted-foreground">
-                    A sua privacidade é importante para nós. Esta Política de Privacidade descreve como o Portal do Orçamento Português ("Portal", "nós" ou "nosso") lida com as informações dos utilizadores ("você").
+                    A sua privacidade é importante para nós. Esta Política de Privacidade descreve como a DespesaPública.pt ("Plataforma", "nós" ou "nossa") lida com as informações dos utilizadores ("você").
                   </p>
                   <p className="mt-2 text-muted-foreground">
-                    Este Portal foi concebido apenas para visualizar dados públicos através de gráficos interativos. <strong>Não recolhemos nem armazenamos informações pessoais.</strong>
+                    Esta Plataforma foi concebido apenas para visualizar dados públicos através de gráficos interativos. <strong>Não recolhemos nem armazenamos informações pessoais.</strong>
                   </p>
                 </div>
 
@@ -56,9 +56,9 @@ export default function PrivacyPage() {
                 <Separator />
 
                 <div>
-                  <h2 className="text-xl font-semibold">3. Finalidade do Portal</h2>
+                  <h2 className="text-xl font-semibold">3. Finalidade do DespesaPública.pt</h2>
                   <p className="mt-2 text-muted-foreground">
-                    O único objetivo do Portal é <strong>exibir informação pública</strong> de forma visual e acessível.
+                    O único objetivo da Plataforma é <strong>exibir informação pública</strong> de forma visual e acessível.
                     Não realizamos atividades de marketing, perfis de utilizadores ou recolha de dados.
                   </p>
                 </div>
@@ -68,7 +68,7 @@ export default function PrivacyPage() {
                 <div>
                   <h2 className="text-xl font-semibold">4. Segurança</h2>
                   <p className="mt-2 text-muted-foreground">
-                    Embora não recolhamos dados pessoais, implementamos medidas de segurança apropriadas para proteger a integridade do Portal contra acessos ou alterações não autorizadas.
+                    Embora não recolhamos dados pessoais, implementamos medidas de segurança apropriadas para proteger a integridade da Plataforma contra acessos ou alterações não autorizadas.
                   </p>
                 </div>
 
@@ -87,8 +87,8 @@ export default function PrivacyPage() {
                   <h2 className="text-xl font-semibold">6. Contacto</h2>
                   <p className="mt-2 text-muted-foreground">
                     Para qualquer questão relacionada com esta Política de Privacidade, por favor contacte-nos através do email:{" "}
-                    <a href="mailto:privacy@portaldoorcamento.pt" className="text-blue-500 hover:underline">
-                      privacy@portaldoorcamento.pt
+                    <a href="mailto:privacy@DespesaPública.pt" className="text-blue-500 hover:underline">
+                      privacy@DespesaPública.pt
                     </a>
                   </p>
                 </div>
@@ -103,7 +103,7 @@ export default function PrivacyPage() {
                 </div>
 
                 <div className="pt-4 text-center text-sm text-muted-foreground">
-                  © {currentYear} Portal do Orçamento Português. Todos os direitos reservados.
+                  © {currentYear} DespesaPública.pt Todos os direitos reservados.
                 </div>
 
               </div>

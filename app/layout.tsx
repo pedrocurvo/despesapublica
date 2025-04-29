@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   description: "Explore facilmente como o dinheiro público é gasto em Portugal — por setor, medidas do programa e região. Acompanhe as decisões do governo com clareza e transparência.",
   generator: 'Next.js',
   applicationName: 'DespesaPública.pt',
-  keywords: "despesa pública, orçamento, portugal, setores, subsectores, finanças públicas",
+  keywords: "despesa pública, orçamento, portugal, setores, subsetores, finanças públicas",
 }
 
 // Navigation links array that can be easily modified
@@ -43,7 +43,7 @@ export default function RootLayout({
           <header className="sticky top-0 z-10 flex h-16 items-center gap-4 border-b bg-background px-4 md:px-6">
             <div className="flex items-center gap-2">
               <Euro className="h-6 w-6" />
-              <h1 className="text-lg font-semibold">Despesa Publica</h1>
+              <h1 className="text-lg font-semibold">Despesa Pública</h1>
             </div>
             <NavMenu links={navLinks} />
           </header>
