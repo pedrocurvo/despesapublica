@@ -5,11 +5,19 @@ import { Euro } from "lucide-react"
 import { ThemeProvider } from "@/components/theme-provider"
 import { NavMenu, NavItem } from "@/components/nav-menu"
 
-export const metadata: Metadata = {
-  title: 'Despesa Pública | Orçamento do Governo Português',
+/*export const metadata: Metadata = {
+  title: 'DespesaPública.pt | Orçamento do Governo Português',
   description: 'Visualização da despesa pública por sector e subsector do orçamento governamental Português',
   generator: 'Next.js',
-  applicationName: 'Despesa Pública',
+  applicationName: 'DespesaPública.pt',
+  keywords: "despesa pública, orçamento, portugal, setores, subsectores, finanças públicas",
+}*/
+
+export const metadata: Metadata = {
+  title: "DespesaPública.pt - Como São Usados Os Nossos Impostos?",
+  description: "Explore facilmente como o dinheiro público é gasto em Portugal — por setor, medidas do programa e região. Acompanhe as decisões do governo com clareza e transparência.",
+  generator: 'Next.js',
+  applicationName: 'DespesaPública.pt',
   keywords: "despesa pública, orçamento, portugal, setores, subsectores, finanças públicas",
 }
 
@@ -42,7 +50,7 @@ export default function RootLayout({
           {children}
           <footer className="border-t py-4 px-6">
             <div className="container mx-auto flex flex-col items-center justify-between gap-4 md:flex-row">
-              <p className="text-sm text-muted-foreground">© {new Date().getFullYear()} Portal do Orçamento Português. Todos os direitos reservados.</p>
+              <p className="text-sm text-muted-foreground">© {new Date().getFullYear()} DespesaPública.pt. Todos os direitos reservados.</p>
               <nav className="flex gap-4 text-sm text-muted-foreground">
                 <Link href="/terms" className="hover:underline">
                   Termos
