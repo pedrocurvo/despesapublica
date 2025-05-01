@@ -172,18 +172,34 @@ export default function BudgetPieChart({
     if (!data) return [];
     
     if (sector && data[year]?.setores[sector]) {
-      const medidas = data[year].setores[sector].medidas;
+      const medidas = data[year].setores[sector].medidas || {};
+      // Check if medidas exists and is not null
+      if (!medidas) {
+        return [{
+          name: sector,
+          value: data[year].setores[sector].despesa_executada_efetiva_consolidada || 0,
+          despesaTotalNaoConsolidada: {
+            orcamento: data[year].setores[sector].despesa_orcamentada || 0,
+            execucao: data[year].setores[sector].despesa_executada_total_nao_consolidada || 0
+          },
+          despesaEfetivaConsolidada: {
+            orcamento: data[year].setores[sector].despesa_orcamentada || 0,
+            execucao: data[year].setores[sector].despesa_executada_efetiva_consolidada || 0
+          }
+        }];
+      }
+      
       return Object.entries(medidas)
         .map(([name, value]) => ({
           name,
-          value,
+          value: value || 0,
           despesaTotalNaoConsolidada: {
-            orcamento: value,
-            execucao: value
+            orcamento: value || 0,
+            execucao: value || 0
           },
           despesaEfetivaConsolidada: {
-            orcamento: value,
-            execucao: value
+            orcamento: value || 0,
+            execucao: value || 0
           }
         }))
         .sort((a, b) => b.value - a.value);
@@ -191,14 +207,14 @@ export default function BudgetPieChart({
     
     return Object.entries(data[year]?.setores || {}).map(([name, sectorData]) => ({
       name,
-      value: sectorData.despesa_executada_efetiva_consolidada,
+      value: sectorData.despesa_executada_efetiva_consolidada || 0,
       despesaTotalNaoConsolidada: {
-        orcamento: sectorData.despesa_orcamentada,
-        execucao: sectorData.despesa_executada_total_nao_consolidada
+        orcamento: sectorData.despesa_orcamentada || 0,
+        execucao: sectorData.despesa_executada_total_nao_consolidada || 0
       },
       despesaEfetivaConsolidada: {
-        orcamento: sectorData.despesa_orcamentada,
-        execucao: sectorData.despesa_executada_efetiva_consolidada
+        orcamento: sectorData.despesa_orcamentada || 0,
+        execucao: sectorData.despesa_executada_efetiva_consolidada || 0
       }
     }))
     .sort((a, b) => b.value - a.value);
