@@ -3,18 +3,10 @@
 import { useState, useEffect } from "react"
 import { CalendarIcon, ExternalLink } from "lucide-react"
 import Link from "next/link"
-
-interface NewsItem {
-  id: string
-  title: string
-  date: string
-  source: string
-  summary: string
-  url: string
-}
+import { NewsArticle, fetchNewsArticles, newsDomains, processNewsArticles } from "@/lib/news-utils"
 
 export function RecentNews() {
-  const [newsData, setNewsData] = useState<NewsItem[]>([])
+  const [newsData, setNewsData] = useState<NewsArticle[]>([])
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [error, setError] = useState<string | null>(null)
 
@@ -30,101 +22,58 @@ export function RecentNews() {
         // Calculate date range (last 6 years)
         const today = new Date()
         const sixYearsAgo = new Date()
-        sixYearsAgo.setFullYear(today.getFullYear() - 6)
+        sixYearsAgo.setFullYear(today.getFullYear() - 15)
         
         const fromDate = sixYearsAgo.toISOString().split('T')[0]
         const toDate = today.toISOString().split('T')[0]
         
-        // Domains to search
-        const domains = [
-          "http://publico.pt/",
-          "http://www.rtp.pt/",
-          "http://expresso.pt/",
-          "http://observador.pt/",
-          "http://jornaldenegocios.pt/",
-          "http://dn.pt/",
-          "http://dn.sapo.pt/",
-          "http://www.dn.pt/",
-          "http://news.google.pt/",
-          "http://dgo.pt/",
-          "http://dgo.gov.pt/",
-          "http://www.dgo.pt/",
-          "http://www.portugal.gov.pt/",
-          "https://www.dnoticias.pt/",
-          "https://dnoticias.pt/",
-          "https://www.jn.pt/",
-          "https://jn.sapo.pt/",
-          "https://sicnoticias.pt/",
-          "https://www.rtp.pt/noticias/",
-          "https://tvi24.iol.pt/",
-          "https://www.sabado.pt/",
-          "https://www.banca-financas.com/",
-          "https://jornaleconomico.sapo.pt/"
-        ];
-
         // Search queries to use
         const queries = [
           `orçamento estado ${currentYear}`,
           `execução orçamental ${currentYear}`,
-          `despesa pública ${currentYear}`
+          `despesa pública ${currentYear}`,
+          `orçamento estado`,
+          `execução orçamental`,
+          `despesa pública`,
+          `orçamento geral`,
+          `OE`,
+          `lei orçamento`,
+          `relatório orçamento`,
+          `debate orçamento`,
+          `aprovação orçamento`,
+          `ministro finanças orçamento`,
+          `programa orçamental`,
+          `medidas orçamentais`,
+          `receitas estado`,
+          `défice orçamental`,
+          `discussão orçamento`
         ]
         
-        // Collect all articles from different queries
-        const allArticles: any[] = []
+        // Fetch all articles using the utility function
+        const rawArticles = await fetchNewsArticles(queries, fromDate, toDate, newsDomains, true)
         
-        // Execute all queries in parallel
-        await Promise.all(queries.map(async (query) => {
-          // Build URL with query parameters
-          const params = new URLSearchParams()
-          params.append("query", query)
-          params.append("from", fromDate)
-          params.append("to", toDate)
-          domains.forEach(domain => params.append("domain", domain))
-          
-          try {
-            const response = await fetch(`/api/arquivo?${params.toString()}`)
-            
-            if (!response.ok) {
-              console.error(`Failed to fetch news for query "${query}"`)
-              return
-            }
-            
-            const data = await response.json()
-            
-            // Add results to allArticles
-            if (data.results && Array.isArray(data.results)) {
-              allArticles.push(...data.results)
-            }
-          } catch (err) {
-            console.error(`Error fetching news for query "${query}":`, err)
-          }
-        }))
-        
-        // Remove duplicates by title
-        const seenTitles = new Set<string>()
-        const uniqueArticles = allArticles.filter((item) => {
-          const normalizedTitle = item.headline?.trim().toLowerCase()
-          const isNew = normalizedTitle && !seenTitles.has(normalizedTitle)
-          if (isNew) seenTitles.add(normalizedTitle)
-          return isNew
+        // Process and format articles
+        const processedArticles = processNewsArticles(rawArticles, {
+          keywords: ["orçamento", "despesa", "execução", "OE"],
+          idPrefix: "recent",
+          limit: 10,
         })
-        
-        // Format and limit to 3 most recent articles
-        const processedArticles = uniqueArticles
-          .filter((item: any) => item.headline && item.headline.trim() !== "")
-          .sort((a: any, b: any) => new Date(b.datetime).getTime() - new Date(a.datetime).getTime())
-          .slice(0, 3)
-          .map((item: any, index: number) => ({
-            id: index,
-            uniqueId: `recent-${index}-${item.headline.substring(0, 20).replace(/\s+/g, '-')}`,
-            title: item.headline,
-            date: new Date(item.datetime).toISOString().split("T")[0],
-            source: item.domain.replace("www.", ""),
-            summary: "",
-            url: item.url
-          }))
-        
-        setNewsData(processedArticles)
+
+        // Sort articles by date
+        processedArticles.sort((a, b) => {
+          const dateA = new Date(a.date).getTime()
+          const dateB = new Date(b.date).getTime()
+          return dateB - dateA
+        })
+
+        // Remove article mentioning Angola or Expresso
+        const filteredArticles = processedArticles.filter(article => 
+          !article.title.toLowerCase().includes("angola") && 
+          !article.title.toLowerCase().includes("expresso")
+        )
+        // Set only to the first 3
+        setNewsData(filteredArticles.slice(0, 3))
+
       } catch (err) {
         console.error("Error fetching news:", err)
         setError("Failed to load news")
@@ -158,7 +107,7 @@ export function RecentNews() {
   return (
     <div className="space-y-4">
       {newsData.map((news) => (
-        <div key={news.uniqueId || `news-${news.id}`} className="border-b pb-3 last:border-0">
+        <div key={news.id} className="border-b pb-3 last:border-0">
           <h3 className="font-medium">{news.title}</h3>
           <div className="mt-1 flex items-center text-sm text-muted-foreground">
             <CalendarIcon className="mr-1 h-3 w-3" />

@@ -3,19 +3,11 @@
 import { CalendarIcon, ExternalLink } from "lucide-react"
 import Link from "next/link"
 import { useEffect, useState } from "react"
+import { NewsArticle, fetchNewsArticles, newsDomains, processNewsArticles } from "@/lib/news-utils"
 
 interface NewsArticlesProps {
   year: number
   sector?: string | null
-}
-
-interface NewsArticle {
-  id: string
-  title: string
-  date: string
-  source: string
-  summary: string
-  url: string
 }
 
 // Object mapping sectors to related keywords for more targeted searches
@@ -56,53 +48,10 @@ export function NewsArticles({ year, sector }: NewsArticlesProps) {
         const fromDate = `${year - 1}-09-01`
         const toDate = `${year}-08-31`
         
-        // Domains to search
-        const domains = [
-          "http://publico.pt/",
-          "http://www.rtp.pt/",
-          "http://expresso.pt/",
-          "http://observador.pt/",
-          "http://jornaldenegocios.pt/",
-          "http://dn.pt/",
-          "http://dn.sapo.pt/",
-          "http://www.dn.pt/",
-          "http://news.google.pt/",
-          "http://dgo.pt/",
-          "http://dgo.gov.pt/",
-          "http://www.dgo.pt/",
-          "http://www.portugal.gov.pt/",
-          "https://www.dnoticias.pt/",
-          "https://dnoticias.pt/",
-          "https://www.jn.pt/",
-          "https://jn.sapo.pt/",
-          "https://sicnoticias.pt/",
-          "https://www.rtp.pt/noticias/",
-          "https://tvi24.iol.pt/",
-          "https://www.sabado.pt/",
-          "https://www.banca-financas.com/",
-          "https://jornaleconomico.sapo.pt/"
-        ];
-
-        // Base search queries
-        let queries = [
-          `orçamento estado ${year}`,
-          `execução orçamental ${year}`,
-          `despesa pública ${year}`,
-          `orçamento geral ${year}`,
-          `OE ${year}`,
-          `lei orçamento ${year}`,
-          `relatório orçamento ${year}`,
-          `debate orçamento ${year}`,
-          `aprovação orçamento ${year}`,
-          `ministro finanças orçamento ${year}`,
-          `programa orçamental ${year}`,
-          `medidas orçamentais ${year}`,
-          `receitas estado ${year}`,
-          `défice orçamental ${year}`,
-          `discussão orçamento ${year}`
-        ]
+        // Determine queries based on whether a sector is selected
+        let queries: string[] = []
+        let keywords: string[] = []
         
-        // If a sector is selected, add sector-specific queries
         if (sector) {
           // Get proper sector name in Portuguese
           const sectorNameMap = {
@@ -136,110 +85,62 @@ export function NewsArticles({ year, sector }: NewsArticlesProps) {
             `${sectorName} orçamento estado ${year}`
           ]
           
+          // Add sector-specific keywords for article relevance sorting
+          keywords = [sectorName, "orçamento", "despesa"]
+          
           // Add keywords related to the sector to enrich the queries
-          const keywords = sectorKeywords[sector as keyof typeof sectorKeywords] || []
-          if (keywords.length > 0) {
+          const sectorSpecificKeywords = sectorKeywords[sector as keyof typeof sectorKeywords] || []
+          if (sectorSpecificKeywords.length > 0) {
             // Add more specific queries with keywords
-            keywords.forEach(keyword => {
+            sectorSpecificKeywords.forEach(keyword => {
               queries.push(`orçamento ${keyword} ${year}`)
               queries.push(`despesa ${keyword} ${year}`)
             })
+            
+            // Add to keywords for article relevance sorting
+            keywords = [...keywords, ...sectorSpecificKeywords]
           }
-        }
-        
-        // Collect all articles from different queries
-        const allArticles: any[] = []
-        
-        // Execute all queries in parallel
-        await Promise.all(queries.map(async (query) => {
-          // Build URL with query parameters
-          const params = new URLSearchParams()
-          params.append("query", query)
-          params.append("from", fromDate)
-          params.append("to", toDate)
-          domains.forEach(domain => params.append("domain", domain))
+        } else {
+          // Base search queries for general budget news
+          queries = [
+            `orçamento estado ${year}`,
+            `execução orçamental ${year}`,
+            `despesa pública ${year}`,
+            `orçamento geral ${year}`,
+            `OE ${year}`,
+            `lei orçamento ${year}`,
+            `relatório orçamento ${year}`,
+            `debate orçamento ${year}`,
+            `aprovação orçamento ${year}`,
+            `ministro finanças orçamento ${year}`,
+            `programa orçamental ${year}`,
+            `medidas orçamentais ${year}`,
+            `receitas estado ${year}`,
+            `défice orçamental ${year}`,
+            `discussão orçamento ${year}`
+          ]
           
-          try {
-            const response = await fetch(`/api/arquivo?${params.toString()}`)
-            
-            // Silently skip failed queries without logging errors
-            if (!response.ok) {
-              return
-            }
-            
-            const data = await response.json()
-            
-            // Add results to allArticles
-            if (data.results && Array.isArray(data.results)) {
-              allArticles.push(...data.results)
-            }
-          } catch (err) {
-            // Silently ignore fetch errors
-          }
-        }))
-        
-        // Remove duplicates by title + url (in case same headlines are on different domains)
-        const seenTitles = new Set<string>()
-        const uniqueArticles = allArticles.filter((item) => {
-          const normalizedTitle = item.headline?.trim().toLowerCase()
-          const isNew = normalizedTitle && !seenTitles.has(normalizedTitle)
-          if (isNew) seenTitles.add(normalizedTitle)
-          return isNew
-        })
-        
-        // Group by source domain
-        const groupedBySource: Record<string, any[]> = {}
-        for (const item of uniqueArticles) {
-          const source = item.domain.replace("www.", "")
-          if (!groupedBySource[source]) {
-            groupedBySource[source] = []
-          }
-          groupedBySource[source].push(item)
+          // Add general keywords for article relevance sorting
+          keywords = ["orçamento", "despesa", "OE", "estado", "finanças", "défice"]
         }
-
-        // Interleave in round-robin
-        const interleaved: any[] = []
-        let exhausted = false
-        while (!exhausted) {
-          exhausted = true
-          for (const domain in groupedBySource) {
-            if (groupedBySource[domain].length > 0) {
-              interleaved.push(groupedBySource[domain].shift())
-              exhausted = false
-            }
-          }
-        }
-
-        // Filter articles with valid headlines
-        const validArticles = interleaved.filter((item: any) => 
-          item.headline && item.headline.trim() !== ""
+        
+        // Fetch all articles using the utility function
+        const rawArticles = await fetchNewsArticles(
+          queries, 
+          fromDate, 
+          toDate, 
+          newsDomains,
+          true // silent mode
         )
-
-        // Separate articles into two groups: those with > 4 words and those with <= 4 words
-        const longHeadlines: any[] = []
-        const shortHeadlines: any[] = []
         
-        validArticles.forEach((item: any) => {
-          const wordCount = item.headline.trim().split(/\s+/).length
-          if (wordCount > 4) {
-            longHeadlines.push(item)
-          } else {
-            shortHeadlines.push(item)
-          }
+        // Process and format articles
+        const processedArticles = processNewsArticles(rawArticles, {
+          keywords: keywords,
+          idPrefix: `${year}-${sector || "general"}`,
+          limit: 15,
+          specialWord: sector || "orçamento",
+          fromDate: `${year}`,
         })
-
-        // Prioritize articles with longer headlines, but include shorter ones if needed
-        const prioritizedArticles = [...longHeadlines, ...shortHeadlines].slice(0, 15)
-        
-        // Format and map the final list
-        const processedArticles = prioritizedArticles.map((item: any, index: number) => ({
-          id: `${year}-${sector || ""}-${index}`,
-          title: item.headline,
-          date: new Date(item.datetime).toISOString().split("T")[0],
-          source: item.domain.replace("www.", ""),
-          summary: "",
-          url: item.url
-        }))
         
         setArticles(processedArticles)
       } catch (err) {
