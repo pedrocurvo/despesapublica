@@ -1,23 +1,24 @@
 import React from 'react';
 import { Linkedin, Mail, Twitter, Instagram } from 'lucide-react';
+import Image from 'next/image';
 
 const members = [
     {
         name: 'Pedro Curvo',
         role: 'Creator - Developer',
-        avatar: 'https://avatars.githubusercontent.com/u/47919550?v=4',
+        avatar: '/team/pedro.webp',
         linkedin: 'https://www.linkedin.com/in/pedro-curvo/',
     },
     {
         name: 'Clara Vasconcelos',
         role: 'Creator',
-        avatar: 'https://avatars.githubusercontent.com/u/68236786?v=4',
+        avatar: '/team/pedro.webp',
         linkedin: 'https://www.linkedin.com/in/theobalick/',
     },
     {
-        name: 'Tomás LAST NAME',
+        name: 'Tomás Duarte',
         role: 'Creator',
-        avatar: 'https://avatars.githubusercontent.com/u/99137927?v=4',
+        avatar: '/team/pedro.webp',
         linkedin: 'https://www.linkedin.com/in/glodie-lukose/',
     },
 ]
@@ -33,7 +34,14 @@ export default function TeamPage() {
                             {members.map((member, index) => (
                                 <div key={index}>
                                     <div className="bg-background size-20 rounded-full border p-0.5 shadow shadow-zinc-950/5 relative group">
-                                        <img className="aspect-square rounded-full object-cover" src={member.avatar} alt={member.name} height="460" width="460" loading="lazy" />
+                                        <Image 
+                                            className="aspect-square rounded-full object-cover" 
+                                            src={member.avatar} 
+                                            alt={member.name} 
+                                            height={460} 
+                                            width={460} 
+                                            loading="lazy" 
+                                        />
                                         <a 
                                             href={member.linkedin} 
                                             target="_blank" 
