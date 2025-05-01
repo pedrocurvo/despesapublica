@@ -19,7 +19,7 @@ type TransferData = {
 };
 
 export function MapContainer() {
-  const [selectedYear, setSelectedYear] = useState("2023");
+  const [selectedYear, setSelectedYear] = useState("2015");
   const [selectedDistrict, setSelectedDistrict] = useState<string | null>(null);
   const [transferData, setTransferData] = useState<TransferData | null>(null);
   const [loading, setLoading] = useState(true);
