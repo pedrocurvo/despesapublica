@@ -1,6 +1,7 @@
 import React from 'react';
 import { Linkedin, Mail, Twitter, Instagram } from 'lucide-react';
 import Image from 'next/image';
+import { Metadata } from 'next';
 
 const members = [
     {
@@ -22,6 +23,11 @@ const members = [
         linkedin: 'https://www.linkedin.com/in/glodie-lukose/',
     },
 ]
+
+export const metadata: Metadata = {
+    title: "Contacto | DespesaPública.pt",
+    description: "Conheça a equipa por trás do DespesaPública.pt, uma plataforma dedicada à transparência e análise da despesa pública em Portugal.",
+};
 
 export default function TeamPage() {
     return (

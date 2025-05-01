@@ -9,11 +9,6 @@ import { BudgetOverviewTrends } from "@/components/budget-overview-trends"
 import { ExpenseOverviewTrends } from "@/components/expense-overview-trends"
 import { Button } from "@/components/ui/button"
 
-/*export const metadata: Metadata = {
-  title: "Comparar Dados Orçamentais | Orçamento do Governo Português",
-  description: "Compare dados orçamentais entre diferentes anos e setores",
-}*/
-
 export const metadata: Metadata = {
   title: "Comparar Despesas por Ano, Setor, Medidas do Programa e Distritos| DespesaPública.pt",
   description: "Compare a evolução da despesa pública entre diferentes anos, setores, distritos e municípios — visualize tendências e variações no orçamento do governo português.",
