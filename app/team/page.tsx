@@ -14,13 +14,13 @@ const members = [
         name: 'Clara Vasconcelos',
         role: 'Creator',
         avatar: '/team/pedro.webp',
-        linkedin: 'https://www.linkedin.com/in/theobalick/',
+        linkedin: 'https://www.linkedin.com/in/clara-vasconcelos-9724b8243/',
     },
     {
         name: 'Tomás Duarte',
         role: 'Creator',
         avatar: '/team/pedro.webp',
-        linkedin: 'https://www.linkedin.com/in/glodie-lukose/',
+        linkedin: 'www.linkedin.com/in/clara-vasconcelos-9724b8243/',
     },
 ]
 
