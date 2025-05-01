@@ -5,20 +5,24 @@ import { Euro } from "lucide-react"
 import { ThemeProvider } from "@/components/theme-provider"
 import { NavMenu, NavItem } from "@/components/nav-menu"
 
-/*export const metadata: Metadata = {
-  title: 'DespesaPública.pt | Orçamento do Governo Português',
-  description: 'Visualização da despesa pública por sector e subsector do orçamento governamental Português',
-  generator: 'Next.js',
-  applicationName: 'DespesaPública.pt',
-  keywords: "despesa pública, orçamento, portugal, setores, subsectores, finanças públicas",
-}*/
-
 export const metadata: Metadata = {
   title: "DespesaPública.pt - Como São Usados Os Nossos Impostos?",
   description: "Explore facilmente como o dinheiro público é gasto em Portugal — por setor, medidas do programa e região. Acompanhe as decisões do governo com clareza e transparência.",
   generator: 'Next.js',
   applicationName: 'DespesaPública.pt',
   keywords: "despesa pública, orçamento, portugal, setores, subsetores, finanças públicas",
+  openGraph: {
+    title: "DespesaPública.pt - Como São Usados Os Nossos Impostos?",
+    description: "Explore facilmente como o dinheiro público é gasto em Portugal — por setor, medidas do programa e região. Acompanhe as decisões do governo com clareza e transparência.",
+    url: "https://despesapublica.pt",
+    siteName: "DespesaPública.pt",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "DespesaPública.pt - Como São Usados Os Nossos Impostos?",
+    description: "Explore facilmente como o dinheiro público é gasto em Portugal — por setor, medidas do programa e região. Acompanhe as decisões do governo com clareza e transparência.",
+    creator: "@pedrocurvo",
+  },
 }
 
 // Navigation links array that can be easily modified
