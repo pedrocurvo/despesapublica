@@ -1,6 +1,5 @@
 "use client"
 
-import type { Metadata } from "next"
 import { useState } from "react"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { NewsArticles } from "@/components/news-articles"
@@ -62,7 +61,7 @@ export default function NewsPage() {
           </p>
         </div>
 
-        <Tabs defaultValue={String(years[years.length - 1])}>
+        <Tabs defaultValue={String(years[0])}>
           <div className="flex flex-col md:flex-row md:items-center gap-4 md:justify-between mb-4">
             <TabsList className="w-full md:w-auto h-auto flex-wrap">
               {years.map((year) => (
