@@ -6,20 +6,19 @@ import { ThemeProvider } from "@/components/theme-provider"
 import { NavMenu, NavItem } from "@/components/nav-menu"
 
 export const metadata: Metadata = {
-  title: "DespesaPública.pt - Como São Usados Os Nossos Impostos?",
+  title: "Despesa Pública - Como São Usados Os Nossos Impostos?",
   description: "Explore facilmente como o dinheiro público é gasto em Portugal — por setor, medidas do programa e região. Acompanhe as decisões do governo com clareza e transparência.",
   generator: 'Next.js',
-  applicationName: 'DespesaPública.pt',
+  applicationName: 'Despesa Pública',
   keywords: "despesa pública, orçamento, portugal, setores, subsetores, finanças públicas",
   openGraph: {
-    title: "DespesaPública.pt - Como São Usados Os Nossos Impostos?",
+    title: "Despesa Pública - Como São Usados Os Nossos Impostos?",
     description: "Explore facilmente como o dinheiro público é gasto em Portugal — por setor, medidas do programa e região. Acompanhe as decisões do governo com clareza e transparência.",
-    url: "https://despesapublica.pt",
-    siteName: "DespesaPública.pt",
+    siteName: "Despesa Pública",
   },
   twitter: {
     card: "summary_large_image",
-    title: "DespesaPública.pt - Como São Usados Os Nossos Impostos?",
+    title: "Despesa Pública - Como São Usados Os Nossos Impostos?",
     description: "Explore facilmente como o dinheiro público é gasto em Portugal — por setor, medidas do programa e região. Acompanhe as decisões do governo com clareza e transparência.",
     creator: "@pedrocurvo",
   },
