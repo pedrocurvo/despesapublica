@@ -20,7 +20,7 @@ const members = [
         name: 'Tomás Duarte',
         role: 'Creator',
         avatar: '/team/tomas.jpeg',
-        linkedin: 'www.linkedin.com/in/clara-vasconcelos-9724b8243/',
+        linkedin: 'https://www.linkedin.com/in/tomás-duarte-03b69130a',
     },
 ]
 
