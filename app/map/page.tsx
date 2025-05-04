@@ -2,7 +2,7 @@ import type { Metadata } from "next"
 import { MapContainer } from "@/components/map-container"
 
 export const metadata: Metadata = {
-  title: "Mapa de Despesas Públicas | DespesaPública.pt",
+  title: "Mapa de Despesas Públicas | DespesaPública.net",
   description: "Distribuição geográfica do orçamento em Portugal  — despesas por distrito e município em todo o país.",
  }
 

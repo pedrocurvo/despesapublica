@@ -10,7 +10,7 @@ import { ExpenseOverviewTrends } from "@/components/expense-overview-trends"
 import { Button } from "@/components/ui/button"
 
 export const metadata: Metadata = {
-  title: "Comparar Despesas por Ano, Setor, Medidas do Programa e Distritos| DespesaPública.pt",
+  title: "Comparar Despesas por Ano, Setor, Medidas do Programa e Distritos| DespesaPública.net",
   description: "Compare a evolução da despesa pública entre diferentes anos, setores, distritos e municípios — visualize tendências e variações no orçamento do governo português.",
   keywords: "comparar orçamento, despesas públicas, anos, setores, distritos, municípios, finanças públicas, portugal",
 }

@@ -53,7 +53,7 @@ export default function RootLayout({
           {children}
           <footer className="border-t py-4 px-6">
             <div className="container mx-auto flex flex-col items-center justify-between gap-4 md:flex-row">
-              <p className="text-sm text-muted-foreground">© {new Date().getFullYear()} DespesaPública.pt. Todos os direitos reservados.</p>
+              <p className="text-sm text-muted-foreground">© {new Date().getFullYear()} DespesaPública.net. Todos os direitos reservados.</p>
               <nav className="flex gap-4 text-sm text-muted-foreground">
                 <Link href="/terms" className="hover:underline">
                   Termos

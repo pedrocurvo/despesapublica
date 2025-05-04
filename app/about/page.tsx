@@ -5,8 +5,8 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Separator } from "@/components/ui/separator"
 
 export const metadata: Metadata = {
-  title: "Sobre | DespesaPública.pt",
-  description: "Sobre a DespesaPública.pt e fontes de dados",
+  title: "Sobre | DespesaPública.net",
+  description: "Sobre a DespesaPública.net e fontes de dados",
 }
 
 export default function AboutPage() {
@@ -14,8 +14,8 @@ export default function AboutPage() {
     <div className="flex min-h-screen w-full flex-col">
       <main className="flex-1 p-4 md:p-8">
         <div className="mb-8">
-          <h1 className="text-3xl font-bold tracking-tight">Sobre a DespesaPública.pt</h1>
-          <p className="text-muted-foreground mt-2">Informações sobre a DespesaPública.pt e fontes de dados</p>
+          <h1 className="text-3xl font-bold tracking-tight">Sobre a DespesaPública.net</h1>
+          <p className="text-muted-foreground mt-2">Informações sobre a DespesaPública.net e fontes de dados</p>
           <Separator className="my-6" />
         </div>
         
@@ -61,8 +61,8 @@ export default function AboutPage() {
         <div className="mt-8">
           <Card>
             <CardHeader className="bg-muted/50">
-              <CardTitle className="text-xl">Como Utilizar a DespesaPública.pt</CardTitle>
-              <CardDescription>Um guia para navegar e utilizar a DespesaPública.pt</CardDescription>
+              <CardTitle className="text-xl">Como Utilizar a DespesaPública.net</CardTitle>
+              <CardDescription>Um guia para navegar e utilizar a DespesaPública.net</CardDescription>
             </CardHeader>
             <CardContent className="grid gap-6 pt-6 md:grid-cols-2 lg:grid-cols-3">
               <div className="rounded-lg border p-4">

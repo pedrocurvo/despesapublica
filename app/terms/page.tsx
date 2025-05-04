@@ -5,8 +5,8 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Separator } from "@/components/ui/separator"
 
 export const metadata: Metadata = {
-  title: "Termos de Utilização | DespesaPública.pt ",
-  description: "Termos de utilização e condições da DespesaPública.pt",
+  title: "Termos de Utilização | DespesaPública.net ",
+  description: "Termos de utilização e condições da DespesaPública.net",
 }
 
 export default function TermsPage() {
@@ -32,7 +32,7 @@ export default function TermsPage() {
                 <div>
                   <h2 className="text-xl font-semibold">1. Aceitação dos Termos</h2>
                   <p className="mt-2 text-muted-foreground">
-                    Ao aceder e utilizar a DespesaPública.pt - Como São Usados Os Nossos Impostos? ("DespesaPública.pt" ou "Plataforma"), o utilizador concorda em cumprir estes Termos de Serviço. Se não concordar com algum dos termos, solicitamos que não utilize esta plataforma.
+                    Ao aceder e utilizar a DespesaPública.net - Como São Usados Os Nossos Impostos? ("DespesaPública.net" ou "Plataforma"), o utilizador concorda em cumprir estes Termos de Serviço. Se não concordar com algum dos termos, solicitamos que não utilize esta plataforma.
                   </p>
                 </div>
 
@@ -41,28 +41,28 @@ export default function TermsPage() {
                 <div>
                   <h2 className="text-xl font-semibold">2. Descrição do Serviço</h2>
                   <p className="mt-2 text-muted-foreground">
-                    A DespesaPública.pt é uma ferramenta de visualização de dados destinada a tornar a informação do orçamento do governo português mais acessível e compreensível para o público geral.
+                    A DespesaPública.net é uma ferramenta de visualização de dados destinada a tornar a informação do orçamento do governo português mais acessível e compreensível para o público geral.
                   </p>
                   <p className="mt-2 text-muted-foreground">
-                    A DespesaPública.pt disponibiliza dados sobre o orçamento do Estado português, incluindo receitas, despesas e alocações por setores e regiões, através de visualizações interativas e análises comparativas.
+                    A DespesaPública.net disponibiliza dados sobre o orçamento do Estado português, incluindo receitas, despesas e alocações por setores e regiões, através de visualizações interativas e análises comparativas.
                   </p>
                 </div>
 
                 <Separator />
 
                 <div>
-                  <h2 className="text-xl font-semibold">3. Utilização da DespesaPública.pt</h2>
+                  <h2 className="text-xl font-semibold">3. Utilização da DespesaPública.net</h2>
                   <p className="mt-2 text-muted-foreground">
-                    A DespesaPública.pt é fornecida para fins informativos e educativos. O utilizador concorda em utilizar a Plataforma apenas para fins legais e de acordo com estes termos.
+                    A DespesaPública.net é fornecida para fins informativos e educativos. O utilizador concorda em utilizar a Plataforma apenas para fins legais e de acordo com estes termos.
                   </p>
                   <p className="mt-2 text-muted-foreground">
                     É proibido:
                   </p>
                   <ul className="mt-2 ml-6 list-disc text-muted-foreground">
-                    <li>Utilizar a DespesaPública.pt de qualquer forma que possa danificar, desativar ou sobrecarregar a Plataforma</li>
+                    <li>Utilizar a DespesaPública.net de qualquer forma que possa danificar, desativar ou sobrecarregar a Plataforma</li>
                     <li>Tentar obter acesso não autorizado a sistemas ou redes conectadas à Plataforma</li>
-                    <li>Recolher dados dos utilizadores da DespesaPública.pt sem consentimento explícito</li>
-                    <li>Utilizar a DespesaPública.pt para qualquer finalidade fraudulenta ou ilegal</li>
+                    <li>Recolher dados dos utilizadores da DespesaPública.net sem consentimento explícito</li>
+                    <li>Utilizar a DespesaPública.net para qualquer finalidade fraudulenta ou ilegal</li>
                   </ul>
                 </div>
 
@@ -71,7 +71,7 @@ export default function TermsPage() {
                 <div>
                   <h2 className="text-xl font-semibold">4. Precisão dos Dados</h2>
                   <p className="mt-2 text-muted-foreground">
-                    Embora nos esforcemos para garantir a precisão dos dados apresentados, não podemos garantir que a DespesaPública.pt esteja livre de erros ou imprecisões. Os dados são disponibilizados "tal como estão", sem garantias de qualquer tipo.
+                    Embora nos esforcemos para garantir a precisão dos dados apresentados, não podemos garantir que a DespesaPública.net esteja livre de erros ou imprecisões. Os dados são disponibilizados "tal como estão", sem garantias de qualquer tipo.
                   </p>
                   <p className="mt-2 text-muted-foreground">
                     Os utilizadores são aconselhados a verificar as informações com as fontes oficiais para decisões importantes que se baseiem nesses dados.
@@ -83,10 +83,10 @@ export default function TermsPage() {
                 <div>
                   <h2 className="text-xl font-semibold">5. Propriedade Intelectual</h2>
                   <p className="mt-2 text-muted-foreground">
-                    O conteúdo da Plataforma, incluindo, mas não se limitando a, textos, gráficos, logotipos, ícones, imagens e software, é propriedade da DespesaPública.pt ou dos seus fornecedores de conteúdo e está protegido por leis de direitos de autor portuguesas e internacionais.
+                    O conteúdo da Plataforma, incluindo, mas não se limitando a, textos, gráficos, logotipos, ícones, imagens e software, é propriedade da DespesaPública.net ou dos seus fornecedores de conteúdo e está protegido por leis de direitos de autor portuguesas e internacionais.
                   </p>
                   <p className="mt-2 text-muted-foreground">
-                    É permitido utilizar o conteúdo para fins não comerciais, desde que seja devidamente atribuída a fonte (DespesaPública.pt) e que não sejam feitas modificações ao conteúdo.
+                    É permitido utilizar o conteúdo para fins não comerciais, desde que seja devidamente atribuída a fonte (DespesaPública.net) e que não sejam feitas modificações ao conteúdo.
                   </p>
                 </div>
 
@@ -95,7 +95,7 @@ export default function TermsPage() {
                 <div>
                   <h2 className="text-xl font-semibold">6. Ligações a Terceiros</h2>
                   <p className="mt-2 text-muted-foreground">
-                    A DespesaPública.pt pode conter ligações para websites de terceiros. Estas ligações são fornecidas apenas para conveniência e informação do utilizador. A DespesaPública.pt não tem controlo sobre o conteúdo desses websites e não assume qualquer responsabilidade pelo conteúdo, políticas de privacidade ou práticas de websites de terceiros.
+                    A DespesaPública.net pode conter ligações para websites de terceiros. Estas ligações são fornecidas apenas para conveniência e informação do utilizador. A DespesaPública.net não tem controlo sobre o conteúdo desses websites e não assume qualquer responsabilidade pelo conteúdo, políticas de privacidade ou práticas de websites de terceiros.
                   </p>
                 </div>
 
@@ -104,7 +104,7 @@ export default function TermsPage() {
                 <div>
                   <h2 className="text-xl font-semibold">7. Limitação de Responsabilidade</h2>
                   <p className="mt-2 text-muted-foreground">
-                    Em nenhuma circunstância a DespesaPública.pt, seus diretores, funcionários, parceiros ou agentes serão responsáveis por quaisquer danos diretos, indiretos, incidentais, especiais, punitivos ou consequentes decorrentes da utilização ou incapacidade de utilizar a Plataforma.
+                    Em nenhuma circunstância a DespesaPública.net, seus diretores, funcionários, parceiros ou agentes serão responsáveis por quaisquer danos diretos, indiretos, incidentais, especiais, punitivos ou consequentes decorrentes da utilização ou incapacidade de utilizar a Plataforma.
                   </p>
                 </div>
 
@@ -113,7 +113,7 @@ export default function TermsPage() {
                 <div>
                   <h2 className="text-xl font-semibold">8. Alterações aos Termos</h2>
                   <p className="mt-2 text-muted-foreground">
-                    Reservamo-nos o direito de modificar estes Termos de Serviço a qualquer momento. As alterações entrarão em vigor imediatamente após a publicação dos termos atualizados na DespesaPública.pt. O uso contínuo do Plataforma após tais alterações constitui concordância com os novos termos.
+                    Reservamo-nos o direito de modificar estes Termos de Serviço a qualquer momento. As alterações entrarão em vigor imediatamente após a publicação dos termos atualizados na DespesaPública.net. O uso contínuo do Plataforma após tais alterações constitui concordância com os novos termos.
                   </p>
                 </div>
 
@@ -131,12 +131,12 @@ export default function TermsPage() {
                 <div>
                   <h2 className="text-xl font-semibold">10. Contato</h2>
                   <p className="mt-2 text-muted-foreground">
-                    Para questões relacionadas com estes Termos de Serviço, por favor contacte-nos através do email: <a href="mailto:contact@DespesaPública.pt" className="text-blue-500 hover:underline">contact@DespesaPública.pt</a>
+                    Para questões relacionadas com estes Termos de Serviço, por favor contacte-nos através do email: <a href="mailto:contact@DespesaPública.net" className="text-blue-500 hover:underline">contact@DespesaPública.net</a>
                   </p>
                 </div>
 
                 <div className="pt-4 text-center text-sm text-muted-foreground">
-                  © {currentYear} DespesaPública.pt. Todos os direitos reservados.
+                  © {currentYear} DespesaPública.net. Todos os direitos reservados.
                 </div>
               </div>
             </ScrollArea>

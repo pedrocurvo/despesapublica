@@ -5,7 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Separator } from "@/components/ui/separator";
 
 export const metadata: Metadata = {
-  title: "Política de Privacidade | DespesaPública.pt",
+  title: "Política de Privacidade | DespesaPública.net",
   description: "Esta Plataforma apenas visualiza dados públicos e não recolhe informações pessoais dos utilizadores.",
 };
 
@@ -32,7 +32,7 @@ export default function PrivacyPage() {
                 <div>
                   <h2 className="text-xl font-semibold">1. Introdução</h2>
                   <p className="mt-2 text-muted-foreground">
-                    A sua privacidade é importante para nós. Esta Política de Privacidade descreve como a DespesaPública.pt ("Plataforma", "nós" ou "nossa") lida com as informações dos utilizadores ("você").
+                    A sua privacidade é importante para nós. Esta Política de Privacidade descreve como a DespesaPública.net ("Plataforma", "nós" ou "nossa") lida com as informações dos utilizadores ("você").
                   </p>
                   <p className="mt-2 text-muted-foreground">
                     Esta Plataforma foi concebido apenas para visualizar dados públicos através de gráficos interativos. <strong>Não recolhemos nem armazenamos informações pessoais.</strong>
@@ -56,7 +56,7 @@ export default function PrivacyPage() {
                 <Separator />
 
                 <div>
-                  <h2 className="text-xl font-semibold">3. Finalidade do DespesaPública.pt</h2>
+                  <h2 className="text-xl font-semibold">3. Finalidade do DespesaPública.net</h2>
                   <p className="mt-2 text-muted-foreground">
                     O único objetivo da Plataforma é <strong>exibir informação pública</strong> de forma visual e acessível.
                     Não realizamos atividades de marketing, perfis de utilizadores ou recolha de dados.
@@ -87,8 +87,8 @@ export default function PrivacyPage() {
                   <h2 className="text-xl font-semibold">6. Contacto</h2>
                   <p className="mt-2 text-muted-foreground">
                     Para qualquer questão relacionada com esta Política de Privacidade, por favor contacte-nos através do email:{" "}
-                    <a href="mailto:privacy@DespesaPública.pt" className="text-blue-500 hover:underline">
-                      privacy@DespesaPública.pt
+                    <a href="mailto:privacy@DespesaPública.net" className="text-blue-500 hover:underline">
+                      privacy@DespesaPública.net
                     </a>
                   </p>
                 </div>
@@ -103,7 +103,7 @@ export default function PrivacyPage() {
                 </div>
 
                 <div className="pt-4 text-center text-sm text-muted-foreground">
-                  © {currentYear} DespesaPública.pt Todos os direitos reservados.
+                  © {currentYear} DespesaPública.net Todos os direitos reservados.
                 </div>
 
               </div>

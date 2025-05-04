@@ -25,8 +25,8 @@ const members = [
 ]
 
 export const metadata: Metadata = {
-    title: "Contacto | DespesaPública.pt",
-    description: "Conheça a equipa por trás do DespesaPública.pt, uma plataforma dedicada à transparência e análise da despesa pública em Portugal.",
+    title: "Contacto | DespesaPública.net",
+    description: "Conheça a equipa por trás do DespesaPública.net, uma plataforma dedicada à transparência e análise da despesa pública em Portugal.",
 };
 
 export default function TeamPage() {
@@ -78,8 +78,8 @@ export default function TeamPage() {
                     
                     <div className="flex items-center gap-2 mb-4">
                         <Mail className="h-5 w-5" />
-                        <a href="mailto:contact@DespesaPública.pt" className="text-blue-500 hover:underline">
-                        contact@DespesaPública.pt
+                        <a href="mailto:contact@DespesaPública.net" className="text-blue-500 hover:underline">
+                        contact@DespesaPública.net
                         </a>
                     </div>
                     
@@ -87,7 +87,7 @@ export default function TeamPage() {
                     
                     <div className="flex gap-4">
                         <a 
-                            href="https://twitter.com/DespesaPública.pt" 
+                            href="https://twitter.com/DespesaPública.net" 
                             target="_blank" 
                             rel="noopener noreferrer"
                             className="bg-background hover:bg-gray-100 dark:hover:bg-gray-800 size-10 rounded-full flex items-center justify-center border transition-colors"
@@ -96,7 +96,7 @@ export default function TeamPage() {
                             <Twitter className="h-5 w-5" />
                         </a>
                         <a 
-                            href="https://instagram.com/DespesaPública.pt" 
+                            href="https://instagram.com/DespesaPública.net" 
                             target="_blank" 
                             rel="noopener noreferrer"
                             className="bg-background hover:bg-gray-100 dark:hover:bg-gray-800 size-10 rounded-full flex items-center justify-center border transition-colors"
@@ -105,7 +105,7 @@ export default function TeamPage() {
                             <Instagram className="h-5 w-5" />
                         </a>
                         <a 
-                            href="https://linkedin.com/company/DespesaPública.pt" 
+                            href="https://linkedin.com/company/DespesaPública.net" 
                             target="_blank" 
                             rel="noopener noreferrer"
                             className="bg-background hover:bg-gray-100 dark:hover:bg-gray-800 size-10 rounded-full flex items-center justify-center border transition-colors"
