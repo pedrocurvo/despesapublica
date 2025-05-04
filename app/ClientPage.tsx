@@ -58,23 +58,23 @@ const router = useRouter()
             </CardContent>
           </Card>
           <Card className="lg:col-span-3">
-            <CardHeader className="flex flex-row items-center justify-between">
+            <CardHeader className="flex flex-row items-center justify-between relative z-20">
               <div>
                 <CardTitle>Distribuição do Orçamento</CardTitle>
                 <CardDescription>Divisão por setor para {distributionYear}</CardDescription>
               </div>
               <DistributionYearSelector selectedYear={distributionYear} onYearChange={setDistributionYear} />
             </CardHeader>
-            <CardContent className="p-2 sm:p-4 md:p-6 pb-0">
-              <div className="h-[350px]">
+            <CardContent className="p-2 sm:p-4 md:p-6 pb-0 ">
+              <div className="h-[350px] relative">
                 <HomeBudgetPieChart 
                   year={distributionYear}
                 />
               </div>
-              <div className="flex justify-end mt-4">
+              <div className="flex justify-end mt-4 relative z-10">
                 <Button 
                   variant="outline" 
-                  className="w-full sm:w-auto"
+                  className="block sm:w-[200px] px-4 py-2"
                   onClick={() => router.push('/despesa')}
                 >
                   Ver por setor
