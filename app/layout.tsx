@@ -6,19 +6,19 @@ import { ThemeProvider } from "@/components/theme-provider"
 import { NavMenu, NavItem } from "@/components/nav-menu"
 
 export const metadata: Metadata = {
-  title: "Despesa Pública - Como São Usados Os Nossos Impostos?",
+  title: "DespesaPública.net - Como São Usados Os Nossos Impostos?",
   description: "Explore facilmente como o dinheiro público é gasto em Portugal — por setor, medidas do programa e região. Acompanhe as decisões do governo com clareza e transparência.",
   generator: 'Next.js',
-  applicationName: 'Despesa Pública',
+  applicationName: 'DespesaPública.net',
   keywords: "despesa pública, orçamento, portugal, setores, subsetores, finanças públicas",
   openGraph: {
-    title: "Despesa Pública - Como São Usados Os Nossos Impostos?",
+    title: "DespesaPública.net - Como São Usados Os Nossos Impostos?",
     description: "Explore facilmente como o dinheiro público é gasto em Portugal — por setor, medidas do programa e região. Acompanhe as decisões do governo com clareza e transparência.",
-    siteName: "Despesa Pública",
+    siteName: "DespesaPública.net",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Despesa Pública - Como São Usados Os Nossos Impostos?",
+    title: "DespesaPública.net - Como São Usados Os Nossos Impostos?",
     description: "Explore facilmente como o dinheiro público é gasto em Portugal — por setor, medidas do programa e região. Acompanhe as decisões do governo com clareza e transparência.",
     creator: "@pedrocurvo",
   },
@@ -46,7 +46,7 @@ export default function RootLayout({
           <header className="sticky top-0 z-10 flex h-16 items-center gap-4 border-b bg-background px-4 md:px-6">
             <div className="flex items-center gap-2">
               <Euro className="h-6 w-6" />
-              <h1 className="text-lg font-semibold">Despesa Pública</h1>
+              <h1 className="text-lg font-semibold">DespesaPública.net</h1>
             </div>
             <NavMenu links={navLinks} />
           </header>

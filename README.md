@@ -1,4 +1,4 @@
-# Despesa Pública
+# DespesaPública.net
 
 A data visualization application for exploring and analyzing the Portuguese government's budget distribution.
 
