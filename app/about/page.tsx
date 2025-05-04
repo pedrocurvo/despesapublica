@@ -29,7 +29,7 @@ export default function AboutPage() {
             </CardHeader>
             <CardContent className="space-y-4 pt-6">
               <p>
-              A DespesaPublica.pt é uma plataforma que recorre à Direção-Geral do Orçamento e ao Arquivo.pt para 
+              A DespesaPública.net é uma plataforma que recorre à Direção-Geral do Orçamento e ao Arquivo.pt para 
               tornar a informação sobre os orçamentos do Estado mais acessível e transparente.
               </p>
               <p>
