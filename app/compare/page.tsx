@@ -11,7 +11,7 @@ import { Button } from "@/components/ui/button"
 
 export const metadata: Metadata = {
   title: "Comparar Despesas por Ano, Setor, Medidas do Programa e Distritos| DespesaPública.net",
-  description: "Compare a evolução da despesa pública entre diferentes anos, setores, distritos e municípios — visualize tendências e variações no orçamento do governo português.",
+  description: "Compara a evolução da despesa pública entre diferentes anos, setores, distritos e municípios — visualize tendências e variações no orçamento do governo português.",
   keywords: "comparar orçamento, despesas públicas, anos, setores, distritos, municípios, finanças públicas, portugal",
 }
 
@@ -23,7 +23,7 @@ export default function ComparePage() {
           <div className="mb-6 flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
             <div>
               <h1 className="text-2xl font-bold tracking-tight">Comparação Orçamental</h1>
-              <p className="text-muted-foreground">Compare dados orçamentais entre diferentes anos, setores, distritos e municípios</p>
+              <p className="text-muted-foreground">Compara dados orçamentais entre diferentes anos, setores, distritos e municípios</p>
             </div>
           </div>
           
@@ -48,7 +48,7 @@ export default function ComparePage() {
               <Card className="lg:col-span-3" id="budget-overview">
                 <CardHeader>
                   <CardTitle>Tendências Gerais do Orçamento</CardTitle>
-                  <CardDescription>Compare tendências de receitas e despesas ao longo do tempo</CardDescription>
+                  <CardDescription>Compara tendências de receitas e despesas ao longo do tempo</CardDescription>
                 </CardHeader>
                 <CardContent>
                   <BudgetOverviewTrends />
@@ -57,7 +57,7 @@ export default function ComparePage() {
               <Card className="lg:col-span-3" id="expense-overview">
                 <CardHeader>
                   <CardTitle>Tendências Gerais das Despesas</CardTitle>
-                  <CardDescription>Compare tendências de despesas orçamentadas vs executadas</CardDescription>
+                  <CardDescription>Compara tendências de despesas orçamentadas vs executadas</CardDescription>
                 </CardHeader>
                 <CardContent>
                   <ExpenseOverviewTrends />
@@ -68,8 +68,8 @@ export default function ComparePage() {
               <Card className="lg:col-span-7" id="sector-trends">
                 <CardHeader className="flex flex-row items-center justify-between">
                   <div>
-                    <CardTitle>Tendências por Setor e Subsetor</CardTitle>
-                    <CardDescription>Compare tendências de alocação orçamental entre setores ao longo do tempo</CardDescription>
+                    <CardTitle>Tendências por Setor e Respetivas Medidas</CardTitle>
+                    <CardDescription>Compara tendências de alocação orçamental entre setores e respetivas medidas do programa ao longo do tempo</CardDescription>
                   </div>
                 </CardHeader>
                 <CardContent>
@@ -82,7 +82,7 @@ export default function ComparePage() {
                 <CardHeader className="flex flex-row items-center justify-between">
                   <div>
                     <CardTitle>Tendências por Distrito e Município</CardTitle>
-                    <CardDescription>Compare tendências de alocação orçamental entre regiões ao longo do tempo</CardDescription>
+                    <CardDescription>Compara tendências de alocação orçamental entre regiões ao longo do tempo</CardDescription>
                   </div>
                 </CardHeader>
                 <CardContent>

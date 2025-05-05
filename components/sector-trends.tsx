@@ -720,7 +720,7 @@ export function SectorTrends() {
                 }
               }}
             />
-            <Label htmlFor="show-incomplete-data" className="text-sm">Mostrar setores inconsistentes</Label>
+            <Label htmlFor="show-incomplete-data" className="text-sm">Mostrar medidas inconsistentes</Label>
           </div>
           
           {/* Show all subsectors checkbox (only when a sector is selected) */}
@@ -739,7 +739,7 @@ export function SectorTrends() {
                   }
                 }}
               />
-              <Label htmlFor="show-all-subsectors" className="text-sm">Mostrar todos os subsetores</Label>
+              <Label htmlFor="show-all-subsectors" className="text-sm">Mostrar todas as medidas</Label>
             </div>
           )}
         </div>
