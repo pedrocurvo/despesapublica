@@ -15,7 +15,7 @@ export default function MainDespesaPage() {
     <div className="container mx-auto py-8">
       <div className="space-y-6">
         <div className="flex flex-col space-y-2">
-          <h1 className="text-3xl font-bold tracking-tight">DespesaPública.net</h1>
+          <h1 className="text-3xl font-bold tracking-tight">Despesa</h1>
           <p className="text-muted-foreground">
           Visualização da despesa pública por setor e respetivas medidas do programa orçamental
           </p>
