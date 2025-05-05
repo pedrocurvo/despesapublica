@@ -79,7 +79,7 @@ export default function TeamPage() {
                     <div className="flex items-center gap-2 mb-4">
                         <Mail className="h-5 w-5" />
                         <a href="mailto:contact@DespesaPública.net" className="text-blue-500 hover:underline">
-                        contact@DespesaPública.net
+                        contacto@despesapublica.net
                         </a>
                     </div>
                     

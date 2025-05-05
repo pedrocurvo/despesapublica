@@ -129,9 +129,9 @@ export default function TermsPage() {
                 <Separator />
 
                 <div>
-                  <h2 className="text-xl font-semibold">10. Contato</h2>
+                  <h2 className="text-xl font-semibold">10. Contacto</h2>
                   <p className="mt-2 text-muted-foreground">
-                    Para questões relacionadas com estes Termos de Serviço, por favor contacte-nos através do email: <a href="mailto:contact@DespesaPública.net" className="text-blue-500 hover:underline">contact@DespesaPública.net</a>
+                    Para questões relacionadas com estes Termos de Serviço, por favor contacte-nos através do email: <a href="mailto:contacto@despesapublica.net" className="text-blue-500 hover:underline">contacto@despesapublica.net</a>
                   </p>
                 </div>
 
